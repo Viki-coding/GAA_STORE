@@ -2,7 +2,9 @@
 
 Live Link:
 
-Link to Kanban Board:
+Link to Kanban Board:  https://github.com/users/Viki-coding/projects/9/views/1?layout=board
+
+
 
 Table of Contents
 Introduction
@@ -33,7 +35,9 @@ Introduction
 
 
 Description - Project Purpose
-Gaelic Games in Ireland is an integral part of every townland, parish, village, town, city and county in Ireland and now farther afield.  This site aims at show casing a large variety of different hurleys made by different manufactures and different materials, such as ash and bamboo and ash, to allow the customer to quickly view and purchase hurleys, sliotars and hurley grips and hurley helmets.  The site will also sell footballs and rebound posts.  One of the unique selling points it to offer next day delivery if ordered before 3pm within the republic of Ireland.  During the hurling season, players are busy with matches and training, so if you break your hurley you need a replacement quickly.  There will also be a reviews section where customers can leave reviews about their purchase.  There will be an FAQ section to highlight frequently asked questions, such as why metal bands are used.  We will have a hurley size calculator where a user can enter their height, the height to their hip and the hurley calculator will tell you what size hurley is appropriate.  The customer will be able to add items to their basket, they will be able to select the size of the particular hurley they require, a sucess message will appear when they successfully add an item to their basket. when they add to their basket a display will appear at the bottom of other items to 'bundle' other items in for a deal.  When they log on to the site, a pop up will appear offering 5% off their first order when they enter their email address. There will be mail chimp newsletter.  There will be a privacy policy.  There will be a 404 page. Once the customer has added items to their shopping cart, they will proceed to checkout section, where they will enter their payment details for stripe to process,  there will be a remember me tick box so the customer can set up an account profile where they can view their orders. During each process, success or warning messages will be displayed. 
+Gaelic Games in Ireland is an integral part of every townland, parish, village, town, city and county in Ireland and now farther afield.  This site aims at show casing a large variety of different hurleys made by different manufactures and different materials, such as ash and bamboo and ash, to allow the customer to quickly view and purchase hurleys, sliotars and hurley grips and hurley helmets.  Currently, there are individual hurley makers or sports shops who only sell one particular type of hurley and do not show the range available in Ireland. 
+
+One of the unique selling points it to offer next day delivery if ordered before 3pm within the republic of Ireland.  During the hurling season, players are busy with matches and training, so if you break your hurley you need a replacement quickly.  There will also be a reviews section where customers can leave reviews about their purchase.  There will be an FAQ section to highlight frequently asked questions, such as why metal bands are used.  We will have a hurley size calculator where a user can enter their height, the height to their hip and the hurley calculator will tell you what size hurley is appropriate.  The customer will be able to add items to their basket, they will be able to select the size of the particular hurley they require, a sucess message will appear when they successfully add an item to their basket. when they add to their basket a display will appear at the bottom of other items to 'bundle' other items in for a deal.  When they log on to the site, a pop up will appear offering 5% off their first order when they enter their email address. There will be mail chimp newsletter.  There will be a privacy policy.  There will be a 404 page. Once the customer has added items to their shopping cart, they will proceed to checkout section, where they will enter their payment details for stripe to process,  there will be a remember me tick box so the customer can set up an account profile where they can view their orders. During each process, success or warning messages will be displayed. 
 
 
 
@@ -50,7 +54,7 @@ Update
 Delete
 
 
-User Personas - EXAMPLE:
+User Personas:
 
 Persona 1: The Dedicated Player
 Name: Liam Murphy
@@ -172,6 +176,55 @@ Epic 10: Discounts
 
 
 Design Choices
+1. Captivating Homepage
+Hero Image I have incorporated a high-quality hero image of a hurley and helmet
+I am using  taglines like "Your Ultimate Source for Gaelic Games Gear." This aligns with my user persona profiles of Liam Murphy (The Dedicated Player) and Emily Ryan (The Aspiring Camogie Player).
+
+I have a dynamic Call-to-Actions (CTAs): "Shop Now" "Find Your Perfect Hurley" and "Next-Day Delivery Available!" prominently featured on the homepage.
+
+I have highlighted USP (Unique Selling Point) of the next-day delivery option and the hurley size calculator s to immediately engage users.
+
+2. Clear Navigation and Layout
+Simple and Intuitive Menu, the navigation bar is clearly labelled with categories like "Hurleys" "Sliotars" "Helmets" "FAQ" and "Contact Us."
+
+The site uses responsive design, ensuring seamless usability across devices for parents like Siobhán O'Connell (The Supportive Parent) who may browse on mobile.
+
+I have used sticky navigation to keep the navigation bar accessible as users scroll down for ease of movement between sections.
+
+3. Tailored Product Display
+In cluded in the site is filter options for material (e.g., ash or bamboo), manufacturer, size, and price to suit gift buyers like Aoife Byrne (The Gift Buyer).
+
+Bundle Deals Section: Automatically suggest bundles (e.g., hurley + sliotar + grip) to encourage additional purchases.
+
+Interactive Features: zoom hover effects on product images to reveal details for an interactive shopping experience.
+
+4. Enhanced Shopping Cart Experience
+Mini Cart Preview: I display a preview of the cart when items are added to confirm selections, along with success messages.
+
+5. Engaging User Features
+We have a Profile Dashboard: For logged-in users like Seán McCarthy (The Busy Coach), display a personalized dashboard to view order history, manage orders, and edit profiles.
+
+6. Community and Customer Feedback
+Review Section: Included is a ratings and user feedback prominently on product pages to help Siobhán O'Connell make informed decisions for her son.
+
+Pop-Up for First-Time Users: Displays a non-intrusive pop-up offering 5% off for new customers like Aoife Byrne.
+
+7. Specialized Tools and Calculators
+Hurley Size Calculator: This feature is visible on both the homepage and the product pages. 
+
+FAQ Section: The FAQ is Organised by categories and display them with collapsible dropdowns for quick navigation.
+
+8. Admin and Superuser Features
+Admin Dashboard: We have created an user firendly dashboard for product management with icons for adding, editing, and deleting products. 
+Drag-and-Drop Functionality: Enable image uploads with a drag-and-drop interface for managers.
+
+9. Encouraging Engagement
+Mailchimp Integration: We have designed an eye-catching newsletter signup form with benefits like "Be the First to Know About New Arrivals and Deals."
+
+Social Media Integration: Displays our instagram and facebook clickable icons for social platforms in the footer to foster community engagement.
+
+Future: Add color-coded statuses for products (e.g., "In Stock," "Low Stock"). under admin superuse section
+User testimonials from All Ireland and county players
 
 Colour Scheme
 
