@@ -448,7 +448,8 @@ Media/Images
 Images of logo and notice board both created in Canva by myself using canva template. No other imagery used.
 
 CONTENT
-The content text for website is fictious and is written by Viki Mulhall.
+Hurley size: https://learning.gaa.ie/sites/default/files/info_hurl_FINAL.pdf
+
 
 Legal & Ethical Compliance
 This project is for educational purposes only.
