@@ -29,6 +29,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: url('/media/hurley-and-helmet-hero.jpg') no-repeat center center;
+    background-size: cover;
     text-align: center;
     background-color: #000; /* Black canvas */
     color: #fff;
