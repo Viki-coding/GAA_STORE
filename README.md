@@ -1,4 +1,5 @@
 # GAA_STORE
+<<<<<<< HEAD
 
 Live Link:
 
@@ -453,3 +454,6 @@ Hurley size: https://learning.gaa.ie/sites/default/files/info_hurl_FINAL.pdf
 
 Legal & Ethical Compliance
 This project is for educational purposes only.
+=======
+# GAA_STORE
+>>>>>>> a53d69acf343e23d2e4a24c93c052242bde06f7b
