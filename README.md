@@ -266,8 +266,7 @@ Font used is Roboto from Google Fonts. It is in the sans serif family, is clean 
 
 **ER Diagram & Data Schema**
 
-
-![Uploading ERD Hurling Ecommerce models.png…]()
+<img width="1035" alt="ERD Hurling Ecommerce models" src="https://github.com/user-attachments/assets/2e5df726-c898-4b68-89f2-1c091f60018d" />
 
 
 **FEATURES**
