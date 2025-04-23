@@ -1,5 +1,4 @@
 # GAA_STORE
-<<<<<<< HEAD
 
 Live Link:
 
@@ -8,29 +7,8 @@ Link to Kanban Board:  https://github.com/users/Viki-coding/projects/9/views/1?l
 
 
 Table of Contents
-Introduction
-Description - Project Purpose
-User Demographics - Target Audience
-UX
-User Stories
-Design Choices
-Typography
-Wireframes
-Flow Chart
-Features
-Interaction Points
-Future Implementation Section
-Accessibility
-Technologies Used
-Frameworks, Libraries and Programs Used
-Deployment Steps
-How to Fork
-How to Clone
-Heroku Deployment
-Acknowledging Contributions & Credits
-Media/Images
-Content
-Legal & Ethical Compliance
+
+
 
 Introduction
 
@@ -136,7 +114,7 @@ When you land on our site it is immediately obvious what the site is and conveys
 
 
 
-USER STORIES
+**USER STORIES**
 
 Epic 1: Product Showcase & Navigation
 #1:As a customer, I want to browse a variety of hurleys by material and manufacturer so that I can find the perfect match for my needs.
@@ -176,7 +154,7 @@ Epic 10: Discounts
 #17: As a first-time user, I want to apply a discount to my first purchase so that I can save money.
 
 
-Design Choices
+**Design Choices**
 1. Captivating Homepage
 Hero Image I have incorporated a high-quality hero image of a hurley and helmet
 I am using  taglines like "Your Ultimate Source for Gaelic Games Gear." This aligns with my user persona profiles of Liam Murphy (The Dedicated Player) and Emily Ryan (The Aspiring Camogie Player).
@@ -237,33 +215,36 @@ Color-contrast-good
 Typography
 Font used is Roboto from Google Fonts. It is in the sans serif family, is clean with a modern appearance. It is dyslexic friendly helping with readability.
 
-Wireframes
 
-**HOME PAGE**
+**Wireframes**
+
+
 
 <img width="712" alt="Home Page with Tagline Wire Frames" src="https://github.com/user-attachments/assets/2609729a-4e66-44d2-a485-8e9e33331761" />
 
-**PRODUCT PAGE**
+
 <img width="732" alt="Product Page Wire Frames" src="https://github.com/user-attachments/assets/511ebfc1-26b0-421d-9f3b-2ea08b739c33" />
 
-**HURLEYS PAGE**
+
 <img width="720" alt="Hurleys Page Wire Frames" src="https://github.com/user-attachments/assets/c6366f20-6942-450f-a8c2-c0546b15e079" />
 
-**ACCESSORIES PAGE**
+
 <img width="723" alt="Accessories Page Wire Frames" src="https://github.com/user-attachments/assets/880aea0c-bf8c-4d0c-9c8e-db8e78e03db1" />
 
-**STRIPE PAYMENT PAGE**
+
 <img width="725" alt="Stripe Payment Wire Frames" src="https://github.com/user-attachments/assets/6f2700ea-54ec-40f9-9e86-48b956add2fc" />
 
-**USER PROFILE PAGE**
+
 <img width="739" alt="User Profile Wire Frames" src="https://github.com/user-attachments/assets/7cb47ebb-fb10-485c-bd72-50641da52ef1" />
 
 
 
-ER Diagram & Data Schema
+**ER Diagram & Data Schema**
+
+![ERD Project 5 GAA Store ](https://github.com/user-attachments/assets/3beb6c06-5c47-4693-ae88-359020d32b19)
 
 
-FEATURES
+**FEATURES**
 Feature Title / Screenshot / Value to the User
 
 Navigation Bar:
