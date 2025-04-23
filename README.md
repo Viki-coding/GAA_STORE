@@ -10,17 +10,17 @@ Table of Contents
 
 
 
-Introduction
+<h2>Introduction</h2>
 
 
-Description - Project Purpose
+<h2>Description - Project Purpose</h2>
 Gaelic Games in Ireland is an integral part of every townland, parish, village, town, city and county in Ireland and now farther afield.  This site aims at show casing a large variety of different hurleys made by different manufactures and different materials, such as ash and bamboo and ash, to allow the customer to quickly view and purchase hurleys, sliotars and hurley grips and hurley helmets.  Currently, there are individual hurley makers or sports shops who only sell one particular type of hurley and do not show the range available in Ireland. 
 
 One of the unique selling points it to offer next day delivery if ordered before 3pm within the republic of Ireland.  During the hurling season, players are busy with matches and training, so if you break your hurley you need a replacement quickly.  There will also be a reviews section where customers can leave reviews about their purchase.  There will be an FAQ section to highlight frequently asked questions, such as why metal bands are used.  We will have a hurley size calculator where a user can enter their height, the height to their hip and the hurley calculator will tell you what size hurley is appropriate.  The customer will be able to add items to their basket, they will be able to select the size of the particular hurley they require, a sucess message will appear when they successfully add an item to their basket. when they add to their basket a display will appear at the bottom of other items to 'bundle' other items in for a deal.  When they log on to the site, a pop up will appear offering 5% off their first order when they enter their email address. There will be mail chimp newsletter.  There will be a privacy policy.  There will be a 404 page. Once the customer has added items to their shopping cart, they will proceed to checkout section, where they will enter their payment details for stripe to process,  there will be a remember me tick box so the customer can set up an account profile where they can view their orders. During each process, success or warning messages will be displayed. 
 
 
 
-CRUD
+<h2>CRUD</h2>
 Create
 
 
@@ -33,128 +33,153 @@ Update
 Delete
 
 
-User Personas:
+<h2>User Personas:<h2>
 
-Persona 1: The Dedicated Player
+**Persona 1: The Dedicated Player**
 Name: Liam Murphy
 
-Age: 25
+**Age:** 25
 
-Occupation: Accountant
+**Occupation:** Accountant
 
-Background: Liam plays hurling competitively for his local club and is devoted to improving his skills on the field. He trains and plays matches regularly during the season and often needs replacement gear quickly.
+**Background:** Liam plays hurling competitively for his local club and is devoted to improving his skills on the field. He trains and plays matches regularly during the season and often needs replacement gear quickly.
 
-Goals: To easily find high-quality hurleys and sliotars and receive next-day delivery after breaking his hurley during matches.
+**Goals:** To easily find high-quality hurleys and sliotars and receive next-day delivery after breaking his hurley during matches.
 
-Challenges: Balancing his busy work life with the demands of his hurling schedule.
+**Challenges:** Balancing his busy work life with the demands of his hurling schedule.
 
-Persona 2: The Supportive Parent
+**Persona 2: The Supportive Parent**
 Name: Siobhán O'Connell
 
-Age: 40
+**Age:** 40
 
-Occupation: Teacher
+**Occupation:** Teacher
 
-Background: Siobhán’s 12-year-old son plays hurling for his school team, and she wants to ensure he has the best gear available. She likes to research products thoroughly and read customer reviews before making purchases.
+**Background:** Siobhán’s 12-year-old son plays hurling for his school team, and she wants to ensure he has the best gear available. She likes to research products thoroughly and read customer reviews before making purchases.
 
-Goals: To purchase durable and appropriately sized hurleys for her son, along with helmets and grips for safety.
+**Goals:** To purchase durable and appropriately sized hurleys for her son, along with helmets and grips for safety.
 
-Challenges: Managing her budget while providing her son with high-quality gear.
+**Challenges:** Managing her budget while providing her son with high-quality gear.
 
-Persona 3: The Gift Buyer
+**Persona 3: The Gift Buyer**
 Name: Aoife Byrne
 
-Age: 32
+**Age:** 32
 
-Occupation: Graphic Designer
+**Occupation:** Graphic Designer
 
-Background: Aoife is buying a birthday gift for her cousin, who plays hurling. She isn’t familiar with hurley sizes or materials but wants to find a meaningful and practical gift.
+**Background:** Aoife is buying a birthday gift for her cousin, who plays hurling. She isn’t familiar with hurley sizes or materials but wants to find a meaningful and practical gift.
 
-Goals: To bundle items like hurleys, sliotars, and grips into a gift set with a discount.
+**Goals:** To bundle items like hurleys, sliotars, and grips into a gift set with a discount.
 
-Challenges: Navigating the site as someone unfamiliar with the sport and its equipment.
+**Challenges:** Navigating the site as someone unfamiliar with the sport and its equipment.
 
-Persona 4: The Aspiring Camogie Player
+**Persona 4: The Aspiring Camogie Player**
 Name: Emily Ryan
 
-Age: 18
+**Age:** 18
 
-Occupation: University Student
+**Occupation:** University Student
 
-Background: Emily plays camogie for her college team and is passionate about her sport. She loves exploring innovative gear, like hurleys made with bamboo, to enhance her performance.
+**Background:** Emily plays camogie for her college team and is passionate about her sport. She loves exploring innovative gear, like hurleys made with bamboo, to enhance her performance.
 
-Goals: To use the hurley size calculator to find gear tailored to her height and hip measurements.
+**Goals:** To use the hurley size calculator to find gear tailored to her height and hip measurements.
 
-Challenges: Staying within her student budget while getting high-quality gear quickly.
+**Challenges:** Staying within her student budget while getting high-quality gear quickly.
 
-Persona 5: The Busy Coach
+**Persona 5: The Busy Coach**
 Name: Seán McCarthy
 
-Age: 45
+**Age:** 45
 
-Occupation: Sports Coach
+**Occupation:** Sports Coach
 
-Background: Seán coaches both hurling and football teams at his local club. He often needs to bulk-purchase equipment for training sessions and matches.
+**Background:** Seán coaches both hurling and football teams at his local club. He often needs to bulk-purchase equipment for training sessions and matches.
 
-Goals: To quickly order large quantities of footballs, rebound posts, and hurleys for his teams and receive them on time.
+**Goals:** To quickly order large quantities of footballs, rebound posts, and hurleys for his teams and receive them on time.
 
-Challenges: Ensuring all purchases are efficient and cost-effective while managing a tight team schedule.
+**Challenges:** Ensuring all purchases are efficient and cost-effective while managing a tight team schedule.
 
 
 
-Kanban Board
+<h2>Kanban Board<h2>
 
 I found the Kanban very helpful, it did take time to set up, it was well planned and structured. I sometimes have a tendency to go from one area and then get distracted to start fixing another area, having the Kanban board with the user stories and the tasks that I needed to perform helped me to keep a structured approach to coding. I learnt that at the end of a commit if I put "relates to #1" etc it would be documented with the task # in my project. Live link at top of readme and made public.
 
 Kanban Board Progress
 
-UX
+<h2>UX</h2>
 
 When you land on our site it is immediately obvious what the site is and conveys the message of 
 
 
 
-**USER STORIES**
+<h2>>USER STORIES<h2>
 
-Epic 1: Product Showcase & Navigation
+**Epic 1: Product Showcase & Navigation**
 #1:As a customer, I want to browse a variety of hurleys by material and manufacturer so that I can find the perfect match for my needs.
 #2: As a user, I want filters for size and material so that I can narrow down my search quickly.
 
-Epic 2: Hurley Size Calculator
+**Epic 2: Hurley Size Calculator**
 #3: As a player, I want a hurley size calculator that recommends the ideal size based on my height and hip measurements so that I can improve my performance.
 
-Epic 3: Shopping Cart
+**Epic 3: Shopping Cart**
 #4: As a customer, I want to see bundled items for a discount after adding products to my basket so that I can save money.
 #5: As a user, I want success messages to appear when I add items to my cart so that I know my action was completed successfully.
 
-Epic 4: Checkout & Payment
+**Epic 4: Checkout & Payment**
 #6: As a customer, I want to complete the checkout process easily so that I can quickly finalize my purchase.
 #7: As a user, I want warning messages for incomplete or invalid inputs during checkout so that I can fix errors.
 
-Epic 5: Customer Engagement
+**Epic 5: Customer Engagement**
 #8: As a new user, I want a pop-up offering 5% off when I log in so that I’m incentivized to make my first purchase.
 #9: As a customer, I want to sign up for Mailchimp newsletters so that I can stay updated on deals and new products.
 #10: As a customer, I want to leave reviews about my purchases so that I can share feedback and see others’ experiences.
 
-Epic 6: Additional Features
+**Epic 6: Additional Features**
 #11: As a customer, I want an FAQ section to find answers to common questions so that I can make informed purchases.
 #12: As a user, I want a privacy policy page so that I feel confident my data is secure.
 #13: As a website visitor, I want a custom 404 page to redirect me gracefully if a link is broken.
 
-Epic 7: Homepage Design and Structure
+**Epic 7: Homepage Design and Structure**
 #14: As a user, I want a visually appealing homepage with hurling imagery, navigation, and footer so that I can quickly find what I’m looking for and feel immersed in the theme of Gaelic games.
 
-Epic 8: User Profile Creation and Order Management
+**Epic 8: User Profile Creation and Order Management**
 #15: As a user, I want to create a profile during my first purchase so that I can log in later and view my order history.
 
-Epic 9: Product and Image Management
+**Epic 9: Product and Image Management**
 #16: As a manager or superuser, I want to log in and have CRUD (Create, Read, Update, Delete) functionality for products and images so that I can manage inventory effectively.
 
-Epic 10: Discounts
+**Epic 10: Discounts**
 #17: As a first-time user, I want to apply a discount to my first purchase so that I can save money.
 
+<h2>SEO and Web Marketing</h2>
+1. SEO
+2. Content Marketing 
+   
+   KEYWORD LIST: 
 
-**Design Choices**
+   RESEARCH QUESTIONS: 
+   1.   What does the user need?
+   2.   What information and features can you provide to meet those needs?
+   3.	How can you make the information easy to understand?
+   4.	How can you demonstrate expertise, authoritativeness and trustworthiness in your content?
+   5.	Would there be other pages within your own site you could link to from your chosen page?
+   6.	Are there opportunities to link back to external websites that already rank highly on Google?
+   7.	How can you help users discover other relevant parts of your web application?
+
+   Business Research on Similar Companies 
+    - Marketing practices they employ:
+    - Which appear to be working best:
+   
+3. Social Media Marketing
+4. Email Marketing 
+
+
+
+
+
+<h2>>Design Choices</h2>
 1. Captivating Homepage
 Hero Image I have incorporated a high-quality hero image of a hurley and helmet
 I am using  taglines like "Your Ultimate Source for Gaelic Games Gear." This aligns with my user persona profiles of Liam Murphy (The Dedicated Player) and Emily Ryan (The Aspiring Camogie Player).
