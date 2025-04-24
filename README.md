@@ -266,7 +266,7 @@ Font used is Roboto from Google Fonts. It is in the sans serif family, is clean 
 
 **ER Diagram & Data Schema**
 
-<img width="1035" alt="ERD Hurling Ecommerce models" src="https://github.com/user-attachments/assets/2e5df726-c898-4b68-89f2-1c091f60018d" />
+![ERD Project 5 GAA Store V5](https://github.com/user-attachments/assets/6fdc491e-3896-4698-87c0-a4733502d609)
 
 
 **FEATURES**
@@ -301,6 +301,11 @@ We use the attribute rel="noopener noreferrer" in the anchor tages to enhance se
 
 The Eircode of centre is already linked to google maps the user can easily navigate to the centre by clicking on the Eircode, which opens in a new page.
 
+Privacy Policy 
+
+
+Mailchimp Signup
+
 Facebook and Instagram Features:
 
 This allows the user to access the Ballinameela Community Centre socials in a new page.
@@ -334,6 +339,11 @@ Error Handling
 We have created a 404 page so that user of accidentally enters a typo in the address they get an opportunity to be redirected back to the home page: 404 page 
 When a user attempts to book an event who’s capacity has already been reached, i.e. the event is already booked out, a message is displayed to let them know event capacity has been reached:
 
+![404 Error](https://github.com/user-attachments/assets/7b71ca73-7c08-49af-a247-8e8b6b67fe85)
+
+500 Page 
+
+![500 Error](https://github.com/user-attachments/assets/6747674d-8ad5-4899-a4bc-ed5798943a71)
 
 Future Implementation Section
 
