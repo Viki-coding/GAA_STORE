@@ -6,7 +6,7 @@ def product_list(request):
     """
     View to display a list of all products or filter by category.
     """
-    category = request.GET.get('category')  
+    category = request.GET.get('category')
     if category:
         products = Product.objects.filter(description__icontains=category)
     else:
@@ -28,7 +28,15 @@ def product_detail(request, product_id):
 
 def hurleys_shop(request):
     """
-    View to display the Hurley shop page. This will show the categories of 
-    hurleys, Bambú, Ash and Goalie.  
+    View to display the Hurley shop page. This will show the categories of
+    hurleys, Bambú, Ash and Goalie.
     """
     return render(request, 'products/hurleys_shop.html', {})
+
+
+def accessories_shop(request):
+    """
+    View to display the accessories shop page. This will show the categories of
+    grips, helmets and sliotars.
+    """
+    return render(request, 'products/accessories_shop.html', {})
