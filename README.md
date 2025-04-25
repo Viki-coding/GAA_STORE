@@ -412,6 +412,7 @@ Figma - to crate wireframes
 Converting tabel to markdown (https://tabletomarkdown.com/convert-spreadsheet-to-markdown/)
 Whitenoise
 dbdiagram.io - For creation of ERD diagram 
+https://www.vecteezy.com - used for images 
 
 Deployment Steps
 
@@ -482,7 +483,9 @@ Help with markdown, found this site usefule (https://www.markdownguide.org/basic
 We gained inspiration with the READ.me by watching the video 'Creating your first README with Kera Cudmore' on CI Chanel Lead Library on YouTube and also the video with Lane-Sawyer Thompson on CI Channel on YouTube. Thanks to the on-line tutor, Oisin and Rebecca for their expertise and ability to explain some of the 'challenges' I encountered. Thanks to our very supportive and positive facilitator Kay and my Kiwi mentor Dick Vlaanderen. Also found the webinar 'Community Q&A: How to Troubleshoot with Lane-Sawyer Thompson' very helpful approach to how to view looking at the site for bugs and methodically identifying issues.
 
 Media/Images
-Images of logo and notice board both created in Canva by myself using canva template. No other imagery used.
+Images used from 
+https://www.vecteezy.com and edited in canva. 
+
 
 CONTENT
 Hurley size: https://learning.gaa.ie/sites/default/files/info_hurl_FINAL.pdf
