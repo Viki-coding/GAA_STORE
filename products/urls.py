@@ -8,4 +8,5 @@ urlpatterns = [
         views.product_detail,
         name='product_detail',
     ),
+    path('hurleys/', views.hurleys_shop, name='hurleys_shop'),
 ]

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Hurleys Shop</h1>
+    <div class="row text-center mt-4">
+        <!-- Ash Hurleys -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'product_list' %}?category=ash-hurleys">
+                <img src="{% static 'images/ash_hurleys.png' %}" alt="Ash Hurleys" class="img-fluid rounded">
+                <h3 class="mt-3">Ash Hurleys</h3>
+            </a>
+        </div>
+        <!-- Bambú Hurleys -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'product_list' %}?category=ash-hurleys">
+                <img src="{% static 'images/bambu-hurleys.png' %}" alt="Bambú Hurleys" class="img-fluid rounded">
+                <h3 class="mt-3">Bambú Hurleys</h3>
+            </a>
+        </div>
+        <!-- Goalie Hurleys -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'product_list' %}?category=ash-hurleys">
+                <img src="{% static 'images/goalie-hurleys.png' %}" alt="Goalie Hurleys" class="img-fluid rounded">
+                <h3 class="mt-3">Goalie Hurleys</h3>
+            </a>
+        </div>
+{% endblock %}

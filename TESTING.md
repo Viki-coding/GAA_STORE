@@ -8,3 +8,5 @@ ImportError: cannot import name 'renderget_object_or_404' from 'django.shortcuts
 What I did to solve: Went to my views.py file and saw I had a typo in the import line. Amended and started server again. 
 
 
+
+
