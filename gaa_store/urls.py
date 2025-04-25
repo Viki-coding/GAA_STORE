@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from products import views
 
 
 urlpatterns = [
@@ -25,6 +26,8 @@ urlpatterns = [
     path('', include('home.urls')),
     path('profiles/', include('profiles.urls')),
     path('products/', include('products.urls')),
+    path('hurleys/', views.hurleys_shop, name='hurleys_shop'), 
+
 ]
 
 handler404 = 'gaa_store.views.handle_404'
