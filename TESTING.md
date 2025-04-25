@@ -11,8 +11,10 @@ Not Found: /hurleys/
 [25/Apr/2025 15:06:51] "GET /hurleys/ HTTP/1.1" 404 2717
 RESOLVED BY: Realised I had forgotten to include the products app in the main urls.py. I then also included the hurling page itself. 
 
- BUG: Hurley images not being displayed. 
- RESOLVED BY: Changed location of images to the static folder, restarted server, only the ash image displayed, checked for typos, found dashes rather than hyphens, ameneded in the html page and resolved problem.
+ BUG: Hurley images not being displayed & not consistent size.  
+ RESOLVED BY: Changed location of images to the static folder, restarted server, only the ash image displayed, checked for typos, found dashes rather than hyphens, ameneded in the html page and resolved problem. To fix the inconsistent size of the ash hurley image compared to the other two, I added some css, which did not work, so I fixed the image again in canva and resaved and loaded and it worked when refreshed. 
+
+ 
 
 
 
