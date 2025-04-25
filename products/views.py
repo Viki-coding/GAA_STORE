@@ -1,4 +1,4 @@
-from django.shortcuts import renderget_object_or_404
+from django.shortcuts import render, get_object_or_404
 from .models import Product, Hurley, Grip, Sliotar, Helmet
 
 # Create your views here.
