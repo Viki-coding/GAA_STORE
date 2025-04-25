@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Accessories</h1>
+    <div class="row text-center mt-4">
+        <!-- Sliotars -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'product_list' %}?category=ash-hurleys">
+                <img src="{% static 'images/Sliotars.png' %}" alt="Sliotars" class="img-fluid rounded">
+                <h3 class="mt-3">Sliotars</h3>
+            </a>
+        </div>
+        <!-- Helmets -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'product_list' %}?category=ash-hurleys">
+                <img src="{% static 'images/helmets.png' %}" alt="Helmets" class="img-fluid rounded">
+                <h3 class="mt-3">Helmets</h3>
+            </a>
+        </div>
+        <!-- Grips -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'product_list' %}?category=ash-hurleys">
+                <img src="{% static 'images/grips.png' %}" alt="Grips" class="img-fluid rounded">
+                <h3 class="mt-3">Grips</h3>
+            </a>
+        </div>
+{% endblock %}
