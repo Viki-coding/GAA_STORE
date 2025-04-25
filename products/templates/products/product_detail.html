@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p>{{ product.description }}</p>
+<p>Price: €{{ product.price }}</p>
+
+{% if specific_product %}
+    <h2>Specific Details</h2>
+    <ul>
+        {% if specific_product.grip_color %}
+        <li>Grip Color: {{ specific_product.grip_color }}</li>
+        {% endif %}
+        {% if specific_product.weight %}
+        <li>Weight: {{ specific_product.weight }}</li>
+        {% endif %}
+        {% if specific_product.size %}
+        <li>Size: {{ specific_product.size }}</li>
+        {% endif %}
+        {% if specific_product.color %}
+        <li>Color: {{ specific_product.color }}</li>
+        {% endif %}
+    </ul>
+{% endif %}
+{% endblock %}
