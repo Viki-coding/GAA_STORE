@@ -72,6 +72,37 @@ body {
     margin: 20px 0; 
 }
 
+/* Calculator for Hurley measurements section */
+.calculator {
+    background-color: #111; /* Dark background to match the theme */
+    color: #fff; /* White text */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calculator input {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.calculator button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+}
+
+.calculator p {
+    font-size: 1.1rem;
+}
+
+#result {
+    color: #fff; 
+    font-size: 1.2rem; 
+    margin-top: 10px; 
+    text-align: center;
+}
+
+
 /* Footer */
 footer {
     background-color: #111; /* Slightly lighter black for contrast */
