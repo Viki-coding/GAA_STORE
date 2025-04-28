@@ -3,6 +3,11 @@
         const cmInput = document.getElementById('cm-input');
         const result = document.getElementById('result');
 
+        if (!convertBtn || !cmInput || !result) {
+            console.error('One or more elements are missing from the DOM.');
+            return;
+        }
+
         convertBtn.addEventListener('click', function () {
             const cmValue = parseFloat(cmInput.value);
             if (!isNaN(cmValue)) {

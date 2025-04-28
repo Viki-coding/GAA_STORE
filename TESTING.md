@@ -20,7 +20,11 @@ RESOLVED BY: Realised I had forgotten to include the products app in the main ur
  BUG: Creating a horizontal line to divide the helmet from hurley measurement section. 
  RESOLVED BY: Checked using inspection tools, the width appeared as 0.  When I googled it, this can be an issue with flexbox layouts.  Applied some width in css and the issue was resolved. 
 
- 
+ BUG: Creating a FAQ page, for better UX I wanted to to list the FAQ and if you click on the question it expands, so I used boostraps data-toggle accordian feature.  When I started the server it just displayed the question and the answer and had no toggle feature. 
+ RESOLVED BY: I opened my development tools and checked my console and when I clicked on a question it displayed an error message. The error message indicates that in my collapse.js, something is null where an object is expected. This error can happen if you try to operate on an element that doesn't exist on the page.
+I had put my converter calculator script into my base.file, which I should of kept in my how_to_measure.html file as base.html shares with everything else including my FAQ page.  I put my script files in base.html into the correct order.  I also reviewed my FAQ html structure as this can cause errors too. I restarted the server and now it is working. 
+
+
 
 
 

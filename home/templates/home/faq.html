@@ -4,7 +4,7 @@
     <h1 class="text-center">Frequently Asked Questions</h1>
     <p>If you can't find an answer that your're looking for, feel free to drop us a line</p>
     <div class="faq-section mt-4">
-        <div class="accordion" id="faqAccordian">
+        <div class="accordion" id="faqAccordion">
             <!-- Question 1 -->
             <div class="card">
                 <div class="card-header" id="headingOne">
@@ -20,37 +20,37 @@
                     </div>
                 </div>
             </div>
-
+        
             <!-- Question 2 -->
             <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="headingTwo">
                     <h3 class="mb-0">
-                        <button class="btn btn-link text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            How do I measure for the correct hurley size?
+                        <button class="btn btn-link text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How do I measure for the correct helmet size?
                         </button>
                     </h3>
                 </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
                     <div class="card-body">
-                        Go to our dedicated <a href="/how-to-measure/">measurement page</a> for detailed instructions.
+                        Use a measuring tape to measure the circumference of your head just above your eyebrows. Refer to the size chart provided by the manufacturer.
                     </div>
                 </div>
             </div>
-
+        
             <!-- Question 3 -->
             <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="headingThree">
                     <h3 class="mb-0">
-                        <button class="btn btn-link text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            How do I measure for the correct hurley size?
+                        <button class="btn btn-link text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Can I return a hurley or helmet if it doesn't fit?
                         </button>
                     </h3>
                 </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
                     <div class="card-body">
-                        Go to our dedicated <a href="/how-to-measure/">measurement page</a> for detailed instructions.
+                        Yes, we accept returns within 30 days of purchase, provided the item is unused and in its original condition. Please refer to our <a href="/returns-policy/">Returns Policy</a> for more details.
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 {% endblock %}
