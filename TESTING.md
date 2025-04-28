@@ -14,6 +14,12 @@ RESOLVED BY: Realised I had forgotten to include the products app in the main ur
  BUG: Hurley images not being displayed & not consistent size.  
  RESOLVED BY: Changed location of images to the static folder, restarted server, only the ash image displayed, checked for typos, found dashes rather than hyphens, ameneded in the html page and resolved problem. To fix the inconsistent size of the ash hurley image compared to the other two, I added some css, which did not work, so I fixed the image again in canva and resaved and loaded and it worked when refreshed. 
 
+ BUG: Created a hurling calculator, when the user enters the measurement in cms it will give the result in inches. On testing when I entered a number, no result was displayed. 
+ RESOLVED BY: Checked the css and js and it seemed ok. Went to inspector tools and found the error that the converter.js was not found.  Realised I had spelled the converter.js file incorrectly in the directory. 
+
+ BUG: Creating a horizontal line to divide the helmet from hurley measurement section. 
+ RESOLVED BY: Checked using inspection tools, the width appeared as 0.  When I googled it, this can be an issue with flexbox layouts.  Applied some width in css and the issue was resolved. 
+
  
 
 
