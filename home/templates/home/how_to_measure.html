@@ -1,24 +1,66 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">How to Measure for the Correct Size Hurley and Helmet</h1>
-    <p class="mt-4">
-        Choosing the right size hurley and helmet is essential for safety and performance. Follow these steps to measure correctly:
-    </p>
-    <h2>How to Measure for a Hurley</h2>
+    <h1 class="text-center">CORRECT SIZING - HURLEYS & HELMETS</h1>
+
+    <!-- Responsive Image and Text Section -->
+    <div class="row align-items-center my-4">
+        <!-- Image Column -->
+        <div class="col-md-6 text-center">
+            <img src="{% static 'images/hurley-measurement.webp' %}" 
+                 alt="Hurley Measurement Guide" 
+                 class="img-fluid rounded shadow hurley-image">
+        </div>
+        <!-- Text Column -->
+        <div class="col-md-6">
+            <p>
+                Choosing the correct size hurley will increase a player’s success at mastering the skills of the game. A shorter, lighter hurley is especially recommended for children and those new to the game. Choosing the right size hurley and helmet is essential for safety and performance. Follow these steps to measure correctly:
+            </p>
+        </div>
+    </div>
+
+ <!-- Add a horizontal line here -->
+ <div class="styled-hr"></div>
+
+
+    <h2>- How to Measure for a Hurley -</h2>
     <ol>
-        <li>Wear your shoes or boots<li>
-        </li>Stand straight with your feet should width apart.</li>
-        <li>Measure from the inside of your wrist to the ground</li>
-    
+        <li>Wear your shoes or boots</li>
+        <li>Player stands nice and relaxed with their hands down by their sides.</li>
+        <li>Measure in inches the distance from the ground to their wrist in inches.</li>
+        <li>This meausrement in inches is the correct size hurley to choose.</li>
+
+        <li>If you are checking the size of an old hurley, the player should be able to hold the hurley at the top and the hurley should be just touching the ground.</li>
+       <br>TOP TIP: If a player is between sizes it is still better to have the hurley too small rather than too big.
     </ol>
-    <h2>How to Measure for a Helemet</h2>
+
+     <!-- Add a horizontal line here -->
+     <div class="styled-hr"></div>
+
+    <h2>- How to Measure for a Helmet -</h2>
+
+    <!-- Responsive Image and Text Section -->
+    <div class="row align-items-center my-4">
+        <!-- Image Column -->
+        <div class="col-md-6 text-center">
+            <img src="{% static 'images/helmet-measurement.webp' %}" 
+                 alt="Helemet Measurement Guide" 
+                 class="img-fluid rounded shadow hurley-image">
+        </div>
+        <!-- Text Column -->
+        <div class="col-md-6">
+
     <ol>
-        <li>Use a measuring tape to measure the circumference of your head just above your eyebrows.</li>
+        <li>Starting just above the eyebrow, use a measuring tape to measure the circumference of the head.</li>
+        <li> Ensure the measuring tape is flat the full way around, it should sit snug but not too tight.</li>
+        <li> Take note of the measurements and find the correct size of hurling helmet using the size guide.</li>
+        <br>
+        If you have any questions, feel free to <a href="/contact-us/">contact us
+
     </ol>
-    <p>
-        If you have any questions, feel free to <a href="/contact-us/">contact us</a>.
     </p>
 </div>
 {% endblock %}

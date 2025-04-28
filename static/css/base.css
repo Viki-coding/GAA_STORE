@@ -55,6 +55,23 @@ body {
     text-transform: uppercase;
 }
 
+/* Hurley measurements section */
+.hurley-image {
+    max-width: 800px;
+    width: 100%; 
+    height: auto; 
+    margin: 0 auto;
+}
+
+/* Line between in helmet and Hurley measurements section */
+.styled-hr {
+    border: none; 
+    border-top: 2px solid white; 
+    height: 2px; 
+    width: 100%; 
+    margin: 20px 0; 
+}
+
 /* Footer */
 footer {
     background-color: #111; /* Slightly lighter black for contrast */
