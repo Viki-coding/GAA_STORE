@@ -474,7 +474,8 @@ Click on the view button
 Acknowledging Contributions & Credits
 TITLE OR DESCRIPTION SOURCE OF LINK CONTEXT
 
-
+https://www.w3schools.com/howto/howto_js_accordion.asp
+Found this useful when creating my FAQ page to create an accordian style FAQ section. 
 
 MARKDOWN:
 
