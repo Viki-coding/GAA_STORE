@@ -1,18 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Hurley, Grip, Sliotar, Helmet
 
+
 # Create your views here.
 def product_list(request):
     """
     View to display a list of all products or filter by category.
     """
-    category = request.GET.get('category')
-    if category:
-        products = Product.objects.filter(description__icontains=category)
-    else:
-        products = Product.objects.all()
-    return render(
-        request, 'products/product_list.html', {'products': products})
+    products = Product.objects.all()  # Fetch all products
+    return render(request, 'products/product_list.html', {'products': products})
+    # category = request.GET.get('category')
+    # if category:
+    #     products = Product.objects.filter(description__icontains=category)
+    # else:
+    #     products = Product.objects.all()
+    # return render(
+    #     request, 'products/product_list.html', {'products': products})
 
 
 def product_detail(request, product_id):
@@ -31,7 +34,8 @@ def hurleys_shop(request):
     View to display the Hurley shop page. This will show the categories of
     hurleys, Bambú, Ash and Goalie.
     """
-    return render(request, 'products/hurleys_shop.html', {})
+    hurleys = Hurley.objects.all()
+    return render(request, 'products/hurleys_shop.html', {'hurleys': hurleys})
 
 
 def accessories_shop(request):
@@ -39,4 +43,11 @@ def accessories_shop(request):
     View to display the accessories shop page. This will show the categories of
     grips, helmets and sliotars.
     """
-    return render(request, 'products/accessories_shop.html', {})
+    grips = Grip.objects.all()
+    sliotars = Sliotar.objects.all()
+    helmets = Helmet.objects.all()
+    return render(request, 'products/accessories_shop.html', {
+        'grips': grips,
+        'sliotars': sliotars,
+        'helmets': helmets,
+    })

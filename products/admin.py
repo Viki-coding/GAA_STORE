@@ -8,9 +8,8 @@ class ProductAdmin(admin.ModelAdmin):
     """
     Admin interface for the Product model.
     """
-    list_display = ('name', 'category', 'price', 'stock')
-    search_fields = ('name', 'category')
-    list_filter = ('category',)
+    list_display = ('name', 'price',)
+    search_fields = ('name',)
     ordering = ('name',)
 
 
@@ -30,8 +29,8 @@ class GripAdmin(admin.ModelAdmin):
     """
     Admin interface for the Grip model.
     """
-    list_display = ('product', 'grip_color')
-    search_fields = ('product__name', 'grip_color')
+    list_display = ('product', 'color')
+    search_fields = ('product__name', 'color')
     ordering = ('product__name',)
 
 
