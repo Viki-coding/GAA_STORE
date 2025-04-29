@@ -10,7 +10,7 @@
 
         convertBtn.addEventListener('click', function () {
             const cmValue = parseFloat(cmInput.value);
-            if (!isNaN(cmValue)) {
+            if (!isNaN(cmValue)&& cmValue > 0) {
                 const inches = Math.floor(cmValue / 2.54); // Convert cm to inches & round down
                 result.textContent = `You need a ${inches}-inch hurley.`;
                 result.style.color = '#fff'; 

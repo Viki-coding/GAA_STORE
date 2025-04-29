@@ -478,6 +478,8 @@ https://www.w3schools.com/howto/howto_js_accordion.asp
 Found this useful when creating my FAQ page to create an accordian style FAQ section. 
 
 https://dbdiagram.io/ - Excellent for planning my ERD 
+At my first meeting with my mentor, I showed him my ERD diagram, he didn't think my model approach would work with my products the way I had it mapped and suggested to use the abstract-base-model as detailed here: 
+https://realpython.com/modeling-polymorphism-django-python/#abstract-base-model
 
 MARKDOWN:
 

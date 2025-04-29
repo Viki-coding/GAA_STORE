@@ -35,7 +35,8 @@ I had put my converter calculator script into my base.file, which I should of ke
 
 <img width="1217" alt="JS null error FAQ bug" src="https://github.com/user-attachments/assets/46484b58-2f93-403a-ab17-fe7b67a48b16" />
 
-
+**BUG:** After fixing my FAQ bug, I checked to see if my converter calculator works and even though I entered a valid number is sent the error message that I entered an invalid number.  
+**RESOLVED BY:** I opened up my inspector tools and could not see any error messages. Then reviewed my script on my html page and realised I put it in the wrong place, amended it and converter calculator working again. 
 
 
 
