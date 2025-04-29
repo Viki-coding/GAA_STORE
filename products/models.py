@@ -20,6 +20,7 @@ class Product(models.Model):
         blank=True,
         help_text="Image of the product."
     )
+ 
     created_at = models.DateTimeField(
         auto_now_add=True, help_text="Timestamp when the product was created."
     )
@@ -56,6 +57,12 @@ class Hurley(models.Model):
     product = models.OneToOneField(
         Product, on_delete=models.CASCADE, primary_key=True,
         help_text="The base product associated with this Hurley."
+    )
+    manufacturer = models.CharField(
+        max_length=50,
+        help_text="Manufacturer of the Hurley.",
+        null=True,
+        blank=True
     )
     grip_color = models.CharField(
         max_length=20,
@@ -108,7 +115,8 @@ class Hurley(models.Model):
         Returns the string representation of the Hurley, including its size
         and grip color.
         """
-        return f"{self.product.name} - {self.size}, {self.grip_color}"
+        return f"{self.product.name} - {self.size}, {self.grip_color}, {
+            self.manufacturer}"
 
 
 class Grip(models.Model):
