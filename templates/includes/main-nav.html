@@ -11,6 +11,11 @@
           <li class="nav-item"><a class="nav-link" href="/how-to-measure/">Measure</a></li>
           <li class="nav-item"><a class="nav-link" href="/faq/">FAQ</a></li>
           <li class="nav-item"><a class="nav-link" href="/accounts/login/">Log In</a></li>
+          <li class="nav-item">
+            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
+                Bag
+            </a>
+        </li>
         </ul>
       </div>
     </div>
