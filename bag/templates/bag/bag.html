@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Your Bag</h1>
+    <div class="bag-items mt-4">
+        {% if bag_items %}
+            <ul class="list-group">
+                {% for item in bag_items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ item.product.name }} - {{ item.quantity }} x €{{ item.product.price }}
+                        <span>€{{ item.total_price }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="mt-4 text-right">
+                <h4>Total: €{{ bag_total }}</h4>
+                <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+            </div>
+        {% else %}
+            <p class="text-center">Your bag is empty.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
