@@ -477,6 +477,8 @@ TITLE OR DESCRIPTION SOURCE OF LINK CONTEXT
 https://www.w3schools.com/howto/howto_js_accordion.asp
 Found this useful when creating my FAQ page to create an accordian style FAQ section. 
 
+https://dbdiagram.io/ - Excellent for planning my ERD 
+
 MARKDOWN:
 
 Help with markdown, found this site usefule (https://www.markdownguide.org/basic-syntax/) and downloaded this extenstion to Visual Studio Code (https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents)
@@ -490,10 +492,12 @@ https://www.vecteezy.com and edited in canva.
 
 CONTENT
 Hurley size: https://learning.gaa.ie/sites/default/files/info_hurl_FINAL.pdf
+How to measure for a hurley and helmet content from: https://www.elverys.ie/pages/how-to-measure-for-a-hurley-buying-guide
+Hurley measure guide from: https://camogie.ie/files/Hurl%20Size%20Poster.pdf
+
+
 
 
 Legal & Ethical Compliance
 This project is for educational purposes only.
-=======
-# GAA_STORE
->>>>>>> a53d69acf343e23d2e4a24c93c052242bde06f7b
+
