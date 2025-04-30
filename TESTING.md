@@ -39,6 +39,8 @@ I had put my converter calculator script into my base.file, which I should of ke
 **RESOLVED BY:** I opened up my inspector tools and could not see any error messages. Then reviewed my script on my html page and realised I put it in the wrong place, amended it and converter calculator working again. 
 
 
+BUG: ValueError at /products/
+The 'image' attribute has no file associated with it.
 
 
 

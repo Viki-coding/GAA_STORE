@@ -18,6 +18,7 @@ class Product(models.Model):
         upload_to='products/',
         null=True,
         blank=True,
+        default='products/default-product.jpg',
         help_text="Image of the product."
     )
  
