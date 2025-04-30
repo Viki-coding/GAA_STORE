@@ -25,14 +25,13 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('profiles/', include('profiles.urls')),
-    path('products/', include('products.urls')),
     path('hurleys/', views.hurleys_shop, name='hurleys_shop'),
-    path('accessories/', views.accessories_shop, name='accessories_shop'),
+    path('products/', include('products.urls')),
     path('bag/', include('bag.urls')),
 ]
 
-handler404 = 'gaa_store.views.handle_404'
-handler500 = 'gaa_store.views.handle_500'
+HANDLER_404 = 'gaa_store.views.handle_404'
+HANDLER_500 = 'gaa_store.views.handle_500'
 
 if settings.DEBUG:
     urlpatterns += static(
