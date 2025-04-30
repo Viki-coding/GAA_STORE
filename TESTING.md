@@ -43,3 +43,5 @@ I had put my converter calculator script into my base.file, which I should of ke
 **RESOLVED BY:** I had come accross it in the walk-thru also, so I added a default-image.jpeg to my static files and put an if else option in my product_list.html to use the default if no prodcut img present. I will fix the image files but I just wanted to review the layout before committing to data. 
 
 
+**BUG:** On my views.py file I had a red underline and when I right clicjed it said - Unable to import 'django.urls'PylintE0401:import-error. 
+**RESOLVED BY:** I knew I had installed django but checked again by typing pip show django in the terminal. I could see my virtual env was running. I opened up setting in my VS code and updaed my pylint settings.  This worked and cut down on my errors to do with importing so that I could concentrate on the remaining. 
