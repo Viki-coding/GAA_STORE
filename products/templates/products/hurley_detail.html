@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ hurley.product.name }}</h1>
+<img src="{{ hurley.product.image.url }}" alt="{{ hurley.product.name }}" class="img-fluid mb-4">
+<p>{{ hurley.product.description }}</p>
+<p>Price: €{{ hurley.product.price }}</p>
+
+<form method="POST" action="{% url 'add_to_bag' hurley.product.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="size">Size:</label>
+        <select id="size" name="size" class="form-control">
+            {% for size, size_label in hurley._meta.get_field('size').choices %}
+                <option value="{{ size }}">{{ size_label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="weight">Weight:</label>
+        <select id="weight" name="weight" class="form-control">
+            {% for weight, weight_label in hurley._meta.get_field('weight').choices %}
+                <option value="{{ weight }}">{{ weight_label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="grip_color">Grip Colour:</label>
+        <select id="grip_color" name="grip_color" class="form-control">
+            {% for color, color_label in hurley._meta.get_field('grip_color').choices %}
+                <option value="{{ color }}">{{ color_label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="manufacturer">Manufacturer:</label>
+        <input type="text" id="manufacturer" name="manufacturer" value="{{ hurley.manufacturer }}" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Add to Bag</button>
+</form>
+{% endblock %}

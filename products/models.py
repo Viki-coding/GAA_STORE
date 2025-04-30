@@ -57,13 +57,12 @@ class Hurley(models.Model):
     """
     product = models.OneToOneField(
         Product, on_delete=models.CASCADE, primary_key=True,
+        related_name='hurley',
         help_text="The base product associated with this Hurley."
     )
     manufacturer = models.CharField(
         max_length=50,
         help_text="Manufacturer of the Hurley.",
-        null=True,
-        blank=True
     )
     grip_color = models.CharField(
         max_length=20,
@@ -77,6 +76,7 @@ class Hurley(models.Model):
             ('orange', 'Orange'),
             ('yellow', 'Yellow'),
         ],
+        default='black',
         help_text="Color of the grip on the Hurley."
     )
     weight = models.CharField(
@@ -86,6 +86,7 @@ class Hurley(models.Model):
             ('medium', 'Medium'),
             ('heavy', 'Heavy'),
         ],
+        default='medium',
         help_text="Weight category of the Hurley."
     )
     size = models.CharField(
@@ -145,9 +146,15 @@ class Grip(models.Model):
 
     def __str__(self):
         """
-        Returns the string representation of the Grip, including its color.
+        Returns the string representation of the Grip, including its color,
+        manufacturer and size.
         """
-        return f"{self.product.name} - {self.color}"
+        return f"{self.product.name} - Size: {self.size}, -Grip Color: {
+            self.color}, Manufacturer: {self.manufacturer}"
+  
+    class Meta:
+        verbose_name = "Hurley"
+        verbose_name_plural = "Hurleys"
 
 
 class Sliotar(models.Model):

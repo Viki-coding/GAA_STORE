@@ -39,8 +39,7 @@ I had put my converter calculator script into my base.file, which I should of ke
 **RESOLVED BY:** I opened up my inspector tools and could not see any error messages. Then reviewed my script on my html page and realised I put it in the wrong place, amended it and converter calculator working again. 
 
 
-BUG: ValueError at /products/
-The 'image' attribute has no file associated with it.
-
+**BUG:** ValueError at /products/. The 'image' attribute has no file associated with it. After adding some test products through my django admin panel, when I ran the server this error was displayed. 
+**RESOLVED BY:** I had come accross it in the walk-thru also, so I added a default-image.jpeg to my static files and put an if else option in my product_list.html to use the default if no prodcut img present. I will fix the image files but I just wanted to review the layout before committing to data. 
 
 

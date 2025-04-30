@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Hurley, Grip, Sliotar, Helmet
 
 
@@ -51,3 +51,46 @@ def accessories_shop(request):
         'sliotars': sliotars,
         'helmets': helmets,
     })
+
+
+def hurley_detail(request, hurley_id):
+    """
+    View to display the details of a specific hurley.
+    """
+    hurley = get_object_or_404(Hurley, product_id=hurley_id)
+    return render(request, 'products/hurley_detail.html', {'hurley': hurley})
+
+
+def add_to_bag(request, product_id):
+    """
+    Add a hurley to the shopping bag.
+    """
+    product = get_object_or_404(Product, id=product_id)
+    size = request.POST.get('size')
+    weight = request.POST.get('weight')
+    grip_color = request.POST.get('grip_color')
+    manufacturer = request.POST.get('manufacturer')
+    quantity = int(request.POST.get('quantity', 1))
+
+    bag = request.session.get('bag', {})
+
+    # Create a unique key for the hurley based on its attributes,
+    # prevents overwriting
+    # hurleys with the same product ID but different attributes
+    hurley_key = f"{product_id}-{size}-{weight}-{grip_color}-{manufacturer}"
+
+    if hurley_key in bag:
+        bag[hurley_key]['quantity'] += quantity
+    else:
+        bag[hurley_key] = {
+            'product_id': product_id,
+            'size': size,
+            'weight': weight,
+            'grip_color': grip_color,
+            'manufacturer': manufacturer,
+            'quantity': quantity,
+        }
+    
+    request.session['bag'] = bag
+    return redirect('hurley_detail', hurley_id=product_id)
+
