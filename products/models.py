@@ -111,6 +111,16 @@ class Hurley(models.Model):
         ],
         help_text="Size of the Hurley in inches."
     )
+    type = models.CharField(
+        max_length=20,
+        choices=[
+            ('ash', 'Ash'),
+            ('bambu', 'Bambú'),
+            ('goalie', 'Goalie'),
+        ],
+        default='ash',
+        help_text="Type of the Hurley."
+    )
 
     def __str__(self):
         """
