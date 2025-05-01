@@ -58,7 +58,18 @@ def hurley_detail(request, hurley_id):
     View to display the details of a specific hurley.
     """
     hurley = get_object_or_404(Hurley, product_id=hurley_id)
-    return render(request, 'products/hurley_detail.html', {'hurley': hurley})
+    size_choices = Hurley._meta.get_field('size').choices
+    weight_choices = Hurley._meta.get_field('weight').choices
+    grip_color_choices = Hurley._meta.get_field('grip_color').choices
+    manufacturer_choices = Hurley._meta.get_field('manufacturer').choices   
+
+    return render(request, 'products/hurley_detail.html', {
+        'hurley': hurley,
+        'size_choices': size_choices,
+        'weight_choices': weight_choices,
+        'grip_color_choices': grip_color_choices,
+        'manufacturer_choices': manufacturer_choices,
+    })
 
 
 def add_to_bag(request, product_id):
