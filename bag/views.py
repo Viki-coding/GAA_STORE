@@ -1,14 +1,3 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from products.models import Product, Hurley, Grip, Sliotar, Helmet
-
-
-def view_bag(request):
-    """ A view that renders the bag contents page """
-
-    return render(request, 'bag/bag.html')
-
-
 def add_to_bag(request, product_id):
     """ Add a quantity of the specified product to the shopping bag """
 
@@ -20,18 +9,69 @@ def add_to_bag(request, product_id):
     except (ValueError, TypeError):
         messages.error(request, "Invalid quantity. Please try again.")
         return redirect(request.POST.get('redirect_url'))
- 
+
     # Validate the product ID
     product = get_object_or_404(Product, id=product_id)
+
+    # Determine the specific product type (Hurley, Grip, Sliotar, Helmet)
+    specific_product = product.get_specific_instance()
 
     # Retrieve the bag from the session (or initialize it if it doesn't exist)
     bag = request.session.get('bag', {})
 
-    # Check if the product is already in the bag and update the quantity
-    if product_id in list(bag.keys()):
-        bag[product_id] += quantity
+    # Create a unique key for the product based on its attributes
+    if isinstance(specific_product, Hurley):
+        size = request.POST.get('size')
+        weight = request.POST.get('weight')
+        grip_color = request.POST.get('grip_color')
+        manufacturer = specific_product.manufacturer.name
+        product_key = f"{product_id}-{size}-{weight}-{grip_color}-{manufacturer}"
+        bag[product_key] = bag.get(product_key, {'quantity': 0})
+        bag[product_key]['quantity'] += quantity
+        bag[product_key].update({
+            'product_id': product_id,
+            'size': size,
+            'weight': weight,
+            'grip_color': grip_color,
+            'manufacturer': manufacturer,
+        })
+    elif isinstance(specific_product, Grip):
+        color = specific_product.color
+        product_key = f"{product_id}-{color}"
+        bag[product_key] = bag.get(product_key, {'quantity': 0})
+        bag[product_key]['quantity'] += quantity
+        bag[product_key].update({
+            'product_id': product_id,
+            'color': color,
+        })
+    elif isinstance(specific_product, Sliotar):
+        color = specific_product.color
+        product_key = f"{product_id}-{color}"
+        bag[product_key] = bag.get(product_key, {'quantity': 0})
+        bag[product_key]['quantity'] += quantity
+        bag[product_key].update({
+            'product_id': product_id,
+            'color': color,
+        })
+    elif isinstance(specific_product, Helmet):
+        size = specific_product.size
+        color = specific_product.color
+        product_key = f"{product_id}-{size}-{color}"
+        bag[product_key] = bag.get(product_key, {'quantity': 0})
+        bag[product_key]['quantity'] += quantity
+        bag[product_key].update({
+            'product_id': product_id,
+            'size': size,
+            'color': color,
+        })
     else:
-        bag[product_id] = quantity
+        # Default case for products without specific attributes
+        product_key = str(product_id)
+        bag[product_key] = bag.get(product_key, {'quantity': 0})
+        bag[product_key]['quantity'] += quantity
+        bag[product_key].update({
+            'product_id': product_id,
+        })
 
     # Save the updated bag back to the session
     request.session['bag'] = bag

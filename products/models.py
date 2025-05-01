@@ -49,6 +49,19 @@ class Product(models.Model):
         return self
 
 
+class Manufacturer(models.Model):
+    """
+    Represents a manufacturer of hurleys.
+    """
+    name = models.CharField(
+        max_length=50, help_text="Name of the manufacturer.")
+    description = models.TextField(
+        help_text="Short description of the manufacturer.")
+
+    def __str__(self):
+        return self.name
+
+
 # Specific product models (with one-to-one relationships to Product)
 class Hurley(models.Model):
     """
@@ -60,8 +73,8 @@ class Hurley(models.Model):
         related_name='hurley',
         help_text="The base product associated with this Hurley."
     )
-    manufacturer = models.CharField(
-        max_length=50,
+    manufacturer = models.ForeignKey(
+        Manufacturer, on_delete=models.CASCADE,
         help_text="Manufacturer of the Hurley.",
     )
     grip_color = models.CharField(

@@ -8,7 +8,6 @@
             <img src="{{ hurley.product.image.url }}" alt="{{ hurley.product.name }}" class="img-fluid">
         </div>
         <div class="col-md-6">
-            <p><strong>Manufacturer:</strong> {{ hurley.manufacturer }}</p>
             <p><strong>Price:</strong> €{{ hurley.product.price }}</p>
             <p><strong>Description:</strong> {{ hurley.product.description }}</p>
             <form method="POST" action="{% url 'add_to_bag' hurley.product.id %}">
@@ -18,6 +17,14 @@
                     <select id="size" name="size" class="form-control">
                         {% for size, size_label in size_choices %}
                             <option value="{{ size }}">{{ size_label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="manufacturer">Manufacturer:</label>
+                    <select id="manufacturer" name="manufacturer" class="form-control">
+                        {% for manufacturer in manufacturers %}
+                            <option value="{{ manufacturer.id }}">{{ manufacturer.name }}</option>
                         {% endfor %}
                     </select>
                 </div>

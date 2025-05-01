@@ -21,7 +21,6 @@
                 <img src="{% if hurley.product.image %}{{ hurley.product.image.url }}{% else %}{% static 'images/default-product.jpg' %}{% endif %}" alt="{{ hurley.product.name }}" class="img-fluid rounded">
                 <h3 class="mt-3">{{ hurley.product.name }}</h3>
             </a>
-            <p>Manufacturer: {{ hurley.manufacturer }}</p>
         </div>
         {% empty %}
         <p class="text-center">No hurleys found for this category.</p>
