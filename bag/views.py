@@ -1,3 +1,13 @@
+from django.shortcuts import render
+
+def view_bag(request):
+    """
+    View to display the shopping bag.
+    """
+    bag = request.session.get('bag', {})  # Retrieve the bag from the session
+    return render(request, 'bag/bag.html', {'bag': bag})
+
+    
 def add_to_bag(request, product_id):
     """ Add a quantity of the specified product to the shopping bag """
 

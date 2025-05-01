@@ -15,5 +15,4 @@ urlpatterns = [
         views.hurley_detail,
         name='hurley_detail',
     ),
-    path('add/<int:product_id>/', views.add_to_bag, name='add_to_bag'),
 ]
