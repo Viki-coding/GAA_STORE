@@ -31,10 +31,16 @@ def product_detail(request, product_id):
 
 def hurleys_shop(request):
     """
-    View to display the Hurley shop page. This will show the categories of
-    hurleys, Bambú, Ash and Goalie.
+    View to display the Hurley shop page. This will show the types of
+    hurleys, Bambú, Ash and Goalie. if not type specified, show all hurleys.
     """
-    hurleys = Hurley.objects.all()
+    hurley_type = request.GET.get('type')
+    if hurley_type:
+        hurleys = Hurley.objects.filter(
+            product__description__icontains=hurley_type)
+    else:
+        hurleys = Hurley.objects.all()
+ 
     return render(request, 'products/hurleys_shop.html', {'hurleys': hurleys})
 
 

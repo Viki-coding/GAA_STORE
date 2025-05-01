@@ -4,28 +4,28 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center">Hurleys Shop</h1>
+
+    <!-- Filter Links -->
+    <div class="text-center mb-4">
+        <a href="{% url 'hurleys_shop' %}?type=ash" class="btn btn-outline-primary">Ash Hurleys</a>
+        <a href="{% url 'hurleys_shop' %}?type=bambu" class="btn btn-outline-primary">Bambú Hurleys</a>
+        <a href="{% url 'hurleys_shop' %}?type=goalie" class="btn btn-outline-primary">Goalie Hurleys</a>
+        <a href="{% url 'hurleys_shop' %}" class="btn btn-outline-secondary">Show All</a>
+    </div>
+
+    <!-- Display Hurleys  -->
     <div class="row text-center mt-4">
-        <!-- Ash Hurleys -->
         {% for hurley in hurleys %}
         <div class="col-md-4 mb-4">
             <a href="{% url 'hurley_detail' hurley.product.id %}">
-                <img src="{% static 'images/ash_hurley.png' %}" alt="Ash Hurleys" class="img-fluid rounded">
+                <img src="{{ hurley.product.image.url }}" alt="{{ hurley.product.name }}" class="img-fluid rounded">
                 <h3 class="mt-3">{{ hurley.product.name }}</h3>
             </a>
+            <p>Manufacturer: {{ hurley.manufacturer }}</p>
         </div>
+        {% empty %}
+        <p class="text-center">No hurleys found for this category.</p>
         {% endfor %}
-        <!-- Bambú Hurleys -->
-        <div class="col-md-4 mb-4">
-            <a href="{% url 'product_list' %}?category=bambu_hurleys">
-                <img src="{% static 'images/bambu_hurley.png' %}" alt="Bambú Hurleys" class="img-fluid rounded">
-                <h3 class="mt-3">Bambú Hurleys</h3>
-            </a>
-        </div>
-        <!-- Goalie Hurleys -->
-        <div class="col-md-4 mb-4">
-            <a href="{% url 'product_list' %}?category=goalie_hurleys">
-                <img src="{% static 'images/goalie_hurleys.png' %}" alt="Goalie Hurleys" class="img-fluid rounded">
-                <h3 class="mt-3">Goalie Hurleys</h3>
-            </a>
-        </div>
+    </div>
+</div>
 {% endblock %}
