@@ -12,7 +12,7 @@ class Product(models.Model):
     description = models.TextField(
         help_text="Detailed description of the product.")
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, help_text="Price of the product."
+        max_digits=10, decimal_places=2, help_text="Price of the produfct."
     )
     image = models.ImageField(
         upload_to='products/',
@@ -168,16 +168,11 @@ class Grip(models.Model):
     )
 
     def __str__(self):
-        """
-        Returns the string representation of the Grip, including its color,
-        manufacturer and size.
-        """
-        return f"{self.product.name} - Size: {self.size}, -Grip Color: {
-            self.color}, Manufacturer: {self.manufacturer}"
-  
-    class Meta:
-        verbose_name = "Hurley"
-        verbose_name_plural = "Hurleys"
+        return f"{self.product.name} - Grip Color: {self.color}"
+    
+        class Meta:
+            verbose_name = "Hurley"
+            verbose_name_plural = "Hurleys"
 
 
 class Sliotar(models.Model):

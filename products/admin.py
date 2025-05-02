@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Hurley, Grip, Sliotar, Helmet
+from .models import Product, Hurley, Grip, Sliotar, Helmet, Manufacturer
 # Register your models here.
 
 
@@ -52,3 +52,7 @@ class HelmetAdmin(admin.ModelAdmin):
     list_display = ('product', 'size', 'color')
     search_fields = ('product__name', 'size', 'color')
     ordering = ('product__name',)
+
+@admin.register(Manufacturer)
+class ManufacturerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')

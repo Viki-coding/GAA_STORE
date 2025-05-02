@@ -45,3 +45,6 @@ I had put my converter calculator script into my base.file, which I should of ke
 
 **BUG:** On my views.py file I had a red underline and when I right clicjed it said - Unable to import 'django.urls'PylintE0401:import-error. 
 **RESOLVED BY:** I knew I had installed django but checked again by typing pip show django in the terminal. I could see my virtual env was running. I opened up setting in my VS code and updaed my pylint settings.  This worked and cut down on my errors to do with importing so that I could concentrate on the remaining. 
+
+**BUG:** I needed to modify my model, as I wanted the user to be able to choose which manufacturers hurley they wanted. So  I created a new model and deleted it from the hurley model. I thought I had made migrations and run migrations but I obviously did something wrong and ended up with countless errors after errors for a day saying my table already existed but they didn't.
+**RESOLVED BY:** Walking away from the laptop and returning. The advice I was getting on-line was to delete all previous migrations and reapply them, which I did but didn't solve the problem.  Ran my models.py though perplexity and was shown I had manufacurers in my grips which I shouldn't have had, amended that.  Stack overflow advised to delete my database, which I did and then reapply migrations which I did and it worked then. 
