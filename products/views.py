@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Hurley, Grip, Sliotar, Helmet
+from .models import Product, Hurley, Grip, Sliotar, Helmet, Manufacturer
 
 
 # Create your views here.
@@ -67,14 +67,14 @@ def hurley_detail(request, hurley_id):
     size_choices = Hurley._meta.get_field('size').choices
     weight_choices = Hurley._meta.get_field('weight').choices
     grip_color_choices = Hurley._meta.get_field('grip_color').choices
-    manufacturer_choices = Hurley._meta.get_field('manufacturer').choices   
+    manufacturers = Manufacturer.objects.all() 
 
     return render(request, 'products/hurley_detail.html', {
         'hurley': hurley,
         'size_choices': size_choices,
         'weight_choices': weight_choices,
         'grip_color_choices': grip_color_choices,
-        'manufacturer_choices': manufacturer_choices,
+        'manufacturers': manufacturers,
     })
 
 
