@@ -69,6 +69,14 @@ def hurley_detail(request, hurley_id):
     grip_color_choices = Hurley._meta.get_field('grip_color').choices
     manufacturers = Manufacturer.objects.all() 
 
+    # Filter manufacturers based on hurley type
+    if hurley.type == 'ash':
+        manufacturers = Manufacturer.objects.exclude(name='Torpey Bambú Hurley')
+    elif hurley.type == 'bambu':
+        manufacturers = Manufacturer.objects.filter(name='Torpey Bambú Hurley')
+    else:
+        manufacturers = Manufacturer.objects.all()
+
     return render(request, 'products/hurley_detail.html', {
         'hurley': hurley,
         'size_choices': size_choices,
