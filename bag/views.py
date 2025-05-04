@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from products.models import Product, Hurley, Grip, Sliotar, Helmet
+
 
 def view_bag(request):
     """
@@ -7,7 +10,7 @@ def view_bag(request):
     bag = request.session.get('bag', {})  # Retrieve the bag from the session
     return render(request, 'bag/bag.html', {'bag': bag})
 
-    
+
 def add_to_bag(request, product_id):
     """ Add a quantity of the specified product to the shopping bag """
 
@@ -87,7 +90,8 @@ def add_to_bag(request, product_id):
     request.session['bag'] = bag
 
     # Add a success message
-    messages.success(request, f'Added {quantity} x {product.name} to your bag.')
+    messages.success(
+        request, f'Added {quantity} x {product.name} to your bag.')
 
     # Redirect to the specified URL
     return redirect(request.POST.get('redirect_url'))

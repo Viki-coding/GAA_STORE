@@ -78,7 +78,7 @@ def hurley_detail(request, hurley_id):
         manufacturers = Manufacturer.objects.all()
 
     return render(request, 'products/product_detail.html', {
-        'hurley': hurley,
+        'product': hurley.product,
         'size_choices': size_choices,
         'weight_choices': weight_choices,
         'grip_color_choices': grip_color_choices,
