@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label for="grip_color">Grip Color:</label>
                         <select id="grip_color" name="grip_color" class="form-control">
-                            {% for color, color_label in grip_color_choices %}
+                            {% for color, color_label in color_choices %}
                                 <option value="{{ color }}">{{ color_label }}</option>
                             {% endfor %}
                         </select>
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label for="size">Size:</label>
                         <select id="size" name="size" class="form-control">
-                            {% for size, size_label in product.helmet.size_choices %}
+                            {% for size, size_label in size_choices %}
                                 <option value="{{ size }}">{{ size_label }}</option>
                             {% endfor %}
                         </select>
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label for="color">Color:</label>
                         <select id="color" name="color" class="form-control">
-                            {% for color, color_label in product.helmet.color_choices %}
+                            {% for color, color_label in color_choices %}
                                 <option value="{{ color }}">{{ color_label }}</option>
                             {% endfor %}
                         </select>
@@ -73,7 +73,7 @@
                     <div class="form-group">
                         <label for="color">Color:</label>
                         <select id="color" name="color" class="form-control">
-                            {% for color, color_label in product.sliotar.color_choices %}
+                            {% for color, color_label in color_choices %}
                                 <option value="{{ color }}">{{ color_label }}</option>
                             {% endfor %}
                         </select>
