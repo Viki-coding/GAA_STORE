@@ -34,6 +34,22 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="grip_color">Grip Color:</label>
+                        <select id="grip_color" name="grip_color" class="form-control">
+                            {% for color, color_label in grip_color_choices %}
+                                <option value="{{ color }}">{{ color_label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="manufacturer">Manufacturer:</label>
+                        <select id="manufacturer" name="manufacturer" class="form-control">
+                            {% for manufacturer in manufacturers %}
+                                <option value="{{ manufacturer.id }}">{{ manufacturer.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                     {% endif %}
                 {% if product.helmet %}
                     <div class="form-group">

@@ -48,3 +48,7 @@ I had put my converter calculator script into my base.file, which I should of ke
 
 **BUG:** I needed to modify my model, as I wanted the user to be able to choose which manufacturers hurley they wanted. So  I created a new model and deleted it from the hurley model. I thought I had made migrations and run migrations but I obviously did something wrong and ended up with countless errors after errors for a day saying my table already existed but they didn't.
 **RESOLVED BY:** Walking away from the laptop and returning. The advice I was getting on-line was to delete all previous migrations and reapply them, which I did but didn't solve the problem.  Ran my models.py though perplexity and was shown I had manufacurers in my grips which I shouldn't have had, amended that.  Stack overflow advised to delete my database, which I did and then reapply migrations which I did and it worked then. 
+
+**BUG:** I realised that should of used a general product_detail.html rather than separate product detail pages to reuse code and work with the product list dynamically. So I set about to do that. REceived an error page NoReverseMatch at /products/hurley/1/. Reverse for 'add_to_bag' with arguments '('',)' not found. 1 pattern(s) tried: ['bag/add/(?P<product_id>[0-9]+)/\\Z']. 
+**RESOLVED BY:** I fixed a typo in my nested form. I reviewed by views, concentrating on hurley_details as this was hightlighted in grey in the error page. In my return render I changed 'hurley': hurley.product to 'product': hurley.product and this fixed it. 
+
