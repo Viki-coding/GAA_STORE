@@ -15,4 +15,19 @@ urlpatterns = [
         views.hurley_detail,
         name='hurley_detail',
     ),
+    path(
+        'grip/<int:grip_id>/',
+        views.grip_detail,
+        name='grip_detail',
+    ),
+    path(
+        'sliotar/<int:sliotar_id>/',
+        views.sliotar_detail,
+        name='sliotar_detail',
+    ),
+    path(
+        'helmet/<int:helmet_id>/',
+        views.helmet_detail,
+        name='helmet_detail',
+    ),
 ]

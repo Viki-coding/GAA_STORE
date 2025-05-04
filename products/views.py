@@ -77,7 +77,7 @@ def hurley_detail(request, hurley_id):
     else:
         manufacturers = Manufacturer.objects.all()
 
-    return render(request, 'products/hurley_detail.html', {
+    return render(request, 'products/product_detail.html', {
         'hurley': hurley,
         'size_choices': size_choices,
         'weight_choices': weight_choices,
@@ -85,6 +85,30 @@ def hurley_detail(request, hurley_id):
         'manufacturers': manufacturers,
     })
 
+
+def helmet_detail(request, helmet_id):
+    helmet = get_object_or_404(Helmet, product_id=helmet_id)
+    return render(request, 'products/product_detail.html', {
+        'product': helmet.product,
+        'size_choices': Helmet._meta.get_field('size').choices,
+        'color_choices': Helmet._meta.get_field('color').choices,
+    })
+
+
+def grip_detail(request, grip_id):
+    grip = get_object_or_404(Grip, product_id=grip_id)
+    return render(request, 'products/product_detail.html', {
+        'product': grip.product,
+        'color_choices': Grip._meta.get_field('color').choices,
+    })
+
+
+def sliotar_detail(request, sliotar_id):
+    sliotar = get_object_or_404(Sliotar, product_id=sliotar_id)
+    return render(request, 'products/product_detail.html', {
+        'product': sliotar.product,
+        'color_choices': Sliotar._meta.get_field('color').choices,
+    })
 
 # def add_to_bag(request, product_id):
 #     """
