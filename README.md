@@ -484,6 +484,9 @@ https://dbdiagram.io/ - Excellent for planning my ERD
 At my first meeting with my mentor, I showed him my ERD diagram, he didn't think my model approach would work with my products the way I had it mapped and suggested to use the abstract-base-model as detailed here: 
 https://realpython.com/modeling-polymorphism-django-python/#abstract-base-model
 
+https://www.w3schools.com/django/ref_tags_verbatim.php
+Found this W3 schools helpful for explaining about verbatium template tags when my JS was causeing errors on my product detail template. 
+
 MARKDOWN:
 
 Help with markdown, found this site usefule (https://www.markdownguide.org/basic-syntax/) and downloaded this extenstion to Visual Studio Code (https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents)

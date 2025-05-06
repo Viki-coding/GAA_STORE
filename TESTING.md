@@ -52,3 +52,6 @@ I had put my converter calculator script into my base.file, which I should of ke
 **BUG:** I realised that should of used a general product_detail.html rather than separate product detail pages to reuse code and work with the product list dynamically. So I set about to do that. REceived an error page NoReverseMatch at /products/hurley/1/. Reverse for 'add_to_bag' with arguments '('',)' not found. 1 pattern(s) tried: ['bag/add/(?P<product_id>[0-9]+)/\\Z']. 
 **RESOLVED BY:** I fixed a typo in my nested form. I reviewed by views, concentrating on hurley_details as this was hightlighted in grey in the error page. In my return render I changed 'hurley': hurley.product to 'product': hurley.product and this fixed it. 
 
+
+**BUG:**  When checking my products were displaying, I noticed that grips was not displaying a color drop down arrow, which it should have. 
+**RESOLVED BY:**  Checked by def grip_detail view which looked correct, checked my grips model which also looked correct. After checking my product list template, I had a naming typo error which I corrected and I was missing the logic for grips, I added the condiation to check if it was a grip to render the color dropdown, which resolved the bug. 

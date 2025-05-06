@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label for="grip_color">Grip Color:</label>
                         <select id="grip_color" name="grip_color" class="form-control">
-                            {% for color, color_label in color_choices %}
+                            {% for color, color_label in grip_color_choices %}
                                 <option value="{{ color }}">{{ color_label }}</option>
                             {% endfor %}
                         </select>
@@ -46,11 +46,11 @@
                         <label for="manufacturer">Manufacturer:</label>
                         <select id="manufacturer" name="manufacturer" class="form-control">
                             {% for manufacturer in manufacturers %}
-                                <option value="{{ manufacturer.id }}">{{ manufacturer.name }}</option>
+                                                <option value="{{ manufacturer.id }}">{{ manufacturer.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    {% endif %}
+                {% endif %}
                 {% if product.helmet %}
                     <div class="form-group">
                         <label for="size">Size:</label>
@@ -60,6 +60,16 @@
                             {% endfor %}
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="color">Color:</label>
+                        <select id="color" name="color" class="form-control">
+                            {% for color, color_label in color_choices %}
+                                <option value="{{ color }}">{{ color_label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endif %}
+                {% if product.grip %}
                     <div class="form-group">
                         <label for="color">Color:</label>
                         <select id="color" name="color" class="form-control">
@@ -83,9 +93,6 @@
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control mb-3">
                 </div>
-            <form method="POST" action="{% url 'add_to_bag' product.id %}">
-                {% csrf_token %}
-                <!-- Other form fields -->
                 <button type="submit" class="btn btn-primary">Add to Bag</button>
             </form>
         </div>
@@ -93,25 +100,29 @@
 </div>
 
 <script>
+    {% verbatim %}
     // Get references to the manufacturer dropdown and description placeholder
     const manufacturerDropdown = document.getElementById('manufacturer');
     const manufacturerDescription = document.getElementById('manufacturer-description');
 
-    // Create a mapping of manufacturer IDs to their descriptions
-    const manufacturerDescriptions = {
-        {% for manufacturer in manufacturers %}
-            "{{ manufacturer.id|escapejs }}": "{{ manufacturer.description|escapejs }}",
-        {% endfor %}
-    };
+    if (manufacturerDropdown) {
+        // Create a mapping of manufacturer IDs to their descriptions
+        const manufacturerDescriptions = {
+            {% for manufacturer in manufacturers %}
+                "{{ manufacturer.id|escapejs }}": "{{ manufacturer.description|escapejs }}"
+            {% endfor %}
+        };
 
-    // Add an event listener to update the description when the manufacturer changes
-    manufacturerDropdown.addEventListener('change', function () {
-        const selectedManufacturerId = this.value;
-        const description = manufacturerDescriptions[selectedManufacturerId] || '';
-        manufacturerDescription.textContent = description; // Update the description
-    });
+        // Add an event listener to update the description when the manufacturer changes
+        manufacturerDropdown.addEventListener('change', function () {
+            const selectedManufacturerId = this.value;
+            const description = manufacturerDescriptions[selectedManufacturerId] || '';
+            manufacturerDescription.textContent = description; // Update the description
+        });
 
-    // Trigger the event listener on page load to show the default description
-    manufacturerDropdown.dispatchEvent(new Event('change'));
+        // Trigger the event listener on page load to show the default description
+        manufacturerDropdown.dispatchEvent(new Event('change'));
+    }
+    {% endverbatim %}
 </script>
 {% endblock %}
