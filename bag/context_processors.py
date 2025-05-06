@@ -2,17 +2,24 @@ from decimal import Decimal
 from django.conf import settings
 from products.models import Product
 
+
 def bag_contents(request):
     """
-    Makes the bag contents and delivery calculations available across all templates.
+    Makes the bag contents and delivery calculations 
+    available across all templates.
     """
     bag_items = []
     total = 0
     product_count = 0
 
     bag = request.session.get('bag', {})
-    for product_id, quantity in bag.items():
-        product = Product.objects.get(id=product_id)
+    for product_key, item in bag.items():
+        product_id = item['product_id'] 
+        quantity = item['quantity']
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            continue
         total_price = product.price * quantity
         bag_items.append({
             'product': product,
