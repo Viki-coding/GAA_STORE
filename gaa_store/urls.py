@@ -29,6 +29,7 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('bag/', include('bag.urls')),
     path('accessories/', views.accessories_shop, name='accessories_shop'),
+    path('checkout/', include('checkout.urls')),
 ]
 
 HANDLER_404 = 'gaa_store.views.handle_404'
