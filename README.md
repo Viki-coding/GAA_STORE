@@ -4,7 +4,7 @@ Live Link:
 
 Link to Kanban Board:  https://github.com/users/Viki-coding/projects/9/views/1?layout=board
 
-
+Link to Testing 
 
 Table of Contents
 
@@ -21,16 +21,26 @@ One of the unique selling points it to offer next day delivery if ordered before
 
 
 <h2>CRUD</h2>
-Create
+User will be able to REGISTER as a user on the site
+User will be able to LOGIN
 
+Create
+User will be able to add an item to the shopping bag
 
 Read
-
+User will be able to view the items in their bag
 
 Update
-
+User will be able to increase decrease or change the item in their shopping bag
 
 Delete
+User will be able to delete an item/items from their shopping bag
+
+Users will be able to make a puchase
+
+There will be user feedback on CRUG, eg - Are you sure you want to delete item from bag?
+
+CRUD to FAQ for admin user
 
 
 <h2>User Personas:<h2>
@@ -99,6 +109,32 @@ Name: Seán McCarthy
 **Goals:** To quickly order large quantities of footballs, rebound posts, and hurleys for his teams and receive them on time.
 
 **Challenges:** Ensuring all purchases are efficient and cost-effective while managing a tight team schedule.
+
+-Business and Customaer Goals-
+Socument Purpose and the Value to Users and Business:
+
+Document Purpose Testing, how is it met?
+
+Map Project Goalds to User Stories, which User Story is mapped to which goal?
+
+-Project Rationale-
+A well defined and clear Purpose and Goal 
+What is your Targe Audience
+How are their needs addressed by the purpose of the Application
+
+-Marketing-
+Documnent the eCommerce business model underslying the application:
+
+Document Purpose of the Application:
+
+B2C focused model
+
+Core Business Intents:
+
+Marketing Strategies for the Application:
+
+
+FAcebook: 
 
 
 
@@ -176,8 +212,20 @@ When you land on our site it is immediately obvious what the site is and conveys
 4. Email Marketing 
 
 
+Keywords
+robots.txt
+site.map.xml
+desscriptive meta tags
+rel attributes  
+site 
+content
+FB Page
+Newsletter - Mail chimp 
+Links to external sources 
 
 
+
+Database Construction 
 
 <h2>>Design Choices</h2>
 1. Captivating Homepage
@@ -388,6 +436,7 @@ Django
 Bootstrap
 Heroku
 Postgres Database
+Stripe 
 Frameworks, Libraries and Programs Used:
 Balsamiq Wireframes - used to create wireframes
 Git - version control
@@ -471,11 +520,20 @@ App will build:
 Wait until the message ‘App was successfully deployed’ is displayed,
 Click on the view button
 
+Stripe Connection: 
+
+
 Acknowledging Contributions & Credits
 TITLE OR DESCRIPTION SOURCE OF LINK CONTEXT
 
 CI - Boutique Ado - Walk through project
+The user of the boiler plate from the boutique ado was very helpful for the main structure of the project. I customised from this. 
 
+CI [Portfolio Project 5 - Ecommerce: The guide to MVP] video was very useful. 
+
+CI [eCommerce & Stripe] - Paul outlining some of the stripe implementation 
+
+CI [Community Q&A: PP5 eCommerce Project FAQ]
 
 https://www.w3schools.com/howto/howto_js_accordion.asp
 Found this useful when creating my FAQ page to create an accordian style FAQ section. 
@@ -490,6 +548,9 @@ Found this W3 schools helpful for explaining about verbatium template tags when 
 Understanding tags in django
 https://docs.djangoproject.com/en/5.2/ref/templates/builtins/
 
+Stripe documentation 
+
+
 
 MARKDOWN:
 
@@ -500,6 +561,7 @@ We gained inspiration with the READ.me by watching the video 'Creating your firs
 Media/Images
 Images used from 
 https://www.vecteezy.com and edited in canva. 
+Elverys 
 
 
 CONTENT
