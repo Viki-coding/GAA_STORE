@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
 <div class="container mt-5">
@@ -64,7 +66,9 @@
                         <label for="color">Color:</label>
                         <select id="color" name="color" class="form-control">
                             {% for color, color_label in color_choices %}
-                                <option value="{{ color }}">{{ color_label }}</option>
+                                <option value="{{ color }}" data-image-url="{% static 'images/helmets/' %}{{ color }}_helmet.png">
+                                    {{ color_label }}
+                                </option>
                             {% endfor %}
                         </select>
                     </div>
@@ -100,7 +104,6 @@
 </div>
 
 <script>
-    {% verbatim %}
     // Get references to the manufacturer dropdown and description placeholder
     const manufacturerDropdown = document.getElementById('manufacturer');
     const manufacturerDescription = document.getElementById('manufacturer-description');
@@ -109,7 +112,7 @@
         // Create a mapping of manufacturer IDs to their descriptions
         const manufacturerDescriptions = {
             {% for manufacturer in manufacturers %}
-                "{{ manufacturer.id|escapejs }}": "{{ manufacturer.description|escapejs }}"
+                "{{ manufacturer.id|escapejs }}": "{{ manufacturer.description|escapejs }}",
             {% endfor %}
         };
 
@@ -123,6 +126,26 @@
         // Trigger the event listener on page load to show the default description
         manufacturerDropdown.dispatchEvent(new Event('change'));
     }
-    {% endverbatim %}
+
+    // Helmet color dropdown logic
+    const colorDropdown = document.getElementById('color');
+    const productImage = document.querySelector('.img-fluid'); // Assuming this is the helmet image
+
+    if (colorDropdown && productImage) {
+        // Add an event listener to update the image when the color changes
+        colorDropdown.addEventListener('change', function () {
+            // Get the selected option
+            const selectedOption = colorDropdown.options[colorDropdown.selectedIndex];
+            // Get the data-image-url attribute from the selected option
+            const newImageUrl = selectedOption.getAttribute('data-image-url');
+            // Update the image's src attribute
+            if (newImageUrl) {
+                productImage.src = newImageUrl;
+            }
+        });
+
+        // Trigger the change event on page load to set the default image
+        colorDropdown.dispatchEvent(new Event('change'));
+    }
 </script>
 {% endblock %}

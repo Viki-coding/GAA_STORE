@@ -487,6 +487,10 @@ https://realpython.com/modeling-polymorphism-django-python/#abstract-base-model
 https://www.w3schools.com/django/ref_tags_verbatim.php
 Found this W3 schools helpful for explaining about verbatium template tags when my JS was causeing errors on my product detail template. 
 
+Understanding tags in django
+https://docs.djangoproject.com/en/5.2/ref/templates/builtins/
+
+
 MARKDOWN:
 
 Help with markdown, found this site usefule (https://www.markdownguide.org/basic-syntax/) and downloaded this extenstion to Visual Studio Code (https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents)
