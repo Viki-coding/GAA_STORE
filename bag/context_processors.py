@@ -25,6 +25,7 @@ def bag_contents(request):
         total_price = product.price * quantity
         bag_items.append({
             'product_key': product_key,
+            'product': product,
             'quantity': quantity,
             'total_price': total_price,
             'size': item.get('size'),

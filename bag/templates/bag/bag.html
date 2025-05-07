@@ -27,10 +27,16 @@
                                     <p class="mt-2 text-dark">{{ item.product.name }}</p>
                                 </td>
                                 <!-- Product Details -->
-                                <td  class="text-dark">
-                                    {% for key, value in item.attributes.items %}
-                                        <p><strong>{{ key|capfirst }}:</strong> {{ value }}</p>
-                                    {% endfor %}
+                                <td class="text-dark">
+                                    {% if item.size %}
+                                        <p><strong>Size:</strong> {{ item.size }}</p>
+                                    {% endif %}
+                                    {% if item.color %}
+                                        <p><strong>Color:</strong> {{ item.color }}</p>
+                                    {% endif %}
+                                    {% if item.manufacturer %}
+                                        <p><strong>Manufacturer:</strong> {{ item.manufacturer }}</p>
+                                    {% endif %}
                                 </td>
                                 <!-- Price -->
                                 <td>€{{ item.product.price }}</td>
