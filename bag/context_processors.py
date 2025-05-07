@@ -5,7 +5,7 @@ from products.models import Product
 
 def bag_contents(request):
     """
-    Makes the bag contents and delivery calculations 
+    Makes the bag contents and delivery calculations
     available across all templates.
     """
     bag_items = []
@@ -24,7 +24,7 @@ def bag_contents(request):
         # Calculate total price for the item
         total_price = product.price * quantity
         bag_items.append({
-            'product': product,
+            'product_key': product_key,
             'quantity': quantity,
             'total_price': total_price,
             'size': item.get('size'),

@@ -29,7 +29,7 @@
                                     <!-- Product Details -->
                                     <td>
                                         <p><strong>{{ item.product.name }}</strong></p>
-                                        {% if item.size %}
+                                        {% if item..size %}
                                             <p>Size: {{ item.size }}</p>
                                         {% endif %}
                                         {% if item.color %}
@@ -42,7 +42,7 @@
                                     <td>€{{ item.product.price }}</td>
                                     <!-- Quantity -->
                                     <td>
-                                        <form method="POST" action="{% url 'update_bag' item.product.id %}">
+                                        <form method="POST" action="{% url 'update_bag' item.product.key %}">
                                             {% csrf_token %}
                                             <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="form-control form-control-sm">
                                             <button type="submit" class="btn btn-sm btn-primary mt-2">Update</button>
@@ -52,7 +52,7 @@
                                     <td>€{{ item.total_price }}</td>
                                     <!-- Actions -->
                                     <td>
-                                        <form method="POST" action="{% url 'remove_from_bag' item.id %}">
+                                        <form method="POST" action="{% url 'remove_from_bag' item.product.key %}">
                                             {% csrf_token %}
                                             <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                         </form>
