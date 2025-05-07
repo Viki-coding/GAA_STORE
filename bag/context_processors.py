@@ -14,8 +14,10 @@ def bag_contents(request):
 
     bag = request.session.get('bag', {})
     for product_key, item in bag.items():
-        product_id = item['product_id']
-        quantity = item['quantity']
+        product_id = item.get('product_id')
+        if not product_id:
+            continue
+        quantity = item.get('quantity')
         try:
             product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:

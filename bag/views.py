@@ -197,7 +197,7 @@ def add_gift_message(request):
             'gift_message': gift_message,
         }
 
-        # Save the updated bag back to the session
-        request.session['bag'] = bag
-        messages.success(request, "Gift message added to your bag.")
-        return redirect('view_bag')
+    # Save the updated bag back to the session
+    request.session['bag'] = bag
+    messages.success(request, "Gift message added to your bag.")
+    return redirect('view_bag')
