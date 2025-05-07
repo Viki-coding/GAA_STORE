@@ -165,3 +165,18 @@ def update_bag(request, product_key):
         # Save the updated bag back to the session
         request.session['bag'] = bag
         return redirect('view_bag')
+    
+
+def remove_from_bag(request, product_key):
+    """Remove a specific product from the shopping bag."""
+    bag = request.session.get('bag', {})
+
+    if product_key in bag:
+        del bag[product_key]
+        messages.success(request, "Removed item from your bag.")
+    else:
+        messages.error(request, "Item not found in your bag.")
+
+    # Save the updated bag back to the session
+    request.session['bag'] = bag
+    return redirect('view_bag')

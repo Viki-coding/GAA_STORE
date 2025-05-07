@@ -40,12 +40,12 @@
                                 <td>€{{ item.total_price }}</td>
                                 <!-- Actions -->
                                 <td>
-                                    <form method="POST" action="{% url 'update_bag' item.product.key %}">
+                                    <form method="POST" action="{% url 'update_bag' item.product_key %}">
                                         {% csrf_token %}
                                         <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="form-control form-control-sm">
                                         <button type="submit" class="btn btn-sm btn-primary mt-2">Update</button>
                                     </form>
-                                    <form method="POST" action="{% url 'remove_from_bag' item.product.key %}">
+                                    <form method="POST" action="{% url 'remove_from_bag' item.product_key %}">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-danger btn-sm mt-2">Remove</button>
                                     </form>
@@ -54,6 +54,37 @@
                         {% endfor %}
                     </tbody>
                 </table>
+
+            <!-- Bag Summary -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <form method="POST" action="{% url 'add_gift_message' %}">
+                        {% csrf_token %}
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="giftCheckbox" name="is_gift">
+                            <label class="form-check-label" for="giftCheckbox">
+                                Is this a gift? Add a personalized message.
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="giftMessage" name="gift_message" rows="3" placeholder="Write your message here..." disabled></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Save Gift Message</button>
+                    </form>
+                </div>
+                <div class="col-md-6 text-right">
+                    <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
+                    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+                    <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>
+                    {% if free_delivery_delta > 0 %}
+                        <p class="text-danger">
+                            Spend €{{ free_delivery_delta|floatformat:2 }} more for free delivery!
+                        </p>
+                    {% endif %}
+                    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-3">
+                        <i class="fas fa-lock"></i> Proceed to Checkout
+                    </a>
+                </div>
             </div>
         {% else %}
             <p class="lead text-center">Your bag is empty.</p>
@@ -65,4 +96,14 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    // Enable/disable the gift message textarea based on the checkbox
+    document.getElementById('giftCheckbox').addEventListener('change', function() {
+        const giftMessage = document.getElementById('giftMessage');
+        giftMessage.disabled = !this.checked;
+    });
+</script>
 {% endblock %}
