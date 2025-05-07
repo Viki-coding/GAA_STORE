@@ -14,21 +14,29 @@ def bag_contents(request):
 
     bag = request.session.get('bag', {})
     for product_key, item in bag.items():
-        product_id = item['product_id'] 
+        product_id = item['product_id']
         quantity = item['quantity']
         try:
             product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
             continue
+
+        # Calculate total price for the item
         total_price = product.price * quantity
         bag_items.append({
             'product': product,
             'quantity': quantity,
             'total_price': total_price,
+            'size': item.get('size'),
+            'color': item.get('color'),
+            'manufacturer': item.get('manufacturer'),
         })
+
+        # Update totals
         total += total_price
         product_count += quantity
 
+    # Calculate delivery costs
     if total < settings.FREE_DELIVERY_THRESHOLD:
         delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
         free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - total
