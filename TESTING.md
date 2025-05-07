@@ -62,6 +62,11 @@ I had put my converter calculator script into my base.file, which I should of ke
 **BUG:** When bag displayed, the product, description were not being displayed. 
 **RESOLVED BY:** Added product under bag_contents in views.py and it displayed. 
 
+**BUG:** I wanted to create a 'Gift Message'function.  So in the bag.html, I created a tickbox and a message box. If the box was ticked the user could write a gift message. But when the box was ticked, I couldn't write in the box. 
+**RESOLVED BY:**  I checked my js code and it seemed ok. When I opened but my console and clicked on the tick box, nothing was happending so I figured the js and event listener were not being called. I removed the js code from the bottom of the bag.html and created a specific js file for bags app under the static folder as I thought the base.html and its scripts could be affecting it. Finally I changed {%block postloadjs %} to {% block extra_js %} and this  fixed it.   
+
+
+
 
 UNRESOLVED BUG
 **BUG:** Bag contents table not responsive on Firefox but perfect in Chrome.
