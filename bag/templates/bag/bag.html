@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'bag/css/bag.css' %}">
 
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center mb-4">Your Shopping Bag</h1>
     <div class="bag-items">
-        {% if bag_items %}
+            {% if bag_items %}
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-light align-middle">
+                <table class="table table-bordered table-striped table-light align-middle" width="100%">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Product</th>
@@ -60,56 +61,52 @@
                         {% endfor %}
                     </tbody>
                 </table>
-
-            <!-- Bag Summary -->
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <form method="POST" action="{% url 'add_gift_message' %}">
-                        {% csrf_token %}
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="giftCheckbox" name="is_gift">
-                            <label class="form-check-label" for="giftCheckbox">
-                                Is this a gift? Add a personalized message.
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="giftMessage" name="gift_message" rows="3" placeholder="Write your message here..." disabled></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-secondary">Save Gift Message</button>
-                    </form>
-                </div>
-                <div class="col-md-6 text-right">
-                    <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
-                    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
-                    <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>
-                    {% if free_delivery_delta > 0 %}
-                        <p class="text-danger">
-                            Spend €{{ free_delivery_delta|floatformat:2 }} more for free delivery!
-                        </p>
-                    {% endif %}
-                    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-3">
-                        <i class="fas fa-lock"></i> Proceed to Checkout
-                    </a>
-                </div>
             </div>
         {% else %}
-            <p class="lead text-center">Your bag is empty.</p>
-            <div class="text-center">
-                <a href="{% url 'products' %}" class="btn btn-outline-primary btn-lg">
-                    <i class="fas fa-chevron-left"></i> Continue Shopping
-                </a>
-            </div>
+        <p class="lead text-center">Your bag is empty.</p>
+        <div class="text-center">
+            <a href="{% url 'products' %}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-chevron-left"></i> Continue Shopping
+            </a>
+        </div>
         {% endif %}
     </div>
 </div>
+
+<!-- Bag Summary -->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <form method="POST" action="{% url 'add_gift_message' %}">
+            {% csrf_token %}
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="giftCheckbox" name="is_gift">
+                <label class="form-check-label" for="giftCheckbox">
+                    Is this a gift? Add a personalized message.
+                </label>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="giftMessage" name="gift_message" rows="3" placeholder="Write your message here..." disabled></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary">Save Gift Message</button>
+        </form>
+    </div>
+    <div class="col-md-6 text-right">
+        <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
+        <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+        <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>
+        {% if free_delivery_delta > 0 %}
+            <p class="text-danger">
+                Spend €{{ free_delivery_delta|floatformat:2 }} more for free delivery!
+            </p>
+        {% endif %}
+        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-3">
+            <i class="fas fa-lock"></i> Proceed to Checkout
+        </a>
+    </div>
+</div>
+{% endblock %}
+{% block postloadjs %}
+<script src="{% static 'bag/js/bag.js' %}"></script>
 {% endblock %}
 
-{% block postloadjs %}
-<script>
-    // Enable/disable the gift message textarea based on the checkbox
-    document.getElementById('giftCheckbox').addEventListener('change', function() {
-        const giftMessage = document.getElementById('giftMessage');
-        giftMessage.disabled = !this.checked;
-    });
-</script>
-{% endblock %}
+

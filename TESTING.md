@@ -55,3 +55,14 @@ I had put my converter calculator script into my base.file, which I should of ke
 
 **BUG:**  When checking my products were displaying, I noticed that grips was not displaying a color drop down arrow, which it should have. 
 **RESOLVED BY:**  Checked by def grip_detail view which looked correct, checked my grips model which also looked correct. After checking my product list template, I had a naming typo error which I corrected and I was missing the logic for grips, I added the condiation to check if it was a grip to render the color dropdown, which resolved the bug. 
+
+**BUG:** Spent the day trying to get my bag to display anything, after adding items to it. 
+**RESOLVED BY:** I had a few issues which got me into a lot of checks and rechecks.  My product_key and product_id were conflicting in my context-processor.py and views.py file. I wasn't iterating through my products correctly in my bag.html file. After fixing these errors it finally displayed the items on the table. 
+
+**BUG:** When bag displayed, the product, description were not being displayed. 
+**RESOLVED BY:** Added product under bag_contents in views.py and it displayed. 
+
+
+UNRESOLVED BUG
+**BUG:** Bag contents table not responsive on Firefox but perfect in Chrome.
+**ATTEMPTED FIXES:** After looking on the net, this seems to be a common proble. Stack overflow suggested a fieldset and nest table within it, no luck, tried custom css, still no luck, reviewed code for errors and all seemed to be ok. Deleted custom css code and fieldset and no change.  I have spent a few hours trying to fix and need to step away from it now. I will try to revert back again if I have time. 
