@@ -180,3 +180,24 @@ def remove_from_bag(request, product_key):
     # Save the updated bag back to the session
     request.session['bag'] = bag
     return redirect('view_bag')
+
+
+def add_gift_message(request):
+    """Add a gift message to the shopping bag."""
+    if request.method == 'POST':
+        is_gift = request.POST.get('is_gift', False)
+        gift_message = request.POST.get('gift_message', '')
+
+        # Retrieve the bag from the session
+        bag = request.session.get('bag', {})
+
+        # Add gift message to the session
+        bag['gift'] = {
+            'is_gift': bool(is_gift),
+            'gift_message': gift_message,
+        }
+
+        # Save the updated bag back to the session
+        request.session['bag'] = bag
+        messages.success(request, "Gift message added to your bag.")
+        return redirect('view_bag')

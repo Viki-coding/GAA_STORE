@@ -7,8 +7,8 @@
     <div class="bag-items">
         {% if bag_items %}
             <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="thead-light">
+                <table class="table table-bordered table-striped table-light align-middle">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col">Product</th>
                             <th scope="col">Details</th>
@@ -22,12 +22,12 @@
                         {% for item in bag_items %}
                             <tr>
                                 <!-- Product Image -->
-                                <td>
+                                <td class="text-center">
                                     <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded" style="max-width: 100px;">
-                                    <p>{{ item.product.name }}</p>
+                                    <p class="mt-2 text-dark">{{ item.product.name }}</p>
                                 </td>
                                 <!-- Product Details -->
-                                <td>
+                                <td  class="text-dark">
                                     {% for key, value in item.attributes.items %}
                                         <p><strong>{{ key|capfirst }}:</strong> {{ value }}</p>
                                     {% endfor %}
