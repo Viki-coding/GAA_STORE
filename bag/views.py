@@ -4,6 +4,7 @@ from django.conf import settings
 from decimal import Decimal
 from products.models import Product, Hurley, Grip, Sliotar, Helmet
 
+
 def view_bag(request):
     return render(request, 'bag/bag.html')
 
