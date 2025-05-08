@@ -17,7 +17,7 @@ def bag_contents(request):
         product_id = item.get('product_id')
         if not product_id:
             continue
-        quantity = item.get('quantity')
+        quantity = item.get('quantity', 1)
         try:
             product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:

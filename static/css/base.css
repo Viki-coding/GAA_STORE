@@ -149,6 +149,11 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
+/* Checkout Summary */
+.list-group-item {
+    color: black;
+}
+
 /* Footer */
 footer {
     background-color: #111; /* Slightly lighter black for contrast */

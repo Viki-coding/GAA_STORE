@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Order, ShippingAddress
 from profiles.models import UserProfile
+from bag.context_processors import bag_contents
 
 
 def checkout(request):
@@ -15,9 +16,10 @@ def checkout(request):
         street_address1 = request.POST.get('street_address1')
         street_address2 = request.POST.get('street_address2')
         town_or_city = request.POST.get('town_or_city')
-        county = request.POST.get('county') 
+        county = request.POST.get('county')
         eircode = request.POST.get('eircode')
-        store_shipping_address = request.POST.get('store_shipping_address') == 'on'
+        store_shipping_address = request.POST.get(
+            'store_shipping_address') == 'on'
         create_user_profile = request.POST.get('create_user_profile') == 'on'
 
         # Create or retrieve user profile
@@ -35,7 +37,7 @@ def checkout(request):
                 default_county=county,
                 default_eircode=eircode,
             )
-    
+
         # Save shipping address if requested
         shipping_address = None
         if store_shipping_address and user_profile:
@@ -54,11 +56,20 @@ def checkout(request):
         order = Order.objects.create(
             user_profile=user_profile,
             shipping_address=shipping_address,
-            total_price=0,  # Replace with actual total
+            total_price=bag_contents(request)['grand_total'],
         )
 
         messages.success(request, 'Your order has been placed successfully!')
         return redirect('order_confirmation', order_number=order.order_number)
 
+    # Get the bag contents and pass them to the template
+    bag = bag_contents(request)
+    bag_items = bag['bag_items']
+    grand_total = bag['grand_total']
 
-    return render(request, 'checkout/checkout.html')
+    context = {
+        'bag_items': bag_items,
+        'grand_total': grand_total,
+    }
+
+    return render(request, 'checkout/checkout.html', context)

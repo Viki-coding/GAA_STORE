@@ -65,8 +65,8 @@ I had put my converter calculator script into my base.file, which I should of ke
 **BUG:** I wanted to create a 'Gift Message'function.  So in the bag.html, I created a tickbox and a message box. If the box was ticked the user could write a gift message. But when the box was ticked, I couldn't write in the box. 
 **RESOLVED BY:**  I checked my js code and it seemed ok. When I opened but my console and clicked on the tick box, nothing was happending so I figured the js and event listener were not being called. I removed the js code from the bottom of the bag.html and created a specific js file for bags app under the static folder as I thought the base.html and its scripts could be affecting it. Finally I changed {%block postloadjs %} to {% block extra_js %} and this  fixed it.   
 
-
-
+**BUG:** Order Summary not displaying on checkout page. 
+**RESOLVED BY:**  I learnt a lot with this bug. Firstly I had not imported my context-processors file correctly into my checkout views. Fixed that, but no resolution. Checked my views.py and context processors, checked my product models, checked my html. Everything looked ok. Put debugging statements in the checkout views, which displayed the correct output in the terminal, so that was working. Thenb put debugging statemtnts in the context_processors and that verified that my grand total was working, then I put debugging statements in my html, activated the server and went to checkout and right clicked to view page source - and all my products were listed there. After hours and hours of trying to fix this error, I put my cursor over the order summary as if to hgilight and realised it was white text on a white background! I may have cursed a little. Added some css to my base.css file and finally all was fixed.
 
 UNRESOLVED BUG
 **BUG:** Bag contents table not responsive on Firefox but perfect in Chrome.
