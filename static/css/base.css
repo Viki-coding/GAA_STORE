@@ -153,27 +153,31 @@ body {
 footer {
     background-color: #111; /* Slightly lighter black for contrast */
     color: #fff;
-    padding: 40px 0;
+    padding: 10px 0;
+    font-size: 14px;
 }
 
 footer .form-label {
     font-size: 1rem;
     font-weight: 700;
+    margin-right: 10px;
 }
 
 footer .form-control {
-    max-width: 400px;
+    max-width: 300px;
     margin: 0 auto;
 }
 
 footer .btn-primary {
+    padding: 5px 15px;
     margin-top: 10px;
+    font-size: 14px;
 }
 
 footer .d-flex a {
     color: #fff;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 14px;
     margin: 0 10px;
     transition: color 0.3s ease;
 }
@@ -197,7 +201,17 @@ footer .d-flex a:hover {
         padding: 8px 20px;
     }
 
-    footer .form-control {
+    footer .form-control,
+    footer .btn-primary {
         width: 100%;
+        margin bottom: 10px;
+    }
+
+@media (max-width: 991.98px) {
+    .footer-subscribe-form .form-control,
+    .footer-subscribe-form .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
     }
 }

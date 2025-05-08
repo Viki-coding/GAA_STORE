@@ -212,6 +212,21 @@ When you land on our site it is immediately obvious what the site is and conveys
 4. Email Marketing 
 
 
+Keyword Research Questions
+What does the user need?
+
+What information and features can you provide to meet those needs?
+
+How can you make the information easy to understand?
+
+How can you demonstrate expertise, authoritativeness, and trustworthiness in your content?
+
+Would there be other pages within your site you could link to?
+
+Are there opportunities to link to high-ranking external sites?
+
+How can you guide users to discover other relevant parts of your site?
+
 Keywords
 robots.txt
 site.map.xml

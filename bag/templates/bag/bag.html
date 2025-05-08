@@ -74,7 +74,7 @@
 </div>
 
 <!-- Bag Summary -->
-<div class="row mt-4">
+<div class="row mt-4 mb-4">
     <div class="col-md-6">
         <form method="POST" action="{% url 'add_gift_message' %}">
             {% csrf_token %}
@@ -99,7 +99,7 @@
                 Spend €{{ free_delivery_delta|floatformat:2 }} more for free delivery!
             </p>
         {% endif %}
-        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-3">
+        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-4">
             <i class="fas fa-lock"></i> Proceed to Checkout
         </a>
     </div>
