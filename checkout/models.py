@@ -39,6 +39,7 @@ class Order(models.Model):
         UserProfile, on_delete=models.CASCADE)
     shipping_address = models.ForeignKey(
         ShippingAddress, null=True, blank=True, on_delete=models.SET_NULL)
+    email = models.EmailField(null=False, blank=False) 
     order_date = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(
         max_digits=10, decimal_places=2, default=0.00)
