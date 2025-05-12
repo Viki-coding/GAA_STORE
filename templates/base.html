@@ -80,12 +80,38 @@
           </div>
         </div>
       </div>
+
     </footer>
-    
+      <!-- Include Toast Templates -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                {% include 'includes/toasts/toast_success.html' with message=message %}
+            {% elif message.tags == 'error' %}
+                {% include 'includes/toasts/toast_error.html' with message=message %}
+            {% elif message.tags == 'info' %}
+                {% include 'includes/toasts/toast_info.html' with message=message %}
+            {% elif message.tags == 'warning' %}
+                {% include 'includes/toasts/toast_warning.html' with message=message %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for Toasts -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          const toastElements = document.querySelectorAll('.toast');
+          toastElements.forEach(toastElement => {
+              const toast = new bootstrap.Toast(toastElement);
+              toast.show();
+          });
+      });
+    </script>
+
     {% block extra_js %}{% endblock %}
   </body>
 </html>

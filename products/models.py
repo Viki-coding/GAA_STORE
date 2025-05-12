@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 # Base Product model - concrete (not abstract)
 class Product(models.Model):
     """
