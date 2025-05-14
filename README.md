@@ -288,7 +288,7 @@ Drag-and-Drop Functionality: Enable image uploads with a drag-and-drop interface
 9. Encouraging Engagement
 Mailchimp Integration: We have designed an eye-catching newsletter signup form with benefits like "Be the First to Know About New Arrivals and Deals."
 
-Social Media Integration: Displays our instagram and facebook clickable icons for social platforms in the footer to foster community engagement.
+Social Media Integration: Displays our facebook clickable icon in the footer to foster community engagement.
 
 Future: Add color-coded statuses for products (e.g., "In Stock," "Low Stock"). under admin superuse section
 User testimonials from All Ireland and county players
@@ -348,11 +348,9 @@ If you are a new user, it is easy to navigate to the Sign Up form, enter your de
 Nav Bar
 
 
-Search by Category Feature:
+Search by Hurley Type Feature:
 
-Users who want to narrow down the search to certain events, such as a new parent in the area may want to only see events in the 'Parent & Toddler' section. When a facilitator creates a new event, they have the opportunity of associating it with a certain category. By clicking on the drop down arrow, a list of categories is displayed and when a category is selected only events listed under that category are displayed. Leaving the selection to 'All' displays all events, with the post recently created first.
-
-Sort-by-category
+Users who want to quickly search for a particular hurley type only have to click once to narrow down the search to certain hurleys, Ash, Bambu and Goalie. 
 
 
 
@@ -369,13 +367,9 @@ Privacy Policy
 
 Mailchimp Signup
 
-Facebook and Instagram Features:
+Facebook Features:
 
-This allows the user to access the Ballinameela Community Centre socials in a new page.
-
-Pagination Feature:
-
-The latest events are posted first, to view older posted events the user can user the pagination links at the bottom of the page to easily navigate though the pages.
+This allows the user to access the GAA Store socials in a new page.
 
 Security
 In a world where cyber security threats are on the increase, inlcuding the awful affect the HSE hack had on our health care system, it is important to be mindful of security when creating an application.
@@ -392,9 +386,7 @@ Only authenticated facilicators can create, view, edit, delete their own events.
 Interaction
 Whenever a user interacts with our site, they get immeadiate feedback messages and confirmations.
 
-When a user clicks on Book Event - a message is displayed to let them know their booking is successful:
-
-Event Booked Successfully
+When a user adds something to their shopping bag, deletes something in their shopping bag or makes an input error - a message is displayed to keep them informed.
 
 Error Handling
 
@@ -442,101 +434,108 @@ Color Blindness Simulator Tool:
 
 Color Blindness simulator
 
-Technologies Used
-HTML
-CSS -
-JS -
-Python
-Django
-Bootstrap
-Heroku
-Postgres Database
-Stripe 
-Frameworks, Libraries and Programs Used:
-Balsamiq Wireframes - used to create wireframes
-Git - version control
-Visual Studio Code
-Git Hub - To save and store the files for the website
-Google Fonts - to import fonts onto the website
-Font Awesome for iconography on website
-Favicon.io - to create favicon
-Coolors - checking colour pallets and their contrast abilities with fonts.
-Berme.net - to reduce image sizes and convert to .webp
-Canva - to create logo image
-Am I Responsive - quick tool to check how responsiveness on various devices and creates display
-Responsive tool - (https://responsivetesttool.com/)
-Screen Shot of site on various screens (https://techsini.com/multi-mockup/)
-JSHint to check JS code
-Spell Check
-Heroku
-Django
-Pylint
-FigJam - to create ER diagram
-Figma - to crate wireframes
-Converting tabel to markdown (https://tabletomarkdown.com/convert-spreadsheet-to-markdown/)
-Whitenoise
-dbdiagram.io - For creation of ERD diagram 
-https://www.vecteezy.com - used for images 
+Technologies Used:
 
-Deployment Steps
+* HTML
+* CSS 
+* JS 
+* Python
+* Django
+* Bootstrap
+* Heroku
+* Postgres Database
+* Stripe 
+* Frameworks, Libraries and Programs Used:
+* Balsamiq Wireframes - used to create wireframes
+* Git - version control
+* Visual Studio Code
+* Git Hub - To save and store the files for the website
+* Google Fonts - to import fonts onto the website
+* Font Awesome for iconography on website
+* Favicon.io - to create favicon
+* Coolors - checking colour pallets and their contrast abilities with fonts.
+* Berme.net - to reduce image sizes and convert to .webp
+* Canva - to create logo image
+* Am I Responsive - quick tool to check how responsiveness on various devices and creates display
+* Responsive tool - (https://responsivetesttool.com/)
+* Screen Shot of site on various screens (https://techsini.com/multi-mockup/)
+* JSHint to check JS code
+* Spell Check
+* Heroku
+* Pylint
+* FigJam - to create ER diagram
+* Figma - to crate wireframes
+* Converting tabel to markdown (https://tabletomarkdown.com/convert-spreadsheet-to-markdown/)
+* Whitenoise
+* dbdiagram.io - For creation of ERD diagram 
+* https://www.vecteezy.com - used for images 
 
-The site is Deployed using GitHub Pages
-Login to GitHub
-Go to the projects repository (https://github.com/Viki-coding/community)
-Click on Settings
-Select pages in the left navigation bar
-From SOURCE dropdown select Deploy from a Branch
-Under BRANCH from dropdown select Main Branch and SAVE
-The site is now deployed but may take a few minutes to go live.
-Return to CODE tab of Github repo and wait a few minutes for build to finish, refresh page. This will show on GitHub-pages to see active deployments.
+Deployment Steps:
 
-How to Fork
-Login to Github
-Go to Project repository
-Click the FORK button top right corner
+* The site is Deployed using GitHub Pages
+* Login to GitHub
+* Go to the projects repository (https://github.com/Viki-coding/community)
+* Click on Settings
+* Select pages in the left navigation bar
+* From SOURCE dropdown select Deploy from a Branch
+* Under BRANCH from dropdown select Main Branch and SAVE
+* The site is now deployed but may take a few minutes to go live.
+* Return to CODE tab of Github repo and wait a few minutes for build to finish, refresh page. This * will show on GitHub-pages to see active deployments.
 
-How to Clone
-Log into Github
-Go to project repository
-Click on the code button, select what want to clone HTTPS, SSH or GitHub CLI and copy the link.
-Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory
-Copy 'git clone' into the terminal and paste the link you copied in step 3. Press enter.
+How to Fork:
 
-Heroku Deployment
-Log on to Heroku (https://dashboard.heroku.com/apps)
-Select “Create new app”
-Name the app something unique
-Choose Europe from the dropdown
-Click ‘Create App’
-Go to the SETTINGS tab first
-In the ‘Config Vars’ section aka environment variables
-In the KEY section type in PORT and the value section type in 8000 – add
-IF you build a landmark project that doesn’t use a cred.json file you don’t need to set up config vars otherwise:
+* Login to Github
+* Go to Project repository
+* Click the FORK button top right corner
 
-In the KEY section type CREDS (all capital letters) –
-Go to workspace and copy the entire creds.json file and paste it into the value field and add.
-To add other dependencies:
+How to Clone:
+
+* Log into Github
+* Go to project repository
+* Click on the code button, select what want to clone HTTPS, SSH or GitHub CLI and copy the link.
+* Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory
+* Copy 'git clone' into the terminal and paste the link you copied in step 3. Press enter.
+
+Heroku Deployment:
+
+* Log on to Heroku (https://dashboard.heroku.com/apps)
+* Select “Create new app”
+* Name the app something unique
+* Choose Europe from the dropdown
+* Click ‘Create App’
+* Go to the SETTINGS tab first
+* In the ‘Config Vars’ section aka environment variables
+* In the KEY section type in PORT and the value section type in 8000 – add
+* IF you build a landmark project that doesn’t use a cred.json file you don’t need to set up config vars otherwise:
+
+* In the KEY section type CREDS (all capital letters) –
+* Go to workspace and copy the entire creds.json file and paste it into the value field and add.
+  
+  To add other dependencies:
 
 ADD BUILDPACK
-Select Python – choose add
-Select Node.js – choose add
-NOTE: (Should be in this order, python first then node.js)
+* Select Python – choose add
+* Select Node.js – choose add
+* NOTE: (Should be in this order, python first then node.js)
+
 DEPLOY SECTION:
 
-Click on the DEPLOY Tab
-Choose the Githb deployment method
-Confirm that you want to connect to GitHub, gitbub will request your password to connect.
-Click in repo name and Search for your repository name and select connect.
-Select Enable Automatic Deploys
-Check Choose a branch to deploy is defaulted is MAIN
-Click on Display Branch
+* Click on the DEPLOY Tab
+* Choose the Githb deployment method
+* Confirm that you want to connect to GitHub, gitbub will request your password to connect.
+* Click in repo name and Search for your repository name and select connect.
+* Select Enable Automatic Deploys
+* Check Choose a branch to deploy is defaulted is MAIN
+* Click on Display Branch
+  
 App will build:
 
-Wait until the message ‘App was successfully deployed’ is displayed,
-Click on the view button
+* Wait until the message ‘App was successfully deployed’ is displayed,
+* Click on the view button
 
 Stripe Connection: 
 
+* 
 
 Acknowledging Contributions & Credits
 TITLE OR DESCRIPTION SOURCE OF LINK CONTEXT
