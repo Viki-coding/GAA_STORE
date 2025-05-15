@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-<link rel="stylesheet" href="{% static 'css/checkout/checkout.css' %}">
-
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <h1 class="text-center">Checkout</h1>
     <div class="row">
         <div class="col-md-6">
@@ -40,9 +41,10 @@
         <!-- Billing/Shipping Form -->
         <div class="col-md-6">
             <h4>Billing & Shipping Details</h4>
-            <form id="checkout-form" method="POST" action="{% url 'checkout' %}">
+            <form id="checkout-form" method="POST" action="{% url 'checkout' %}" class="mb-5">
                 {% csrf_token %}
-                <div class="form-group">
+                {% crispy form %}
+                <!-- <div class="form-group">
                     <label for="full_name">Full Name</label>
                     <input type="text" class="form-control" id="full_name" name="full_name" required>
                 </div>
@@ -73,22 +75,22 @@
                 <div class="form-group">
                     <label for="eircode">Eircode</label>
                     <input type="text" class="form-control" id="eircode" name="eircode" required>
-                </div>
+                </div> -->
                 <!-- Tick box to save shipping address -->
-                <div class="form-check mb-3">
+                <!-- <div class="form-check mb-3">
                     <input type="checkbox" class="form-check-input" id="store_shipping_address" name="store_shipping_address">
                     <label class="form-check-label" for="store_shipping_address">
                         Save this shipping address for future use
                     </label>
                 </div>
-                <!-- Tick box to create user profile -->
-                <div class="form-check mb-3">
+                Tick box to create user profile -->
+                <!-- <div class="form-check mb-3">
                     <input type="checkbox" class="form-check-input" id="create_user_profile" name="create_user_profile">
                     <label class="form-check-label" for="create_user_profile">
                         Create a user profile for faster checkout next time
                     </label>
-                </div>
-                <button type="submit" class="btn btn-success btn-block mt-4">Place Order</button>
+                </div> --> 
+                <button type="submit" class="btn btn-success btn-lg btn-block mt-4">Place Order</button>
             </form>
         </div>
     </div>

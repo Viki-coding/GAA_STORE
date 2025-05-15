@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import Order, ShippingAddress
 from profiles.models import UserProfile
 from bag.context_processors import bag_contents
+from .forms import CheckoutForm
 
 
 def checkout(request):
@@ -62,12 +63,15 @@ def checkout(request):
         messages.success(request, 'Your order has been placed successfully!')
         return redirect('order_confirmation', order_number=order.order_number)
 
-    # Get the bag contents and pass them to the template
+    # Get the bag contents and pass them to the template, initialize form.
+  
+    form = CheckoutForm()
     bag = bag_contents(request)
     bag_items = bag['bag_items']
     grand_total = bag['grand_total']
 
     context = {
+        'form': form,
         'bag_items': bag_items,
         'grand_total': grand_total,
     }
