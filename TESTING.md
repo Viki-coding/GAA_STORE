@@ -68,6 +68,12 @@ I had put my converter calculator script into my base.file, which I should of ke
 **BUG:** Order Summary not displaying on checkout page. 
 **RESOLVED BY:**  I learnt a lot with this bug. Firstly I had not imported my context-processors file correctly into my checkout views. Fixed that, but no resolution. Checked my views.py and context processors, checked my product models, checked my html. Everything looked ok. Put debugging statements in the checkout views, which displayed the correct output in the terminal, so that was working. Thenb put debugging statemtnts in the context_processors and that verified that my grand total was working, then I put debugging statements in my html, activated the server and went to checkout and right clicked to view page source - and all my products were listed there. After hours and hours of trying to fix this error, I put my cursor over the order summary as if to hgilight and realised it was white text on a white background! I may have cursed a little. Added some css to my base.css file and finally all was fixed.
 
+
+**BUG:** Billing & Shipping field input narrow and not taking up full width
+**RESOLVED BY:**  It appeared like this was due to some conflicting css rules. I checked base.css to see if there were any .form-control rules, but there were not.  I applied them to checkout.css but nothing changed.  I used !important beside it but still no luck. I ensured the checkout.css for the checkout page was loading by inspecting it in chrome developer and checking the network tab, yes that was loading. I checked the html form was inside the .col -md-6. I thought the fields were constained by bootstrap but in the end it was by their own css, so I targeting each element of the form field putting !important beside them, checkout-form imput, select and text area.  Finally this worked but then my tick boxes got misalighned. So I updated the css again to apply width of 100% to only text-based inputs. Finally sorted. 
+
+
+
 UNRESOLVED BUG
 **BUG:** Bag contents table not responsive on Firefox but perfect in Chrome.
 **ATTEMPTED FIXES:** After looking on the net, this seems to be a common proble. Stack overflow suggested a fieldset and nest table within it, no luck, tried custom css, still no luck, reviewed code for errors and all seemed to be ok. Deleted custom css code and fieldset and no change.  I have spent a few hours trying to fix and need to step away from it now. I will try to revert back again if I have time. 

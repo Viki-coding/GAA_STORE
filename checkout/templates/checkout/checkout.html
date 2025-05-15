@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
@@ -9,7 +10,8 @@
 <div class="container mt-5 mb-5">
     <h1 class="text-center">Checkout</h1>
     <div class="row">
-        <div class="col-md-6">
+        <!-- Order Summary -->
+        <div class="col-md-6 mb-4">
             <h4>Order Summary</h4>
             <ul class="list-group">
                 {% if bag_items %}
@@ -44,52 +46,6 @@
             <form id="checkout-form" method="POST" action="{% url 'checkout' %}" class="mb-5">
                 {% csrf_token %}
                 {% crispy form %}
-                <!-- <div class="form-group">
-                    <label for="full_name">Full Name</label>
-                    <input type="text" class="form-control" id="full_name" name="full_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone_number">Phone Number</label>
-                    <input type="text" class="form-control" id="phone_number" name="phone_number" required>
-                </div>
-                <div class="form-group">
-                    <label for="street_address1">Street Address 1</label>
-                    <input type="text" class="form-control" id="street_address1" name="street_address1" required>
-                </div>
-                <div class="form-group">
-                    <label for="street_address2">Street Address 2 (Optional)</label>
-                    <input type="text" class="form-control" id="street_address2" name="street_address2">
-                </div>
-                <div class="form-group">
-                    <label for="town_or_city">Town or City</label>
-                    <input type="text" class="form-control" id="town_or_city" name="town_or_city" required>
-                </div>
-                <div class="form-group">
-                    <label for="county">County</label>
-                    <input type="text" class="form-control" id="county" name="county" required>
-                </div>
-                <div class="form-group">
-                    <label for="eircode">Eircode</label>
-                    <input type="text" class="form-control" id="eircode" name="eircode" required>
-                </div> -->
-                <!-- Tick box to save shipping address -->
-                <!-- <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="store_shipping_address" name="store_shipping_address">
-                    <label class="form-check-label" for="store_shipping_address">
-                        Save this shipping address for future use
-                    </label>
-                </div>
-                Tick box to create user profile -->
-                <!-- <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="create_user_profile" name="create_user_profile">
-                    <label class="form-check-label" for="create_user_profile">
-                        Create a user profile for faster checkout next time
-                    </label>
-                </div> --> 
                 <button type="submit" class="btn btn-success btn-lg btn-block mt-4">Place Order</button>
             </form>
         </div>
