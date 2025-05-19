@@ -88,22 +88,22 @@
       </footer>
     </div>
 
-    <!-- Include Toast Templates -->
-    <div id="toast-container">
-      {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-                {% include 'includes/toasts/toast_success.html' with message=message %}
-            {% elif message.tags == 'error' %}
-                {% include 'includes/toasts/toast_error.html' with message=message %}
-            {% elif message.tags == 'info' %}
-                {% include 'includes/toasts/toast_info.html' with message=message %}
-            {% elif message.tags == 'warning' %}
-                {% include 'includes/toasts/toast_warning.html' with message=message %}
-            {% endif %}
-        {% endfor %}
-      {% endif %}
-    </div>
+  <!-- Include Toast Templates -->
+  <div id="toast-container">
+    {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == 'success' %}
+              {% include 'includes/toasts/toast_success.html' with message=message %}
+          {% elif message.tags == 'error' %}
+              {% include 'includes/toasts/toast_error.html' with message=message %}
+          {% elif message.tags == 'info' %}
+              {% include 'includes/toasts/toast_info.html' with message=message %}
+          {% elif message.tags == 'warning' %}
+              {% include 'includes/toasts/toast_warning.html' with message=message %}
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
