@@ -62,5 +62,5 @@ def bag_contents(request):
 
 def bag_count(request):
     bag = request.session.get('bag', {})
-    count = sum(item['quantity'] for item in bag.values())
+    count = sum(item.get('quantity', 0) for item in bag.values())
     return {'bag_count': count}
