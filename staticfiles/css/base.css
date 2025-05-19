@@ -154,6 +154,30 @@ body {
     color: black;
 }
 
+#toast-container {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important; 
+    left: auto !important;
+    z-index: 1060 !important;
+    width: auto !important;
+    max-width: 400px !important;
+    pointer-events: none; 
+}
+
+#toast-container .toast {
+    margin-bottom: 10px;
+    pointer-events: auto; 
+}
+
+.toast {
+    min-width: 300px; 
+    max-width: 400px; 
+    margin-bottom: 10px;
+    opacity: 0.9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
 /* Footer */
 footer {
     background-color: #111; /* Slightly lighter black for contrast */

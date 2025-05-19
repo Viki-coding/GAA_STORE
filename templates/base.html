@@ -43,47 +43,54 @@
     <title>GAA Store - {% block extra_title %}{% endblock %}</title>
     {% block extra_css %}{% endblock %}
   </head>
-  <body class="d-flex flex-column min-vh-100">
-    {% include 'includes/mobile-top-header.html' %} {% include 'includes/main-nav.html' %}
+  <body>
+    <div class="d-flex flex-column min-vh-100">
 
-    <main>{% block content %}{% endblock %}</main>
 
-    <footer class="bg-dark text-white py-3">
-      <div class="row align-items-center">
-        <div class="col-md-6 mb-3 mb-md-0">
-          <div class="row no-gutters">
-            <div class="col-12 col-md-8 mb-2 mb-md-0">
-              <form action="https://mailchimp.com" method="POST" class="d-flex">
-                <label for="email" class="sr-only">Sign up for updates:</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="form-control mr-2"
-                  placeholder="Enter your email"
-                  required
-                />
-                <button type="submit" class="btn btn-primary">
-                  Subscribe
-                </button>
-              </form>
+      {% include 'includes/mobile-top-header.html' %} 
+      {% include 'includes/main-nav.html' %}
+
+      <main>{% block content %}{% endblock %}</main>
+
+      <footer class="bg-dark text-white py-3">
+        <div class="row align-items-center">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <div class="row no-gutters">
+              <div class="col-12 col-md-8 mb-2 mb-md-0">
+                <form action="https://mailchimp.com" method="POST" class="d-flex">
+                  <label for="email" class="sr-only">Sign up for updates:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control mr-2"
+                    placeholder="Enter your email"
+                    required
+                  />
+                  <button type="submit" class="btn btn-primary">
+                    Subscribe
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
-        </div>    
-          <!-- Links -->
-          <div class="col-md-6 text-md-right">
-            <div class="d-flex justify-content-center justify-content-md-end">
-              <a href="https://facebook.com" class="text-white mx-2">Facebook</a>
-              <a href="/privacy-policy/" class="text-white mx-2">Privacy Policy</a>
-              <a href="/contact-us/" class="text-white mx-2">Contact Us</a>
+          </div>    
+            <!-- Links -->
+            <div class="col-md-6 text-md-right">
+              <div class="d-flex justify-content-center justify-content-md-end">
+                <a href="https://facebook.com" class="text-white mx-2">Facebook</a>
+                <a href="/privacy-policy/" class="text-white mx-2">Privacy Policy</a>
+                <a href="/contact-us/" class="text-white mx-2">Contact Us</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </footer>
-      <!-- Include Toast Templates -->
-    {% if messages %}
+      </footer>
+    </div>
+
+    <!-- Include Toast Templates -->
+    <div id="toast-container">
+      {% if messages %}
         {% for message in messages %}
             {% if message.tags == 'success' %}
                 {% include 'includes/toasts/toast_success.html' with message=message %}
@@ -95,7 +102,9 @@
                 {% include 'includes/toasts/toast_warning.html' with message=message %}
             {% endif %}
         {% endfor %}
-    {% endif %}
+      {% endif %}
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
