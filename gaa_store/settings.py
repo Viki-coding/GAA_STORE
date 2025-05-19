@@ -83,6 +83,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'bag.context_processors.bag_contents',
                 'django.template.context_processors.media',
+                'bag.context_processors.bag_count'
             ],
         },
     },

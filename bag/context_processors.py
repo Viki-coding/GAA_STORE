@@ -58,3 +58,9 @@ def bag_contents(request):
         'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
         'grand_total': grand_total,
     }
+
+
+def bag_count(request):
+    bag = request.session.get('bag', {})
+    count = sum(item['quantity'] for item in bag.values())
+    return {'bag_count': count}
