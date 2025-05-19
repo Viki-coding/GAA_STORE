@@ -8,54 +8,6 @@ from products.models import Product, Hurley, Grip, Sliotar, Helmet
 def view_bag(request):
     return render(request, 'bag/bag.html')
 
-# def view_bag(request):
-#     """
-#     View to display the shopping bag.
-#     """
-#     bag = request.session.get('bag', {})  # Retrieve the bag from the session
-#     bag_items = []
-#     bag_total = 0  # Initialize the total cost of items in the bag
-
-#     for product_key, item in bag.items():
-#         product_id = item['product_id']  # Use the actual product ID
-#         try:
-#             product = Product.objects.get(id=product_id)  # Fetch the product
-#         except Product.DoesNotExist:
-#             # Handle the case where the product no longer exists
-#             continue
-#         total_price = product.price * item['quantity']  # Calculate total price
-#         bag_items.append({
-#             'product': product,
-#             'quantity': item['quantity'],
-#             'total_price': total_price,
-#             'attributes': {
-#                 key: value for key, value in item.items() if key not in [
-#                     'product_id', 'quantity']}
-#         })
-#         bag_total += total_price  # Add to the bag total
-
-    # Calculate delivery costs and grand total
-    # delivery = 0
-    # free_delivery_delta = 0
-    # grand_total = bag_total
-
-    # if bag_total < settings.FREE_DELIVERY_THRESHOLD:
-    #     delivery = bag_total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
-    #     free_delivery_delta = settings.FREE_DELIVERY_THRESHOLD - bag_total
-    # else:
-    #     delivery = 0
-    #     free_delivery_delta = 0
-
-    # grand_total = bag_total + delivery
-
-    # return render(request, 'bag/bag.html', {
-    #     'bag_items': bag_items,
-    #     'bag_total': bag_total,
-    #     'delivery': delivery,
-    #     'free_delivery_delta': free_delivery_delta,
-    #     'grand_total': grand_total,
-    # })
-
 
 def add_to_bag(request, product_id):
     """ Add a quantity of the specified product to the shopping bag """
@@ -90,7 +42,12 @@ def add_to_bag(request, product_id):
         weight = request.POST.get('weight')
         grip_color = request.POST.get('grip_color')
         manufacturer = specific_product.manufacturer.name
-        product_key = f"{product_id}-{size}-{weight}-{grip_color}-{manufacturer}"
+        size = size if size is not None else "unknown"
+        weight = weight if weight is not None else "unknown"
+        grip_color = grip_color if grip_color is not None else "unknown"
+        manufacturer = manufacturer if manufacturer is not None else "unknown"
+        product_key = f"{
+            product_id}-{size}-{weight}-{grip_color}-{manufacturer}"
         update_bag(
             bag, product_key, product_id, quantity,
             size=size,
@@ -133,7 +90,7 @@ def add_to_bag(request, product_id):
         redirect_url = resolve_url(redirect_url)
     except Exception:
         redirect_url = '/'
-        
+
     # Return the redirect response
     return redirect(redirect_url)
 
@@ -155,7 +112,9 @@ def update_bag(request, product_key):
         if product_key in bag:
             if quantity > 0:
                 bag[product_key]['quantity'] = quantity
-                messages.success(request, f"Updated {bag[product_key]['quantity']} x {bag[product_key]['product_id']} in your bag.")
+                messages.success(
+                    request, f"Updated {bag[product_key]['quantity']} x {
+                        bag[product_key]['product_id']} in your bag.")
             else:
                 del bag[product_key]
                 messages.success(request, "Removed item from your bag.")
@@ -165,7 +124,7 @@ def update_bag(request, product_key):
         # Save the updated bag back to the session
         request.session['bag'] = bag
         return redirect('view_bag')
-    
+
 
 def remove_from_bag(request, product_key):
     """Remove a specific product from the shopping bag."""
