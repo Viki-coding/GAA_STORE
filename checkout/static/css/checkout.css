@@ -42,6 +42,27 @@ footer .form-control {
     width: auto; 
 }
 
+#save-shipping-address,
+#remember-me {
+    display: inline-block;
+    background-color: #6c757d; /* Bootstrap secondary button color */
+    color: #fff;
+    border: 1px solid #6c757d;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 10px; /* Add spacing between buttons */
+    margin-bottom: 1rem;
+}
+
+#save-shipping-address:hover,
+#remember-me:hover {
+    background-color: #5a6268; /* Darker shade for hover effect */
+    border-color: #545b62;
+}
+
 /* Stripe CSS */
 .stripe-input {
     background: #fff;
