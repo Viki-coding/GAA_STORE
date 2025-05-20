@@ -83,3 +83,31 @@ form.addEventListener('submit', function(event) {
         }
     });
 });
+
+const submitButton = document.getElementById('submit-button');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
+
+    stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+            card: card,
+            billing_details: {
+                name: form.name.value,
+                email: form.email.value,
+            }
+        }
+    }).then(function(result) {
+        if (result.error) {
+            const errorDiv = document.getElementById('card-errors');
+            errorDiv.textContent = result.error.message;
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Complete Order';
+        } else {
+            if (result.paymentIntent.status === 'succeeded') {
+                form.submit();
+            }
+        }
+    });
+});
