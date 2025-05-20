@@ -4,6 +4,8 @@ from .models import Order, ShippingAddress
 from profiles.models import UserProfile
 from bag.context_processors import bag_contents
 from .forms import CheckoutForm
+import stripe
+from django.conf import settings
 
 
 def checkout(request):
@@ -77,3 +79,21 @@ def checkout(request):
     }
 
     return render(request, 'checkout/checkout.html', context)
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+def process_payment(request):
+    if request.method == 'POST':
+        payment_method_id = request.POST.get('payment_method_id')
+        try:
+            # Create a PaymentIntent
+            intent = stripe.PaymentIntent.create(
+                amount=5000,  # Amount in cents (e.g., $50.00)
+                currency='usd',
+                payment_method=payment_method_id,
+                confirm=True,
+            )
+            return redirect('payment_success')
+        except stripe.error.CardError as e:
+            return render(request, 'checkout.html', {'error': str(e)})

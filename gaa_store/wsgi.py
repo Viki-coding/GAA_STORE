@@ -11,6 +11,10 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+# Load environment variables from env.py if it exists
+if os.path.isfile('env.py'):
+    import env
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gaa_store.settings')
 
 application = get_wsgi_application()

@@ -41,7 +41,10 @@
       href="{% static 'images/favicon/favicon-16x16.png' %}"
     />
     <title>GAA Store - {% block extra_title %}{% endblock %}</title>
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
     {% block extra_css %}{% endblock %}
+    
   </head>
   <body>
     <div class="d-flex flex-column min-vh-100">
