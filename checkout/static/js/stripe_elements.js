@@ -7,6 +7,7 @@
 */
 
 // Retrieve Stripe public key and client secret from the DOM
+console.log("Stripe JS loaded");
 const stripePublicKeyElement = document.getElementById('id_stripe_public_key');
 const clientSecretElement = document.getElementById('id_client_secret');
 
@@ -59,7 +60,7 @@ card.addEventListener('change', function (event) {
     }
 });
 
-const form = document.getElementById('payment-form');
+const form = document.getElementById('checkout-form');
 form.addEventListener('submit', function(event) {
     event.preventDefault();
     stripe.confirmCardPayment(clientSecret, {
