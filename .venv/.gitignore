@@ -1,5 +1,0 @@
-.venv
-env.py
-*.sqlite
-*.pyc
-__pycache__
