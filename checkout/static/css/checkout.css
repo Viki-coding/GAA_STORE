@@ -73,60 +73,11 @@ footer .form-control {
     margin-bottom: 1rem;
 }
 
-/* .StripeElement,
-/* .stripe-style-input { */
-/* {
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px 12px;
-  border: 1px solid transparent;
-  border-radius: 0px;
-  background-color: white;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
-} */ */
-
-/* .StripeElement--focus,
-.stripe-style-input:focus,
-.stripe-style-input:active {
-  box-shadow: 0 1px 3px 0 #cfd7df;
-}
-
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
-}
-
-.stripe-style-input::placeholder {
-    color: #aab7c4;
-}
-
-.fieldset-label {
-    position: relative;
-    right: .5rem;
-} */
-
-/* #payment-form .form-control,
-#card-element {
-    color: #000;
-    border: 1px solid #000;
-} */
-
-/* Container for Stripe Element */
-
-/* Stripe's iframe element */
-/* #card-element,
-.stripe-input
-.StripeElement {
-    min-height: 48px !important;
-    background: #fff !important;
-    border: 1px solid #ced4da !important;
-    border-radius: 4px !important;
-    padding: 10px 12px !important;
+#card-element iframe {
     pointer-events: auto !important;
-    position: relative;
-    z-index: 10;
-} */
+    visibility: visible !important;
+    opacity: 1 !important;
+}
 
 #card-element {
     background: #fff;
@@ -136,7 +87,10 @@ footer .form-control {
     padding: 10px 12px;
     margin-bottom: 1rem;
     position: relative;
-    z-index: 10;
+    z-index: 9999;
+    pointer-events: auto !important;
+    outline: 2px solid red; /* Temporary for debugging */
+
 }
 
 .StripeElement {

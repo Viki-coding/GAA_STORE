@@ -7,6 +7,7 @@ from .forms import CheckoutForm
 import stripe
 from django.conf import settings
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def checkout(request):
     """
@@ -81,7 +82,7 @@ def checkout(request):
     return render(request, 'checkout/checkout.html', context)
 
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def process_payment(request):
     if request.method == 'POST':

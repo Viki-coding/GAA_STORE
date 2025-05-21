@@ -72,7 +72,8 @@ I had put my converter calculator script into my base.file, which I should of ke
 **BUG:** Billing & Shipping field input narrow and not taking up full width
 **RESOLVED BY:**  It appeared like this was due to some conflicting css rules. I checked base.css to see if there were any .form-control rules, but there were not.  I applied them to checkout.css but nothing changed.  I used !important beside it but still no luck. I ensured the checkout.css for the checkout page was loading by inspecting it in chrome developer and checking the network tab, yes that was loading. I checked the html form was inside the .col -md-6. I thought the fields were constained by bootstrap but in the end it was by their own css, so I targeting each element of the form field putting !important beside them, checkout-form imput, select and text area.  Finally this worked but then my tick boxes got misalighned. So I updated the css again to apply width of 100% to only text-based inputs. Finally sorted. 
 
-
+**BUG:** Setting up stripe, I could not input anything in the card number field. 
+**RESOLVED BY:** After spending a day and half, debugging, firstly I had a form nested within a form, which was incorrect. Fixed that. Checked css and any parents that might be having an effect. I added debugging to the stripe_elements.js and found that they weren't being loaded in the console. I had the script tag in my checkout.html I had {%block postload_js %} rather than {%block extra_js %}. After I did that I could see it in my console but it was showing a 404 error.  My settings.py were fine, with regards my static files, and I had listed checkout under apps. But it was file path was incorrect. I fixed that and finally it was resolved. 
 
 UNRESOLVED BUG
 **BUG:** Bag contents table not responsive on Firefox but perfect in Chrome.
