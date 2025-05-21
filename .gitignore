@@ -1,0 +1,8 @@
+.venv
+env.py
+*.sqlite
+*.pyc
+__pycache__
+# Ignore system files
+.DS_Store
+Thumbs.db
