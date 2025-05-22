@@ -56,6 +56,19 @@ def checkout(request):
         except stripe.error.StripeError as e:
             messages.error(request, f"Stripe error: {str(e)}")
             return JsonResponse({'error': str(e)}, status=400)
+        except stripe.error.CardError as e:
+            # Handle card errors (declined, etc.)
+            messages.error(request, f"Card error: {e.user_message}")
+        except stripe.error.InvalidRequestError as e:
+            # Invalid parameters were supplied to Stripe's API
+            messages.error(request, f"Invalid request: {str(e)}")
+        except stripe.error.StripeError as e:
+            # Generic Stripe error
+            messages.error(request, f"Stripe error: {str(e)}")
+        except Exception as e:
+            # Something else happened
+            messages.error(request, f"Serious error: {str(e)}")
+
 
         # Create or retrieve user profile
         user_profile = None
