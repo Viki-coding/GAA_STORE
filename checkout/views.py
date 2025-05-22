@@ -2,6 +2,7 @@ import uuid
 import stripe
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -11,6 +12,7 @@ from .models import Order, ShippingAddress
 from profiles.models import UserProfile
 from bag.context_processors import bag_contents
 from .forms import CheckoutForm
+from .forms import ShippingAddressForm
 
 
 def checkout(request):
@@ -189,3 +191,36 @@ def checkout_success(request, order_number):
         'order': order,
     }
     return render(request, template, context)
+
+@login_required
+def add_address(request):
+    """
+    View to add a new shipping address.
+    """
+    if request.method == 'POST':
+        form = ShippingAddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user_profile = request.user.userprofile
+            address.save()
+            messages.success(request, 'Shipping address added successfully.')
+            return redirect('manage_addresses')
+    else:
+        form = ShippingAddressForm()
+    return render(request, 'checkout/add_address.html', {'form': form})
+
+@login_required
+def edit_address(request, address_id):
+    """
+    View to edit an existing shipping address.
+    """
+    address = get_object_or_404(ShippingAddress, id=address_id, user_profile=request.user.userprofile)
+    if request.method == 'POST':
+        form = ShippingAddressForm(request.POST, instance=address)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Shipping address updated successfully.')
+            return redirect('manage_addresses')
+    else:
+        form = ShippingAddressForm(instance=address)
+    return render(request, 'checkout/edit_address.html', {'form': form})

@@ -1,6 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
+from .models import ShippingAddress
 
 
 class CheckoutForm(forms.Form):
@@ -26,3 +27,19 @@ class CheckoutForm(forms.Form):
         self.helper.form_class = 'form-horizontal'
         self.helper.field_class = 'col-12'
         self.helper.label_class = 'col-form-label'
+
+
+class ShippingAddressForm(forms.ModelForm):
+    """
+    Form for adding and editing shipping addresses.
+    """
+    class Meta:
+        model = ShippingAddress
+        fields = [
+            'full_name', 'phone_number', 'street_address1', 'street_address2',
+            'town_or_city', 'county', 'eircode', 'country', 'is_default'
+        ]
+        widgets = {
+            'is_default': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}),
+        }
