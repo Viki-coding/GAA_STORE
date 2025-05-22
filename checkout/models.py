@@ -24,9 +24,14 @@ class ShippingAddress(models.Model):
     county = models.CharField(max_length=80, null=True, blank=True)
     eircode = models.CharField(max_length=10)
     country = CountryField(blank_label='Country *', default='IE')
+    is_default = models.BooleanField(default=False)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.full_name} - {self.eircode}"
+ 
+    class Meta:
+        ordering = ['-is_default', '-date_added']
 
 
 class Order(models.Model):

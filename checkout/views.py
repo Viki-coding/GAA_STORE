@@ -39,6 +39,8 @@ def checkout(request):
         if form.is_valid():
             # Check if the user selected a saved address
             saved_address = form.cleaned_data.get('saved_address')
+            create_user_profile = form.cleaned_data.get('create_user_profile', False)
+
             if saved_address:
                 # Use the saved address for the order
                 full_name = saved_address.full_name

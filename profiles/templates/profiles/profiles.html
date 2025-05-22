@@ -21,6 +21,24 @@
                 <hr>
                 <h2 class="logo-font mb-4">My Profile</h2>
                 <hr>
+
+                <h2>Manage Shipping Addresses</h2>
+                <a href="{% url 'add_address' %}" class="btn btn-primary">Add New Address</a>
+                <ul>
+                    {% for address in addresses %}
+                        <li>
+                            <strong>{{ address.full_name }}</strong><br>
+                            {{ address.street_address1 }}<br>
+                            {{ address.street_address2 }}<br>
+                            {{ address.town_or_city }}, {{ address.county }}<br>
+                            {{ address.country }} - {{ address.eircode }}<br>
+                            {% if address.is_default %}<em>(Default Address)</em>{% endif %}
+                            <br>
+                            <a href="{% url 'edit_address' address.id %}">Edit</a> |
+                            <a href="{% url 'delete_address' address.id %}">Delete</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
 {% endblock %}
