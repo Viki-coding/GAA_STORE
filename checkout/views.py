@@ -92,11 +92,16 @@ def checkout(request):
 
         # Create the order
         order = Order.objects.create(
-            user_profile=user_profile,
+            user_profile=None,
             shipping_address=shipping_address,
             total_price=bag_contents(request)['grand_total'],
             stripe_pid=intent.id,
         )
+
+        # Redirect to the order confirmation page
+        return redirect('order_confirmation', order_number=order.order_number)
+
+
         # Handle AJAX and regular form submissions
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             # Return JSON response for AJAX requests
@@ -134,7 +139,7 @@ def checkout(request):
 
     # Handle GET request
     form = CheckoutForm()
-    
+
     context = {
         'form': form,
         'bag_items': bag_items,

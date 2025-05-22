@@ -89,8 +89,6 @@ footer .form-control {
     position: relative;
     z-index: 9999;
     pointer-events: auto !important;
-    outline: 2px solid red; /* Temporary for debugging */
-
 }
 
 .StripeElement {
@@ -115,6 +113,39 @@ footer .form-control {
 
 .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
+}
+
+/* Make the Adjust Bag button more visible */
+.btn-outline-black {
+    color: #000; 
+    border-color: #000; 
+    background-color: #f8f9fa; 
+}
+
+.btn-outline-black:hover {
+    color: #fff; 
+    background-color: #000; 
+    border-color: #000; 
+}
+
+/* Make the Complete Order button more visible */
+.btn-black {
+    color: #fff; 
+    background-color: #007bff; 
+    border-color: #007bff; 
+}
+
+.btn-black:hover {
+    color: #fff; 
+    background-color: #0056b3; 
+    border-color: #0056b3; 
+}
+
+/* Custom class for the payment message */
+.payment-message {
+    color: #ffc107; 
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); 
 }
 
 @media (max-width: 768px) {

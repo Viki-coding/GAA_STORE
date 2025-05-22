@@ -7,28 +7,26 @@
 */
 
 // Retrieve Stripe public key and client secret from the DOM
-const stripePublicKeyElement = document.getElementById('id_stripe_public_key');
-const clientSecretElement = document.getElementById('id_client_secret');
+// var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+// var clientSecret = $('#id_client_secret').text().slice(1, -1);
 
-if (!stripePublicKeyElement || !clientSecretElement) {
+var stripePublicKey = JSON.parse(document.getElementById('id_stripe_public_key').textContent);
+var clientSecret = JSON.parse(document.getElementById('id_client_secret').textContent);
+
+console.log('Stripe Public Key:', stripePublicKey);
+console.log('Client Secret:', clientSecret);
+
+if (!stripePublicKey || !clientSecret) {
     console.error('Stripe public key or client secret is missing.');
     alert('An error occurred while loading the payment form. Please try again.');
 }
 
-const stripePublicKey = stripePublicKeyElement.textContent.trim();
-const clientSecret = clientSecretElement.textContent.trim();
-
-// Debugging logs to verify the values
-console.log('Stripe public key:', stripePublicKey);
-console.log('Stripe client secret:', clientSecret);
-console.log("Stripe JS loaded");
-
 // Initialize Stripe
-const stripe = Stripe(stripePublicKey);
-const elements = stripe.elements();
+var stripe = Stripe(stripePublicKey);
+var elements = stripe.elements();
 
 // Define custom styling for the card element
-const style = {
+var style = {
     base: {
         color: '#000',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
@@ -45,33 +43,37 @@ const style = {
 };
 
 // Create and mount the card element
-const card = elements.create('card', { style: style });
+var card = elements.create('card', { style: style });
 card.mount('#card-element');
 
 // Handle real-time validation errors on the card element
 card.addEventListener('change', function (event) {
-    const errorDiv = document.getElementById('card-errors');
+    var errorDiv = document.getElementById('card-errors');
     if (event.error) {
-        const errorHtml = `
+        var html = `
             <span class="icon" role="alert">
                 <i class="fas fa-times"></i>
             </span>
             <span>${event.error.message}</span>
         `;
-        errorDiv.innerHTML = errorHtml;
+        $(errorDiv).html(html);
     } else {
         errorDiv.textContent = '';
     }
 });
 
-const form = document.getElementById('checkout-form');
+var form = document.getElementById('checkout-form');
+var submitButton = document.getElementById('submit-button');
 
-const submitButton = document.getElementById('submit-button');
 form.addEventListener('submit', function(event) {
     event.preventDefault();
-    submitButton.disabled = true;
-    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
 
+    // Disable the submit button to prevent repeated clicks
+    card.update({ 'disabled': true });
+    $(submitButton).attr('disabled', true);
+    $(submitButton).html('<span class="spinner-border spinner-border-sm"></span> Processing...');
+
+   // confirm card payment 
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
@@ -80,14 +82,25 @@ form.addEventListener('submit', function(event) {
                 email: form.email.value,
             }
         }
-    }).then(function(result) {
+    }).then(function (result) {
         if (result.error) {
-            const errorDiv = document.getElementById('card-errors');
-            errorDiv.textContent = result.error.message;
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Complete Order';
+            // Display error message
+            var errorDiv = document.getElementById('card-errors');
+            var html = `
+                <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span>${result.error.message}</span>
+            `;
+            $(errorDiv).html(html);
+
+            // Re-enable card input and submit button
+            card.update({ 'disabled': false });
+            $(submitButton).attr('disabled', false);
+            $(submitButton).html('Complete Order');
         } else {
             if (result.paymentIntent.status === 'succeeded') {
+                // Submit the form
                 form.submit();
             }
         }
