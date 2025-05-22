@@ -111,3 +111,27 @@ def checkout(request):
     }
 
     return render(request, 'checkout/checkout.html', context)
+
+
+def checkout_success(request, order_number):
+    """
+    Handle successful checkouts
+    """
+    # Retrieve the order using the order number
+    order = get_object_or_404(Order, order_number=order_number)
+
+    # Display a success message to the user
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation \
+        email will be sent to {order.email}.')
+
+    # Clear the shopping bag from the session
+    if 'bag' in request.session:
+        del request.session['bag']
+
+    # Pass the order to the template
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+    }
+    return render(request, template, context)

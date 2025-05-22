@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1 class="text-center">Thank You for Your Order!</h1>
+    <p class="text-center">Your order has been successfully placed. A confirmation email has been sent to <strong>{{ order.email }}</strong>.</p>
+
+    {% if order.gift_message %}
+    <div class="alert alert-info text-center">
+        <strong>Gift Message:</strong> {{ order.gift_message }}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <!-- Order Summary -->
+        <div class="col-md-8 offset-md-2 mb-4">
+            <h4>Order Summary</h4>
+            <ul class="list-group">
+                {% for item in order.items.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ item.product.name }}</strong>
+                        <small>
+                            {% if item.size %}Size: {{ item.size }}, {% endif %}
+                            {% if item.color %}Color: {{ item.color }}, {% endif %}
+                            {% if item.manufacturer %}Manufacturer: {{ item.manufacturer }}{% endif %}
+                        </small>
+                        <br>
+                        Quantity: {{ item.quantity }}
+                    </div>
+                    <span>€{{ item.total_price|floatformat:2 }}</span>
+                </li>
+                {% endfor %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>Total</strong>
+                    <strong>€{{ order.total_price|floatformat:2 }}</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Navigation Options -->
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn btn-outline-black rounded-0">
+            <span class="icon">
+                <i class="fas fa-home"></i>
+            </span>
+            <span class="font-weight-bold">Return to Homepage</span>
+        </a>
+        <a href="{% url 'shop' %}" class="btn btn-black rounded-0">
+            <span class="icon">
+                <i class="fas fa-shopping-bag"></i>
+            </span>
+            <span class="font-weight-bold">Continue Shopping</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
