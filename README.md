@@ -565,6 +565,8 @@ https://docs.djangoproject.com/en/5.2/ref/templates/builtins/
 Stripe documentation 
 https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
 
+Webhooks
+https://docs.stripe.com/webhooks/quickstart
 
 MARKDOWN:
 
