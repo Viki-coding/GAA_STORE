@@ -96,7 +96,7 @@ def checkout(request):
         )
 
         # Redirect to the order confirmation page
-        return redirect('order_confirmation', order_number=order.order_number)
+        return redirect('checkout_success', order_number=order.order_number)
 
         # Handle AJAX and regular form submissions
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
