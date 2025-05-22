@@ -12,28 +12,28 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = (
         'status', 'payment_status', 'delivery_status')
     search_fields = (
-        'order_number', 
-        'user_profile__user__username', 
+        'order_number',
+        'user_profile__user__username',
         'user_profile__user__email')
     readonly_fields = (
-        'order_number', 'order_date', 
-        'total_price', 
-        'delivery_cost', 
+        'order_number', 'order_date',
+        'total_price',
+        'delivery_cost',
         'grand_total')
     fieldsets = (
         (None, {
             'fields': (
-                'order_number', 
-                'user_profile', 
-                'shipping_address', 
-                'order_date', 
+                'order_number',
+                'user_profile',
+                'shipping_address',
+                'order_date',
                 'status')
         }),
         ('Payment & Delivery', {
             'fields': (
-                'payment_status', 
-                'delivery_status', 
-                'delivery_cost', 
+                'payment_status',
+                'delivery_status',
+                'delivery_cost',
                 'grand_total')
         }),
         ('Gift Options', {
