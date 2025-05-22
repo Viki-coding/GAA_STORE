@@ -7,8 +7,14 @@
 */
 
 // Retrieve Stripe public key and client secret from the DOM
-var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
-var clientSecret = $('#id_client_secret').text().slice(1, -1);
+// var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+// var clientSecret = $('#id_client_secret').text().slice(1, -1);
+
+var stripePublicKey = JSON.parse(document.getElementById('id_stripe_public_key').textContent);
+var clientSecret = JSON.parse(document.getElementById('id_client_secret').textContent);
+
+console.log('Stripe Public Key:', stripePublicKey);
+console.log('Client Secret:', clientSecret);
 
 if (!stripePublicKey || !clientSecret) {
     console.error('Stripe public key or client secret is missing.');

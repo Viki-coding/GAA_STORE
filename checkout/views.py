@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.core.mail import send_mail
 from .models import Order, ShippingAddress
 from profiles.models import UserProfile
 from bag.context_processors import bag_contents
@@ -16,6 +17,14 @@ def checkout(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
 
+    # Get the current bag contents and calculate the total
+    bag = bag_contents(request)
+    bag_items = bag['bag_items']
+    grand_total = bag['grand_total']
+    stripe_total = round(grand_total * 100)  # Convert to cents for Stripe
+
+
+    # Collect form data and create a payment intent
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
         email = request.POST.get('email')
@@ -41,9 +50,15 @@ def checkout(request):
                 currency=settings.STRIPE_CURRENCY,
                 payment_method_types=['card'],
             )
+            client_secret = intent.client_secret  # Set client_secret for POST requests
+            print(f"POST request PaymentIntent created: {intent}")  # Debugging statement
+        
         except stripe.error.StripeError as e:
             messages.error(request, f"Stripe error: {str(e)}")
             return JsonResponse({'error': str(e)}, status=400)
+
+        # Debugging statement for GET requests
+        print(f"GET Request - Client Secret: {client_secret}")
 
         # Create or retrieve user profile
         user_profile = None
@@ -82,32 +97,50 @@ def checkout(request):
             total_price=bag_contents(request)['grand_total'],
             stripe_pid=intent.id,
         )
+        # Handle AJAX and regular form submissions
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            # Return JSON response for AJAX requests
+            return JsonResponse({
+                'client_secret': intent.client_secret,
+                'order_id': order.id,
+            })
+        else:
+            # Redirect for regular form submissions
+            messages.success(request, 'Your order has been placed successfully!')
+            return redirect('order_confirmation', order_number=order.order_number)
 
-        # Redirect to payment page with client_secret
-        return JsonResponse({
-            'client_secret': intent.client_secret,
-            'order_id': order.id,
-        })
+    else:
+        # For GET requests, create a PaymentIntent
+        try:
+            intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+                payment_method_types=['card'],
+            )
+            client_secret = intent.client_secret
+            print(f"GET Request - PaymentIntent created: {intent}")  # Debugging statement
+        except Exception as e:
+            messages.error(request, f'Error creating payment intent: {str(e)}')
+            client_secret = None
 
-        messages.success(request, 'Your order has been placed successfully!')
-        return redirect('order_confirmation', order_number=order.order_number)
 
-    # Get the bag contents and pass them to the template, initialize form.
-
-    form = CheckoutForm()
-    bag = bag_contents(request)
-    bag_items = bag['bag_items']
-    grand_total = bag['grand_total']
-
+    # Check for missing keys
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
+    if not client_secret:
+        messages.warning(request, 'Stripe client secret could not be generated. \
+            Please try again later.')
 
+    # Handle GET request
+    form = CheckoutForm()
+    
     context = {
         'form': form,
         'bag_items': bag_items,
         'grand_total': grand_total,
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'client_secret': client_secret, # Set to None for GET requests
     }
 
     return render(request, 'checkout/checkout.html', context)
