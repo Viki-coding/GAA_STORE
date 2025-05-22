@@ -35,17 +35,33 @@ def checkout(request):
 
     # Collect form data and create a payment intent
     if request.method == 'POST':
-        full_name = request.POST.get('full_name')
-        email = request.POST.get('email')
-        phone_number = request.POST.get('phone_number')
-        street_address1 = request.POST.get('street_address1')
-        street_address2 = request.POST.get('street_address2')
-        town_or_city = request.POST.get('town_or_city')
-        county = request.POST.get('county')
-        eircode = request.POST.get('eircode')
-        store_shipping_address = request.POST.get(
-            'store_shipping_address') == 'on'
-        create_user_profile = request.POST.get('create_user_profile') == 'on'
+        form = CheckoutForm(request.POST, user=request.user)
+        if form.is_valid():
+            # Check if the user selected a saved address
+            saved_address = form.cleaned_data.get('saved_address')
+            if saved_address:
+                # Use the saved address for the order
+                full_name = saved_address.full_name
+                phone_number = saved_address.phone_number
+                street_address1 = saved_address.street_address1
+                street_address2 = saved_address.street_address2
+                town_or_city = saved_address.town_or_city
+                county = saved_address.county
+                eircode = saved_address.eircode
+                country = saved_address.country
+            else:
+                # Use the new address entered in the form
+                full_name = request.POST.get('full_name')
+                email = request.POST.get('email')
+                phone_number = request.POST.get('phone_number')
+                street_address1 = request.POST.get('street_address1')
+                street_address2 = request.POST.get('street_address2')
+                town_or_city = request.POST.get('town_or_city')
+                county = request.POST.get('county')
+                eircode = request.POST.get('eircode')
+                store_shipping_address = request.POST.get(
+                    'store_shipping_address') == 'on'
+                create_user_profile = request.POST.get('create_user_profile') == 'on'
 
         # Get the current bag contents and calculate the total
         current_bag = bag_contents(request)

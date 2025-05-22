@@ -5,6 +5,12 @@ from .models import ShippingAddress
 
 
 class CheckoutForm(forms.Form):
+    saved_address = forms.ModelChoiceField(
+        queryset=None,
+        required=False,
+        label="Select a saved address",
+        empty_label="Use a new address",
+    )
     full_name = forms.CharField(max_length=100, label="Full Name")
     email = forms.EmailField(label="Email Address")
     phone_number = forms.CharField(max_length=15, label="Phone Number")
@@ -22,12 +28,18 @@ class CheckoutForm(forms.Form):
         )
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None) 
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.field_class = 'col-12'
         self.helper.label_class = 'col-form-label'
 
+        # Populate the saved_address field with the user's saved addresses
+        if user and user.is_authenticated:
+            self.fields['saved_address'].queryset = ShippingAddress.objects.filter(
+                user_profile=user.userprofile
+            )
 
 class ShippingAddressForm(forms.ModelForm):
     """
