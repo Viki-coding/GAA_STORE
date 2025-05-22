@@ -23,6 +23,12 @@ def checkout(request):
     bag = bag_contents(request)
     bag_items = bag['bag_items']
     grand_total = bag['grand_total']
+
+    # Redirect if the cart is empty
+    if grand_total == 0:
+        messages.warning(request, "Your cart is empty. Please add items to proceed to checkout.")
+        return redirect('view_bag')  # Replace 'view_bag' with the name of your cart view
+
     stripe_total = round(grand_total * 100)  # Convert to cents for Stripe
 
     # Collect form data and create a payment intent
