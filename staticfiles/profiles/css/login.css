@@ -9,6 +9,11 @@
     font-weight: bold;
 }
 
+.form-label {
+    font-weight: 600;
+    color: #333;
+}
+
 .card-body {
     padding: 2rem;
 }
@@ -16,4 +21,13 @@
 .card-footer {
     background-color: #f8f9fa;
     font-size: 0.9rem;
+}
+
+.card-footer a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card-footer a:hover {
+    text-decoration: underline;
 }

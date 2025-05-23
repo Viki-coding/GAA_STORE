@@ -1,5 +1,7 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import path, include
 from django.contrib.auth.views import LoginView
+from profiles.forms import CustomLoginForm
 from . import views
 
 urlpatterns = [
@@ -16,5 +18,11 @@ urlpatterns = [
         views.delete_address,
         name='delete_address',
     ),
-    path('login/', LoginView.as_view(template_name='profiles/login.html'), name='login'),
-]
+    path(
+        'login/',
+        LoginView.as_view(
+            template_name='profiles/login.html',
+            authentication_form=CustomLoginForm),
+            name='login',
+        ),
+    ]

@@ -1,29 +1,57 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/login.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow-sm">
+            <!-- Login Card -->
+            <div class="card shadow-sm mb-4">
                 <div class="card-header text-center bg-primary text-white">
                     <h4>Log In</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="mb-3">
-                            {{ form.email.label_tag }}
-                            {{ form.email|add_class:"form-control" }}
+                            <label for="id_email" class="form-label">Email</label>
+                            {{ form.email }}
                         </div>
                         <div class="mb-3">
-                            {{ form.password.label_tag }}
-                            {{ form.password|add_class:"form-control" }}
+                            <label for="id_password" class="form-label">Password</label>
+                            {{ form.password }}
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Log In</button>
                     </form>
                 </div>
-                <div class="card-footer text-center">
-                    <p class="mb-0">Don't have an account? <a href="{% url 'account_signup' %}">Sign up here</a>.</p>
+            </div>
+
+            <!-- Signup Card -->
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-secondary text-white">
+                    <h4>Sign Up</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_signup_email" class="form-label">Email</label>
+                            <input type="email" name="email" id="id_signup_email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_signup_password1" class="form-label">Password</label>
+                            <input type="password" name="password1" id="id_signup_password1" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_signup_password2" class="form-label">Confirm Password</label>
+                            <input type="password" name="password2" id="id_signup_password2" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary w-100">Sign Up</button>
+                    </form>
                 </div>
             </div>
         </div>

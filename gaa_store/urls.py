@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from products import views
 from django.contrib.auth.views import LoginView
+from profiles.forms import CustomLoginForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +33,10 @@ urlpatterns = [
     path('checkout/', include('checkout.urls')),
     path(
         'login/',
-        LoginView.as_view(template_name='profiles/login.html'),
+        LoginView.as_view(
+            template_name='profiles/login.html',
+            authentication_form=CustomLoginForm
+        ),
         name='login',
     ),
 ]
