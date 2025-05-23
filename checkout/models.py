@@ -5,6 +5,7 @@ from django.conf import settings
 from products.models import Product
 from profiles.models import UserProfile
 from django_countries.fields import CountryField
+from django.utils import timezone
 
 
 class ShippingAddress(models.Model):
@@ -25,7 +26,11 @@ class ShippingAddress(models.Model):
     eircode = models.CharField(max_length=10)
     country = CountryField(blank_label='Country *', default='IE')
     is_default = models.BooleanField(default=False)
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(
+        auto_now_add=False,
+        null=True,
+        default=timezone.now
+        )
 
     def __str__(self):
         return f"{self.full_name} - {self.eircode}"

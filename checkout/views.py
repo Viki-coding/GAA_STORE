@@ -21,6 +21,10 @@ def checkout(request):
     """
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
+
+    create_user_profile = False
+    store_shipping_address = False
+
     # Get the current bag contents and calculate the total
     bag = bag_contents(request)
     bag_items = bag['bag_items']
@@ -35,6 +39,8 @@ def checkout(request):
 
     # Collect form data and create a payment intent
     if request.method == 'POST':
+        create_user_profile = request.POST.get('create_user_profile') == 'on'
+        store_shipping_address = request.POST.get('store_shipping_address') == 'on'
         form = CheckoutForm(request.POST, user=request.user)
         if form.is_valid():
             # Check if the user selected a saved address
