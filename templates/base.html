@@ -52,27 +52,27 @@
       {% include 'includes/mobile-top-header.html' %} 
       {% include 'includes/main-nav.html' %}
 
+      <!-- Wrapper for main content -->
+      <div class="wrapper flex-grow-1">
       <main>{% block content %}{% endblock %}</main>
+      </div>
 
       <footer class="bg-dark text-white py-3">
         <div class="row align-items-center">
           <div class="col-md-6 mb-3 mb-md-0">
             <div class="row no-gutters">
               <div class="col-12 col-md-8 mb-2 mb-md-0">
-                <form action="https://mailchimp.com" method="POST" class="d-flex">
-                  <label for="email" class="sr-only">Sign up for updates:</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-control mr-2"
-                    placeholder="Enter your email"
-                    required
-                  />
-                  <button type="submit" class="btn btn-primary">
-                    Subscribe
-                  </button>
-                </form>
+                  <form class="subscribe-form" action="https://mailchimp.com" method="POST">
+                    <label for="email" class="sr-only">Sign up for updates:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    />
+                    <button type="submit">Subscribe</button>
+                  </form>
               </div>
             </div>
           </div>    
