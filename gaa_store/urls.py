@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from products import views
-
+from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,11 @@ urlpatterns = [
     path('bag/', include('bag.urls')),
     path('accessories/', views.accessories_shop, name='accessories_shop'),
     path('checkout/', include('checkout.urls')),
+    path(
+        'login/',
+        LoginView.as_view(template_name='profiles/login.html'),
+        name='login',
+    ),
 ]
 
 HANDLER_404 = 'gaa_store.views.handle_404'
