@@ -42,24 +42,90 @@ def checkout(request):
 
     # Collect form data and create a payment intent
     if request.method == 'POST':
-        create_user_profile = request.POST.get('create_user_profile') == 'on'
-        store_shipping_address = request.POST.get('store_shipping_address') == 'on'
-        form = CheckoutForm(request.POST, user=request.user)
+        # Get form data
+        form = CheckoutForm(request.POST or None, user=request.user)
         if form.is_valid():
-            # Check if the user selected a saved address
-            saved_address = form.cleaned_data.get('saved_address')
+            # Extract cleaned data from the form
             create_user_profile = form.cleaned_data.get('create_user_profile', False)
+            store_shipping_address = form.cleaned_data.get('store_shipping_address', False)
+            saved_address = form.cleaned_data.get('saved_address')
 
-            if saved_address:
-                # Use the saved address for the order
-                full_name = saved_address.full_name
-                phone_number = saved_address.phone_number
-                street_address1 = saved_address.street_address1
-                street_address2 = saved_address.street_address2
-                town_or_city = saved_address.town_or_city
-                county = saved_address.county
-                eircode = saved_address.eircode
-                country = saved_address.country
+            # Process user profile creation
+            user_profile = None
+            if create_user_profile and not request.user.is_authenticated:
+                # Create a new user and profile
+                email = form.cleaned_data.get('email')
+                password = form.cleaned_data.get('password')  # Add this field to your form
+                password2 = form.cleaned_data.get('password2')
+
+                # Validate passwords match
+                if password != password2:
+                    messages.error(request, "Passwords do not match.")
+                    return redirect('checkout')
+
+                # Create user (using email as username)
+                user = User.objects.create_user(
+                    username=email,
+                    email=email,
+                    password=password
+                )
+                user_profile = UserProfile.objects.create(user=user)
+                login(request, user)  # Log the user in
+
+            elif request.user.is_authenticated:
+                # Use existing profile
+                user_profile = request.user.userprofile
+
+            # Process shipping address
+            if store_shipping_address and user_profile:
+                # Save the address from the form data
+                ShippingAddress.objects.create(
+                    user_profile=user_profile,
+                    full_name=form.cleaned_data['full_name'],
+                    email=form.cleaned_data['email'],
+                    phone_number=form.cleaned_data['phone_number'],
+                    street_address1=form.cleaned_data['street_address1'],
+                    street_address2=form.cleaned_data['street_address2'],
+                    town_or_city=form.cleaned_data['town_or_city'],
+                    county=form.cleaned_data['county'],
+                    eircode=form.cleaned_data['eircode'],
+                    country=form.cleaned_data['country']
+                )
+
+    # if request.method == 'POST':
+    #     create_user_profile = request.POST.get('create_user_profile') == 'on'
+    #     store_shipping_address = request.POST.get('store_shipping_address') == 'on'
+    #     form = CheckoutForm(request.POST, user=request.user)
+    #     if form.is_valid():
+    #         # Check if the user selected a saved address
+    #         saved_address = form.cleaned_data.get('saved_address')
+    #         create_user_profile = form.cleaned_data.get('create_user_profile', False)
+    #         # Create user profile if requested
+    #         if create_profile and not request.user.is_authenticated:
+    #             user = User.objects.create_user(
+    #                 username=email,  # Use email as username or generate a unique username
+    #                 email=email,
+    #                 password=request.POST.get('password')  # Add a password field to your form
+    #                 )
+    #             user_profile = UserProfile.objects.create(user=user)
+    #             # Log the user in
+    #             login(request, user)
+    #         elif request.user.is_authenticated:
+    #             user_profile = request.user.userprofile
+            
+    #                     # Save shipping address if requested
+    #         if save_address and user_profile:
+    #             ShippingAddress.objects.create(
+    #                 user_profile=user_profile,
+    #                 full_name=full_name,
+    #                 phone_number=phone_number,
+    #                 street_address1=street_address1,
+    #                 street_address2=street_address2,
+    #                 town_or_city=town_or_city,
+    #                 county=county,
+    #                 eircode=eircode,
+    #                 country=country
+
             else:
                 # Use the new address entered in the form
                 full_name = request.POST.get('full_name')
