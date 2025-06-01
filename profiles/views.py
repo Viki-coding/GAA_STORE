@@ -1,15 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from checkout.models import ShippingAddress
+from checkout.models import ShippingAddress, Order
 from checkout.forms import ShippingAddressForm
 
 
+@login_required
 def profile(request):
-    """ Display the user's profile. """
+    """ Display the user's profile with shipping addresses and orders. """
+    addresses = ShippingAddress.objects.filter(user_profile=request.user.userprofile)
+    orders = Order.objects.filter(user_profile=request.user.userprofile)  # Assuming an Order model exists
 
     template = 'profiles/profile.html'
-    context = {}
+    context = {
+        'addresses': addresses,
+        'orders': orders,
+    }
 
     return render(request, template, context)
 
@@ -71,3 +77,17 @@ def delete_address(request, address_id):
     address.delete()
     messages.success(request, 'Shipping address deleted successfully.')
     return redirect('manage_addresses')
+
+@login_required
+def order_detail(request, order_id):
+    """
+    Display detailed information about a specific order.
+    """
+    order = get_object_or_404(Order, id=order_id, user_profile=request.user.userprofile)
+
+    template = 'checkout/order_detail.html'
+    context = {
+        'order': order,
+    }
+
+    return render(request, template, context)

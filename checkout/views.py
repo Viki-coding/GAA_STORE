@@ -32,9 +32,12 @@ def checkout(request):
 
     # Redirect if the cart is empty
     if grand_total == 0:
-        messages.warning(request, "Your cart is empty. Please add items to proceed to checkout.")
-        return redirect('view_bag')  # Replace 'view_bag' with the name of your cart view
-
+        messages.warning(
+            request, (
+                "Your cart is empty. Please add items to proceed to checkout."
+            ))
+        return redirect('view_bag')
+    
     stripe_total = round(grand_total * 100)  # Convert to cents for Stripe
 
     # Collect form data and create a payment intent
@@ -248,3 +251,4 @@ def edit_address(request, address_id):
     else:
         form = ShippingAddressForm(instance=address)
     return render(request, 'checkout/edit_address.html', {'form': form})
+

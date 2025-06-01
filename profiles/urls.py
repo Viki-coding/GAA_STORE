@@ -22,7 +22,9 @@ urlpatterns = [
         'login/',
         LoginView.as_view(
             template_name='profiles/login.html',
-            authentication_form=CustomLoginForm),
-            name='login',
+            redirect_authenticated_user=True
         ),
-    ]
+        name='login',
+    ),
+    path('order/<int:order_id>/', views.order_detail, name='order_detail'),
+]
