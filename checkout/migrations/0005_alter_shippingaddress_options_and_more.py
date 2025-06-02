@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='shippingaddress',
             name='date_added',
-            field=models.DateTimeField(auto_now_add=True, default=1.0),
+            field=models.DateTimeField(auto_now_add=True),
             preserve_default=False,
         ),
         migrations.AddField(
