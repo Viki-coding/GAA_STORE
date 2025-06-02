@@ -13,7 +13,10 @@ class CheckoutForm(forms.ModelForm):
         empty_label="Use a new address",
     )
     full_name = forms.CharField(max_length=100, label="Full Name")
-    email = forms.EmailField(label="Email Address")
+    email = forms.EmailField(
+        label="Email Address",
+        widget=forms.EmailInput(attrs={'id': 'shipping-email'})
+    )
     phone_number = forms.CharField(max_length=15, label="Phone Number")
     street_address1 = forms.CharField(max_length=255, label="Street Address 1")
     street_address2 = forms.CharField(
