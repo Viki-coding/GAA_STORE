@@ -24,58 +24,68 @@ def checkout(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
 
-    # Get the bag and calculate total
-    bag = bag_contents(request)
-    bag_items = bag['bag_items']
-    grand_total = bag['grand_total']
+    # Always define these so they exist no matter which branch we hit:
+    client_secret = None
+    payment_intent_id = None
 
-    # Redirect if the cart is empty
+    # 1) Pull bag contents and compute total
+    bag = bag_contents(request)
+    bag_items = bag["bag_items"]
+    grand_total = bag["grand_total"]
+
     if grand_total == 0:
         messages.warning(
             request,
             "Your cart is empty. Please add items to proceed to checkout."
         )
-        return redirect('view_bag')
+        return redirect("view_bag")
 
     stripe_total = round(grand_total * 100)  # amount in cents
 
-    if request.method == 'POST':
-        # Process a normal form submission (after Stripe has confirmed payment)
+    if request.method == "POST":
+        # ───────────────────────────────────────────────
+        # A) PROCESS A FORM SUBMISSION (after Stripe confirmed payment)
+        # ───────────────────────────────────────────────
         form = CheckoutForm(request.POST, user=request.user)
 
-        # Retrieve the PaymentIntent ID from the hidden input field
-        payment_intent_id = request.POST.get('payment_intent_id')
+        # Debugging: Print form errors if validation fails
+        if not form.is_valid():
+            print("Form validation failed:")
+            print(form.errors)
 
+        # Retrieve the PaymentIntent ID from the hidden <input>
+        payment_intent_id = request.POST.get("payment_intent_id")
         if not payment_intent_id:
-            messages.error(request, "No payment intent ID was submitted. Please try again.")
-            return redirect('checkout')
+            messages.error(request, "Payment information is missing. Please try again.")
+            return redirect("checkout")
 
         # Verify with Stripe that the PaymentIntent succeeded
         try:
             intent = stripe.PaymentIntent.retrieve(payment_intent_id)
         except stripe.error.StripeError as e:
-            messages.error(request, f"Unable to retrieve payment intent: {str(e)}")
-            return redirect('checkout')
+            messages.error(request, f"Unable to verify payment: {str(e)}")
+            return redirect("checkout")
 
-        if intent.status != 'succeeded':
+        if intent.status != "succeeded":
             messages.error(request, "Payment was not successful. Please try again.")
-            return redirect('checkout')
+            return redirect("checkout")
 
-        # Process the form data
+        # Process the form data if valid
         if form.is_valid():
-            # Handle user profile creation (if requested)
-            create_user_profile = form.cleaned_data.get('create_user_profile', False)
-            store_shipping_address = form.cleaned_data.get('store_shipping_address', False)
-            saved_address = form.cleaned_data.get('saved_address')
+            # Handle user profile creation
+            create_user_profile = form.cleaned_data.get("create_user_profile", False)
+            store_shipping_address = form.cleaned_data.get("store_shipping_address", False)
+            saved_address = form.cleaned_data.get("saved_address")
 
             user_profile = None
             if create_user_profile and not request.user.is_authenticated:
-                email = form.cleaned_data['email']
-                password = form.cleaned_data['password']
-                user = User.objects.create_user(username=email, email=email, password=password)
+                email = form.cleaned_data["email"]
+                password = form.cleaned_data["password"]
+                user = User.objects.create_user(
+                    username=email, email=email, password=password
+                )
                 user_profile = UserProfile.objects.create(user=user)
                 login(request, user)
-
             elif request.user.is_authenticated:
                 user_profile = request.user.userprofile
 
@@ -85,73 +95,83 @@ def checkout(request):
             elif store_shipping_address and user_profile:
                 shipping_address = ShippingAddress.objects.create(
                     user_profile=user_profile,
-                    full_name=form.cleaned_data['full_name'],
-                    email=form.cleaned_data['email'],
-                    phone_number=form.cleaned_data['phone_number'],
-                    street_address1=form.cleaned_data['street_address1'],
-                    street_address2=form.cleaned_data['street_address2'],
-                    town_or_city=form.cleaned_data['town_or_city'],
-                    county=form.cleaned_data['county'],
-                    eircode=form.cleaned_data['eircode'],
-                    country=form.cleaned_data['country']
+                    full_name=form.cleaned_data["full_name"],
+                    email=form.cleaned_data["email"],
+                    phone_number=form.cleaned_data["phone_number"],
+                    street_address1=form.cleaned_data["street_address1"],
+                    street_address2=form.cleaned_data["street_address2"],
+                    town_or_city=form.cleaned_data["town_or_city"],
+                    county=form.cleaned_data["county"],
+                    eircode=form.cleaned_data["eircode"],
+                    country=form.cleaned_data["country"],
                 )
             else:
                 shipping_address = None
 
-            # Create the Order in the database
+            # Create the Order
             order = Order.objects.create(
                 user_profile=user_profile,
                 shipping_address=shipping_address,
-                total_price=bag['grand_total'],
+                total_price=grand_total,
                 stripe_pid=payment_intent_id,
             )
 
-            # Clear the shopping bag
-            if 'bag' in request.session:
-                del request.session['bag']
+            # Clear the bag from session
+            if "bag" in request.session:
+                del request.session["bag"]
 
-            # Redirect to success page
-            return redirect('checkout_success', order_number=order.order_number)
+            # Debugging: Print success messages
+            print("Form is valid. Proceeding to create order...")
+            print("Redirecting to checkout_success...")
 
-        # If form.is_valid() is False, fall through to re-render with errors
+            # Redirect to success
+            return redirect("checkout_success", order_number=order.order_number)
 
     else:
-        # On GET: create a PaymentIntent and render the form
+        # ───────────────────────────────────────────────
+        # B) PROCESS A GET REQUEST
+        # ───────────────────────────────────────────────
         form = CheckoutForm(user=request.user)
 
-        try:
-            intent = stripe.PaymentIntent.create(
-                amount=stripe_total,
-                currency=settings.STRIPE_CURRENCY,
-                payment_method_types=['card'],
-            )
-            client_secret = intent.client_secret
-            payment_intent_id = intent.id
-        except stripe.error.StripeError as e:
-            messages.error(request, f'Error creating payment intent: {str(e)}')
-            client_secret = None
-            payment_intent_id = None
+    # Create a fresh PaymentIntent for GET or invalid POST
+    try:
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+            payment_method_types=["card"],
+        )
+        client_secret = intent.client_secret
+        payment_intent_id = intent.id
+    except stripe.error.StripeError as e:
+        messages.error(request, f"Error creating payment intent: {str(e)}")
+        client_secret = None
+        payment_intent_id = None
 
-    # Warn if keys are missing
+    # Warn if keys are missing or if the secret wasn’t created.
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. Did you set it in your environment?')
-    if request.method == 'GET' and not client_secret:
         messages.warning(
             request,
-            'Stripe client secret could not be generated. Please try again later.'
+            (
+                "Stripe public key is missing. "
+                "Did you set it in your environment?"
+            )
+        )
+    if request.method == "GET" and not client_secret:
+        messages.warning(
+            request,
+            "Payment form could not be initialized. Please try again later."
         )
 
     context = {
-        'form': form,
-        'bag_items': bag['bag_items'],
-        'grand_total': bag['grand_total'],
-        'stripe_public_key': stripe_public_key,
-        'client_secret': client_secret,          # for the JS to call stripe.confirmCardPayment(...)
-        'payment_intent_id': payment_intent_id,  # for the hidden <input> so we can read it on POST
+        "form": form,
+        "bag_items": bag_items,              
+        "grand_total": grand_total,
+        "stripe_public_key": stripe_public_key,
+        "client_secret": client_secret,
+        "payment_intent_id": payment_intent_id,
     }
 
-    return render(request, 'checkout/checkout.html', context)
-
+    return render(request, "checkout/checkout.html", context)
 
 def checkout_success(request, order_number):
     """
@@ -161,9 +181,13 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     # Display a success message to the user
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
+    messages.success(
+        request,
+        (
+            f'Order successfully processed! Your order number is {order_number}. '
+            f'A confirmation email will be sent to {order.email}.'
+        )
+    )
 
     # Clear the shopping bag from the session
     if 'bag' in request.session:

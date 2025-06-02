@@ -58,21 +58,20 @@
                 <fieldset class="px-3 mb-4">
                     <legend class="fieldset-label small text-black px-2 w-auto">Billing & Shipping</legend>
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="full_name">Full Name</label>
                         <input 
                             type="text" 
-                            id="name" 
-                            name="name" 
+                            id="full_name" 
+                            name="full_name" 
                             class="form-control" 
                             required
                             autocomplete="name"
-                            aria-label="Full Name"
-                            value="{{ form.name.value|default_if_none:'' }}"
+                            value="{{ form.full_name.value|default_if_none:'' }}"
                         >
-                        {{ form.name.errors }}
+                        {{ form.full_name.errors }}
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email Address</label>
                         <input 
                             type="email" 
                             id="email" 
@@ -80,38 +79,60 @@
                             class="form-control" 
                             required
                             autocomplete="email"
-                            aria-label="Email Address"
                             value="{{ form.email.value|default_if_none:'' }}"
                         >
                         {{ form.email.errors }}
                     </div>
                     <div class="form-group">
-                        <label for="address">Address</label>
+                        <label for="street_address1">Street Address 1</label>
                         <input 
                             type="text" 
-                            id="address" 
-                            name="address" 
+                            id="street_address1" 
+                            name="street_address1" 
                             class="form-control" 
                             required
                             autocomplete="address-line1"
-                            aria-label="Street Address"
-                            value="{{ form.address.value|default_if_none:'' }}"
+                            value="{{ form.street_address1.value|default_if_none:'' }}"
                         >
-                        {{ form.address.errors }}
+                        {{ form.street_address1.errors }}
                     </div>
                     <div class="form-group">
-                        <label for="city">City</label>
+                        <label for="street_address2">Street Address 2 (Optional)</label>
                         <input 
                             type="text" 
-                            id="city" 
-                            name="city" 
+                            id="street_address2" 
+                            name="street_address2" 
+                            class="form-control" 
+                            autocomplete="address-line2"
+                            value="{{ form.street_address2.value|default_if_none:'' }}"
+                        >
+                        {{ form.street_address2.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="town_or_city">Town or City</label>
+                        <input 
+                            type="text" 
+                            id="town_or_city" 
+                            name="town_or_city" 
                             class="form-control" 
                             required
                             autocomplete="address-level2"
-                            aria-label="City"
-                            value="{{ form.city.value|default_if_none:'' }}"
+                            value="{{ form.town_or_city.value|default_if_none:'' }}"
                         >
-                        {{ form.city.errors }}
+                        {{ form.town_or_city.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="county">County</label>
+                        <input 
+                            type="text" 
+                            id="county" 
+                            name="county" 
+                            class="form-control" 
+                            required
+                            autocomplete="address-level1"
+                            value="{{ form.county.value|default_if_none:'' }}"
+                        >
+                        {{ form.county.errors }}
                     </div>
                     <div class="form-group">
                         <label for="eircode">Eircode</label>
@@ -122,10 +143,26 @@
                             class="form-control" 
                             required
                             autocomplete="postal-code"
-                            aria-label="Eircode"
                             value="{{ form.eircode.value|default_if_none:'' }}"
                         >
                         {{ form.eircode.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select 
+                            id="country" 
+                            name="country" 
+                            class="form-control" 
+                            required
+                            autocomplete="country"
+                        >
+                            {% for country_code, country_name in form.country.field.choices %}
+                            <option value="{{ country_code }}" {% if form.country.value == country_code %}selected{% endif %}>
+                                {{ country_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        {{ form.country.errors }}
                     </div>
 
                     <!-- Save Shipping Address and Remember Me -->

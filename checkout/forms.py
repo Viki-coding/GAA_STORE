@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from .models import ShippingAddress
 from .models import Order
+from django_countries.fields import CountryField
 
 
 class CheckoutForm(forms.ModelForm):
@@ -51,6 +52,13 @@ class CheckoutForm(forms.ModelForm):
         max_length=10,
         label="Eircode",
         widget=forms.TextInput(attrs={'autocomplete': 'postal-code'})
+    )
+    country = CountryField(
+        blank_label="Country *",
+        default='IE'  # Default to Ireland (ISO code 'IE')
+    ).formfield(
+        required=True,
+        widget=forms.Select(attrs={'autocomplete': 'country', 'class': 'form-control'})
     )
     store_shipping_address = forms.BooleanField(
         required=False,
