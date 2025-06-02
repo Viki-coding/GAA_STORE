@@ -17,15 +17,14 @@ from .forms import CheckoutForm, ShippingAddressForm
 
 def checkout(request):
     """
-    View to handle the checkout process and create stripe payment intent.
+    View to handle the checkout process:
+      - On GET: create a Stripe PaymentIntent, embed its secret in the page
+      - On POST: verify that payment succeeded and then create the Order
     """
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
 
-    client_secret = None
-    intent = None
-
-    # Get the current bag contents and calculate the total
+    # Get the bag and calculate total
     bag = bag_contents(request)
     bag_items = bag['bag_items']
     grand_total = bag['grand_total']
@@ -38,39 +37,46 @@ def checkout(request):
         )
         return redirect('view_bag')
 
-    stripe_total = round(grand_total * 100)  # Convert to cents for Stripe
+    stripe_total = round(grand_total * 100)  # amount in cents
 
-    # Collect form data and create a payment intent
     if request.method == 'POST':
-        # Get form data
+        # Process a normal form submission (after Stripe has confirmed payment)
         form = CheckoutForm(request.POST, user=request.user)
+
+        # Retrieve the PaymentIntent ID from the hidden input field
+        payment_intent_id = request.POST.get('payment_intent_id')
+
+        if not payment_intent_id:
+            messages.error(request, "No payment intent ID was submitted. Please try again.")
+            return redirect('checkout')
+
+        # Verify with Stripe that the PaymentIntent succeeded
+        try:
+            intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+        except stripe.error.StripeError as e:
+            messages.error(request, f"Unable to retrieve payment intent: {str(e)}")
+            return redirect('checkout')
+
+        if intent.status != 'succeeded':
+            messages.error(request, "Payment was not successful. Please try again.")
+            return redirect('checkout')
+
+        # Process the form data
         if form.is_valid():
-            # Extract cleaned data from the form
-            create_user_profile = form.cleaned_data.get(
-                'create_user_profile', False
-            )
-            store_shipping_address = form.cleaned_data.get(
-                'store_shipping_address', False
-            )
+            # Handle user profile creation (if requested)
+            create_user_profile = form.cleaned_data.get('create_user_profile', False)
+            store_shipping_address = form.cleaned_data.get('store_shipping_address', False)
             saved_address = form.cleaned_data.get('saved_address')
 
-            # Process user profile creation
             user_profile = None
             if create_user_profile and not request.user.is_authenticated:
-                # Create a new user and profile
-                email = form.cleaned_data.get('email')
-                password = form.cleaned_data.get('password')
-                # Create user (using email as username)
-                user = User.objects.create_user(
-                    username=email,
-                    email=email,
-                    password=password
-                )
+                email = form.cleaned_data['email']
+                password = form.cleaned_data['password']
+                user = User.objects.create_user(username=email, email=email, password=password)
                 user_profile = UserProfile.objects.create(user=user)
-                login(request, user)  # Log the user in
+                login(request, user)
 
             elif request.user.is_authenticated:
-                # Use existing profile
                 user_profile = request.user.userprofile
 
             # Handle shipping address
@@ -91,43 +97,28 @@ def checkout(request):
                 )
             else:
                 shipping_address = None
-            try:
-                # Create a PaymentIntent with the order amount
-                intent = stripe.PaymentIntent.create(
-                    amount=stripe_total,
-                    currency=settings.STRIPE_CURRENCY,
-                    payment_method_types=['card'],
-                )
-                client_secret = intent.client_secret
-            except stripe.error.StripeError as e:
-                messages.error(request, f"Error creating payment intent: {e}")
-                client_secret = None
-                intent = None
 
-            # Create the order
+            # Create the Order in the database
             order = Order.objects.create(
                 user_profile=user_profile,
                 shipping_address=shipping_address,
-                total_price=bag_contents(request)['grand_total'],
-                stripe_pid=intent.id if intent else "",
+                total_price=bag['grand_total'],
+                stripe_pid=payment_intent_id,
             )
 
-            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                return JsonResponse({
-                    'client_secret': client_secret,
-                    'order_id': order.id,
-                })
+            # Clear the shopping bag
+            if 'bag' in request.session:
+                del request.session['bag']
 
-            # Otherwise, standard POST: redirect to success page
-            return redirect(
-                'checkout_success',
-                order_number=order.order_number
-            )
-   
-        # If the form is not valid, display errors
+            # Redirect to success page
+            return redirect('checkout_success', order_number=order.order_number)
+
+        # If form.is_valid() is False, fall through to re-render with errors
+
     else:
-        # For GET requests, create a PaymentIntent
+        # On GET: create a PaymentIntent and render the form
         form = CheckoutForm(user=request.user)
+
         try:
             intent = stripe.PaymentIntent.create(
                 amount=stripe_total,
@@ -135,25 +126,28 @@ def checkout(request):
                 payment_method_types=['card'],
             )
             client_secret = intent.client_secret
+            payment_intent_id = intent.id
         except stripe.error.StripeError as e:
             messages.error(request, f'Error creating payment intent: {str(e)}')
             client_secret = None
+            payment_intent_id = None
 
-    # Check for missing keys
+    # Warn if keys are missing
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-            Did you forget to set it in your environment?')
-    if not client_secret:
+        messages.warning(request, 'Stripe public key is missing. Did you set it in your environment?')
+    if request.method == 'GET' and not client_secret:
         messages.warning(
-            request, 'Stripe client secret could not be generated. \
-            Please try again later.')
+            request,
+            'Stripe client secret could not be generated. Please try again later.'
+        )
 
     context = {
         'form': form,
-        'bag_items': bag_items,
-        'grand_total': grand_total,
-        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
-        'client_secret': client_secret,
+        'bag_items': bag['bag_items'],
+        'grand_total': bag['grand_total'],
+        'stripe_public_key': stripe_public_key,
+        'client_secret': client_secret,          # for the JS to call stripe.confirmCardPayment(...)
+        'payment_intent_id': payment_intent_id,  # for the hidden <input> so we can read it on POST
     }
 
     return render(request, 'checkout/checkout.html', context)
