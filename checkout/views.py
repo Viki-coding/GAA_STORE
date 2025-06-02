@@ -1,10 +1,9 @@
-import uuid
+import json
 import stripe
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
 from django.contrib.auth import login
@@ -13,8 +12,7 @@ from django.contrib.auth.models import User
 from .models import Order, ShippingAddress
 from profiles.models import UserProfile
 from bag.context_processors import bag_contents
-from .forms import CheckoutForm
-from .forms import ShippingAddressForm
+from .forms import CheckoutForm, ShippingAddressForm
 
 
 def checkout(request):
@@ -24,6 +22,9 @@ def checkout(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
 
+    client_secret = None
+    intent = None
+
     # Get the current bag contents and calculate the total
     bag = bag_contents(request)
     bag_items = bag['bag_items']
@@ -32,9 +33,9 @@ def checkout(request):
     # Redirect if the cart is empty
     if grand_total == 0:
         messages.warning(
-            request, (
-                "Your cart is empty. Please add items to proceed to checkout."
-            ))
+            request,
+            "Your cart is empty. Please add items to proceed to checkout."
+        )
         return redirect('view_bag')
 
     stripe_total = round(grand_total * 100)  # Convert to cents for Stripe
@@ -99,10 +100,7 @@ def checkout(request):
                 )
                 client_secret = intent.client_secret
             except stripe.error.StripeError as e:
-                messages.error(
-                    request,
-                    f'Error creating payment intent: {str(e)}'
-                )
+                messages.error(request, f"Error creating payment intent: {e}")
                 client_secret = None
                 intent = None
 
@@ -115,26 +113,21 @@ def checkout(request):
             )
 
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                # Handle AJAX requests
-                if form.is_valid():
-                    return JsonResponse({
-                        'client_secret': client_secret,
-                        'order_id': order.id,
-                    })
-                else:
-                    return JsonResponse(
-                        {'error': 'Invalid form data'},
-                        status=400
-                    )
+                return JsonResponse({
+                    'client_secret': client_secret,
+                    'order_id': order.id,
+                })
 
-            # Redirect to the order confirmation page
+            # Otherwise, standard POST: redirect to success page
             return redirect(
                 'checkout_success',
                 order_number=order.order_number
             )
-
+   
+        # If the form is not valid, display errors
     else:
         # For GET requests, create a PaymentIntent
+        form = CheckoutForm(user=request.user)
         try:
             intent = stripe.PaymentIntent.create(
                 amount=stripe_total,
@@ -142,10 +135,9 @@ def checkout(request):
                 payment_method_types=['card'],
             )
             client_secret = intent.client_secret
-        except Exception as e:
+        except stripe.error.StripeError as e:
             messages.error(request, f'Error creating payment intent: {str(e)}')
             client_secret = None
-        form = CheckoutForm(user=request.user)
 
     # Check for missing keys
     if not stripe_public_key:
@@ -155,9 +147,6 @@ def checkout(request):
         messages.warning(
             request, 'Stripe client secret could not be generated. \
             Please try again later.')
-
-    # Handle GET request
-    form = CheckoutForm(user=request.user)
 
     context = {
         'form': form,
