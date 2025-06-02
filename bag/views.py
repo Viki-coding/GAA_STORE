@@ -19,11 +19,19 @@ def add_to_bag(request, product_id):
         if quantity <= 0:
             raise ValueError("Quantity must be greater than zero.")
     except (ValueError, TypeError):
-        error_msg = "Invalid quantity. Please enter a valid number greater than zero."
+        error_msg = (
+            "Invalid quantity. Please enter a valid number greater than zero."
+        )
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': False, 'message': error_msg}, status=400)
+            return JsonResponse(
+                {'success': False, 'message': error_msg},
+                status=400
+            )
         messages.error(request, error_msg)
-        return redirect(request.POST.get('redirect_url', request.META.get('HTTP_REFERER', '/')))
+        redirect_url = request.POST.get(
+            'redirect_url', request.META.get('HTTP_REFERER', '/')
+        )
+        return redirect(redirect_url)
 
     # Validate the product ID
     product = get_object_or_404(Product, id=product_id)
@@ -92,7 +100,10 @@ def add_to_bag(request, product_id):
 
     # Handle non-AJAX requests
     messages.success(request, success_msg)
-    return redirect(request.POST.get('redirect_url', request.META.get('HTTP_REFERER', '/')))
+    redirect_url = request.POST.get(
+        'redirect_url', request.META.get('HTTP_REFERER', '/')
+    )
+    return redirect(redirect_url)
 
     # Add a success message
     messages.success(
@@ -119,7 +130,10 @@ def update_bag(request, product_key):
         except (ValueError, TypeError):
             error_msg = "Invalid quantity. Please try again."
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                return JsonResponse({'success': False, 'message': error_msg}, status=400)
+                return JsonResponse(
+                    {'success': False, 'message': error_msg},
+                    status=400
+                )
             messages.error(request, error_msg)
             return redirect('view_bag')
 
@@ -129,17 +143,22 @@ def update_bag(request, product_key):
         if product_key in bag:
             if quantity > 0:
                 bag[product_key]['quantity'] = quantity
-                msg = f"Updated {bag[product_key]['quantity']} x {bag[product_key]['product_id']} in your bag."
+                msg = (
+                    f"Updated {bag[product_key]['quantity']} x "
+                    f"{bag[product_key]['product_id']} in your bag."
+                )
             else:
                 del bag[product_key]
                 msg = "Removed item from your bag."
         else:
             msg = "Item not found in your bag."
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                return JsonResponse({'success': False, 'message': msg}, status=404)
+                return JsonResponse(
+                    {'success': False, 'message': msg},
+                    status=404
+                )
             messages.error(request, msg)
             return redirect('view_bag')
-        
         request.session['bag'] = bag
 
         # AJAX response
@@ -168,7 +187,10 @@ def remove_from_bag(request, product_key):
     # AJAX response
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         status = 200 if success else 404
-        return JsonResponse({'success': success, 'message': msg}, status=status)
+        return JsonResponse(
+            {'success': success, 'message': msg},
+            status=status
+        )
 
     # Non-AJAX response
     if success:
