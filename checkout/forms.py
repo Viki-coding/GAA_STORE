@@ -12,24 +12,56 @@ class CheckoutForm(forms.ModelForm):
         label="Select a saved address",
         empty_label="Use a new address",
     )
-    full_name = forms.CharField(max_length=100, label="Full Name")
+    full_name = forms.CharField(
+        max_length=100,
+        label="Full Name",
+        widget=forms.TextInput(attrs={'autocomplete': 'name'})
+    )
     email = forms.EmailField(
         label="Email Address",
-        widget=forms.EmailInput(attrs={'id': 'shipping-email'})
+        widget=forms.EmailInput(attrs={'autocomplete': 'email'})
     )
-    phone_number = forms.CharField(max_length=15, label="Phone Number")
-    street_address1 = forms.CharField(max_length=255, label="Street Address 1")
+    phone_number = forms.CharField(
+        max_length=15,
+        label="Phone Number",
+        widget=forms.TextInput(attrs={'autocomplete': 'tel'})
+    )
+    street_address1 = forms.CharField(
+        max_length=255,
+        label="Street Address 1",
+        widget=forms.TextInput(attrs={'autocomplete': 'address-line1'})
+    )
     street_address2 = forms.CharField(
-        max_length=255, required=False, label="Street Address 2 (Optional)")
-    town_or_city = forms.CharField(max_length=100, label="Town or City")
-    county = forms.CharField(max_length=100, label="County")
-    eircode = forms.CharField(max_length=10, label="Eircode")
+        max_length=255,
+        required=False,
+        label="Street Address 2 (Optional)",
+        widget=forms.TextInput(attrs={'autocomplete': 'address-line2'})
+    )
+    town_or_city = forms.CharField(
+        max_length=100,
+        label="Town or City",
+        widget=forms.TextInput(attrs={'autocomplete': 'address-level2'})
+    )
+    county = forms.CharField(
+        max_length=100,
+        label="County",
+        widget=forms.TextInput(attrs={'autocomplete': 'address-level1'})
+    )
+    eircode = forms.CharField(
+        max_length=10,
+        label="Eircode",
+        widget=forms.TextInput(attrs={'autocomplete': 'postal-code'})
+    )
     store_shipping_address = forms.BooleanField(
-        required=False, label="Save this shipping address for future use")
+        required=False,
+        label="Save this shipping address for future use",
+        widget=forms.CheckboxInput(attrs={'autocomplete': 'off'})
+    )
     create_user_profile = forms.BooleanField(
-            required=False,
-            label="Create a user profile for faster checkout next time"
-        )
+        required=False,
+        label="Create a user profile for faster checkout next time",
+        widget=forms.CheckboxInput(attrs={'autocomplete': 'off'})
+    )
     password = forms.CharField(
         required=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
@@ -102,8 +134,15 @@ class ShippingAddressForm(forms.ModelForm):
             'town_or_city', 'county', 'eircode', 'country', 'is_default'
         ]
         widgets = {
-            'is_default': forms.CheckboxInput(
-                attrs={'class': 'form-check-input'}),
+            'full_name': forms.TextInput(attrs={'autocomplete': 'name'}),
+            'phone_number': forms.TextInput(attrs={'autocomplete': 'tel'}),
+            'street_address1': forms.TextInput(attrs={'autocomplete': 'address-line1'}),
+            'street_address2': forms.TextInput(attrs={'autocomplete': 'address-line2'}),
+            'town_or_city': forms.TextInput(attrs={'autocomplete': 'address-level2'}),
+            'county': forms.TextInput(attrs={'autocomplete': 'address-level1'}),
+            'eircode': forms.TextInput(attrs={'autocomplete': 'postal-code'}),
+            'country': forms.Select(attrs={'autocomplete': 'country'}),
+            'is_default': forms.CheckboxInput(attrs={'autocomplete': 'off'}),
         }
 
 
