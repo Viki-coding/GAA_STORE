@@ -112,6 +112,7 @@ def checkout(request):
             order = Order.objects.create(
                 user_profile=user_profile,
                 shipping_address=shipping_address,
+                email=form.cleaned_data['email'],
                 total_price=grand_total,
                 stripe_pid=payment_intent_id,
             )
@@ -172,6 +173,7 @@ def checkout(request):
     }
 
     return render(request, "checkout/checkout.html", context)
+
 
 def checkout_success(request, order_number):
     """

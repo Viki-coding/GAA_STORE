@@ -7,14 +7,8 @@
 */
 
 // Retrieve Stripe public key and client secret from the DOM
-// var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
-// var clientSecret = $('#id_client_secret').text().slice(1, -1);
-
 var stripePublicKey = JSON.parse(document.getElementById('id_stripe_public_key').textContent);
 var clientSecret = JSON.parse(document.getElementById('id_client_secret').textContent);
-
-console.log('Stripe Public Key:', stripePublicKey);
-console.log('Client Secret:', clientSecret);
 
 if (!stripePublicKey || !clientSecret) {
     console.error('Stripe public key or client secret is missing.');
@@ -56,7 +50,7 @@ card.addEventListener('change', function (event) {
             </span>
             <span>${event.error.message}</span>
         `;
-        $(errorDiv).html(html);
+        errorDiv.innerHTML = html;
     } else {
         errorDiv.textContent = '';
     }
@@ -70,10 +64,10 @@ form.addEventListener('submit', function(event) {
 
     // Disable the submit button to prevent repeated clicks
     card.update({ 'disabled': true });
-    $(submitButton).attr('disabled', true);
-    $(submitButton).html('<span class="spinner-border spinner-border-sm"></span> Processing...');
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
 
-   // confirm card payment 
+    // Confirm card payment
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
@@ -92,12 +86,12 @@ form.addEventListener('submit', function(event) {
                 </span>
                 <span>${result.error.message}</span>
             `;
-            $(errorDiv).html(html);
+            errorDiv.innerHTML = html;
 
             // Re-enable card input and submit button
             card.update({ 'disabled': false });
-            $(submitButton).attr('disabled', false);
-            $(submitButton).html('Complete Order');
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Complete Order';
         } else {
             if (result.paymentIntent.status === 'succeeded') {
                 // Submit the form
