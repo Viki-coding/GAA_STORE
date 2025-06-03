@@ -106,7 +106,6 @@ def checkout(request):
                 shipping_address = ShippingAddress.objects.create(
                     user_profile=user_profile,
                     full_name=form.cleaned_data["full_name"],
-                    email=form.cleaned_data["email"],
                     phone_number=form.cleaned_data["phone_number"],
                     street_address1=form.cleaned_data["street_address1"],
                     street_address2=form.cleaned_data["street_address2"],

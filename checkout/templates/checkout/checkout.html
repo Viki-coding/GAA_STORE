@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
@@ -57,18 +58,30 @@
                 <!-- Billing/Shipping Details -->
                 <fieldset class="px-3 mb-4">
                     <legend class="fieldset-label small text-black px-2 w-auto">Billing & Shipping</legend>
+                    <!-- Saved address Dropdown -->
+                    <div class="form-group">
+                        <label for="{{ form.saved_address.id_for_label }}">Saved Shipping Address</label>
+                        {{ form.saved_address|add_class:"form-control" }}
+                        {% if form.saved_address.errors %}
+                            <div class="text-danger small">
+                                {{ form.saved_address.errors.as_text }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <!-- New Address Fields -->
                     <div class="form-group">
                         <label for="full_name">Full Name</label>
                         <input 
                             type="text" 
                             id="full_name" 
                             name="full_name" 
-                            class="form-control" 
-                            required
+                            class="form-control{% if form.full_name.errors %} is-invalid{% endif %}" 
                             autocomplete="name"
                             value="{{ form.full_name.value|default_if_none:'' }}"
                         >
-                        {{ form.full_name.errors }}
+                        {% for err in form.full_name.errors %}
+                        <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="billing_email">Email Address</label>
@@ -76,12 +89,14 @@
                             type="email" 
                             id="billing_email" 
                             name="email" 
-                            class="form-control" 
+                            class="form-control{% if form.email.errors %} is-invalid{% endif %}" 
                             required
                             autocomplete="email"
                             value="{{ form.email.value|default_if_none:'' }}"
                         >
-                        {{ form.email.errors }}
+                        {% for err in form.email.errors %}
+                            <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}                    
                     </div>
                     <div class="form-group">
                         <label for="phone_number">Phone Number</label>
@@ -90,7 +105,6 @@
                             id="phone_number"
                             name="phone_number"
                             class="form-control{% if form.phone_number.errors %} is-invalid{% endif %}"
-                            required
                             autocomplete="tel"
                             value="{{ form.phone_number.value|default_if_none:'' }}"
                         >
@@ -104,12 +118,13 @@
                             type="text" 
                             id="street_address1" 
                             name="street_address1" 
-                            class="form-control" 
-                            required
+                            class="form-control{% if form.street_address1.errors %} is-invalid{% endif %}" 
                             autocomplete="address-line1"
                             value="{{ form.street_address1.value|default_if_none:'' }}"
                         >
-                        {{ form.street_address1.errors }}
+                        {% for err in form.street_address1.errors %}
+                        <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="street_address2">Street Address 2 (Optional)</label>
@@ -117,11 +132,13 @@
                             type="text" 
                             id="street_address2" 
                             name="street_address2" 
-                            class="form-control" 
+                            class="form-control{% if form.street_address2.errors %} is-invalid{% endif %}" 
                             autocomplete="address-line2"
                             value="{{ form.street_address2.value|default_if_none:'' }}"
                         >
-                        {{ form.street_address2.errors }}
+                        {% for err in form.street_address2.errors %}
+                            <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}                    
                     </div>
                     <div class="form-group">
                         <label for="town_or_city">Town or City</label>
@@ -129,12 +146,13 @@
                             type="text" 
                             id="town_or_city" 
                             name="town_or_city" 
-                            class="form-control" 
-                            required
+                            class="form-control{% if form.town_or_city.errors %} is-invalid{% endif %}" 
                             autocomplete="address-level2"
                             value="{{ form.town_or_city.value|default_if_none:'' }}"
                         >
-                        {{ form.town_or_city.errors }}
+                        {% for err in form.town_or_city.errors %}
+                            <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}                    
                     </div>
                     <div class="form-group">
                         <label for="county">County</label>
@@ -142,12 +160,13 @@
                             type="text" 
                             id="county" 
                             name="county" 
-                            class="form-control" 
-                            required
+                            class="form-control{% if form.county.errors %} is-invalid{% endif %}" 
                             autocomplete="address-level1"
                             value="{{ form.county.value|default_if_none:'' }}"
                         >
-                        {{ form.county.errors }}
+                        {% for err in form.county.errors %}
+                            <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}                    
                     </div>
                     <div class="form-group">
                         <label for="eircode">Eircode</label>
@@ -155,20 +174,20 @@
                             type="text" 
                             id="eircode" 
                             name="eircode" 
-                            class="form-control" 
-                            required
+                            class="form-control{% if form.eircode.errors %} is-invalid{% endif %}" 
                             autocomplete="postal-code"
                             value="{{ form.eircode.value|default_if_none:'' }}"
                         >
-                        {{ form.eircode.errors }}
+                        {% for err in form.eircode.errors %}
+                            <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}                    
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label>
                         <select 
                             id="country" 
                             name="country" 
-                            class="form-control" 
-                            required
+                            class="form-control{% if form.country.errors %} is-invalid{% endif %}" 
                             autocomplete="country"
                         >
                             {% for country_code, country_name in form.country.field.choices %}
@@ -177,7 +196,9 @@
                             </option>
                             {% endfor %}
                         </select>
-                        {{ form.country.errors }}
+                        {% for err in form.country.errors %}
+                        <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}                    
                     </div>
 
                     <!-- Save Shipping Address and Remember Me -->
@@ -186,26 +207,31 @@
                             <input 
                               type="checkbox" 
                               id="save-shipping-address" 
-                              name="save_shipping_address" 
+                              name="store_shipping_address" 
                               class="form-check-input"
-                              {% if form.save_shipping_address.value %}checked{% endif %}
+                              {% if form.store_shipping_address.value %}checked{% endif %}
                             >
                             <label for="save-shipping-address" class="form-check-label">
                                 Save Shipping Address
                             </label>
-                            {{ form.save_shipping_address.errors }}
+                            {% for err in form.store_shipping_address.errors %}
+                                <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}                        
                         </div>
                         <div class="form-check">
                             <input 
                               type="checkbox" 
-                              id="remember-me" 
-                              name="remember_me" 
+                              id="create-profile" 
+                              name="create_user_profile" 
                               class="form-check-input"
-                              {% if form.remember_me.value %}checked{% endif %}
+                              {% if form.create_user_profile.value %}checked{% endif %}
                             >
-                            <label for="remember-me" class="form-check-label">
-                                Save for Quicker Checkout
+                            <label for="create-profile" class="form-check-label">
+                                Create a profile for faster checkout next time!
                             </label>
+                            {% for err in form.create_user_profile.errors %}
+                            <div class="text-danger small">{{ err }}</div>
+                            {% endfor %}
                         </div>
                     </div>
                 </fieldset>
@@ -235,24 +261,28 @@
                           type="password" 
                           id="password" 
                           name="password" 
-                          class="form-control"
+                          class="form-control{% if form.password.errors %} is-invalid{% endif %}"
                           autocomplete="new-password"
                           aria-label="Password"
                         >
-                        {{ form.password.errors }}
-                      </div>
+                        {% for err in form.password.errors %}
+                            <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}                        
+                    </div>
                       <div class="form-group">
                         <label for="password2">Confirm Password</label>
                         <input 
                           type="password" 
                           id="password2" 
                           name="password2" 
-                          class="form-control"
+                          class="form-control{% if form.password2.errors %} is-invalid{% endif %}"
                           autocomplete="new-password"
                           aria-label="Confirm Password"
                         >
-                        {{ form.password2.errors }}
-                      </div>
+                        {% for err in form.password2.errors %}
+                        <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}
+                    </div>
                     </div>
                   </fieldset>
                 {% endif %}

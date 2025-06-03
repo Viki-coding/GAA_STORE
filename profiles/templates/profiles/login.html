@@ -16,7 +16,7 @@
                 <h4>Log In</h4>
                 </div>
                 <div class="card-body">
-                <form method="post" action="{% url 'login' %}">
+                <form method="post" action="{% url 'account_login' %}">
                     {% csrf_token %}
                     {# Render non‐field errors, if any: #}
                     {% if form.non_field_errors %}

@@ -8,6 +8,9 @@ from checkout.forms import ShippingAddressForm
 
 
 def login_signup_view(request):
+    if request.user.is_authenticated:
+        return redirect('profile')
+ 
     login_form = AuthenticationForm()
     signup_form = SignupForm()
     return render(request, 'profiles/login.html', {

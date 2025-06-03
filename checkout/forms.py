@@ -1,14 +1,13 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
-from .models import ShippingAddress
-from .models import Order
+from .models import ShippingAddress, Order
 from django_countries.fields import CountryField
 
 
 class CheckoutForm(forms.ModelForm):
     saved_address = forms.ModelChoiceField(
-        queryset=None,
+        queryset=ShippingAddress.objects.none(),
         required=False,
         label="Select a saved address",
         empty_label="Use a new address",
@@ -35,7 +34,7 @@ class CheckoutForm(forms.ModelForm):
     street_address2 = forms.CharField(
         max_length=255,
         required=False,
-        label="Street Address 2 (Optional)",
+        label="Street Address 2",
         widget=forms.TextInput(attrs={'autocomplete': 'address-line2'})
     )
     town_or_city = forms.CharField(
@@ -123,26 +122,59 @@ class CheckoutForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        create_user_profile = cleaned_data.get('create_user_profile')
-        password = cleaned_data.get('password')
-        password2 = cleaned_data.get('password2')
+        saved = cleaned_data.get('saved_address')
 
-        # Only validate passwords if user wants to create a profile 
-        # and is not logged in
-        if create_user_profile and (
-            not self.user or not self.user.is_authenticated
-        ):
-            if not password or not password2:
-                raise forms.ValidationError(
-                    "Please enter and confirm your password."
-                )
-            if password != password2:
+        # If user chose an existing address, skip "new address" validation
+        if saved:
+            # remove any errors on the new‐address fields
+            for field in ['full_name', 'street_address1', 'town_or_city', 'county', 'eircode', 'country']:
+                if field in self._errors:
+                    del self._errors[field]
+            return cleaned_data
+
+        # Otherwise, ensure all required address fields are present
+        missing = []
+        for field in ['full_name', 'street_address1', 'town_or_city', 'county', 'eircode', 'country']:
+            if not cleaned_data.get(field):
+                missing.append(field)
+        if missing:
+            raise forms.ValidationError("Please fill in all shipping address fields or choose a saved address.")
+
+        
+        # Password logic (only if creating a profile)
+        create_profile = cleaned_data.get('create_user_profile')
+        pwd1 = cleaned_data.get('password')
+        pwd2 = cleaned_data.get('password2')
+        if create_profile and (not self.user or not self.user.is_authenticated):
+            if not pwd1 or not pwd2:
+                raise forms.ValidationError("Please enter and confirm your password.")
+            if pwd1 != pwd2:
                 raise forms.ValidationError("Passwords do not match.")
-            if len(password) < 8:
-                raise forms.ValidationError(
-                    "Password must be at least 8 characters long."
-                )
+            if len(pwd1) < 8:
+                raise forms.ValidationError("Password must be at least 8 characters long.")
+
         return cleaned_data
+        
+        # create_user_profile = cleaned_data.get('create_user_profile')
+        # password = cleaned_data.get('password')
+        # password2 = cleaned_data.get('password2')
+
+        # # Only validate passwords if user wants to create a profile 
+        # # and is not logged in
+        # if create_user_profile and (
+        #     not self.user or not self.user.is_authenticated
+        # ):
+        #     if not password or not password2:
+        #         raise forms.ValidationError(
+        #             "Please enter and confirm your password."
+        #         )
+        #     if password != password2:
+        #         raise forms.ValidationError("Passwords do not match.")
+        #     if len(password) < 8:
+        #         raise forms.ValidationError(
+        #             "Password must be at least 8 characters long."
+        #         )
+        # return cleaned_data
 
 
 class ShippingAddressForm(forms.ModelForm):
