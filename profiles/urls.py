@@ -1,25 +1,27 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView
-from .forms import CustomLoginForm
-from . import views
-from django.contrib import admin
-from django.urls import path, include
-from .views import login_signup_view
+from .views import (
+    login_signup_view,
+    profile,
+    add_address,
+    edit_address,
+    delete_address,
+    order_detail,
+)
 
 
 urlpatterns = [
-    path('', views.profile, name='profile'),
-    path('add_address/', views.add_address, name='add_address'),
+    path('login/', login_signup_view, name='login'),
+    path('', profile, name='profile'),
+    path('add_address/', add_address, name='add_address'),
     path(
             'edit_address/<int:address_id>/',
-            views.edit_address,
+            edit_address,
             name='edit_address'
         ),
     path(
         'delete_address/<int:address_id>/',
-        views.delete_address,
+        delete_address,
         name='delete_address',
     ),
-    path('login/', login_signup_view, name='login'),
-    path('order/<int:order_id>/', views.order_detail, name='order_detail'),
+    path('order/<int:order_id>/', order_detail, name='order_detail'),
 ]

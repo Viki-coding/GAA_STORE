@@ -121,13 +121,14 @@ ACCOUNT_SIGNUP_REDIRECT_URL = '/profile/'
 ACCOUNT_LOGIN_ON_SIGNUP = True
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-ACCOUNT_USERNAME_MIN_LENGTH = 4 
+ACCOUNT_USERNAME_MIN_LENGTH = 4
 
-LOGIN_REDIRECT_URL = '/profile/'
-LOGIN_URL = '/profile/login/'
+LOGIN_REDIRECT_URL = '/profile/login/'
+LOGIN_URL = '/profile/'
 
 LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 # ACCOUNT_SIGNUP_FIELDS = [
