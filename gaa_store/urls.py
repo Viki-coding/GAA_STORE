@@ -20,9 +20,16 @@ from django.conf.urls.static import static
 from products import views
 from django.contrib.auth.views import LoginView
 from profiles.forms import CustomLoginForm
+from profiles.views_allauth import CombinedSignupView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path(
+        "accounts/signup/",
+        CombinedSignupView.as_view(),
+        name="account_signup"
+    ),
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('profile/', include('profiles.urls')),
