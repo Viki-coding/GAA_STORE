@@ -1,4 +1,5 @@
 {# profiles/templates/profiles/login.html #}
+
 {% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
@@ -12,16 +13,17 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
 
-      <!-- ───── Login Card ───── -->
+      <!-- ───── LOGIN CARD ───── -->
       <div class="card shadow-sm mb-4">
         <div class="card-header text-center bg-primary text-white">
           <h4>Log In</h4>
         </div>
         <div class="card-body">
+          {# “form” will be Allauth’s AuthenticationForm #}
           <form method="post" action="{% url 'account_login' %}">
             {% csrf_token %}
 
-            {# show any form‐level errors on the login form #}
+            {# Any non‐field (form‐level) errors from login_form #}
             {% if form.non_field_errors %}
               <div class="alert alert-danger">
                 {{ form.non_field_errors }}
@@ -29,11 +31,11 @@
             {% endif %}
 
             <div class="mb-3">
-              <label for="{{ form.username.id_for_label }}" class="form-label">
+              <label for="{{ form.login.id_for_label }}" class="form-label">
                 Username or Email
               </label>
-              {{ form.username|add_class:"form-control" }}
-              {{ form.username.errors }}
+              {{ form.login|add_class:"form-control" }}
+              {{ form.login.errors }}
             </div>
 
             <div class="mb-3">
@@ -49,71 +51,76 @@
         </div>
       </div>
 
-      <!-- ───── Signup Card ───── -->
+
+      <!-- ───── SIGNUP CARD ───── -->
       <div class="card shadow-sm">
         <div class="card-header text-center bg-secondary text-white">
           <h4>Sign Up</h4>
         </div>
         <div class="card-body">
+          {# Allauth’s SignupView will pass its form in as “form” by default. 
+             We don’t want it to clash with “form” (the login form), so we rename it “signup_form”. #}
+          {% with signup_form=form %}
+            <form method="post" action="{% url 'account_signup' %}">
+              {% csrf_token %}
 
-          {# directly use the signup_form from view context. DO NOT reassign it! #}
-          <form method="post" action="{% url 'account_signup' %}">
-            {% csrf_token %}
+              {# Any non‐field errors from the signup_form #}
+              {% if signup_form.non_field_errors %}
+                <div class="alert alert-danger">
+                  {{ signup_form.non_field_errors }}
+                </div>
+              {% endif %}
 
-            {# show form‐level errors on the signup form #}
-            {% if signup_form.non_field_errors %}
-              <div class="alert alert-danger">
-                {{ signup_form.non_field_errors }}
-              </div>
-            {% endif %}
+              {# USERNAME field (only if ACCOUNT_USERNAME_REQUIRED=True) #}
+              {% if signup_form.username %}
+                <div class="mb-3">
+                  <label for="{{ signup_form.username.id_for_label }}" class="form-label">
+                    Username
+                  </label>
+                  {{ signup_form.username|add_class:"form-control" }}
+                  {{ signup_form.username.errors }}
+                </div>
+              {% endif %}
 
-            {% if signup_form.username %}
+              {# EMAIL field #}
               <div class="mb-3">
-                <label for="{{ signup_form.username.id_for_label }}" class="form-label">
-                  Username
+                <label for="{{ signup_form.email.id_for_label }}" class="form-label">
+                  Email
                 </label>
-                {{ signup_form.username|add_class:"form-control" }}
-                {{ signup_form.username.errors }}
+                {{ signup_form.email|add_class:"form-control" }}
+                {{ signup_form.email.errors }}
               </div>
-            {% endif %}
 
-            <div class="mb-3">
-              <label for="{{ signup_form.email.id_for_label }}" class="form-label">
-                Email
-              </label>
-              {{ signup_form.email|add_class:"form-control" }}
-              {{ signup_form.email.errors }}
-            </div>
+              {# PASSWORD #1 #}
+              <div class="mb-3">
+                <label for="{{ signup_form.password1.id_for_label }}" class="form-label">
+                  Password
+                </label>
+                {{ signup_form.password1|add_class:"form-control" }}
+                {{ signup_form.password1.errors }}
+              </div>
 
-            <div class="mb-3">
-              <label for="{{ signup_form.password1.id_for_label }}" class="form-label">
-                Password
-              </label>
-              {{ signup_form.password1|add_class:"form-control" }}
-              {{ signup_form.password1.errors }}
-            </div>
+              {# PASSWORD #2 #}
+              <div class="mb-3">
+                <label for="{{ signup_form.password2.id_for_label }}" class="form-label">
+                  Confirm Password
+                </label>
+                {{ signup_form.password2|add_class:"form-control" }}
+                {{ signup_form.password2.errors }}
+              </div>
 
-            <div class="mb-3">
-              <label for="{{ signup_form.password2.id_for_label }}" class="form-label">
-                Confirm Password
-              </label>
-              {{ signup_form.password2|add_class:"form-control" }}
-              {{ signup_form.password2.errors }}
-            </div>
+              {# Preserve any “next” redirect if present (Allauth automatically sets these names) #}
+              {% if redirect_field_value %}
+                <input
+                  type="hidden"
+                  name="{{ redirect_field_name }}"
+                  value="{{ redirect_field_value }}"
+                />
+              {% endif %}
 
-            {# If Allauth passed in a “next”/redirect field, preserve it here #}
-            {% if redirect_field_value %}
-              <input
-                type="hidden"
-                name="{{ redirect_field_name }}"
-                value="{{ redirect_field_value }}"
-              />
-            {% endif %}
-
-            <button type="submit" class="btn btn-secondary w-100">
-              Sign Up
-            </button>
-          </form>
+              <button type="submit" class="btn btn-secondary w-100">Sign Up</button>
+            </form>
+          {% endwith %}
         </div>
       </div>
 

@@ -7,16 +7,16 @@ from checkout.models import ShippingAddress, Order
 from checkout.forms import ShippingAddressForm
 
 
-def login_signup_view(request):
-    if request.user.is_authenticated:
-        return redirect('profile')
+# def login_signup_view(request):
+#     if request.user.is_authenticated:
+#         return redirect('profile')
  
-    login_form = AuthenticationForm()
-    signup_form = SignupForm()
-    return render(request, 'profiles/login.html', {
-        'form': login_form,
-        'signup_form': signup_form,
-    })
+#     login_form = AuthenticationForm()
+#     signup_form = SignupForm()
+#     return render(request, 'profiles/login.html', {
+#         'form': login_form,
+#         'signup_form': signup_form,
+#     })
 
 
 @login_required

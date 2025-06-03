@@ -115,18 +115,16 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 # After a user signs up, redirect them to /profile/
+LOGIN_URL = 'accounts/login'
+LOGIN_REDIRECT_URL = '/profile/'
+LOGOUT_REDIRECT_URL = '/'
+
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SIGNUP_REDIRECT_URL = '/profile/'
 ACCOUNT_LOGIN_ON_SIGNUP = True
-
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
-
-LOGIN_REDIRECT_URL = '/profile/login/'
-LOGIN_URL = '/profile/'
-
-LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 

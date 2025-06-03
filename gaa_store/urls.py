@@ -1,41 +1,31 @@
-"""gaa_store URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from products import views
-from django.contrib.auth.views import LoginView
-from profiles.forms import CustomLoginForm
-from profiles.views_allauth import CombinedSignupView
-from profiles.views import login_signup_view
 
+from profiles.views_allauth import CombinedLoginView, CombinedSignupView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("accounts/signup/", CombinedSignupView.as_view(),name="account_signup"),
-    path('accounts/', include('allauth.urls')),
-    path('', include('home.urls')),
-    path('profile/', include('profiles.urls')),
-    path('hurleys/', views.hurleys_shop, name='hurleys_shop'),
-    path('products/', include('products.urls')),
-    path('bag/', include('bag.urls')),
-    path('accessories/', views.accessories_shop, name='accessories_shop'),
-    path('checkout/', include('checkout.urls')),
+    path("admin/", admin.site.urls),
+    path(
+        "accounts/login/",
+        CombinedLoginView.as_view(),
+        name="account_login",
+    ),
+    path(
+        "accounts/signup/",
+        CombinedSignupView.as_view(),
+        name="account_signup",
+    ),
+
+    path("accounts/", include("allauth.urls")),
+    path("", include("home.urls")),
+    path("profile/", include("profiles.urls")),
+    path("hurleys/", include("products.urls")),  # or however you point to products
+    path("bag/", include("bag.urls")),
+    path("checkout/", include("checkout.urls")),
 ]
+
 
 HANDLER_404 = 'gaa_store.views.handle_404'
 HANDLER_500 = 'gaa_store.views.handle_500'
