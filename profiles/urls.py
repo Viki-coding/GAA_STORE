@@ -9,7 +9,6 @@ from .views import login_signup_view
 
 urlpatterns = [
     path('', views.profile, name='profile'),
-    path('manage_addresses/', views.manage_addresses, name='manage_addresses'),
     path('add_address/', views.add_address, name='add_address'),
     path(
             'edit_address/<int:address_id>/',
@@ -22,6 +21,5 @@ urlpatterns = [
         name='delete_address',
     ),
     path('login/', login_signup_view, name='login'),
-
     path('order/<int:order_id>/', views.order_detail, name='order_detail'),
 ]

@@ -36,17 +36,6 @@ def profile(request):
 
 
 @login_required
-def manage_addresses(request):
-    """
-    View to display and manage saved shipping addresses.
-    """
-    addresses = ShippingAddress.objects.filter(
-        user_profile=request.user.userprofile)
-    return render(
-        request, 'profiles/manage_addresses.html', {'addresses': addresses})
-
-
-@login_required
 def add_address(request):
     """
     View to add a new shipping address.
@@ -58,7 +47,8 @@ def add_address(request):
             address.user_profile = request.user.userprofile
             address.save()
             messages.success(request, 'Shipping address added successfully.')
-            return redirect('manage_addresses')
+            # Redirect back to the profile page (where addresses are listed)
+            return redirect('profile')
     else:
         form = ShippingAddressForm()
     return render(request, 'profiles/add_address.html', {'form': form})
@@ -76,7 +66,7 @@ def edit_address(request, address_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Shipping address updated successfully.')
-            return redirect('manage_addresses')
+            return redirect('profile')
     else:
         form = ShippingAddressForm(instance=address)
     return render(request, 'profiles/edit_address.html', {'form': form})
@@ -91,7 +81,8 @@ def delete_address(request, address_id):
         ShippingAddress, id=address_id, user_profile=request.user.userprofile)
     address.delete()
     messages.success(request, 'Shipping address deleted successfully.')
-    return redirect('manage_addresses')
+    return redirect('profile')
+
 
 @login_required
 def order_detail(request, order_id):

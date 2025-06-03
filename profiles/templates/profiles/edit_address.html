@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Edit Shipping Address</h2>
+  <hr>
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    {# exactly the same fields as add_address #}
+    <div class="mb-3">
+      <label for="{{ form.full_name.id_for_label }}" class="form-label">Full Name</label>
+      {{ form.full_name|add_class:"form-control" }}
+      {{ form.full_name.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+      {{ form.phone_number|add_class:"form-control" }}
+      {{ form.phone_number.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.street_address1.id_for_label }}" class="form-label">Street Address 1</label>
+      {{ form.street_address1|add_class:"form-control" }}
+      {{ form.street_address1.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.street_address2.id_for_label }}" class="form-label">Street Address 2 (Optional)</label>
+      {{ form.street_address2|add_class:"form-control" }}
+      {{ form.street_address2.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.town_or_city.id_for_label }}" class="form-label">Town or City</label>
+      {{ form.town_or_city|add_class:"form-control" }}
+      {{ form.town_or_city.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.county.id_for_label }}" class="form-label">County</label>
+      {{ form.county|add_class:"form-control" }}
+      {{ form.county.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.eircode.id_for_label }}" class="form-label">Eircode</label>
+      {{ form.eircode|add_class:"form-control" }}
+      {{ form.eircode.errors }}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.country.id_for_label }}" class="form-label">Country</label>
+      {{ form.country|add_class:"form-select" }}
+      {{ form.country.errors }}
+    </div>
+    {% if form.is_default %}
+      <div class="mb-3 form-check">
+        {{ form.is_default|add_class:"form-check-input" }}
+        <label for="{{ form.is_default.id_for_label }}" class="form-check-label">
+          {{ form.is_default.label }}
+        </label>
+      </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">Update Address</button>
+    <a href="{% url 'profile' %}" class="btn btn-outline-secondary ms-2">Cancel</a>
+  </form>
+</div>
+{% endblock %}
