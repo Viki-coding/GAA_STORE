@@ -71,10 +71,10 @@
                         {{ form.full_name.errors }}
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address</label>
+                        <label for="billing_email">Email Address</label>
                         <input 
                             type="email" 
-                            id="email" 
+                            id="billing_email" 
                             name="email" 
                             class="form-control" 
                             required
@@ -82,6 +82,21 @@
                             value="{{ form.email.value|default_if_none:'' }}"
                         >
                         {{ form.email.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input
+                            type="text"
+                            id="phone_number"
+                            name="phone_number"
+                            class="form-control{% if form.phone_number.errors %} is-invalid{% endif %}"
+                            required
+                            autocomplete="tel"
+                            value="{{ form.phone_number.value|default_if_none:'' }}"
+                        >
+                        {% for err in form.phone_number.errors %}
+                            <div class="invalid-feedback">{{ err }}</div>
+                        {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="street_address1">Street Address 1</label>
