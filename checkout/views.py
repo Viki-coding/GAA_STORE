@@ -89,6 +89,16 @@ def checkout(request):
             elif request.user.is_authenticated:
                 user_profile = request.user.userprofile
 
+            # Handle gift message 
+            session_bag = request.session.get('bag', {})
+            is_gift_val = False
+            gift_message_val = None
+            if 'gift' in session_bag:
+                gift_info = session_bag['gift']
+                is_gift_val = gift_info.get('is_gift', False)
+                raw_msg = gift_info.get('gift_message', '').strip()
+                gift_message_val = raw_msg if raw_msg else None
+
             # Handle shipping address
             if saved_address:
                 shipping_address = saved_address
@@ -115,6 +125,8 @@ def checkout(request):
                 email=form.cleaned_data['email'],
                 total_price=grand_total,
                 stripe_pid=payment_intent_id,
+                is_gift=is_gift_val,
+                gift_message=gift_message_val,
             )
 
             # Clear the bag from session

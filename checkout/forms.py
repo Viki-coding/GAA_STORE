@@ -80,13 +80,27 @@ class CheckoutForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         label='Confirm Password'
     )
-    
+    is_gift = forms.BooleanField(
+        required=False,
+        label="This is a gift",
+        widget=forms.CheckboxInput(attrs={'autocomplete': 'off'})
+    )
+    gift_message = forms.CharField(
+        required=False,
+        label="Gift Message (optional)",
+        max_length=255,
+        widget=forms.Textarea(
+            attrs={'rows': 3, 'placeholder': 'Write a short message…'}
+        )
+    )
+
     class Meta:
         model = Order
         fields = [
             'full_name', 'email', 'phone_number', 
             'street_address1', 'street_address2',
             'town_or_city', 'county', 'eircode',
+            'is_gift', 'gift_message',
         ]
 
     def __init__(self, *args, **kwargs):
