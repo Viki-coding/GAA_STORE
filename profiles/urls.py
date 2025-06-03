@@ -4,8 +4,7 @@ from .forms import CustomLoginForm
 from . import views
 from django.contrib import admin
 from django.urls import path, include
-
-
+from .views import login_signup_view
 
 
 urlpatterns = [
@@ -22,14 +21,7 @@ urlpatterns = [
         views.delete_address,
         name='delete_address',
     ),
-    path(
-        'login/',
-        LoginView.as_view(
-            template_name='profiles/login.html',
-            authentication_form=CustomLoginForm,
-            redirect_authenticated_user=True
-        ),
-        name='login',
-    ),
+    path('login/', login_signup_view, name='login'),
+
     path('order/<int:order_id>/', views.order_detail, name='order_detail'),
 ]

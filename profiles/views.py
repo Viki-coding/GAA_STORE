@@ -1,9 +1,19 @@
+from allauth.account.forms import SignupForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from checkout.models import ShippingAddress, Order
 from checkout.forms import ShippingAddressForm
-from allauth.account.forms import SignupForm
+
+
+def login_signup_view(request):
+    login_form = AuthenticationForm()
+    signup_form = SignupForm()
+    return render(request, 'profiles/login.html', {
+        'form': login_form,
+        'signup_form': signup_form,
+    })
 
 
 @login_required
@@ -14,7 +24,7 @@ def profile(request):
 
     # Initialize Allauth's SignupForm
     signup_form = SignupForm()
-    
+
     template = 'profiles/profile.html'
     context = {
         'addresses': addresses,
