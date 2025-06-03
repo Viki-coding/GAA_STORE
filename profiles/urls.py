@@ -1,8 +1,12 @@
+from django.urls import path
+from django.contrib.auth.views import LoginView
+from .forms import CustomLoginForm
+from . import views
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth.views import LoginView
-from profiles.forms import CustomLoginForm
-from . import views
+
+
+
 
 urlpatterns = [
     path('', views.profile, name='profile'),
@@ -22,6 +26,7 @@ urlpatterns = [
         'login/',
         LoginView.as_view(
             template_name='profiles/login.html',
+            authentication_form=CustomLoginForm,
             redirect_authenticated_user=True
         ),
         name='login',

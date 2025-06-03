@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from checkout.models import ShippingAddress, Order
 from checkout.forms import ShippingAddressForm
+from allauth.account.forms import SignupForm
 
 
 @login_required
@@ -11,10 +12,14 @@ def profile(request):
     addresses = ShippingAddress.objects.filter(user_profile=request.user.userprofile)
     orders = Order.objects.filter(user_profile=request.user.userprofile)  # Assuming an Order model exists
 
+    # Initialize Allauth's SignupForm
+    signup_form = SignupForm()
+    
     template = 'profiles/profile.html'
     context = {
         'addresses': addresses,
         'orders': orders,
+        'signup_form': signup_form,
     }
 
     return render(request, template, context)

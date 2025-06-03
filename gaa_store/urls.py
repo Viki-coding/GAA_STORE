@@ -25,20 +25,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
-    path('profiles/', include('profiles.urls')),
+    path('profile/', include('profiles.urls')),
     path('hurleys/', views.hurleys_shop, name='hurleys_shop'),
     path('products/', include('products.urls')),
     path('bag/', include('bag.urls')),
     path('accessories/', views.accessories_shop, name='accessories_shop'),
     path('checkout/', include('checkout.urls')),
-    path(
-        'login/',
-        LoginView.as_view(
-            template_name='profiles/login.html',
-            authentication_form=CustomLoginForm
-        ),
-        name='login',
-    ),
 ]
 
 HANDLER_404 = 'gaa_store.views.handle_404'

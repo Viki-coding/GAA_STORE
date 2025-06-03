@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'bag',
     'checkout',
     'crispy_forms',
+    'widget_tweaks',
 ]
 
 CRISY_TEMPLATE_PACK = 'bootstrap4'
@@ -113,19 +114,28 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
+# After a user signs up, redirect them to /profile/
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_SIGNUP_REDIRECT_URL = '/profile/'
+ACCOUNT_LOGIN_ON_SIGNUP = True
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_USERNAME_MIN_LENGTH = 4 
+
+LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_URL = '/profile/login/'
+
+LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ACCOUNT_LOGIN_METHODS = {'username', 'email'}
-ACCOUNT_SIGNUP_FIELDS = [
-    'email*', 'email2*', 'username*', 'password1*', 'password2*']
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_SIGNUP_FIELDS = [
-    'email*', 'email2*', 'username*', 'password1*', 'password2*']
-ACCOUNT_USERNAME_MIN_LENGTH = 4
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/profile/'
-# Redirect to profile page after signup (if using allauth)
-ACCOUNT_SIGNUP_REDIRECT_URL = 'profile'
+# ACCOUNT_LOGIN_METHODS = {'username', 'email'}
+# ACCOUNT_SIGNUP_FIELDS = [
+#     'email*', 'email2*', 'username*', 'password1*', 'password2*']
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_SIGNUP_FIELDS = [
+#     'email*', 'email2*', 'username*', 'password1*', 'password2*']
+
 
 
 # Database
