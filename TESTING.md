@@ -78,6 +78,8 @@ I had put my converter calculator script into my base.file, which I should of ke
 **BUG:** When pushing to my main branch, I was not allowed because gitpod told me I had exposed secret keys. 
 **RESOLVED BY:** I was surprised by this, as I had added the env.py file at the beginning of the project and added it to a git ignore file. I then made sure my secret keys were never in settings or anywhere else other than my env.py file so I was surprised to see the message. I checked the gitignore.py file for spelling errors etc. to see that it was infact not in my main root directory, so I moved it to my main root directory. Then I went into stripe to access new secret key and I generated a new django secret key. Saved them to env.py. I then ran git filter-repo --replace-text <(echo 'old-secret-key==>REMOVED_SECRET_KEY').  When I did a git push origin I had to do a force push and it still wouldn't push so then in the termainal it brought be to a gitpod link where I selected the following in screen shot to move on as I know I have new secret keys which have not been exposed. 
 
+**BUG:** I created a new model for my FAQ's. I wanted to link my How to meausre page into one of the FAQs but it just kept plain text rather than a link. 
+**RESOLVED BY:** Resolved by adding {{ faq.answer|safe }} which allows the HTML tage to become clickable. 
 
 UNRESOLVED BUG
 **BUG:** Bag contents table not responsive on Firefox but perfect in Chrome.

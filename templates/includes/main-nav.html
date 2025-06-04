@@ -8,6 +8,11 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link" href="/hurleys/">Hurleys</a></li>
           <li class="nav-item"><a class="nav-link" href="/accessories/">Accessories</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'how_to_measure' %}">
+              How to Measure
+            </a>
+          </li>
           <li class="nav-item"><a class="nav-link" href="{% url 'faq_list' %}">FAQ</a>
           </li>
           {% if user.is_authenticated %}

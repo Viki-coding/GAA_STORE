@@ -56,7 +56,7 @@
                aria-labelledby="heading{{ faq.pk }}"
                data-parent="#faqAccordion">
             <div class="card-body">
-              {{ faq.answer|linebreaks }}
+              {{ faq.answer|safe }}
             </div>
           </div>
         </div>
