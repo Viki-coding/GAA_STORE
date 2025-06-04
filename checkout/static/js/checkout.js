@@ -1,8 +1,6 @@
-// checkout/static/js/checkout.js
-
 document.addEventListener('DOMContentLoaded', function () {
     //
-    // 1) PASSWORD‐TOGGLE LOGIC (already in your file)
+    // Password Creation Logic
     //
     const createProfileCheckbox = document.getElementById('create-profile');
     const passwordFields = document.getElementById('password-fields');
@@ -19,10 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   
-    //
-    // 2) SAVED-ADDRESS PREPOPULATE LOGIC
-    //
-    // Find the <select id="id_saved_address"> that we built in checkout.html
+
+    /* Saved Address Selection Logic
+     Find the <select id="id_saved_address"> that we built in checkout.html*/ 
     const savedSelect = document.getElementById('id_saved_address');
     if (savedSelect) {
       savedSelect.addEventListener('change', function () {
@@ -39,8 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
           document.getElementById('county').value = '';
           document.getElementById('eircode').value = '';
           document.getElementById('country').value = '';
-          // If you want to also clear email on “new address,” uncomment:
-          // document.getElementById('billing_email').value = '';
           return;
         }
   
@@ -63,13 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('county').value          = county;
         document.getElementById('eircode').value         = eircode;
         document.getElementById('country').value         = country;
-  
-        // Optionally fill in email with the logged-in user’s email:
-        // (Only do this if you want email to overwrite whenever someone picks a saved address)
-        document.getElementById('billing_email').value = '{{ request.user.email|default_if_none:"" }}';
-      });
+        document.getElementById('billing_email').value = window.currentUserEmail;
+    });
     }
-  
-    // (If you have any other checkout‐related JS, it can go here as well.)
-  });
+});
   
