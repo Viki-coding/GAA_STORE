@@ -12,18 +12,23 @@
           <li class="nav-item"><a class="nav-link" href="/faq/">FAQ</a></li>
           {% if user.is_authenticated %}
           <!-- If someone is already show their username and a “Log out” link -->
-          <li class="nav-item">
-            <span class="navbar-text mr-2">Hello, {{ user.username }}</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_logout' %}">Log out</a>
-          </li>
-        {% else %}
-          <!-- If nobody is logged in, show Sign Up / Log In -->
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_login' %}">Sign Up / Log In</a>
-          </li>
-        {% endif %}
+            <li class="nav-item">
+              <a class="navbar-text mr-2 text-white" href="{% url 'profile' %}">
+                Hello, {{ user.username }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_logout' %}">
+                Log out
+              </a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_login' %}">
+                Sign Up / Log In
+              </a>
+            </li>
+          {% endif %}
           <li class="nav-item">
             <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_bag' %}">
                 Bag (<span id="bag-count">{{ bag_count }}</span>)
