@@ -117,9 +117,9 @@ SITE_ID = 1
 
 # After a user signs up, redirect them to /profile/
 LOGIN_URL = 'accounts/login'
-LOGIN_REDIRECT_URL = '/profile/'
+# LOGIN_REDIRECT_URL = '/profile/'
 LOGOUT_REDIRECT_URL = '/'
-ACCOUNT_LOGIN_REDIRECT_URL = '/profile/'
+# ACCOUNT_LOGIN_REDIRECT_URL = '/profile/'
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True

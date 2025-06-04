@@ -14,14 +14,22 @@ class CombinedLoginView(LoginView):
         context["signup_form"] = SignupForm(self.request.POST or None)
 
         return context
-  
+
     def get_success_url(self):
         user = self.request.user
-        if user.is_staff:
-            # If the logged-in user is staff, send them to /faq/ immediately:
-            return reverse("faq_list")
-        # Otherwise, default to normal Allauth behavior (i.e. ACCOUNT_LOGIN_REDIRECT_URL)
-        return super().get_success_url()
+        # Check if user is staff and redirect to FAQ
+        if user.is_authenticated and user.is_staff:
+            return reverse("faq")  # Use your actual FAQ URL name
+        # Default to profile page for non-staff
+        return reverse("profile")
+    
+    # def get_success_url(self):
+    #     user = self.request.user
+    #     if user.is_staff:
+    #         # If the logged-in user is staff, send them to /faq/ immediately:
+    #         return reverse("faq_list")
+    #     # Otherwise, default to normal Allauth behavior (i.e. ACCOUNT_LOGIN_REDIRECT_URL)
+    #     return super().get_success_url()
 
 
 class CombinedSignupView(SignupView):
