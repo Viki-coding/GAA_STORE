@@ -4,15 +4,15 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from .models import Faq
-from .forms import FaqForm
+from .models import FAQ
+from .forms import FAQForm
 
 
 class FaqListView(ListView):
     """
     Anyone can view the FAQ list.
     """
-    model = Faq
+    model = FAQ
     template_name = "core/faq_list.html"
     context_object_name = "faqs"
 
@@ -23,8 +23,8 @@ class FaqCreateView(CreateView):
     """
     Only staff/superuser can create a new FAQ.
     """
-    model = Faq
-    form_class = FaqForm
+    model = FAQ
+    form_class = FAQForm
     template_name = "core/faq_form.html"
     success_url = reverse_lazy("faq_list")
 
@@ -35,8 +35,8 @@ class FaqUpdateView(UpdateView):
     """
     Only staff/superuser can edit an existing FAQ.
     """
-    model = Faq
-    form_class = FaqForm
+    model = FAQ
+    form_class = FAQForm
     template_name = "core/faq_form.html"
     success_url = reverse_lazy("faq_list")
 
@@ -47,6 +47,6 @@ class FaqDeleteView(DeleteView):
     """
     Only staff/superuser can delete an FAQ.
     """
-    model = Faq
+    model = FAQ
     template_name = "core/faq_confirm_delete.html"
     success_url = reverse_lazy("faq_list")

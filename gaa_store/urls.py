@@ -21,8 +21,6 @@ urlpatterns = [
         name="account_signup",
     ),
     path("accounts/", include("allauth.urls")),
-
-
     path("", include("home.urls")),              
     path("profile/", include("profiles.urls")),
     path("hurleys/", include("products.urls")),
@@ -33,7 +31,8 @@ urlpatterns = [
     ),
     path("bag/", include("bag.urls")),
     path("checkout/", include("checkout.urls")),
-    path("", include("core.urls")),
+    path("faq", include("core.urls")),
+
 ]
 
 

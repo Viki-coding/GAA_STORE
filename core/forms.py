@@ -1,11 +1,11 @@
 # core/forms.py
 from django import forms
-from .models import Faq
+from .models import FAQ
 
 
-class FaqForm(forms.ModelForm):
+class FAQForm(forms.ModelForm):
     class Meta:
-        model = Faq
+        model = FAQ
         fields = ['question', 'answer']
         widgets = {
             'question': forms.TextInput(attrs={'class': 'form-control'}),
