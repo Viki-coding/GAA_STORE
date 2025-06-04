@@ -31,7 +31,7 @@ urlpatterns = [
     ),
     path("bag/", include("bag.urls")),
     path("checkout/", include("checkout.urls")),
-    path("faq", include("core.urls")),
+    path("faq/", include("core.urls")),
 
 ]
 
