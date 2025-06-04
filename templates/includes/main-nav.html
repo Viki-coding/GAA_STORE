@@ -8,8 +8,8 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link" href="/hurleys/">Hurleys</a></li>
           <li class="nav-item"><a class="nav-link" href="/accessories/">Accessories</a></li>
-          <li class="nav-item"><a class="nav-link" href="/how-to-measure/">Measure</a></li>
-          <li class="nav-item"><a class="nav-link" href="/faq/">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'faq_list' %}">FAQ</a>
+          </li>
           {% if user.is_authenticated %}
           <!-- If someone is already show their username and a “Log out” link -->
             <li class="nav-item">

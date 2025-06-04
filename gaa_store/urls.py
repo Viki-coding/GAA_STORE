@@ -5,7 +5,8 @@ from django.conf.urls.static import static
 
 # Import our two “combined” Allauth views
 from profiles.views_allauth import CombinedLoginView, CombinedSignupView
-from products import views as product_views 
+from products import views as product_views
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -32,6 +33,7 @@ urlpatterns = [
     ),
     path("bag/", include("bag.urls")),
     path("checkout/", include("checkout.urls")),
+    path("", include("core.urls")),
 ]
 
 

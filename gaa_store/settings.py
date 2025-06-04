@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'checkout',
     'crispy_forms',
     'widget_tweaks',
+    'core'
 ]
 
 CRISY_TEMPLATE_PACK = 'bootstrap4'
