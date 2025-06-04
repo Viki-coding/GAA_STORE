@@ -118,7 +118,11 @@
                             class="form-control{% if form.email.errors %} is-invalid{% endif %}" 
                             required
                             autocomplete="email"
-                            value="{{ form.email.value|default_if_none:'' }}"
+                            {% if user.is_authenticated %}
+                                value="{{ user.email }}"
+                            {% else %}
+                                value="{{ form.email.value|default_if_none:'' }}"
+                            {% endif %}
                         >
                         {% for err in form.email.errors %}
                             <div class="invalid-feedback">{{ err }}</div>

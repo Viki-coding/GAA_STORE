@@ -56,7 +56,8 @@ def checkout(request):
         # Retrieve the PaymentIntent ID from the hidden <input>
         payment_intent_id = request.POST.get("payment_intent_id")
         if not payment_intent_id:
-            messages.error(request, "Payment information is missing. Please try again.")
+            messages.error(
+                request, "Payment information is missing. Please try again.")
             return redirect("checkout")
 
         # Verify with Stripe that the PaymentIntent succeeded
@@ -67,14 +68,18 @@ def checkout(request):
             return redirect("checkout")
 
         if intent.status != "succeeded":
-            messages.error(request, "Payment was not successful. Please try again.")
+            messages.error(
+                request, "Payment was not successful. Please try again.")
             return redirect("checkout")
 
         # Process the form data if valid
         if form.is_valid():
             # Handle user profile creation
-            create_user_profile = form.cleaned_data.get("create_user_profile", False)
-            store_shipping_address = form.cleaned_data.get("store_shipping_address", False)
+            create_user_profile = form.cleaned_data.get(
+                "create_user_profile", False)
+            store_shipping_address = form.cleaned_data.get(
+                "store_shipping_address", False
+            )
             saved_address = form.cleaned_data.get("saved_address")
 
             user_profile = None
@@ -101,21 +106,43 @@ def checkout(request):
 
             # Handle shipping address
             if saved_address:
-                shipping_address = saved_address
-            elif store_shipping_address and user_profile:
-                shipping_address = ShippingAddress.objects.create(
-                    user_profile=user_profile,
-                    full_name=form.cleaned_data["full_name"],
-                    phone_number=form.cleaned_data["phone_number"],
-                    street_address1=form.cleaned_data["street_address1"],
-                    street_address2=form.cleaned_data["street_address2"],
-                    town_or_city=form.cleaned_data["town_or_city"],
-                    county=form.cleaned_data["county"],
-                    eircode=form.cleaned_data["eircode"],
-                    country=form.cleaned_data["country"],
-                )
+                if store_shipping_address:
+                    # Overwrite fields and save
+                    saved_address.full_name = form.cleaned_data["full_name"]
+                    saved_address.phone_number = form.cleaned_data[
+                        "phone_number"
+                    ]
+                    saved_address.street_address1 = form.cleaned_data[
+                        "street_address1"
+                    ]
+                    saved_address.street_address2 = form.cleaned_data[
+                        "street_address2"
+                    ]
+                    saved_address.town_or_city = form.cleaned_data[
+                        "town_or_city"
+                    ]
+                    saved_address.county = form.cleaned_data["county"]
+                    saved_address.eircode = form.cleaned_data["eircode"]
+                    saved_address.country = form.cleaned_data["country"]
+                    saved_address.save()
+                    shipping_address = saved_address
+                else:
+                    shipping_address = saved_address
             else:
-                shipping_address = None
+                if store_shipping_address and user_profile:
+                    shipping_address = ShippingAddress.objects.create(
+                        user_profile=user_profile,
+                        full_name=form.cleaned_data["full_name"],
+                        phone_number=form.cleaned_data["phone_number"],
+                        street_address1=form.cleaned_data["street_address1"],
+                        street_address2=form.cleaned_data["street_address2"],
+                        town_or_city=form.cleaned_data["town_or_city"],
+                        county=form.cleaned_data["county"],
+                        eircode=form.cleaned_data["eircode"],
+                        country=form.cleaned_data["country"],
+                    )
+                else:
+                    shipping_address = None
 
             # Create the Order
             order = Order.objects.create(
@@ -137,7 +164,8 @@ def checkout(request):
             print("Redirecting to checkout_success...")
 
             # Redirect to success
-            return redirect("checkout_success", order_number=order.order_number)
+            return redirect(
+                "checkout_success", order_number=order.order_number)
 
     else:
         # ───────────────────────────────────────────────
@@ -196,10 +224,8 @@ def checkout_success(request, order_number):
     # Display a success message to the user
     messages.success(
         request,
-        (
-            f'Order successfully processed! Your order number is {order_number}. '
-            f'A confirmation email will be sent to {order.email}.'
-        )
+        f'Order successfully processed! Your order number is {order_number}. '
+        f'A confirmation email will be sent to {order.email}.'
     )
 
     # Clear the shopping bag from the session
