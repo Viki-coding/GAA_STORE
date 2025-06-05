@@ -1,0 +1,72 @@
+{# checkout/templates/checkout/order_detail.html #}
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1>Order #{{ order.order_number }} Details</h1>
+  <p>
+    Placed on: {{ order.date_placed|date:"F j, Y, g:i a" }}<br>
+    Total: €{{ order.total_price|floatformat:2 }}
+  </p>
+
+  <hr>
+
+  <h4>Shipping Address</h4>
+  {% if order.shipping_address %}
+    <p>
+      {{ order.shipping_address.full_name }}<br>
+      {{ order.shipping_address.street_address1 }}<br>
+      {% if order.shipping_address.street_address2 %}
+        {{ order.shipping_address.street_address2 }}<br>
+      {% endif %}
+      {{ order.shipping_address.town_or_city }}, {{ order.shipping_address.county }}<br>
+      {{ order.shipping_address.eircode }}<br>
+      {{ order.shipping_address.country.name }}
+    </p>
+  {% else %}
+    <p><em>No shipping address on file.</em></p>
+  {% endif %}
+
+  <hr>
+
+  {% if order.is_gift and order.gift_message %}
+    <h4>Gift Message</h4>
+    <div class="card mb-4">
+      <div class="card-body">
+        {{ order.gift_message|linebreaks }}
+      </div>
+    </div>
+  {% endif %}
+
+  <hr>
+  <h4>Items</h4>
+  {% comment %}
+    If you have an OrderItem model (with related_name="items"), use order.items.all
+    Otherwise adjust to how you store line items.
+  {% endcomment %}
+  {% if order.items.all %}
+    <ul class="list-group mb-4">
+      {% for item in order.items.all %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            {{ item.product.name }}
+            {% if item.size %}(Size: {{ item.size }}){% endif %}
+            {% if item.color %}(Color: {{ item.color }}){% endif %}
+            <br>
+            Qty: {{ item.quantity }}
+          </div>
+          <span>€{{ item.line_total|floatformat:2 }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p><em>No line items found.</em></p>
+  {% endif %}
+
+  <hr>
+  <a href="{% url 'profile' %}" class="btn btn-secondary">
+    ← Back to My Profile
+  </a>
+</div>
+{% endblock %}
