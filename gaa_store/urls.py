@@ -1,12 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-
-# Import our two “combined” Allauth views
 from profiles.views_allauth import CombinedLoginView, CombinedSignupView
 from products import views as product_views
 from . import views
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -21,7 +20,7 @@ urlpatterns = [
         name="account_signup",
     ),
     path("accounts/", include("allauth.urls")),
-    path("", include("home.urls")),              
+    path("", include("home.urls")),
     path("profile/", include("profiles.urls")),
     path("hurleys/", include("products.urls")),
     path(

@@ -13,25 +13,36 @@ class CombinedLoginView(LoginView):
         context["login_form"] = context.pop("form")
         context["signup_form"] = SignupForm(self.request.POST or None)
 
+        # Debugging: Print the request method and POST data
+        print(f"Request method: {self.request.method}")
+        print(f"POST data: {self.request.POST}")
+
         return context
 
     def get_success_url(self):
         user = self.request.user
-        # Check if user is staff and redirect to FAQ
+
+        # Debugging: Print the user authentication status
+        print(f"User authenticated: {user.is_authenticated}")
+        print(f"User is staff: {user.is_staff}")
+
+        # Always redirect staff to FAQ, regardless of 'next'
         if user.is_authenticated and user.is_staff:
-            return reverse("faq")  # Use your actual FAQ URL name
-        # Default to profile page for non-staff
+            print("Redirecting staff to FAQ...")
+            return reverse("faq")
+
+        # Debugging: Print the next parameter from POST or GET
+        next_url = self.request.POST.get("next") or self.request.GET.get("next")
+        print(f"Next URL parameter: {next_url}")
+
+        if next_url:
+            print(f"Redirecting to next URL: {next_url}")
+            return next_url
+
+        print("Redirecting to profile...")
         return reverse("profile")
     
-    # def get_success_url(self):
-    #     user = self.request.user
-    #     if user.is_staff:
-    #         # If the logged-in user is staff, send them to /faq/ immediately:
-    #         return reverse("faq_list")
-    #     # Otherwise, default to normal Allauth behavior (i.e. ACCOUNT_LOGIN_REDIRECT_URL)
-    #     return super().get_success_url()
-
-
+    
 class CombinedSignupView(SignupView):
     # Tell Allauth to use our single template instead of account/signup.html
     template_name = "profiles/login.html"

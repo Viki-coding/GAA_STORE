@@ -568,6 +568,8 @@ https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
 Webhooks
 https://docs.stripe.com/webhooks/quickstart
 
+[how-to-redirect-superuser-to-specific-page-in-django](https://stackoverflow.com/questions/68572107/how-to-redirect-superuser-to-specific-page-in-django)
+
 MARKDOWN:
 
 Help with markdown, found this site usefule (https://www.markdownguide.org/basic-syntax/) and downloaded this extenstion to Visual Studio Code (https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents)
