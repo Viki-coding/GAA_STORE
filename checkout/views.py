@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
-from .models import Order, ShippingAddress
+from .models import Order, ShippingAddress, OrderItem
 from profiles.models import UserProfile
 from bag.context_processors import bag_contents
 from .forms import CheckoutForm, ShippingAddressForm
@@ -89,8 +89,8 @@ def checkout(request):
                 user = User.objects.create_user(
                     username=email, email=email, password=password
                 )
-                user_profile = UserProfile.objects.create(user=user)
-                login(request, user)
+                user_profile = UserProfile.objects.create(user=new_user)
+                login(request, new_user)
             elif request.user.is_authenticated:
                 user_profile = request.user.userprofile
 
@@ -154,6 +154,21 @@ def checkout(request):
                 is_gift=is_gift_val,
                 gift_message=gift_message_val,
             )
+
+            for item in bag_items:
+                product_obj = item['product']
+                quantity = item['quantity']
+                price_now = product_obj.price
+
+                OrderItem.objects.create(
+                    order=order,
+                    product=product_obj,
+                    quantity=quantity,
+                    price_at_time=price_now,
+                    is_gift=is_gift_val,
+                    gift_message=gift_message_val,
+                )
+            order.update_total()
 
             # Clear the bag from session
             if "bag" in request.session:

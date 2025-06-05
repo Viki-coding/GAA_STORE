@@ -401,7 +401,8 @@ When a user attempts to book an event who’s capacity has already been reached,
 ![500 Error](https://github.com/user-attachments/assets/6747674d-8ad5-4899-a4bc-ed5798943a71)
 
 Future Implementation Section
-
+ - I would like when a user logs onto their profile that they see the item they bought - but also the item details such as color and size if applicable. I would modify my order item model. Unfortunely I just ran out of time on this occasion. 
+ - 
 
 Accessibility
 This is a community website for everyone in the community to use. Accessibility of the site is very important.
