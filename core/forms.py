@@ -9,5 +9,6 @@ class FAQForm(forms.ModelForm):
         fields = ['question', 'answer']
         widgets = {
             'question': forms.TextInput(attrs={'class': 'form-control'}),
-            'answer': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'answer': forms.Textarea(
+                attrs={'class': 'form-control', 'rows': 4}),
         }

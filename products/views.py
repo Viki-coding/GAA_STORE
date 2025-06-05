@@ -8,14 +8,11 @@ def product_list(request):
     View to display a list of all products or filter by category.
     """
     products = Product.objects.all()  # Fetch all products
-    return render(request, 'products/product_list.html', {'products': products})
-    # category = request.GET.get('category')
-    # if category:
-    #     products = Product.objects.filter(description__icontains=category)
-    # else:
-    #     products = Product.objects.all()
-    # return render(
-    #     request, 'products/product_list.html', {'products': products})
+    return render(
+        request,
+        'products/product_list.html',
+        {'products': products}
+    )
 
 
 def product_detail(request, product_id):
@@ -40,7 +37,7 @@ def hurleys_shop(request):
             product__description__icontains=hurley_type)
     else:
         hurleys = Hurley.objects.all()
- 
+
     return render(request, 'products/hurleys_shop.html', {'hurleys': hurleys})
 
 
@@ -67,11 +64,12 @@ def hurley_detail(request, hurley_id):
     size_choices = Hurley._meta.get_field('size').choices
     weight_choices = Hurley._meta.get_field('weight').choices
     grip_color_choices = Hurley._meta.get_field('grip_color').choices
-    manufacturers = Manufacturer.objects.all() 
+    manufacturers = Manufacturer.objects.all()
 
     # Filter manufacturers based on hurley type
     if hurley.type == 'ash':
-        manufacturers = Manufacturer.objects.exclude(name='Torpey Bambú Hurley')
+        manufacturers = Manufacturer.objects.exclude(
+            name='Torpey Bambú Hurley')
     elif hurley.type == 'bambu':
         manufacturers = Manufacturer.objects.filter(name='Torpey Bambú Hurley')
     else:
@@ -109,37 +107,3 @@ def sliotar_detail(request, sliotar_id):
         'product': sliotar.product,
         'color_choices': Sliotar._meta.get_field('color').choices,
     })
-
-# def add_to_bag(request, product_id):
-#     """
-#     Add a hurley to the shopping bag.
-#     """
-#     product = get_object_or_404(Product, id=product_id)
-#     size = request.POST.get('size')
-#     weight = request.POST.get('weight')
-#     grip_color = request.POST.get('grip_color')
-#     manufacturer = request.POST.get('manufacturer')
-#     quantity = int(request.POST.get('quantity', 1))
-
-#     bag = request.session.get('bag', {})
-
-#     # Create a unique key for the hurley based on its attributes,
-#     # prevents overwriting
-#     # hurleys with the same product ID but different attributes
-#     hurley_key = f"{product_id}-{size}-{weight}-{grip_color}-{manufacturer}"
-
-#     if hurley_key in bag:
-#         bag[hurley_key]['quantity'] += quantity
-#     else:
-#         bag[hurley_key] = {
-#             'product_id': product_id,
-#             'size': size,
-#             'weight': weight,
-#             'grip_color': grip_color,
-#             'manufacturer': manufacturer,
-#             'quantity': quantity,
-#         }
-    
-#     request.session['bag'] = bag
-#     return redirect('hurley_detail', hurley_id=product_id)
-

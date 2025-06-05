@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 # Base Product model - concrete (not abstract)
 class Product(models.Model):
     """
@@ -22,7 +21,7 @@ class Product(models.Model):
         default='products/default-product.jpg',
         help_text="Image of the product."
     )
- 
+
     created_at = models.DateTimeField(
         auto_now_add=True, help_text="Timestamp when the product was created."
     )
@@ -170,7 +169,7 @@ class Grip(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - Grip Color: {self.color}"
-    
+
         class Meta:
             verbose_name = "Hurley"
             verbose_name_plural = "Hurleys"
