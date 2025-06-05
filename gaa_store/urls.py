@@ -1,8 +1,7 @@
+from profiles.views_allauth import CombinedLoginView, CombinedSignupView
 from django.contrib import admin
 from django.urls import path, include
-from profiles.views_allauth import CombinedLoginView, CombinedSignupView
 from products import views as product_views
-from . import views
 
 from django.conf import settings
 from django.conf.urls.static import static
