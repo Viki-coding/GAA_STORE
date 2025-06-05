@@ -470,6 +470,7 @@ Technologies Used:
 * Whitenoise
 * dbdiagram.io - For creation of ERD diagram 
 * https://www.vecteezy.com - used for images 
+* https://temp-mail.org/en/
 
 Deployment Steps:
 
