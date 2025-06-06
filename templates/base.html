@@ -4,6 +4,8 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta charset="utf-8" />
+    <meta name="description" content="{% block meta_description %}Welcome to GAA Store, your one-stop shop for all GAA and Camogie gear, including hurleys, how to measure for hurleys, accessories, and more!{% endblock %}" />
+    <meta name="keywords" content="{% block meta_keywords %}GAA, Camogie, Hurleys, Accessories, Sports Gear, How to Measure{% endblock %}" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -80,9 +82,23 @@
             <!-- Links -->
             <div class="col-md-6 text-md-right">
               <div class="d-flex justify-content-center justify-content-md-end">
-                <a href="https://facebook.com" class="text-white mx-2">Facebook</a>
-                <a href="/privacy-policy/" class="text-white mx-2">Privacy Policy</a>
-                <a href="{% url 'contact_us' %}" class="text-white mx-2">Contact Us</a>
+                  <a href="https://facebook.com" 
+                    class="text-white mx-2" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="Visit our Facebook page">
+                    Facebook
+                  </a>
+                  <a href="/privacy-policy/" 
+                    class="text-white mx-2" 
+                    aria-label="Read our Privacy Policy">
+                    Privacy Policy
+                  </a>
+                  <a href="{% url 'contact_us' %}" 
+                      class="text-white mx-2" 
+                      aria-label="Contact us for inquiries">
+                      Contact Us
+                  </a>
               </div>
             </div>
           </div>
