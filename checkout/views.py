@@ -84,13 +84,14 @@ def checkout(request):
 
             user_profile = None
             if create_user_profile and not request.user.is_authenticated:
+                # Create a new Django User and immediately log them in
                 email = form.cleaned_data["email"]
                 password = form.cleaned_data["password"]
                 user = User.objects.create_user(
                     username=email, email=email, password=password
                 )
-                user_profile = UserProfile.objects.create(user=new_user)
-                login(request, new_user)
+                user_profile = UserProfile.objects.create(user=user)
+                login(request, user)
             elif request.user.is_authenticated:
                 user_profile = request.user.userprofile
 
