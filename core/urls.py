@@ -5,6 +5,7 @@ from .views import (
     FaqUpdateView, 
     FaqDeleteView
 )
+from .views import contact_us
 
 
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     path("add/", FaqCreateView.as_view(), name="faq_add"),
     path("edit/<int:pk>/", FaqUpdateView.as_view(), name="faq_edit"),
     path("delete/<int:pk>/", FaqDeleteView.as_view(), name="faq_delete"),
+    path("contact/", contact_us, name="contact_us"),
 ]
