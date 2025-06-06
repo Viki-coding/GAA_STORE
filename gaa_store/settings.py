@@ -209,6 +209,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+WHITENOISE_ALLOW_ALL_ORIGINS = True  # optional: if you want cross‐origin
+WHITENOISE_STATIC_PREFIX = STATIC_URL
+WHITENOISE_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Stripe
 FREE_DELIVERY_THRESHOLD = 50
