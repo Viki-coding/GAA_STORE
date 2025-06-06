@@ -1,11 +1,9 @@
-import json
 import stripe
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
-from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
@@ -95,7 +93,7 @@ def checkout(request):
             elif request.user.is_authenticated:
                 user_profile = request.user.userprofile
 
-            # Handle gift message 
+            # Handle gift message
             session_bag = request.session.get('bag', {})
             is_gift_val = False
             gift_message_val = None
@@ -220,7 +218,7 @@ def checkout(request):
 
     context = {
         "form": form,
-        "bag_items": bag_items,              
+        "bag_items": bag_items,
         "grand_total": grand_total,
         "stripe_public_key": stripe_public_key,
         "client_secret": client_secret,

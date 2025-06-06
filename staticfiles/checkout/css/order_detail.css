@@ -1,153 +1,170 @@
-/* Container styling */
+/* Page container: light gray background so white cards pop */
+body {
+  background-color: #f0f2f5; 
+  color: #333;              
+}
+
 .order-detail-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    background-color: #ffffff;
-    padding: 1.5rem 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Order summary 
+.order-summary-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem 1.8rem;
+  margin-bottom: 2rem;
+}
+
+/* heading */
+.order-summary-card h2 {
+  font-size: 1.25rem;    
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+.order-summary-card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.order-summary-card .order-total {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Sectionn card styling  */
+.order-section {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Section headings */
+.order-section h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #222;
+}
+
+/* Address block styling */
+.order-section address {
+  font-style: normal;
+  line-height: 1.5;
+  color: #444;
+  margin-left: 0.5rem; 
+}
+
+/* Gift message card */
+.gift-message .gift-card {
+  background: #f8f9fa;
+  border-left: 4px solid #dc3545; 
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  color: #333;
+}
+
+/*  Items list styling */
+.items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 0.75rem 0;
+}
+
+/* Product thumbnail */
+.product-thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+/* Item description  */
+.item-desc {
+  flex: 1;
+}
+
+.product-name {
+  display: block;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.product-detail {
+  display: block;
+  font-size: 0.88rem;
+  color: #666;
+  margin-bottom: 0.15rem;
+}
+
+.product-qty {
+  font-size: 0.90rem;
+  color: #444;
+}
+
+/* Price on the right */
+.item-price {
+  font-weight: 700;
+  color: #007bff;
+  min-width: 80px;
+  text-align: right;
+  font-size: 1rem;
+}
+
+/*  Profile button */
+.back-to-profile {
+  display: inline-block;
+  background: #007bff;
+  color: #fff !important;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.back-to-profile:hover {
+  background: #0056b3;
+  text-decoration: none;
+  color: #fff !important;
+}
+
+/* Responsive  */
+@media (max-width: 576px) {
+  .product-thumb {
+    width: 48px;
+    height: 48px;
+    margin-right: 0.75rem;
   }
-  
-  .order-detail-heading {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.75rem; /* smaller than <h1> */
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: baseline;
-  }
-  
-  .order-detail-heading .label {
-    color: #444;
-    font-size: 1.25rem;
-    margin-right: 0.5rem;
-  }
-  
-  
-  .order-detail-heading .order-number {
-    color: #007bff;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-  
-  /* “Placed on” / “Total” lines */
-  .order-date,
-  .order-total {
-    color: #666;
-    margin: 0.25rem 0;
-    font-size: 0.95rem;
-  }
-  
-  /* headings - Shipping Address, Gift Message, Items) */
-  .order-detail-container section h4 {
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: #333;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.25rem;
-  }
-  
-  /* Shipping Address block <address> styling */
-  .order-detail-container address {
-    font-style: normal;
-    line-height: 1.4;
-    color: #555;
-    margin-left: 1rem;
-  }
-  
-  /* Gift message box */
-  .gift-card {
-    background-color: #f8f9fa;
-    border-left: 4px solid #dc3545;
-    padding: 1rem;
-    border-radius: 4px;
-    color: #333;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-left: 1rem;
-  }
-  
-  /* Items list container */
-  .items-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-  }
-  
-  /* Each item‐row: two columns (product details on left, price on right) */
-  .items-list .item-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .items-list .item-row:last-child {
-    border-bottom: none;
-  }
-  
-  .item-desc {
-    max-width: 75%;
-  }
-  
-  .product-name {
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 0.25rem;
-    font-size: 1rem;
-  }
-  
-  .product-detail {
-    font-size: 0.85rem;
-    color: #555;
-    margin: 0;
-  }
-  
-  .product-qty {
-    font-size: 0.85rem;
-    color: #555;
-    margin: 0.25rem 0 0;
-  }
-  
   .item-price {
-    font-weight: 600;
-    color: #000;
-    font-size: 1rem;
-  }
-  
-  .no-items {
-    color: #888;
-    margin-left: 1rem;
-    font-style: italic;
     font-size: 0.95rem;
+    min-width: 60px;
   }
-  
-  /* Back to My Profile button */
-  .back-link-container {
-    margin-top: 2rem;
-    text-align: left;
+  .order-detail-container {
+    margin: 1rem auto;
+    padding: 0 0.5rem;
   }
-  
-  .back-to-profile {
-    background-color: #6c757d; 
-    color: #fff !important;
-    border: none;
-    padding: 0.5rem 1.25rem;
-    font-size: 0.9rem;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-  
-  .back-to-profile:hover {
-    background-color: #5a6268;
-    color: #fff !important;
-  }
-  
-  .order-detail-container hr {
-    border-top: 1px solid #ddd;
-    margin: 1.5rem 0;
-  }
-  
+}
+
