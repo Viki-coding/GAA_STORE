@@ -1,20 +1,21 @@
-"""
-WSGI config for gaa_store project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
-"""
+# gaa_store/wsgi.py
 
 import os
-
 from django.core.wsgi import get_wsgi_application
+from whitenoise import WhiteNoise
 
-# Load environment variables from env.py if it exists
-if os.path.isfile('env.py'):
-    import env
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gaa_store.settings")
+_django_app = get_wsgi_application()
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gaa_store.settings')
+# Step A: Wrap the Django app in WhiteNoise to serve static files
+application = WhiteNoise(
+    _django_app,
+    root=os.path.join(os.path.dirname(__file__), "..", "staticfiles"),
+    prefix="static/"
+)
 
-application = get_wsgi_application()
+# (Optionally) If you also want WhiteNoise to serve media (UPLOAD) files,
+# you can add something like these two lines:
+application.add_files(os.path.join(os.path.dirname(__file__), "..", "media"), prefix="media/")
+#
+# That tells WhiteNoise: “When someone requests /media/…, read from the local media folder.”

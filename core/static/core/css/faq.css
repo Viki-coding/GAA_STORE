@@ -85,4 +85,69 @@
   .container.mt-5 {
     max-width: 800px;
   }
+
+  /* Style for the delete confirmation card */
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card.shadow-sm {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.card-header.bg-danger {
+  background-color: #dc3545; /* Bootstrap danger color */
+  color: #fff;
+}
+
+.card-body {
+  background-color: #fff;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.card-body p {
+  color: #333; 
+}
+
+/* Buttons inside the card */
+.card-body .btn {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  margin: 0.5rem;
+}
+
+.card-body .btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.card-body .btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.card-body .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.card-body .btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
   

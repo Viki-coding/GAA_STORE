@@ -1,12 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container mt-4">
-    <h2>Delete FAQ</h2>
-    <p>Are you sure you want to delete the question: “{{ object.question }}”?</p>
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Yes, delete</button>
-      <a href="{% url 'faq_list' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white text-center">
+          <h4>Delete FAQ</h4>
+        </div>
+        <div class="card-body">
+          <p class="mb-4 text-center">
+            Are you sure you want to delete the question: 
+            <strong>“{{ object.question }}”</strong>?
+          </p>
+          <form method="post" class="text-center">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
+            <a href="{% url 'faq' %}" class="btn btn-secondary btn-sm">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 {% endblock %}
