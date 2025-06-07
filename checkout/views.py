@@ -142,7 +142,6 @@ def checkout(request):
                     )
                 else:
                     shipping_address = None
-
             # Create the Order
             order = Order.objects.create(
                 user_profile=user_profile,

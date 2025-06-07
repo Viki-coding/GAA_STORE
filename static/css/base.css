@@ -192,6 +192,10 @@ body {
     background-color: #0056b3; 
 }
 
+.logout-confirm {
+    color: #212529;   /* Bootstrap’s “dark” text color */
+  }
+  
 /* Stack input and button for mobile */
 @media (max-width: 600px) {
     .subscribe-form {
