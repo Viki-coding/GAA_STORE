@@ -69,3 +69,7 @@ def contact_us(request):
         form = ContactMessageForm()
 
     return render(request, "core/contact_us.html", {"form": form})
+
+
+def privacy_policy(request):
+    return render(request, "core/privacy_policy.html")
