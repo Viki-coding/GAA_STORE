@@ -1,1 +1,1 @@
-web: gunicorn GAA_STORE.wsgi:application
+web: gunicorn gaa_store.wsgi:application
