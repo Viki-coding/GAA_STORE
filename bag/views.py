@@ -58,8 +58,10 @@ def add_to_bag(request, product_id):
         weight = weight if weight is not None else "unknown"
         grip_color = grip_color if grip_color is not None else "unknown"
         manufacturer = manufacturer if manufacturer is not None else "unknown"
-        product_key = f"{
-            product_id}-{size}-{weight}-{grip_color}-{manufacturer}"
+        product_key = (
+            f"{product_id}-{size}-{weight}-"
+            f"{grip_color}-{manufacturer}"
+        )
         update_bag(
             bag, product_key, product_id, quantity,
             size=size,
