@@ -136,14 +136,7 @@ class Hurley(models.Model):
     )
 
     def __str__(self):
-        """
-        Returns the string representation of the Hurley, including its size,
-        grip color, and manufacturer.
-        """
-        return (
-            f"{self.product.name} – {self.size}, "
-            f"{self.grip_color}, {self.manufacturer}"
-        )
+        return f"{self.product.name} - {self.size}, {self.grip_color}, {self.manufacturer}"
 
 
 class Grip(models.Model):
@@ -172,9 +165,10 @@ class Grip(models.Model):
     def __str__(self):
         return f"{self.product.name} - Grip Color: {self.color}"
 
-    class Meta:
-        verbose_name = "Grip"
-        verbose_name_plural = "Grips"
+
+class Meta:
+    verbose_name = "Grip"
+    verbose_name_plural = "Grips"
 
 
 class Sliotar(models.Model):

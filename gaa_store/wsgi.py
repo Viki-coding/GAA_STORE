@@ -14,8 +14,4 @@ application = WhiteNoise(
     prefix="static/"
 )
 
-# (Optionally) If you also want WhiteNoise to serve media (UPLOAD) files,
-# you can add something like these two lines:
 application.add_files(os.path.join(os.path.dirname(__file__), "..", "media"), prefix="media/")
-#
-# That tells WhiteNoise: “When someone requests /media/…, read from the local media folder.”
