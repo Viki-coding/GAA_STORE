@@ -13,7 +13,11 @@ sliotars, hurling helmets, camogie, grips, best hurley helmets, GAA, club gear
         {% for sliotar in sliotars %}
         <div class="col-md-4 mb-4">
             <a href="{% url 'sliotar_detail' sliotar.product.id %}">
-                <img src="{% static 'images/Sliotars.png' %}" alt="Sliotars" class="img-fluid rounded">
+                {% if sliotar.product.image %}
+                    <img src="{{ sliotar.product.image.url }}" alt="{{ sliotar.product.name }}" class="img-fluid rounded">
+                {% else %}
+                    <img src="{% static 'images/default-product.png' %}" alt="Sliotar" class="img-fluid rounded">
+                {% endif %}
                 <h3 class="mt-3">{{ sliotar.product.name }}</h3>
             </a>
         </div>
@@ -22,7 +26,11 @@ sliotars, hurling helmets, camogie, grips, best hurley helmets, GAA, club gear
         {% for helmet in helmets %}
         <div class="col-md-4 mb-4">
             <a href="{% url 'helmet_detail' helmet.product.id %}">
-                <img src="{% static 'images/helmets.png' %}" alt="Helmets" class="img-fluid rounded">
+                {% if helmet.product.image %}
+                    <img src="{{ helmet.product.image.url }}" alt="{{ helmet.product.name }}" class="img-fluid rounded">
+                {% else %}
+                    <img src="{% static 'images/default-product.png' %}" alt="Helmet" class="img-fluid rounded">
+                {% endif %}
                 <h3 class="mt-3">{{ helmet.product.name }}</h3>
             </a>
         </div>
@@ -31,7 +39,11 @@ sliotars, hurling helmets, camogie, grips, best hurley helmets, GAA, club gear
         {% for grip in grips %}
         <div class="col-md-4 mb-4">
             <a href="{% url 'grip_detail' grip.product.id %}">
-                <img src="{% static 'images/grips.png' %}" alt="Grips" class="img-fluid rounded">
+                {% if grip.product.image %}
+                    <img src="{{ grip.product.image.url }}" alt="{{ grip.product.name }}" class="img-fluid rounded">
+                {% else %}
+                    <img src="{% static 'images/default-product.png' %}" alt="Grip" class="img-fluid rounded">
+                {% endif %}
                 <h3 class="mt-3">{{ grip.product.name }}</h3>
             </a>
         </div>
