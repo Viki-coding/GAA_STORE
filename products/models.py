@@ -12,7 +12,7 @@ class Product(models.Model):
     description = models.TextField(
         help_text="Detailed description of the product.")
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, help_text="Price of the produfct."
+        max_digits=10, decimal_places=2, help_text="Price of the product."
     )
     image = models.ImageField(
         upload_to='products/',
@@ -137,11 +137,13 @@ class Hurley(models.Model):
 
     def __str__(self):
         """
-        Returns the string representation of the Hurley, including its size
-        and grip color.
+        Returns the string representation of the Hurley, including its size,
+        grip color, and manufacturer.
         """
-        return f"{self.product.name} - {self.size}, {self.grip_color}, {
-            self.manufacturer}"
+        return (
+            f"{self.product.name} – {self.size}, "
+            f"{self.grip_color}, {self.manufacturer}"
+        )
 
 
 class Grip(models.Model):
