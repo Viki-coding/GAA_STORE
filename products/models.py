@@ -172,9 +172,9 @@ class Grip(models.Model):
     def __str__(self):
         return f"{self.product.name} - Grip Color: {self.color}"
 
-        class Meta:
-            verbose_name = "Hurley"
-            verbose_name_plural = "Hurleys"
+    class Meta:
+        verbose_name = "Grip"
+        verbose_name_plural = "Grips"
 
 
 class Sliotar(models.Model):
