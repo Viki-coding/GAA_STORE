@@ -81,6 +81,11 @@ I had put my converter calculator script into my base.file, which I should of ke
 **BUG:** I created a new model for my FAQ's. I wanted to link my How to meausre page into one of the FAQs but it just kept plain text rather than a link. 
 **RESOLVED BY:** Resolved by adding {{ faq.answer|safe }} which allows the HTML tage to become clickable. 
 
+**BUG:** I am trying to deploy to heroku.  But it keeping failing.  I made a terrible error when starting my project and foolishly name it in uppercase GAA_STORE - I have tried to rename it and seem to have half rename in lowercase using vasious renaming commands but my deployment still isn't working.  
+
+**RESOLVED BY:**
+I entered my screen shots into perplexity and it says I have the following problem: "Somewhere in your code or in your Procfile/gunicorn invocation, you’re still referencing a top‐level package called GAA_STORE (all-caps), which no longer exists on disk – you’ve renamed the folder to lowercase but Git (on a case-insensitive macOS filesystem) hasn’t actually recorded the change. Heroku, seeing your web: gunicorn gaa_store.wsgi:application Procfile, then tries to import gaa_store.wsgi… but your repo still thinks the folder is called “GAA_STORE”, so nothing called “gaa_store” is found, the import blows up, and gunicorn aborts with “worker failed to boot.”
+
 UNRESOLVED BUG
 **BUG:** Bag contents table not responsive on Firefox but perfect in Chrome.
 **ATTEMPTED FIXES:** After looking on the net, this seems to be a common proble. Stack overflow suggested a fieldset and nest table within it, no luck, tried custom css, still no luck, reviewed code for errors and all seemed to be ok. Deleted custom css code and fieldset and no change.  I have spent a few hours trying to fix and need to step away from it now. I will try to revert back again if I have time. 
