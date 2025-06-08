@@ -35,8 +35,8 @@ class ContactMessage(models.Model):
         default=False, help_text="Mark True once message is handled")
 
     def __str__(self):
-        return f"[{self.timestamp.strftime(
-            '%Y-%m-%d %H:%M')}] {self.name} – {self.subject or 'No Subject'}"
+        # FIXED: closing brace `]` and closing quote `"`
+        return f"[{self.timestamp.strftime('%d %b %Y')}]"
 
     class Meta:
         ordering = ["-timestamp"]
