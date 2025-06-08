@@ -7,6 +7,7 @@ import sys
 if os.path.isfile('env.py'):
     import env
     
+    
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gaa_store.settings')
