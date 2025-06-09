@@ -5,6 +5,7 @@ from products import views as product_views
 from django.conf import settings
 from django.conf.urls.static import static
 from profiles.views_allauth import CombinedLoginView, CombinedSignupView
+from core import views as core_views
 
 
 urlpatterns = [
@@ -16,12 +17,12 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
 
     # home, products, profiles, bag, checkout, etc.
+    path("products/", include("products.urls", namespace="products")),
     path("", include("home.urls")),
-    path("", include("products.urls", namespace="products")),
     path("profile/", include("profiles.urls")),
     path("bag/",     include("bag.urls")),
     path("checkout/", include("checkout.urls")),
-    path("privacy-policy/", include("core.urls")),
+    path("privacy-policy/", core_views.privacy_policy, name="privacy_policy"),
     path("faq/", include("core.urls")),
 ]
 
