@@ -11,7 +11,6 @@ Hurleys, Camogie Hurleys, hurley makers, GAA Gear, Best hurleys, bambu hurleys, 
 
     <!-- Display Hurleys  --><div class="row text-center mt-4">
   {% for hurley in hurleys %}
-    {# decide which file name to use #}
     {% if hurley.type == 'ash' %}
       {% static 'products/ash-hurley.webp' as image_url %}
     {% elif hurley.type == 'bambu' %}
@@ -22,12 +21,14 @@ Hurleys, Camogie Hurleys, hurley makers, GAA Gear, Best hurleys, bambu hurleys, 
 
     <div class="col-md-4 mb-4">
       <a href="{% url 'hurley_detail' hurley.product.id %}">
-        <img src="{{ image_url }}"
+        <img src="{{ static filename }}"
              alt="{{ hurley.product.name }}"
              class="img-fluid rounded">
         <h3 class="mt-3">{{ hurley.product.name }}</h3>
       </a>
     </div>
+    {% endwith %}
   {% endfor %}
+</div>
 </div>
 {% endblock %}

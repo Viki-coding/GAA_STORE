@@ -8,7 +8,7 @@ Link to Testing
 
 Table of Contents
 
-
+IMAGES: But since these hurley images are basically “design assets” rather than user content, bundling them in static/ is the simplest, most reliable approach.
 
 <h2>Introduction</h2>
 
