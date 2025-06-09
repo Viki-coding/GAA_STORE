@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 
 from .models import Order, ShippingAddress, OrderItem
 from profiles.models import UserProfile
@@ -290,3 +292,41 @@ def edit_address(request, address_id):
     else:
         form = ShippingAddressForm(instance=address)
     return render(request, 'checkout/edit_address.html', {'form': form})
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    """Endpoint for receiving Stripe webhooks."""
+    # 1) Verify the signature
+    payload = request.body
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
+    endpoint_secret = settings.STRIPE_WH_SECRET
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload=payload, 
+            sig_header=sig_header, 
+            secret=endpoint_secret
+        )
+    except ValueError:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # 2) Handle the event type
+    if event['type'] == 'payment_intent.succeeded':
+        intent = event['data']['object']
+        # TODO: mark your Order as paid (you can look up by intent.id)
+        # e.g. Order.objects.filter(stripe_pid=intent.id).update(paid=True)
+        print(f"✅ PaymentIntent succeeded: {intent['id']}")
+
+    elif event['type'] == 'payment_intent.payment_failed':
+        intent = event['data']['object']
+        print(f"❌ PaymentIntent failed: {intent['id']}")
+
+    # You can handle other event types here as needed
+
+    # 3) Return a 200 so Stripe knows you received it
+    return HttpResponse(status=200)
