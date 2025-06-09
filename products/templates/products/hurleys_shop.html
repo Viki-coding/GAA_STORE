@@ -6,7 +6,6 @@
   <h1 class="text-center">Hurleys Shop</h1>
   <div class="row text-center mt-4">
     {% for hurley in hurleys %}
-      {# pick the correct static file based on hurley.type #}
       {% if hurley.type == "ash" %}
         {% static "products/ash-hurley.webp" as image_url %}
       {% elif hurley.type == "bambu" %}
