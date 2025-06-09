@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+import os
 
 from .models import Order, ShippingAddress, OrderItem
 from profiles.models import UserProfile
@@ -300,7 +301,7 @@ def stripe_webhook(request):
     # 1) Verify the signature
     payload = request.body
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
-    endpoint_secret = settings.STRIPE_WH_SECRET
+    endpoint_secret = os.getenv('STRIPE_WH_SECRET')
 
     try:
         event = stripe.Webhook.construct_event(
