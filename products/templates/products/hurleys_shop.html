@@ -13,11 +13,11 @@ Hurleys, Camogie Hurleys, hurley makers, GAA Gear, Best hurleys, bambu hurleys, 
   {% for hurley in hurleys %}
     {# decide which file name to use #}
     {% if hurley.type == 'ash' %}
-      {% static 'products/ash_hurley.webp' as image_url %}
+      {% static 'products/ash-hurley.webp' as image_url %}
     {% elif hurley.type == 'bambu' %}
-      {% static 'products/bambu_hurley.webp' as image_url %}
+      {% static 'products/bambu-hurley.webp' as image_url %}
     {% else %}
-      {% static 'products/goalie_hurley.webp' as image_url %}
+      {% static 'products/goalie-hurleys.webp' as image_url %}
     {% endif %}
 
     <div class="col-md-4 mb-4">
