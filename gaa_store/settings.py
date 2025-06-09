@@ -31,12 +31,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key")
 # STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False").lower() in ("1", "true", "yes")
-# DEBUG = False
+# DEBUG = os.environ.get("DEBUG", "False").lower() in ("1", "true", "yes")
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    '.herokuapp.com',
     'gaastore-2f38a7e53edc.herokuapp.com',
 ]
 
@@ -166,6 +167,11 @@ else:
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.codeinstitute-ide.net/",
+    "https://*.herokuapp.com"
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {

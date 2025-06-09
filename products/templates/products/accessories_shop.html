@@ -1,50 +1,53 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-  <h1 class="text-center">Accessories</h1>
-  <div class="row text-center mt-4">
+  <div class="container mt-5">
+    <h1 class="text-center">Accessories</h1>
+    <div class="row text-center mt-4">
 
-    {# Sliotars #}
-    {% static "products/12-sliotars.webp" as sliotar_img %}
-    <div class="col-md-4 mb-4">
-      <a href="{% url 'sliotar_detail' sliotars.0.product.id %}">
-        <img
-          src="{{ sliotar_img }}"
-          alt="{{ sliotars.0.product.name }}"
-          class="img-fluid rounded"
-        >
-        <h3 class="mt-3">{{ sliotars.0.product.name }}</h3>
-      </a>
+      {# Sliotars #}
+      {% for sliotar in sliotars %}
+        <div class="col-md-4 mb-4">
+          <a href="{% url 'products:sliotar_detail' sliotar.product.id %}">
+            {% if sliotar.product.image %}
+              <img src="{{ sliotar.product.image.url }}"
+                   alt="{{ sliotar.product.name }}"
+                   class="img-fluid rounded">
+            {% else %}
+              <img src="{% static 'products/12-sliotars.webp' %}"
+                   alt="{{ sliotar.product.name }}"
+                   class="img-fluid rounded">
+            {% endif %}
+            <h3 class="mt-3">{{ sliotar.product.name }}</h3>
+          </a>
+        </div>
+      {% endfor %}
+
+      {# Helmets #}
+      {% for helmet in helmets %}
+        <div class="col-md-4 mb-4">
+          <a href="{% url 'products:helmet_detail' helmet.product.id %}">
+            <img src="{% static 'products/'|add:helmet.color|add:'-cooper-helmet.webp' %}"
+                 alt="{{ helmet.product.name }}"
+                 class="img-fluid rounded">
+            <h3 class="mt-3">{{ helmet.product.name }}</h3>
+          </a>
+        </div>
+      {% endfor %}
+
+      {# Grips #}
+      {% for grip in grips %}
+        <div class="col-md-4 mb-4">
+          <a href="{% url 'products:grip_detail' grip.product.id %}">
+            <img src="{% static 'products/grips.webp' %}"
+                 alt="{{ grip.product.name }}"
+                 class="img-fluid rounded">
+            <h3 class="mt-3">{{ grip.product.name }}</h3>
+          </a>
+        </div>
+      {% endfor %}
+
     </div>
-
-    {# Helmets #}
-    {% static "products/blue-cooper-helmet.webp" as helmet_img %}
-    <div class="col-md-4 mb-4">
-      <a href="{% url 'helmet_detail' helmets.0.product.id %}">
-        <img
-          src="{{ helmet_img }}"
-          alt="{{ helmets.0.product.name }}"
-          class="img-fluid rounded"
-        >
-        <h3 class="mt-3">{{ helmets.0.product.name }}</h3>
-      </a>
-    </div>
-
-    {# Grips #}
-    {% static "products/grips.webp" as grip_img %}
-    <div class="col-md-4 mb-4">
-      <a href="{% url 'grip_detail' grips.0.product.id %}">
-        <img
-          src="{{ grip_img }}"
-          alt="{{ grips.0.product.name }}"
-          class="img-fluid rounded"
-        >
-        <h3 class="mt-3">{{ grips.0.product.name }}</h3>
-      </a>
-    </div>
-
   </div>
-</div>
 {% endblock %}
