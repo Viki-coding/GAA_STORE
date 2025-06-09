@@ -31,13 +31,13 @@
           <p class="card-text">Price: €{{ product.price }}</p>
           <a
             href="{% if product.hurley %}
-                     {% url 'hurley_detail' product.hurley.product.id %}
+                     {% url 'products:hurley_detail' product.hurley.product.id %}
                    {% elif product.helmet %}
-                     {% url 'helmet_detail' product.helmet.product.id %}
+                     {% url 'products:helmet_detail' product.helmet.product.id %}
                    {% elif product.grip %}
-                     {% url 'grip_detail' product.grip.product.id %}
+                     {% url 'products:grip_detail' product.grip.product.id %}
                    {% elif product.sliotar %}
-                     {% url 'sliotar_detail' product.sliotar.product.id %}
+                     {% url 'products:sliotar_detail' product.sliotar.product.id %}
                    {% endif %}"
             class="btn btn-primary"
           >
