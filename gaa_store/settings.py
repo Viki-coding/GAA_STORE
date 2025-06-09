@@ -31,8 +31,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key")
 # STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG', 'False') == 'True'
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() in ("1", "true", "yes")
+# DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
