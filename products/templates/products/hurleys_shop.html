@@ -1,33 +1,30 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
-
-{% block meta_keywords %}
-Hurleys, Camogie Hurleys, hurley makers, GAA Gear, Best hurleys, bambu hurleys, goalie hurleys
-{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Hurleys Shop</h1>
+  <h1 class="text-center">Hurleys Shop</h1>
+  <div class="row text-center mt-4">
+    {% for hurley in hurleys %}
+      {# pick the correct static file based on hurley.type #}
+      {% if hurley.type == "ash" %}
+        {% static "products/ash-hurley.webp" as image_url %}
+      {% elif hurley.type == "bambu" %}
+        {% static "products/bambu-hurley.webp" as image_url %}
+      {% else %}
+        {% static "products/goalie-hurleys.webp" as image_url %}
+      {% endif %}
 
-    <!-- Display Hurleys  --><div class="row text-center mt-4">
-  {% for hurley in hurleys %}
-    {% if hurley.type == 'ash' %}
-      {% static 'products/ash-hurley.webp' as image_url %}
-    {% elif hurley.type == 'bambu' %}
-      {% static 'products/bambu-hurley.webp' as image_url %}
-    {% else %}
-      {% static 'products/goalie-hurleys.webp' as image_url %}
-    {% endif %}
-
-    <div class="col-md-4 mb-4">
-      <a href="{% url 'hurley_detail' hurley.product.id %}">
-        <img src="{{ image_url }}"
-             alt="{{ hurley.product.name }}"
-             class="img-fluid rounded">
-        <h3 class="mt-3">{{ hurley.product.name }}</h3>
-      </a>
-    </div>
-  {% endfor %}
-</div>
+      <div class="col-md-4 mb-4">
+        <a href="{% url 'hurley_detail' hurley.product.id %}">
+          <img src="{{ image_url }}"
+               alt="{{ hurley.product.name }}"
+               class="img-fluid rounded">
+          <h3 class="mt-3">{{ hurley.product.name }}</h3>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}
+
