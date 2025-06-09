@@ -10,5 +10,5 @@ urlpatterns = [
         views.checkout_success,
         name='checkout_success',
     ),
-    path('checkout/wh/', checkout_views.stripe_webhook, name='stripe_webhook'),
++    path('wh/', checkout_views.stripe_webhook, name='stripe_webhook'),
 ]
