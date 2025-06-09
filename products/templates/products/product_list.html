@@ -4,32 +4,53 @@
 {% block content %}
 <h1>Products</h1>
 <div class="row">
-    {% for product in products %}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default-product.jpg' %}{% endif %}" class="card-img-top" alt="{{ product.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p>Product Type: 
-                        {% if product.hurley %}Hurley{% endif %}
-                        {% if product.helmet %}Helmet{% endif %}
-                        {% if product.grip %}Grip{% endif %}
-                        {% if product.sliotar %}Sliotar{% endif %}
-                    </p>
-                    <p class="card-text">Price: €{{ product.price }}</p>
-                    <a href="{% if product.hurley %}
-                                {% url 'hurley_detail' product.hurley.product.id %}
-                            {% elif product.helmet %}
-                                {% url 'helmet_detail' product.helmet.product.id %}
-                            {% elif product.grip %}
-                                {% url 'grip_detail' product.grip.product.id %}
-                            {% elif product.sliotar %}
-                                {% url 'sliotar_detail' product.sliotar.product.id %}
-                            {% endif %}" 
-                    class="btn btn-primary">View Details</a>
-                </div>
-            </div>
+  {% for product in products %}
+
+    {# choose a static thumbnail #}
+    {% if product.hurley %}
+      {% static "products/"|add:product.hurley.type|add:"-hurley.webp" as thumb_url %}
+    {% elif product.helmet %}
+      {% static "products/"|add:product.helmet.color|add:"-cooper-helmet.webp" as thumb_url %}
+    {% elif product.grip %}
+      {% static "products/grips.webp" as thumb_url %}
+    {% elif product.sliotar %}
+      {% static "products/12-sliotars.webp" as thumb_url %}
+    {% else %}
+      {% static "images/default-product.png" as thumb_url %}
+    {% endif %}
+
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img
+          src="{{ thumb_url }}"
+          class="card-img-top"
+          alt="{{ product.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p>Product Type:
+            {% if product.hurley %}Hurley{% endif %}
+            {% if product.helmet %}Helmet{% endif %}
+            {% if product.grip %}Grip{% endif %}
+            {% if product.sliotar %}Sliotar{% endif %}
+          </p>
+          <p class="card-text">Price: €{{ product.price }}</p>
+          <a
+            href="{% if product.hurley %}
+                     {% url 'hurley_detail' product.hurley.product.id %}
+                   {% elif product.helmet %}
+                     {% url 'helmet_detail' product.helmet.product.id %}
+                   {% elif product.grip %}
+                     {% url 'grip_detail' product.grip.product.id %}
+                   {% elif product.sliotar %}
+                     {% url 'sliotar_detail' product.sliotar.product.id %}
+                   {% endif %}"
+            class="btn btn-primary">
+            View Details
+          </a>
         </div>
-    {% endfor %}
+      </div>
+    </div>
+
+  {% endfor %}
 </div>
 {% endblock %}
