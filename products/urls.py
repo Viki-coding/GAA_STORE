@@ -4,11 +4,6 @@ from . import views
 app_name = "products"
 
 urlpatterns = [
-    # product‐wide
-    path("",                         views.product_list,     name="product_list"),
-    path("product/<int:product_id>/", views.product_detail,   name="product_detail"),
-
-    # shop landing pages
     path("hurleys/",                 views.hurleys_shop,     name="hurleys_shop"),
     path("accessories/",             views.accessories_shop, name="accessories_shop"),
 
