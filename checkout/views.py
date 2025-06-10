@@ -1,21 +1,24 @@
-import os
-import stripe
 import json
 import logging
+import os
+from decimal import Decimal
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+import stripe
+
 from django.conf import settings
-from django.contrib.auth import login
+from django.contrib import messages
+from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
 
-from .models import Order, ShippingAddress, OrderItem
-from profiles.models import UserProfile
 from bag.context_processors import bag_contents
+from profiles.models import UserProfile
+
 from .forms import CheckoutForm, ShippingAddressForm
+from .models import Order, OrderItem, ShippingAddress
 
 
 def checkout(request):
@@ -34,16 +37,20 @@ def checkout(request):
     # 1) Pull bag contents and compute total
     bag = bag_contents(request)
     bag_items = bag["bag_items"]
-    grand_total = bag["grand_total"]
+    subtotal = bag["total"] 
+    delivery_cost = bag["delivery"] 
+    free_delivery_delta = bag["free_delivery_delta"]
+    final_total = bag["grand_total"] 
 
-    if grand_total == 0:
+    if subtotal == 0:
         messages.warning(
             request,
             "Your cart is empty. Please add items to proceed to checkout."
         )
         return redirect("view_bag")
 
-    stripe_total = round(grand_total * 100)  # amount in cents
+    # 2) Use the total including delivery for Stripe
+    stripe_total = round(final_total * 100)  # amount in cents
 
     if request.method == "POST":
         # ───────────────────────────────────────────────
@@ -60,7 +67,8 @@ def checkout(request):
         payment_intent_id = request.POST.get("payment_intent_id")
         if not payment_intent_id:
             messages.error(
-                request, "Payment information is missing. Please try again.")
+                request, "Payment information is missing. Please try again."
+            )
             return redirect("checkout")
 
         # Verify with Stripe that the PaymentIntent succeeded
@@ -72,31 +80,44 @@ def checkout(request):
 
         if intent.status != "succeeded":
             messages.error(
-                request, "Payment was not successful. Please try again.")
+                request, "Payment was not successful. Please try again."
+            )
             return redirect("checkout")
 
-        # Process the form data if valid
+        #  Process the form data if valid 
         if form.is_valid():
-            # Handle user profile creation
-            create_user_profile = form.cleaned_data.get(
-                "create_user_profile", False)
-            store_shipping_address = form.cleaned_data.get(
-                "store_shipping_address", False
-            )
-            saved_address = form.cleaned_data.get("saved_address")
+            create_user_profile    = form.cleaned_data.get("create_user_profile", False)
+            store_shipping_address = form.cleaned_data.get("store_shipping_address", False)
+            saved_address          = form.cleaned_data.get("saved_address")
 
             user_profile = None
+
             if create_user_profile and not request.user.is_authenticated:
-                # Create a new Django User and immediately log them in
-                email = form.cleaned_data["email"]
+                email    = form.cleaned_data["email"]
                 password = form.cleaned_data["password"]
-                user = User.objects.create_user(
-                    username=email, email=email, password=password
-                )
-                user_profile = UserProfile.objects.create(user=user)
+
+                User = get_user_model()
+                try:
+                    # Try existing account
+                    user = User.objects.get(username=email)
+                except User.DoesNotExist:
+                    # Otherwise create a new one
+                    user = User.objects.create_user(
+                        username=email,
+                        email=email,
+                        password=password,
+                    )
+
+                # Manually set the backend (so login() knows which to pick)
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
                 login(request, user)
+
+                # Ensure profile exists (won’t double‐create)
+                user_profile, _ = UserProfile.objects.get_or_create(user=user)
+
             elif request.user.is_authenticated:
                 user_profile = request.user.userprofile
+
 
             # Handle gift message
             session_bag = request.session.get('bag', {})
@@ -109,33 +130,29 @@ def checkout(request):
                 gift_message_val = raw_msg if raw_msg else None
 
             # Handle shipping address
-            if saved_address:
-                if store_shipping_address:
-                    # Overwrite fields and save
+           
+            # Only persist for logged-in users who checked “Save Shipping Address”
+            store_shipping = form.cleaned_data.get("store_shipping_address", False)
+            saved_address = form.cleaned_data.get("saved_address")
+
+            if request.user.is_authenticated and store_shipping:
+                # User wants to save/update an address
+                if saved_address:
+                    # Overwrite the existing saved address
                     saved_address.full_name = form.cleaned_data["full_name"]
-                    saved_address.phone_number = form.cleaned_data[
-                        "phone_number"
-                    ]
-                    saved_address.street_address1 = form.cleaned_data[
-                        "street_address1"
-                    ]
-                    saved_address.street_address2 = form.cleaned_data[
-                        "street_address2"
-                    ]
-                    saved_address.town_or_city = form.cleaned_data[
-                        "town_or_city"
-                    ]
+                    saved_address.phone_number = form.cleaned_data["phone_number"]
+                    saved_address.street_address1 = form.cleaned_data["street_address1"]
+                    saved_address.street_address2 = form.cleaned_data["street_address2"]
+                    saved_address.town_or_city = form.cleaned_data["town_or_city"]
                     saved_address.county = form.cleaned_data["county"]
                     saved_address.eircode = form.cleaned_data["eircode"]
                     saved_address.country = form.cleaned_data["country"]
                     saved_address.save()
                     shipping_address = saved_address
                 else:
-                    shipping_address = saved_address
-            else:
-                if store_shipping_address and user_profile:
+                    # Create a brand-new shipping address on their profile
                     shipping_address = ShippingAddress.objects.create(
-                        user_profile=user_profile,
+                        user_profile=request.user.userprofile,
                         full_name=form.cleaned_data["full_name"],
                         phone_number=form.cleaned_data["phone_number"],
                         street_address1=form.cleaned_data["street_address1"],
@@ -145,14 +162,16 @@ def checkout(request):
                         eircode=form.cleaned_data["eircode"],
                         country=form.cleaned_data["country"],
                     )
-                else:
-                    shipping_address = None
+            else:
+                # Either a guest, or they didn’t tick “Save Shipping Address”
+                shipping_address = None
+
             # Create the Order
             order = Order.objects.create(
                 user_profile=user_profile,
                 shipping_address=shipping_address,
                 email=form.cleaned_data['email'],
-                total_price=grand_total,
+                total_price=final_total,
                 stripe_pid=payment_intent_id,
                 is_gift=is_gift_val,
                 gift_message=gift_message_val,
@@ -183,7 +202,8 @@ def checkout(request):
 
             # Redirect to success
             return redirect(
-                "checkout_success", order_number=order.order_number)
+                "checkout_success", order_number=order.order_number
+            )
 
     else:
         # ───────────────────────────────────────────────
@@ -223,7 +243,13 @@ def checkout(request):
     context = {
         "form": form,
         "bag_items": bag_items,
-        "grand_total": grand_total,
+        "subtotal":      subtotal,
+        "delivery_cost": delivery_cost,
+        "free_delivery_delta": free_delivery_delta,
+        "final_total":   final_total,
+        "delivery_cost": delivery_cost,
+        "final_total": final_total,
+        "settings": settings,
         "stripe_public_key": stripe_public_key,
         "client_secret": client_secret,
         "payment_intent_id": payment_intent_id,

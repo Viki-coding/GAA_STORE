@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }
-  
 
     /* Saved Address Selection Logic
      Find the <select id="id_saved_address"> that we built in checkout.html*/ 

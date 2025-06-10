@@ -18,23 +18,22 @@
             <ul class="list-group">
                 {% if bag_items %}
                     {% for item in bag_items %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>{{ item.product.name }}</strong> 
-                            <small>
-                                {% if item.size %}Size: {{ item.size }}, {% endif %}
-                                {% if item.color %}Color: {{ item.color }}, {% endif %}
-                                {% if item.manufacturer %}Manufacturer: {{ item.manufacturer }}{% endif %}
-                            </small>
-                            <br>
-                            Quantity: {{ item.quantity }}
-                        </div>
-                        <span>€{{ item.total_price|floatformat:2 }}</span>
-                    </li>
+                        <!-- You can add item details here if needed -->
                     {% endfor %}
+                    <!-- Subtotal -->
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Subtotal</strong>
+                        <strong>€{{ subtotal|floatformat:2 }}</strong>
+                    </li>
+                    <!-- Delivery -->
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Delivery</span>
+                        <span>€{{ delivery_cost|floatformat:2 }}</span>
+                    </li>
+                    <!-- Total (subtotal + delivery) -->
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <strong>Total</strong>
-                        <strong>€{{ grand_total|floatformat:2 }}</strong>
+                        <strong>€{{ final_total|floatformat:2 }}</strong>
                     </li>
                 {% else %}
                     <li class="list-group-item">Your bag is empty.</li>
@@ -48,6 +47,18 @@
             <form id="checkout-form" method="POST" action="{% url 'checkout' %}">
                 {% csrf_token %}
 
+                {% if form.errors %}
+                  <div class="alert alert-danger" role="alert">
+                    <ul class="mb-0">
+                      {% for field, errs in form.errors.items %}
+                        {% for err in errs %}
+                          <li>{{ err }}</li>
+                        {% endfor %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+
                 <!-- Hidden field to carry the PaymentIntent ID -->
                 <input 
                     type="hidden" 
@@ -58,33 +69,29 @@
 
                 <!-- Billing/Shipping Details -->
                 <fieldset class="px-3 mb-4">
-                    <legend class="fieldset-labegit adl small text-black px-2 w-auto">Billing & Shipping</legend>
-                <!-- Saved Addresss Dropdown -->
+                    <legend class="fieldset-label small text-black px-2 w-auto">Billing & Shipping</legend>
+                    <!-- Saved Address Dropdown -->
                     <div class="form-group">
                         <label for="id_saved_address">Saved Shipping Address</label>
                         <select id="id_saved_address" name="saved_address" class="form-control">
-                            {# Empty option -> “Use a new address” #}
                             <option value="">Use a new address</option>
-
-                            {# Loop over each saved address in the forms queryset #}
                             {% for addr in form.fields.saved_address.queryset %}
-                              <option
-                                value="{{ addr.id }}"
-                                data-full_name="{{ addr.full_name|escapejs }}"
-                                data-phone_number="{{ addr.phone_number|escapejs }}"
-                                data-street_address1="{{ addr.street_address1|escapejs }}"
-                                data-street_address2="{{ addr.street_address2|escapejs }}"
-                                data-town_or_city="{{ addr.town_or_city|escapejs }}"
-                                data-county="{{ addr.county|escapejs }}"
-                                data-eircode="{{ addr.eircode|escapejs }}"
-                                data-country="{{ addr.country.code|escapejs }}"
-                                {# If the form was already bound with this address selected, mark it selected #}
-                                {% if form.saved_address.value|stringformat:"s" == addr.id|stringformat:"s" %}
-                                  selected
-                                {% endif %}
-                              >
-                                {{ addr.full_name }} – {{ addr.eircode }}
-                              </option>
+                                <option
+                                    value="{{ addr.id }}"
+                                    data-full_name="{{ addr.full_name|escapejs }}"
+                                    data-phone_number="{{ addr.phone_number|escapejs }}"
+                                    data-street_address1="{{ addr.street_address1|escapejs }}"
+                                    data-street_address2="{{ addr.street_address2|escapejs }}"
+                                    data-town_or_city="{{ addr.town_or_city|escapejs }}"
+                                    data-county="{{ addr.county|escapejs }}"
+                                    data-eircode="{{ addr.eircode|escapejs }}"
+                                    data-country="{{ addr.country.code|escapejs }}"
+                                    {% if form.saved_address.value|stringformat:"s" == addr.id|stringformat:"s" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ addr.full_name }} – {{ addr.eircode }}
+                                </option>
                             {% endfor %}
                         </select>
                         {% if form.saved_address.errors %}
@@ -93,7 +100,7 @@
                             </div>
                         {% endif %}
                     </div>
-                <!-- New Addresss Input fields -->
+                    <!-- New Address Input fields -->
                     <div class="form-group">
                         <label for="full_name">Full Name</label>
                         <input 
@@ -108,7 +115,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}
                     </div>
-
                     <div class="form-group">
                         <label for="billing_email">Email Address</label>
                         <input 
@@ -128,7 +134,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}                    
                     </div>
-
                     <div class="form-group">
                         <label for="phone_number">Phone Number</label>
                         <input
@@ -143,7 +148,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}
                     </div>
-
                     <div class="form-group">
                         <label for="street_address1">Street Address 1</label>
                         <input 
@@ -158,7 +162,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}
                     </div>
-
                     <div class="form-group">
                         <label for="street_address2">Street Address 2 (Optional)</label>
                         <input 
@@ -173,7 +176,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}                    
                     </div>
-
                     <div class="form-group">
                         <label for="town_or_city">Town or City</label>
                         <input 
@@ -188,7 +190,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}                    
                     </div>
-
                     <div class="form-group">
                         <label for="county">County</label>
                         <input 
@@ -203,7 +204,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}                    
                     </div>
-
                     <div class="form-group">
                         <label for="eircode">Eircode</label>
                         <input 
@@ -218,7 +218,6 @@
                             <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}                    
                     </div>
-
                     <div class="form-group">
                         <label for="country">Country</label>
                         <select 
@@ -228,50 +227,71 @@
                             autocomplete="country"
                         >
                             {% for country_code, country_name in form.fields.country.choices %}
-                              <option 
-                                value="{{ country_code }}"
-                                {% if form.country.value == country_code %}selected{% endif %}
-                              >
-                                {{ country_name }}
-                              </option>
+                                <option 
+                                    value="{{ country_code }}"
+                                    {% if form.country.value == country_code %}selected{% endif %}
+                                >
+                                    {{ country_name }}
+                                </option>
                             {% endfor %}
                         </select>
                         {% for err in form.country.errors %}
-                          <div class="invalid-feedback">{{ err }}</div>
+                            <div class="invalid-feedback">{{ err }}</div>
                         {% endfor %}                    
                     </div>
-
                     <!-- Save Shipping Address and Create Profile -->
                     <div class="form-group">
+                        {% if user.is_authenticated %}
+                         <div class="form-check">
+                           <input 
+                             type="checkbox" 
+                             id="save-shipping-address" 
+                             name="store_shipping_address" 
+                             class="form-check-input"
+                             {% if form.store_shipping_address.value %}checked{% endif %}
+                           >
+                           <label for="save-shipping-address" class="form-check-label">
+                             Save Shipping Address
+                           </label>
+                           {% for err in form.store_shipping_address.errors %}
+                             <div class="text-danger small">{{ err }}</div>
+                           {% endfor %}
+                         </div>
+                       {% endif %}
                         <div class="form-check">
                             <input 
-                              type="checkbox" 
-                              id="save-shipping-address" 
-                              name="store_shipping_address" 
-                              class="form-check-input"
-                              {% if form.store_shipping_address.value %}checked{% endif %}
-                            >
-                            <label for="save-shipping-address" class="form-check-label">
-                                Save Shipping Address
-                            </label>
-                            {% for err in form.store_shipping_address.errors %}
-                                <div class="text-danger small">{{ err }}</div>
-                            {% endfor %}                        
-                        </div>
-                        <div class="form-check">
-                            <input 
-                              type="checkbox" 
-                              id="create-profile" 
-                              name="create_user_profile" 
-                              class="form-check-input"
-                              {% if form.create_user_profile.value %}checked{% endif %}
+                                type="checkbox" 
+                                id="create-profile" 
+                                name="create_user_profile" 
+                                class="form-check-input"
+                                {% if form.create_user_profile.value %}checked{% endif %}
                             >
                             <label for="create-profile" class="form-check-label">
                                 Create a profile for faster checkout next time!
                             </label>
                             {% for err in form.create_user_profile.errors %}
-                              <div class="text-danger small">{{ err }}</div>
+                                <div class="text-danger small">{{ err }}</div>
                             {% endfor %}
+                        </div>
+                        <!-- Password fields get toggled by JS -->
+                        <div id="password-fields" style="display:none;" aria-expanded="false">
+                        <div class="form-group">
+                            <label for="id_password1">Password</label>
+                            <input
+                            type="password"
+                            id="id_password"
+                            name="password"
+                            class="form-control"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="id_password2">Confirm Password</label>
+                            <input
+                            type="password"
+                            id="id_password2"
+                            name="password2"
+                            class="form-control"
+                            >
                         </div>
                     </div>
                 </fieldset>
@@ -310,19 +330,14 @@
 </div>
 {% endblock %}
 
-
 {% block extra_js %}
     {{ block.super }}
 
-    {# Embed Stripe keys for JS to read #}
+    <!-- Embed Stripe keys for JS to read -->
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}
     {{ client_secret|json_script:"id_client_secret" }}
 
-    {# Load the Stripe‐integration script #}
+    <!-- Load the Stripe integration script -->
     <script src="{% static 'js/stripe_elements.js' %}"></script>
-
-    {# Load your password‐toggle script #}
     <script src="{% static 'js/checkout.js' %}"></script>
-
-    
 {% endblock %}
