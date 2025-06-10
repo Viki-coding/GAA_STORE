@@ -297,11 +297,16 @@ def edit_address(request, address_id):
 
 @csrf_exempt
 def stripe_webhook(request):
-    """Endpoint for receiving Stripe webhooks."""
-    # 1) Verify the signature
-    payload = request.body
-    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
     endpoint_secret = os.getenv('STRIPE_WH_SECRET')
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
+    print(f"🔑 Using secret: {endpoint_secret}")
+    print(f"📬 Stripe-Signature: {sig_header}")
+
+    """Endpoint for receiving Stripe webhooks."""
+    # # 1) Verify the signature
+    # payload = request.body
+    # sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
+    # endpoint_secret = os.getenv('STRIPE_WH_SECRET')
 
     try:
         event = stripe.Webhook.construct_event(
