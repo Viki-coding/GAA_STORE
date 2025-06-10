@@ -314,16 +314,19 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
 
     try:
-        if event['type'] == 'payment_intent.succeeded':
-            intent = event['data']['object']
-            print("✅ PaymentIntent succeeded:", intent['id'])
-        elif event['type'] == 'payment_intent.payment_failed':
-            intent = event['data']['object']
-            print("❌ PaymentIntent failed:", intent['id'])
+        if event["type"] == "payment_intent.succeeded":
+            intent = event["data"]["object"]
+            print("✅ PaymentIntent succeeded:", intent["id"])
+        elif event["type"] == "payment_intent.payment_failed":
+            intent = event["data"]["object"]
+            print("❌ PaymentIntent failed:", intent["id"])
         else:
-            print("ℹ️ Unhandled event type:", event['type'])
+            print("ℹ️ Unhandled event type:", event["type"])
     except Exception as e:
-        print("❌ Error handling event:", repr(e))
+        # Log the full traceback so we can see exactly what failed
+        import traceback
+        print("🚨 Exception in webhook handler:", e)
+        traceback.print_exc()
         return HttpResponse(status=500)
 
     return HttpResponse(status=200)
