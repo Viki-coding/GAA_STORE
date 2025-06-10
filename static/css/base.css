@@ -197,12 +197,120 @@ body {
   }
 
   /* MailChimp */
-  #mc_embed_signup{
-    background:#fff; 
-    clear:left; 
-    font:14px Helvetica,Arial,sans-serif; 
-    width: 600px;
+footer #mc_embed_signup {
+  background: transparent !important;  
+  width: 100% !important;              
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
 }
+
+/* Hide the “Subscribe” heading & required note */
+footer #mc_embed_signup h2,
+footer #mc_embed_signup .indicates-required {
+  display: none;
+}
+
+/* Turn the inner scroll wrapper into a flex row */
+footer #mc_embed_signup_scroll {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Style the email input */
+footer #mc_embed_signup input#mce-EMAIL {
+  flex: 1 1 auto;
+  min-width: 200px;
+  padding: 0.5rem;
+  border: 1px solid #444;
+  border-radius: 4px 0 0 4px;
+  background: #222;
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Style the submit button */
+footer #mc_embed_signup input.button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+footer #mc_embed_signup input.button:hover {
+  background-color: #0056b3;
+}
+
+/* Footnote (“powered by…”) and responses */
+footer #mc_embed_signup .foot,
+footer #mc_embed_signup .response {
+  color: #bbb;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Hide the honeypot field */
+footer #mc_embed_signup input[name^="b_"] {
+  display: none !important;
+}
+
+/* Footer Subscribe Input Group */
+footer .input-group-lg .form-control {
+  border: 1px solid #444;
+  border-right: none;
+  border-radius: 0.25rem 0 0 0.25rem;
+  background: #222;
+  color: #fff;
+}
+
+footer .input-group-lg .form-control::placeholder {
+  color: #bbb;
+}
+
+footer .input-group-lg .btn-primary {
+  border-radius: 0 0.25rem 0.25rem 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+footer .input-group-lg .btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Ensure the group never overflows its column on mobile */
+@media (max-width: 576px) {
+  footer .input-group-lg {
+    flex-direction: column;
+  }
+  footer .input-group-lg .form-control,
+  footer .input-group-lg .input-group-append {
+    width: 100%;
+    border-radius: 0.25rem;
+  }
+  footer .input-group-lg .btn-primary {
+    margin-top: 0.5rem;
+    border-radius: 0.25rem;
+  }
+}
+
+/* Mobile: stack input + button */
+@media (max-width: 576px) {
+  footer #mc_embed_signup_scroll {
+    flex-direction: column;
+  }
+  footer #mc_embed_signup input#mce-EMAIL,
+  footer #mc_embed_signup input.button {
+    width: 100% !important;
+    border-radius: 4px !important;
+  }
+}
+
 
 /* Stack input and button for mobile */
 @media (max-width: 600px) {
