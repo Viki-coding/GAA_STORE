@@ -1,4 +1,4 @@
-import stripe
+import os, stripe
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -8,7 +8,6 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-import os
 
 from .models import Order, ShippingAddress, OrderItem
 from profiles.models import UserProfile
@@ -299,40 +298,32 @@ def edit_address(request, address_id):
 def stripe_webhook(request):
     endpoint_secret = os.getenv('STRIPE_WH_SECRET')
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
-    print(f"🔑 Using secret: {endpoint_secret}")
-    print(f"📬 Stripe-Signature: {sig_header}")
 
-    """Endpoint for receiving Stripe webhooks."""
-    # # 1) Verify the signature
-    # payload = request.body
-    # sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
-    # endpoint_secret = os.getenv('STRIPE_WH_SECRET')
+    print("🔑 Using secret:", endpoint_secret)
+    print("📬 Stripe-Signature:", sig_header)
+    print("📦 Payload:", request.body[:200], "...")  # first 200 bytes
 
     try:
         event = stripe.Webhook.construct_event(
-            payload=payload, 
-            sig_header=sig_header, 
+            payload=request.body,
+            sig_header=sig_header,
             secret=endpoint_secret
         )
-    except ValueError:
-        # Invalid payload
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError:
-        # Invalid signature
+    except Exception as e:
+        print("❌ Webhook verification or parsing failed:", repr(e))
         return HttpResponse(status=400)
 
-    # 2) Handle the event type
-    if event['type'] == 'payment_intent.succeeded':
-        intent = event['data']['object']
-        # TODO: mark your Order as paid (you can look up by intent.id)
-        # e.g. Order.objects.filter(stripe_pid=intent.id).update(paid=True)
-        print(f"✅ PaymentIntent succeeded: {intent['id']}")
+    try:
+        if event['type'] == 'payment_intent.succeeded':
+            intent = event['data']['object']
+            print("✅ PaymentIntent succeeded:", intent['id'])
+        elif event['type'] == 'payment_intent.payment_failed':
+            intent = event['data']['object']
+            print("❌ PaymentIntent failed:", intent['id'])
+        else:
+            print("ℹ️ Unhandled event type:", event['type'])
+    except Exception as e:
+        print("❌ Error handling event:", repr(e))
+        return HttpResponse(status=500)
 
-    elif event['type'] == 'payment_intent.payment_failed':
-        intent = event['data']['object']
-        print(f"❌ PaymentIntent failed: {intent['id']}")
-
-    # You can handle other event types here as needed
-
-    # 3) Return a 200 so Stripe knows you received it
     return HttpResponse(status=200)
