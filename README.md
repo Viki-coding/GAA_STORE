@@ -1,22 +1,44 @@
 # GAA_STORE
 
-Live Link:
+Live Link: https://gaastore-2f38a7e53edc.herokuapp.com/
 
 Link to Kanban Board:  https://github.com/users/Viki-coding/projects/9/views/1?layout=board
 
-Link to Testing 
+## Additional Documentation
 
+- [SEO and Marketing Document](seo-marketing.md)
+- [Testing Document](TESTING.md)
+  
 Table of Contents
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Description - Project Purpose](#description---project-purpose)
+- [CRUD](#crud)
+- [User Personas](#user-personas)
+- [Design Choices](#design-choices)
+- [Kanban Board](#kanban-board)
+- [UX](#ux)
+- [User Stories](#user-stories)
+- [SEO and Web Marketing](#seo-and-web-marketing)
+- [Features](#features)
+- [Accessibility](#accessibility)
+- [Technologies Used](#technologies-used)
+- [Deployment Steps](#deployment-steps)
+- [Heroku Deployment](#heroku-deployment)
+- [Acknowledging Contributions & Credits](#acknowledging-contributions--credits)
+- [Legal & Ethical Compliance](#legal--ethical-compliance)
+- 
 IMAGES: But since these hurley images are basically “design assets” rather than user content, bundling them in static/ is the simplest, most reliable approach.
 
 <h2>Introduction</h2>
 
 
 <h2>Description - Project Purpose</h2>
-Gaelic Games in Ireland is an integral part of every townland, parish, village, town, city and county in Ireland and now farther afield.  This site aims at show casing a large variety of different hurleys made by different manufactures and different materials, such as ash and bamboo and ash, to allow the customer to quickly view and purchase hurleys, sliotars and hurley grips and hurley helmets.  Currently, there are individual hurley makers or sports shops who only sell one particular type of hurley and do not show the range available in Ireland. 
+Gaelic Games in Ireland is an integral part of every townland, parish, village, town, city and county in Ireland and now farther afield.  This site aims at show casing a large variety of different hurleys made by different manufactures and different materials, such as ash and bamboo and goalie hurleys, to allow the customer to quickly view and purchase hurleys, sliotars and hurley grips and hurley helmets.  Currently, there are individual hurley makers or sports shops who only sell one particular type of hurley and do not show the range available in Ireland from a number of different hurley makers. 
 
-One of the unique selling points it to offer next day delivery if ordered before 3pm within the republic of Ireland.  During the hurling season, players are busy with matches and training, so if you break your hurley you need a replacement quickly.  There will also be a reviews section where customers can leave reviews about their purchase.  There will be an FAQ section to highlight frequently asked questions, such as why metal bands are used.  We will have a hurley size calculator where a user can enter their height, the height to their hip and the hurley calculator will tell you what size hurley is appropriate.  The customer will be able to add items to their basket, they will be able to select the size of the particular hurley they require, a sucess message will appear when they successfully add an item to their basket. when they add to their basket a display will appear at the bottom of other items to 'bundle' other items in for a deal.  When they log on to the site, a pop up will appear offering 5% off their first order when they enter their email address. There will be mail chimp newsletter.  There will be a privacy policy.  There will be a 404 page. Once the customer has added items to their shopping cart, they will proceed to checkout section, where they will enter their payment details for stripe to process,  there will be a remember me tick box so the customer can set up an account profile where they can view their orders. During each process, success or warning messages will be displayed. 
+There will be an FAQ section to highlight frequently asked questions, such as why metal bands are used.  We will have a hurley size calculator where a user can enter their height, the height to their hip and the hurley calculator will tell you what size hurley is appropriate.  The customer will be able to add items to their basket, they will be able to select the size of the particular hurley they require, a sucess message will appear when they successfully add an item to their basket. when they add to their basket a display will appear at the bottom of other items to 'bundle' other items in for a deal.  When they log on to the site, a pop up will appear offering 5% off their first order when they enter their email address. There will be mail chimp newsletter.  There will be a privacy policy.  There will be a 404 page. Once the customer has added items to their shopping cart, they will proceed to checkout section, where they will enter their payment details for stripe to process,  there will be a remember me tick box so the customer can set up an account profile where they can view their orders. During each process, success or warning messages will be displayed. 
 
 
 
@@ -25,23 +47,22 @@ User will be able to REGISTER as a user on the site
 User will be able to LOGIN
 
 Create
-User will be able to add an item to the shopping bag
+User will be able to create a profile and add a number of shipping address to their profile. 
 
 Read
-User will be able to view the items in their bag
+User will be able to view their saved shipping addresses and view previous orders. 
 
 Update
-User will be able to increase decrease or change the item in their shopping bag
+User will be able to change or edit their saved shipping addresses. 
 
 Delete
-User will be able to delete an item/items from their shopping bag
+User will be able to delete saved shipping address. 
 
-Users will be able to make a puchase
+User will get feedback on all CRUD functionality. 
 
-There will be user feedback on CRUG, eg - Are you sure you want to delete item from bag?
 
 CRUD to FAQ for admin user
-
+Shop owners will be able to log in if they have staff/superuser status. They will be able to navigate to the FAQ section where they can perform CRUD on the FAQ. 
 
 <h2>User Personas:<h2>
 
@@ -146,7 +167,11 @@ Kanban Board Progress
 
 <h2>UX</h2>
 
-When you land on our site it is immediately obvious what the site is and conveys the message of 
+When you land on our site it is immediately obvious what the site is and conveys the message of passion about the sport of hurling with the iconic hero image of a helmet and hurl.  Hurling is a historic and deep rooted game and lifestyle in Ireland. 
+
+The site is easy to navigate, there is an immeadiate call to action button 'Shop for Hurleys Now'. 
+
+
 
 
 
@@ -247,45 +272,38 @@ Database Construction
 Hero Image I have incorporated a high-quality hero image of a hurley and helmet
 I am using  taglines like "Your Ultimate Source for Gaelic Games Gear." This aligns with my user persona profiles of Liam Murphy (The Dedicated Player) and Emily Ryan (The Aspiring Camogie Player).
 
-I have a dynamic Call-to-Actions (CTAs): "Shop Now" "Find Your Perfect Hurley" and "Next-Day Delivery Available!" prominently featured on the homepage.
+I have a dynamic Call-to-Actions (CTAs): "Shop Now" "Find Your Perfect Hurley" prominently featured on the homepage.
+I am engaging users with the FAQ and the How to Meausre pages. 
 
-I have highlighted USP (Unique Selling Point) of the next-day delivery option and the hurley size calculator s to immediately engage users.
 
-2. Clear Navigation and Layout
-Simple and Intuitive Menu, the navigation bar is clearly labelled with categories like "Hurleys" "Sliotars" "Helmets" "FAQ" and "Contact Us."
+1. Clear Navigation and Layout
+Simple and Intuitive Menu, the navigation bar is clearly labelled with categories like "Hurleys" "Accessories" "FAQ" and "How to Measure."
 
 The site uses responsive design, ensuring seamless usability across devices for parents like Siobhán O'Connell (The Supportive Parent) who may browse on mobile.
 
 I have used sticky navigation to keep the navigation bar accessible as users scroll down for ease of movement between sections.
 
 3. Tailored Product Display
-In cluded in the site is filter options for material (e.g., ash or bamboo), manufacturer, size, and price to suit gift buyers like Aoife Byrne (The Gift Buyer).
+Included in the site is filter options for material (e.g., ash or bamboo), manufacturer, size, and price to suit gift buyers like Aoife Byrne (The Gift Buyer).
 
-Bundle Deals Section: Automatically suggest bundles (e.g., hurley + sliotar + grip) to encourage additional purchases.
 
-Interactive Features: zoom hover effects on product images to reveal details for an interactive shopping experience.
-
-4. Enhanced Shopping Cart Experience
+1. Enhanced Shopping Cart Experience
 Mini Cart Preview: I display a preview of the cart when items are added to confirm selections, along with success messages.
 
-5. Engaging User Features
+1. Engaging User Features
 We have a Profile Dashboard: For logged-in users like Seán McCarthy (The Busy Coach), display a personalized dashboard to view order history, manage orders, and edit profiles.
 
-6. Community and Customer Feedback
-Review Section: Included is a ratings and user feedback prominently on product pages to help Siobhán O'Connell make informed decisions for her son.
 
-Pop-Up for First-Time Users: Displays a non-intrusive pop-up offering 5% off for new customers like Aoife Byrne.
-
-7. Specialized Tools and Calculators
+1. Specialized Tools and Calculators
 Hurley Size Calculator: This feature is visible on both the homepage and the product pages. 
 
-FAQ Section: The FAQ is Organised by categories and display them with collapsible dropdowns for quick navigation.
+FAQ Section: The FAQ questions are displayed them with collapsible dropdowns for quick navigation.
 
-8. Admin and Superuser Features
-Admin Dashboard: We have created an user firendly dashboard for product management with icons for adding, editing, and deleting products. 
+1. Admin and Superuser Features
+Admin Login: We have created an user friendly dashboard for product management with icons for adding, editing, and deleting products. 
 Drag-and-Drop Functionality: Enable image uploads with a drag-and-drop interface for managers.
 
-9. Encouraging Engagement
+1. Encouraging Engagement
 Mailchimp Integration: We have designed an eye-catching newsletter signup form with benefits like "Be the First to Know About New Arrivals and Deals."
 
 Social Media Integration: Displays our facebook clickable icon in the footer to foster community engagement.
@@ -337,51 +355,51 @@ Feature Title / Screenshot / Value to the User
 
 Navigation Bar:
 
-Login Feature If you already have a username and password you can log in easily to view your events. Once logged in the button changes to Log Out. When you go to log out an alert modul asks if you are sure you want to log out.
-
-Nav-bar with logout modul
+Login/Signup Feature If you already have a username and password you can log in easily to view your profile and saved shipping addresses and any previous orders. Once logged in the button says "Hello <user>", if you click this it takes you to your User Profile Page and a Log Out button appears. When you go to log out an alert modul asks if you are sure you want to log out.
 
 Sign Up Feature:
 
-If you are a new user, it is easy to navigate to the Sign Up form, enter your details and password being set up within seconds, the 'Login' button changes to 'Log Out' and you have access to book events.
+If you are a new user, it is easy to navigate to the Sign Up form, enter your details and password being set up within seconds, the 'Login' button changes to 'Log Out' and you have access to your profile and orders.
 
-Nav Bar
+Hurleys 
+This site sell hurleys, if you want a hurley you click on the hurley section on my main nav bar, this displays 3 categories of hurleys, Ash/Bambu/Goalie. 
 
+Accessories:
+Accessories such as helmets, sliotars and grips. Easily navigable from the nav bar and you can add items to your bag quickly. 
 
-Search by Hurley Type Feature:
+How To Measure:
+Many parents new to the game may not understand how to measure their child for the correct size hurley or helmet. By clicking on this How to Meausure nav bar heading takes you to our page giving expert advice on how to do it. 
 
-Users who want to quickly search for a particular hurley type only have to click once to narrow down the search to certain hurleys, Ash, Bambu and Goalie. 
-
+FAQ:
+Our FAQ is easy to navigate from the nav bar and details important and informed advice on everything assosicated with hurling and camogie. 
 
 
 FOOTER FEATURES:
 
-Footer Features
-
+Facebook:
+Link to Facebook to enhance user enhancment and communication. This allows the user to access the GAA Store socials in a new page.
 We use the attribute rel="noopener noreferrer" in the anchor tages to enhance security and protect against security vulnerabilities.
 
-The Eircode of centre is already linked to google maps the user can easily navigate to the centre by clicking on the Eircode, which opens in a new page.
 
 Privacy Policy 
-
+We have created a privacy policy with a link here to the privacy policy statement. 
 
 Mailchimp Signup
+We have created a mailchimp sign up with an input field where you can input your email and sign up easilty. 
 
-Facebook Features:
-
-This allows the user to access the GAA Store socials in a new page.
 
 Security
-In a world where cyber security threats are on the increase, inlcuding the awful affect the HSE hack had on our health care system, it is important to be mindful of security when creating an application.
+In a world where cyber security threats are on the increase, we ensured the following was present on our site: 
+
 As well as the rel="noopener noreferrer" in the anchor tags of our external links other security meausures in our app include:
 
 Authentication and authorization of our users using django framework
 Using the CSRF protection tokens in our forms
-Error handling such as creating our 404 page
+Error handling such as creating our 404 page and 500 page
 Using djangos password validators
 Using djangos security middleware settings.
-Only authenticated users can edit delete their booked events
-Only authenticated facilicators can create, view, edit, delete their own events.
+Only authenticated users can edit delete their shipping addresses and profiles.
+Only authenticated staff can create, view, edit, delete the FAQ.
 
 Interaction
 Whenever a user interacts with our site, they get immeadiate feedback messages and confirmations.
@@ -400,12 +418,17 @@ When a user attempts to book an event who’s capacity has already been reached,
 
 ![500 Error](https://github.com/user-attachments/assets/6747674d-8ad5-4899-a4bc-ed5798943a71)
 
-Future Implementation Section
- - I would like when a user logs onto their profile that they see the item they bought - but also the item details such as color and size if applicable. I would modify my order item model. Unfortunely I just ran out of time on this occasion. 
- - 
+Future Implementation Section: 
 
-Accessibility
-This is a community website for everyone in the community to use. Accessibility of the site is very important.
+ - I would like when a user logs onto their profile that they see the item they bought - but also the item details such as color and size if applicable. I would modify my order item model. Unfortunely I just ran out of time on this occasion. 
+ - I would like to add a reviews section
+ - I would like to add promprts such as customers who bought this also bought ... 
+ - Implement functionality for password reset via email
+ - Implement a wish list feature 
+
+Accessibility:
+
+Accessibility of the site is very important.
 
 (a) Semantic HTML elements were used to provide meaningful structure to the content.
 
@@ -468,9 +491,13 @@ Technologies Used:
 * Figma - to crate wireframes
 * Converting tabel to markdown (https://tabletomarkdown.com/convert-spreadsheet-to-markdown/)
 * Whitenoise
+* Perplexity for trouble shooting 
 * dbdiagram.io - For creation of ERD diagram 
 * https://www.vecteezy.com - used for images 
 * https://temp-mail.org/en/
+* Mailchimp 
+* Stripe 
+* Privacy policy generator 
 
 Deployment Steps:
 
@@ -537,7 +564,20 @@ App will build:
 
 Stripe Connection: 
 
-* 
+* Sign up for a Stripe account if you don’t have one.
+* In the Stripe dashboard, get your test and live API keys (Publishable key, Secret key, and Webhook secret).
+* Add your Stripe keys to your environment variables or env.py:
+    - STRIPE_PUBLIC_KEY
+    - STRIPE_SECRET_KEY
+    - STRIPE_WH_SECRET
+* Install the Stripe Python package:
+    - pip install stripe
+* In your Django settings, load the Stripe keys from environment variables.
+* Use the Stripe keys in your checkout/payment views and templates.
+* Set up your webhook endpoint in Stripe to point to /checkout/wh/ (or your webhook URL).
+* In your Django project, implement a webhook handler to process Stripe events.
+* Test payments using Stripe’s test card numbers (e.g., 4242 4242 4242 4242).
+* When ready for production, switch to your live Stripe keys.
 
 Acknowledging Contributions & Credits
 TITLE OR DESCRIPTION SOURCE OF LINK CONTEXT
@@ -576,12 +616,13 @@ MARKDOWN:
 
 Help with markdown, found this site usefule (https://www.markdownguide.org/basic-syntax/) and downloaded this extenstion to Visual Studio Code (https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents)
 
-We gained inspiration with the READ.me by watching the video 'Creating your first README with Kera Cudmore' on CI Chanel Lead Library on YouTube and also the video with Lane-Sawyer Thompson on CI Channel on YouTube. Thanks to the on-line tutor, Oisin and Rebecca for their expertise and ability to explain some of the 'challenges' I encountered. Thanks to our very supportive and positive facilitator Kay and my Kiwi mentor Dick Vlaanderen. Also found the webinar 'Community Q&A: How to Troubleshoot with Lane-Sawyer Thompson' very helpful approach to how to view looking at the site for bugs and methodically identifying issues.
+We gained inspiration with the READ.me by watching the video 'Creating your README' on CI Chanel Lead Library on YouTube and also the video with Lane-Sawyer Thompson on CI Channel on YouTube. Thanks to the on-line tutor, Oisin and Alan for their expertise and ability to explain some of the 'challenges' I encountered. Thanks to our very supportive and positive facilitator Kay and my Kiwi mentor Dick Vlaanderen. Also found the webinar 'Community Q&A: How to Troubleshoot with Lane-Sawyer Thompson' very helpful approach to how to view looking at the site for bugs and methodically identifying issues.
 
 Media/Images
 Images used from 
 https://www.vecteezy.com and edited in canva. 
 Elverys 
+
 
 
 CONTENT
