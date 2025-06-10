@@ -52,3 +52,29 @@ textarea#giftMessage {
     font-weight: 300;
     color: #6c757d; 
 }
+
+/* Constrain width, add side padding */
+.bag-summary-wrapper {
+  max-width: 1140px;     
+  margin: 2rem auto;      
+  padding: 0 1rem;        
+}
+
+.bag-summary-wrapper .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.bag-summary-wrapper .col-md-6 {
+  padding: 1rem 0;
+}
+
+.bag-summary-wrapper .col-md-6.text-right {
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+#giftMessage {
+  min-height: 120px;
+}
