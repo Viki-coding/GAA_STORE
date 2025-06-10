@@ -161,25 +161,40 @@ footer .form-control {
 }
 
 /* Return home: outline style */
-.btn-return-home {
-  color: #333;
-  background-color: transparent;
-  border-color: #333;
-}
-.btn-return-home:hover {
-  background-color: #333;
-  color: #fff;
+/* -------------------------------------------------------------------
+   Thank-You Page Nav Buttons
+   ------------------------------------------------------------------- */
+
+/* Container to center them */
+.thank-you-nav {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
-/* Continue shopping: solid style */
-.btn-continue-shopping {
+/* Return Home or Continue Shopping nav options */
+.thank-you-nav .btn-outline-light {
+  border-width: 2px;
   color: #fff;
-  background-color: #28a745;  
-  border-color: #28a745;
+  transition: background-color 0.2s ease, color 0.2s ease,
+              transform 0.1s ease;
 }
-.btn-continue-shopping:hover {
-  background-color: #218838; 
-  border-color: #1e7e34;
+
+.thank-you-nav .btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* Stack on small screens */
+@media (max-width: 576px) {
+  .thank-you-nav {
+    flex-direction: column;
+  }
+  .thank-you-nav .btn {
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {

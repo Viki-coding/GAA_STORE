@@ -19,6 +19,7 @@ body {
 /* The wrapper takes up the remaining space */
 .wrapper {
     flex: 1;
+    margin-bottom: 1.5rem;
 }
 
 /* Navbar */
@@ -400,7 +401,8 @@ footer .input-group-lg .btn-primary:hover {
 footer {
     background-color: #111; /* Slightly lighter black for contrast */
     color: #fff;
-    padding: 10px 0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
     font-size: 14px;
 }
 
