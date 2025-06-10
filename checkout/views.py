@@ -1,7 +1,7 @@
 import os
 import stripe
 import json
-
+import logging
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -297,39 +297,52 @@ def edit_address(request, address_id):
     return render(request, 'checkout/edit_address.html', {'form': form})
 
 
+logger = logging.getLogger(__name__)
+
+
 @csrf_exempt
 def stripe_webhook(request):
-    endpoint_secret = os.getenv('STRIPE_WH_SECRET')
-    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
-
-    print("🔑 Using secret:", endpoint_secret)
-    print("📬 Stripe-Signature:", sig_header)
-    print("📦 Payload:", request.body[:200], "...")  # first 200 bytes
+    """Endpoint for receiving Stripe webhooks."""
+    # 1) Verify the signature
+    payload = request.body
+    sig_header = request.META.get("HTTP_STRIPE_SIGNATURE", "")
+    endpoint_secret = os.getenv("STRIPE_WH_SECRET", "")
 
     try:
         event = stripe.Webhook.construct_event(
-            payload=request.body,
+            payload=payload,
             sig_header=sig_header,
-            secret=endpoint_secret
+            secret=endpoint_secret,
         )
-    except Exception as e:
-        print("❌ Webhook verification or parsing failed:", repr(e))
+    except (ValueError, stripe.error.SignatureVerificationError) as e:
+        logger.error("❌ Webhook verification failed: %s", e)
         return HttpResponse(status=400)
 
-    try:
-        if event["type"] == "payment_intent.succeeded":
-            intent = event["data"]["object"]
-            print("✅ PaymentIntent succeeded:", intent["id"])
-        elif event["type"] == "payment_intent.payment_failed":
-            intent = event["data"]["object"]
-            print("❌ PaymentIntent failed:", intent["id"])
-        else:
-            print("ℹ️ Unhandled event type:", event["type"])
-    except Exception as e:
-        # Log the full traceback so we can see exactly what failed
-        import traceback
-        print("🚨 Exception in webhook handler:", e)
-        traceback.print_exc()
-        return HttpResponse(status=500)
+    # 2) Handle the event
+    if event["type"] == "payment_intent.succeeded":
+        intent = event["data"]["object"]
+        pid = intent["id"]
 
+        try:
+            order = Order.objects.get(stripe_pid=pid)
+        except Order.DoesNotExist:
+            logger.error("Order with pid %s not found!", pid)
+            return HttpResponse(status=200)
+
+        # Mark order as paid
+        order.status = "paid"
+        order.stripe_pid = pid
+        order.save(update_fields=["status", "stripe_pid"])
+        logger.info("Order %s marked as paid.", order.order_number)
+
+    elif event["type"] == "payment_intent.payment_failed":
+        intent = event["data"]["object"]
+        pid = intent["id"]
+        logger.warning("PaymentIntent failed: %s", pid)
+
+    else:
+        # Any other event types you want to handle
+        logger.debug("Unhandled event type %s", event["type"])
+
+    # 3) Return a 200 so Stripe knows we received it
     return HttpResponse(status=200)
