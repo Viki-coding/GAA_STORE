@@ -2,6 +2,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from .models import ShippingAddress, Order
 from django_countries.fields import CountryField
+from django.core.validators import RegexValidator
 
 
 class CheckoutForm(forms.ModelForm):
@@ -23,7 +24,13 @@ class CheckoutForm(forms.ModelForm):
     phone_number = forms.CharField(
         max_length=15,
         label="Phone Number",
-        widget=forms.TextInput(attrs={'autocomplete': 'tel'})
+        validators=[
+            RegexValidator(
+                regex=r'^\+?[0-9\s\-]{7,15}$',
+                message="Enter a valid phone number (digits, spaces, dashes, and optional leading +)."
+            )
+        ],
+        widget=forms.TextInput(attrs={'autocomplete': 'tel', 'inputmode': 'tel', 'pattern': r'^\+?[0-9\s\-]{7,15}$'})
     )
     street_address1 = forms.CharField(
         max_length=255,

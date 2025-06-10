@@ -402,6 +402,8 @@ Whenever a user interacts with our site, they get immediate feedback messages an
 When a user adds something to their shopping bag, deletes something in their shopping bag or makes an input error - a message is displayed to keep them informed.
 
 ## Error Handling
+USed RegexValidator to validate telephone number input field
+Django forms has server-side error handling for fields. 
 
 #### 404 Page
 We have created a 404 page so that user of accidentally enters a typo in the address they get an opportunity to be redirected back to the home page: 404 page 
@@ -422,6 +424,8 @@ When a user attempts to book an event who’s capacity has already been reached,
  - Implement a wish list feature 
 Future: Add color-coded statuses for products (e.g., "In Stock," "Low Stock"). under admin superuser section
 User testimonials from All Ireland and county players
+- Currently if a new user completes their address and details at checkout and ticks the remember me box, their email and gmail is remembered and when they click into their user profile, their order is there but not the address they first used.  I would like to update that. 
+- When a user logs in - I would like them to be able to go to their user profile and see the status or their order whether its pending, processed, out for delivery etc.
 
 ## Accessibility:
 

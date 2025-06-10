@@ -86,9 +86,9 @@ def checkout(request):
 
         #  Process the form data if valid 
         if form.is_valid():
-            create_user_profile    = form.cleaned_data.get("create_user_profile", False)
+            create_user_profile = form.cleaned_data.get("create_user_profile", False)
             store_shipping_address = form.cleaned_data.get("store_shipping_address", False)
-            saved_address          = form.cleaned_data.get("saved_address")
+            saved_address = form.cleaned_data.get("saved_address")
 
             user_profile = None
 
@@ -112,7 +112,7 @@ def checkout(request):
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 login(request, user)
 
-                # Ensure profile exists (won’t double‐create)
+                # Ensure profile exists errrro handling - dont double‐create)
                 user_profile, _ = UserProfile.objects.get_or_create(user=user)
 
             elif request.user.is_authenticated:
