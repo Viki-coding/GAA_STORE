@@ -20,17 +20,14 @@
                     {% for item in bag_items %}
                         <!-- You can add item details here if needed -->
                     {% endfor %}
-                    <!-- Subtotal -->
                     <li class="list-group-item d-flex justify-content-between">
                         <strong>Subtotal</strong>
                         <strong>€{{ subtotal|floatformat:2 }}</strong>
                     </li>
-                    <!-- Delivery -->
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Delivery</span>
                         <span>€{{ delivery_cost|floatformat:2 }}</span>
                     </li>
-                    <!-- Total (subtotal + delivery) -->
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <strong>Total</strong>
                         <strong>€{{ final_total|floatformat:2 }}</strong>
@@ -48,15 +45,15 @@
                 {% csrf_token %}
 
                 {% if form.errors %}
-                  <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger" role="alert">
                     <ul class="mb-0">
-                      {% for field, errs in form.errors.items %}
-                        {% for err in errs %}
-                          <li>{{ err }}</li>
+                        {% for field, errs in form.errors.items %}
+                            {% for err in errs %}
+                                <li>{{ err }}</li>
+                            {% endfor %}
                         {% endfor %}
-                      {% endfor %}
                     </ul>
-                  </div>
+                </div>
                 {% endif %}
 
                 <!-- Hidden field to carry the PaymentIntent ID -->
@@ -137,15 +134,22 @@
                     <div class="form-group">
                         <label for="phone_number">Phone Number</label>
                         <input
-                            type="text"
+                            type="tel"
                             id="phone_number"
                             name="phone_number"
                             class="form-control{% if form.phone_number.errors %} is-invalid{% endif %}"
                             autocomplete="tel"
+                            inputmode="tel"
+                            pattern="^\+?[0-9\s\-]{7,15}$"
+                            aria-describedby="phoneHelp"
                             value="{{ form.phone_number.value|default_if_none:'' }}"
+                            required
                         >
+                        <small id="phoneHelp" class="form-text text-muted">
+                            Enter a valid phone number (digits only, 7-15 characters).
+                        </small>
                         {% for err in form.phone_number.errors %}
-                            <div class="invalid-feedback">{{ err }}</div>
+                            <div class="invalid-feedback" role="alert">{{ err }}</div>
                         {% endfor %}
                     </div>
                     <div class="form-group">
@@ -240,25 +244,25 @@
                         {% endfor %}                    
                     </div>
                     <!-- Save Shipping Address and Create Profile (FUTURE plan disable for now)-->
-                     {% if False %}
+                    {% if False %}
                         <div class="form-group">
                             {% if user.is_authenticated %}
                             <div class="form-check">
-                            <input 
-                                type="checkbox" 
-                                id="save-shipping-address" 
-                                name="store_shipping_address" 
-                                class="form-check-input"
-                                {% if form.store_shipping_address.value %}checked{% endif %}
-                            >
-                            <label for="save-shipping-address" class="form-check-label">
-                                Save Shipping Address
-                            </label>
-                            {% for err in form.store_shipping_address.errors %}
-                                <div class="text-danger small">{{ err }}</div>
-                            {% endfor %}
+                                <input 
+                                    type="checkbox" 
+                                    id="save-shipping-address" 
+                                    name="store_shipping_address" 
+                                    class="form-check-input"
+                                    {% if form.store_shipping_address.value %}checked{% endif %}
+                                >
+                                <label for="save-shipping-address" class="form-check-label">
+                                    Save Shipping Address
+                                </label>
+                                {% for err in form.store_shipping_address.errors %}
+                                    <div class="text-danger small">{{ err }}</div>
+                                {% endfor %}
                             </div>
-                        {% endif %}
+                            {% endif %}
                             <div class="form-check">
                                 <input 
                                     type="checkbox" 
@@ -276,23 +280,24 @@
                             </div>
                             <!-- Password fields get toggled by JS -->
                             <div id="password-fields" style="display:none;" aria-expanded="false">
-                            <div class="form-group">
-                                <label for="id_password1">Password - Must be 8 digits long</label>
-                                <input
-                                type="password"
-                                id="id_password"
-                                name="password"
-                                class="form-control"
-                                >
-                            </div>
-                            <div class="form-group">
-                                <label for="id_password2">Confirm Password</label>
-                                <input
-                                type="password"
-                                id="id_password2"
-                                name="password2"
-                                class="form-control"
-                                >
+                                <div class="form-group">
+                                    <label for="id_password1">Password - Must be 8 digits long</label>
+                                    <input
+                                        type="password"
+                                        id="id_password"
+                                        name="password"
+                                        class="form-control"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_password2">Confirm Password</label>
+                                    <input
+                                        type="password"
+                                        id="id_password2"
+                                        name="password2"
+                                        class="form-control"
+                                    >
+                                </div>
                             </div>
                         </div>
                     {% endif %}
@@ -309,19 +314,19 @@
                 <div class="submit-button text-right mt-5 mb-2">                    
                     <a href="{% url 'view_bag' %}" class="btn btn-outline-black rounded-0">
                         <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
+                            <i class="fas fa-chevron-left" aria-hidden="true"></i>
                         </span>
                         <span class="font-weight-bold">Adjust Bag</span>
                     </a>
-                    <button id="submit-button" class="btn btn-black rounded-0">
+                    <button id="submit-button" class="btn btn-black rounded-0" type="submit">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon">
-                            <i class="fas fa-lock"></i>
+                            <i class="fas fa-lock" aria-hidden="true"></i>
                         </span>
                     </button>
                     <p class="small payment-message my-0">
                         <span class="icon">
-                            <i class="fas fa-exclamation-circle"></i>
+                            <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
                         </span>
                         <span>Your card will be charged <strong>€{{ grand_total|floatformat:2 }}</strong></span>
                     </p>

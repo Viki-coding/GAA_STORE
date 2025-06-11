@@ -1,4 +1,3 @@
-{# core/templates/core/faq_list.html #}
 {% extends "base.html" %}
 {% load static %}
 
@@ -13,7 +12,14 @@
       If you can’t find the answer you’re looking for, feel free to reach out to us.
     </p>
 
-    {# Only staff/superusers see the “Add New FAQ” button #}
+    <!-- Only staff/superusers see the “Add New FAQ” button -->
+    {% if user.is_authenticated %}
+      <div class="text-right mb-3">
+        <a href="{% url 'faq_list' %}" class="btn btn-secondary">
+          View All FAQs
+        </a>
+      </div>
+    {% endif %}
     {% if user.is_staff %}
       <div class="text-right mb-3">
         <a href="{% url 'faq_add' %}" class="btn btn-add-faq">
@@ -36,8 +42,6 @@
                 {{ faq.question }}
               </button>
             </h5>
-
-            {# If user is staff, show Edit / Delete buttons next to each question #}
             {% if user.is_staff %}
               <div class="ml-2">
                 <a href="{% url 'faq_edit' faq.pk %}"
@@ -51,7 +55,6 @@
               </div>
             {% endif %}
           </div>
-
           <div id="collapse{{ faq.pk }}" class="collapse"
                aria-labelledby="heading{{ faq.pk }}"
                data-parent="#faqAccordion">

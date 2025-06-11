@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'core/css/faq.css' %}">
+<link rel="stylesheet" href="{% static 'core/css/faq.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
         </div>
         <div class="card-body">
           <p class="mb-4 text-center">
-            Are you sure you want to delete the question: 
+            Are you sure you want to delete the question:
             <strong>“{{ object.question }}”</strong>?
           </p>
           <form method="post" class="text-center">

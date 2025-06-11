@@ -9,74 +9,72 @@
 {% block content %}
 <div class="order-detail-container">
 
-  <!-- ─── Order Summary Card ─── -->
-  <div class="order-summary-card">
-    <h2>Order #{{ order.order_number }}</h2>
-    <p><strong>Date:</strong> {{ order.order_date|date:"F j, Y, g:i a" }}</p>
-    <p><strong>Status:</strong> {{ order.status|default:"Processing" }}</p>
-    <p class="order-total"><strong>Total:</strong> €{{ order.total_price|floatformat:2 }}</p>
-  </div>
-  
-  <!-- ─── Shipping Address Section ─── -->
-  <div class="order-section">
-    <h4>Shipping Address</h4>
-    <address>
-      <i class="fa fa-map-marker"></i>
-      {{ order.shipping_address.full_name }}<br>
-      {{ order.shipping_address.street_address1 }}<br>
-      {% if order.shipping_address.street_address2 %}
-        {{ order.shipping_address.street_address2 }}<br>
-      {% endif %}
-      {{ order.shipping_address.town_or_city }}, {{ order.shipping_address.county }}<br>
-      {{ order.shipping_address.eircode }}<br>
-      {{ order.shipping_address.country.name }}
-    </address>
-  </div>
-  
-  <!-- ─── Gift Message Section (if applicable) ─── -->
-  {% if order.is_gift and order.gift_message %}
-    <div class="order-section gift-message">
-      <h4>Gift Message</h4>
-      <div class="gift-card">{{ order.gift_message|linebreaks }}</div>
+    <!-- ─── Order Summary Card ─── -->
+    <div class="order-summary-card">
+        <h2>Order #{{ order.order_number }}</h2>
+        <p><strong>Date:</strong> {{ order.order_date|date:"F j, Y, g:i a" }}</p>
+        <p><strong>Status:</strong> {{ order.status|default:"Processing" }}</p>
+        <p class="order-total"><strong>Total:</strong> €{{ order.total_price|floatformat:2 }}</p>
     </div>
-  {% endif %}
-  
-  <!-- ─── Items Section ─── -->
-  <div class="order-section">
-    <h4>Items</h4>
-    <ul class="items-list">
-      {% for item in order.lineitems.all %}
-        <li class="item-row">
-          {# Thumbnail: fall back to a placeholder if no image exists #}
-          {% if item.product.image %}
-            <img src="{{ item.product.image.url }}" class="product-thumb" alt="{{ item.product.name }}">
-          {% else %}
-            <img src="{% static 'images/placeholder-56x56.png' %}" class="product-thumb" alt="Placeholder">
-          {% endif %}
-          
-          <div class="item-desc">
-            <span class="product-name">{{ item.product.name }}</span>
-            {% if item.size %}
-              <span class="product-detail">Size: {{ item.size }}</span>
+    
+    <!-- ─── Shipping Address Section ─── -->
+    <div class="order-section">
+        <h4>Shipping Address</h4>
+        <address>
+            <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+            {{ order.shipping_address.full_name }}<br>
+            {{ order.shipping_address.street_address1 }}<br>
+            {% if order.shipping_address.street_address2 %}
+                {{ order.shipping_address.street_address2 }}<br>
             {% endif %}
-            {% if item.color %}
-              <span class="product-detail">Color: {{ item.color }}</span>
-            {% endif %}
-            <span class="product-qty">Qty: {{ item.quantity }}</span>
-          </div>
-          
-          <div class="item-price">€{{ item.lineitem_total|floatformat:2 }}</div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-  
-  <!-- ─── Back to Profile Button ─── -->
-  <div class="back-link-container">
-    <a href="{% url 'profile' %}" class="btn btn-secondary back-to-profile">
-      <i class="fa fa-arrow-left"></i> Back to My Profile
-    </a>
-  </div>
-  
+            {{ order.shipping_address.town_or_city }}, {{ order.shipping_address.county }}<br>
+            {{ order.shipping_address.eircode }}<br>
+            {{ order.shipping_address.country.name }}
+        </address>
+    </div>
+    
+    <!-- ─── Gift Message Section (if applicable) ─── -->
+    {% if order.is_gift and order.gift_message %}
+    <div class="order-section gift-message">
+        <h4>Gift Message</h4>
+        <div class="gift-card">{{ order.gift_message|linebreaks }}</div>
+    </div>
+    {% endif %}
+    
+    <!-- ─── Items Section ─── -->
+    <div class="order-section">
+        <h4>Items</h4>
+        <ul class="items-list">
+            {% for item in order.lineitems.all %}
+            <li class="item-row">
+                {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" class="product-thumb" alt="{{ item.product.name }}">
+                {% else %}
+                    <img src="{% static 'images/placeholder-56x56.png' %}" class="product-thumb" alt="Placeholder">
+                {% endif %}
+                <div class="item-desc">
+                    <span class="product-name">{{ item.product.name }}</span>
+                    {% if item.size %}
+                        <span class="product-detail">Size: {{ item.size }}</span>
+                    {% endif %}
+                    {% if item.color %}
+                        <span class="product-detail">Color: {{ item.color }}</span>
+                    {% endif %}
+                    <span class="product-qty">Qty: {{ item.quantity }}</span>
+                </div>
+                <div class="item-price">€{{ item.lineitem_total|floatformat:2 }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <!-- ─── Back to Profile Button ─── -->
+    <div class="back-link-container">
+        <a href="{% url 'profile' %}" class="btn btn-secondary back-to-profile">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <span class="sr-only">Back to My Profile</span>
+            Back to My Profile
+        </a>
+    </div>
 </div>
 {% endblock %}

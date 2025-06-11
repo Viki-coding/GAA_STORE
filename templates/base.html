@@ -6,168 +6,138 @@
     <meta charset="utf-8" />
     <meta name="description" content="{% block meta_description %}Welcome to GAA Store, your one-stop shop for all GAA and Camogie gear, including hurleys, how to measure for hurleys, accessories, and more!{% endblock %}" />
     <meta name="keywords" content="{% block meta_keywords %}GAA, Camogie, Hurleys, Accessories, Sports Gear, How to Measure{% endblock %}" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'css/products.css' %}" />
-    <link
-      rel="icon"
-      href="{% static 'images/favicon/favicon.ico' %}"
-      type="image/x-icon"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="{% static 'images/favicon/apple-touch-icon.png' %}"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="{% static 'images/favicon/favicon-32x32.png' %}"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="{% static 'images/favicon/favicon-16x16.png' %}"
-    />
+    <link rel="icon" href="{% static 'images/favicon/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}" />
     <title>GAA Store - {% block extra_title %}{% endblock %}</title>
     <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
-    {% load static %}
     {% block extra_css %}{% endblock %}
   </head>
   <body>
     <div class="d-flex flex-column min-vh-100">
 
-
-      {% include 'includes/mobile-top-header.html' %} 
+      <!-- Mobile and Main Navigation -->
+      {% include 'includes/mobile-top-header.html' %}
       {% include 'includes/main-nav.html' %}
 
       <!-- Wrapper for main content -->
       <div class="wrapper flex-grow-1">
-      <main>{% block content %}{% endblock %}</main>
+        <main>{% block content %}{% endblock %}</main>
       </div>
-        <footer class="bg-dark text-white py-4">
-          <div class="container">
-            <div class="row align-items-center">
-              <!-- 1) Mailchimp signup in left column -->
-              <div class="col-md-6 mb-3 mb-md-0">
-                <div id="mc_embed_signup">
-                  <form action="https://herokuapp.us18.list-manage.com/subscribe/post?u=9f358bb52fc3efa311e708802&amp;id=23b4851baa"
-                        method="post"
-                        id="mc-embedded-subscribe-form"
-                        name="mc-embedded-subscribe-form"
-                        class="validate d-flex flex-wrap align-items-center"
-                        target="_blank"
-                        novalidate>
-                      <div id="mc_embed_signup_scroll" class="input-group input-group-lg">
-                        <input type="email"
-                              name="EMAIL"
-                              class="required email form-control flex-grow-1 mb-2 mb-sm-0"
-                              id="mce-EMAIL"
-                              placeholder="Enter your email"
-                              required>
-                          <div class="input-group-append">
 
-                          <button type="submit"
-                                  name="subscribe"
-                                  id="mc-embedded-subscribe"
-                                  class="button btn btn-primary ml-2">
-                            Subscribe
-                          </button>
-                        </div>
-                      </div>
-                    <!-- honeypot -->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                      <input type="text"
-                            name="b_9f358bb52fc3efa311e708802_23b4851baa"
-                            tabindex="-1"
-                            value="">
+      <footer class="bg-dark text-white py-4">
+        <div class="container">
+          <div class="row align-items-center">
+            <!-- Mailchimp signup in left column -->
+            <div class="col-md-6 mb-3 mb-md-0">
+              <div id="mc_embed_signup">
+                <form action="https://herokuapp.us18.list-manage.com/subscribe/post?u=9f358bb52fc3efa311e708802&amp;id=23b4851baa"
+                      method="post"
+                      id="mc-embedded-subscribe-form"
+                      name="mc-embedded-subscribe-form"
+                      class="validate d-flex flex-wrap align-items-center"
+                      target="_blank"
+                      novalidate>
+                  <div id="mc_embed_signup_scroll" class="input-group input-group-lg">
+                    <input type="email"
+                          name="EMAIL"
+                          class="required email form-control flex-grow-1 mb-2 mb-sm-0"
+                          id="mce-EMAIL"
+                          placeholder="Enter your email"
+                          required>
+                    <div class="input-group-append">
+                      <button type="submit"
+                              name="subscribe"
+                              id="mc-embedded-subscribe"
+                              class="button btn btn-primary ml-2">
+                        Subscribe
+                      </button>
                     </div>
-                  </form>
-                  <!-- responses -->
-                  <div id="mce-responses" class="clear mt-2 small text-muted">
-                    <div class="response" id="mce-error-response" style="display:none"></div>
-                    <div class="response" id="mce-success-response" style="display:none"></div>
                   </div>
-                </div>
-              </div>
-
-              <!-- 2) Links in right column FB Privacy Policy and Contact Us-->
-              <div class="col-md-6 text-md-right">
-                <div class="d-flex justify-content-center justify-content-md-end">
-                  <a href="https://facebook.com"
-                    class="text-white mx-2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Visit our Facebook page">
-                    Facebook
-                  </a>
-                  <a href="{% url 'privacy_policy' %}"
-                    class="text-white mx-2">
-                    Privacy Policy
-                  </a>
-                  <a href="{% url 'contact_us' %}"
-                    class="text-white mx-2"
-                    aria-label="Contact us for enquiries">
-                    Contact Us
-                  </a>
+                  <!-- honeypot -->
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text"
+                          name="b_9f358bb52fc3efa311e708802_23b4851baa"
+                          tabindex="-1"
+                          value="">
+                  </div>
+                </form>
+                <!-- responses -->
+                <div id="mce-responses" class="clear mt-2 small text-muted">
+                  <div class="response" id="mce-error-response" style="display:none"></div>
+                  <div class="response" id="mce-success-response" style="display:none"></div>
                 </div>
               </div>
             </div>
+
+            <!-- Links in right column: Facebook, Privacy Policy, Contact Us -->
+            <div class="col-md-6 text-md-right">
+              <div class="d-flex justify-content-center justify-content-md-end">
+                <a href="https://facebook.com"
+                  class="text-white mx-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit our Facebook page">
+                  Facebook
+                </a>
+                <a href="{% url 'privacy_policy' %}"
+                  class="text-white mx-2">
+                  Privacy Policy
+                </a>
+                <a href="{% url 'contact_us' %}"
+                  class="text-white mx-2"
+                  aria-label="Contact us for enquiries">
+                  Contact Us
+                </a>
+              </div>
+            </div>
           </div>
-        </footer>
+        </div>
+      </footer>
     </div>
 
-  <!-- Include Toast Templates -->
-  <div id="toast-container">
-    {% if messages %}
-      {% for message in messages %}
+    <!-- Toast Templates -->
+    <div id="toast-container">
+      {% if messages %}
+        {% for message in messages %}
           {% if message.tags == 'success' %}
-              {% include 'includes/toasts/toast_success.html' with message=message %}
+            {% include 'includes/toasts/toast_success.html' with message=message %}
           {% elif message.tags == 'error' %}
-              {% include 'includes/toasts/toast_error.html' with message=message %}
+            {% include 'includes/toasts/toast_error.html' with message=message %}
           {% elif message.tags == 'info' %}
-              {% include 'includes/toasts/toast_info.html' with message=message %}
+            {% include 'includes/toasts/toast_info.html' with message=message %}
           {% elif message.tags == 'warning' %}
-              {% include 'includes/toasts/toast_warning.html' with message=message %}
+            {% include 'includes/toasts/toast_warning.html' with message=message %}
           {% endif %}
-      {% endfor %}
-    {% endif %}
-  </div>
-    
+        {% endfor %}
+      {% endif %}
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
 
-
     <!-- Custom JavaScript for Toasts -->
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-          const toastElements = document.querySelectorAll('.toast');
-          toastElements.forEach(toastElement => {
-              const toast = new bootstrap.Toast(toastElement);
-              toast.show();
-          });
+        const toastElements = document.querySelectorAll('.toast');
+        toastElements.forEach(toastElement => {
+          const toast = new bootstrap.Toast(toastElement);
+          toast.show();
+        });
       });
     </script>
 
-<!-- Custom Mail Chimp script code -->
+    <!-- Custom Mailchimp script code -->
     <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
     <script type="text/javascript">
       (function($) {

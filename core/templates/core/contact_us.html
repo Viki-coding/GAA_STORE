@@ -3,36 +3,48 @@
 {% load static %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'core/css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'core/css/contact.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="container mt-5" style="max-width: 600px;">
-  <h1 class="text-center mb-4">Contact Us</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div class="form-group">
-      {{ form.name.label_tag }} 
-      {{ form.name }}
-      {{ form.name.errors }}
-    </div>
-    <div class="form-group">
-      {{ form.email.label_tag }} 
-      {{ form.email }}
-      {{ form.email.errors }}
-    </div>
-    <div class="form-group">
-      {{ form.subject.label_tag }} 
-      {{ form.subject }}
-      {{ form.subject.errors }}
-    </div>
-    <div class="form-group">
-      {{ form.body.label_tag }} 
-      {{ form.body }}
-      {{ form.body.errors }}
-    </div>
-    <button type="submit" class="btn btn-primary">Send Message</button>
-  </form>
+    <h1 class="text-center mb-4">Contact Us</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {% for error in form.name.errors %}
+                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% for error in form.email.errors %}
+                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.subject.label_tag }}
+            {{ form.subject }}
+            {% for error in form.subject.errors %}
+                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.body.label_tag }}
+            {{ form.body }}
+            {% for error in form.body.errors %}
+                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
 </div>
 {% endblock %}

@@ -38,6 +38,7 @@
                      {% url 'products:grip_detail' product.grip.product.id %}
                    {% elif product.sliotar %}
                      {% url 'products:sliotar_detail' product.sliotar.product.id %}
+                   {% else %}
                    {% endif %}"
             class="btn btn-primary"
           >

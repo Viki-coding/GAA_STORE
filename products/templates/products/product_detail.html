@@ -16,7 +16,6 @@
       {% elif product.sliotar %}
         {% static "products/"|add:product.sliotar.color|add:"-sliotar.webp" as image_url %}
       {% elif product.image %}
-        {# if you really have an uploaded media fallback #}
         {% with product.image.url as image_url %}{% endwith %}
       {% else %}
         {% static "images/default-product.png" as image_url %}
@@ -40,7 +39,6 @@
         {% csrf_token %}
 
         {% if product.hurley %}
-          {# size, weight, grip_color, manufacturer selects … #}
           <div class="form-group">
             <label for="size">Size:</label>
             <select id="size" name="size" class="form-control">
@@ -88,7 +86,6 @@
             <label for="color">Color:</label>
             <select id="color" name="color" class="form-control">
               {% for color, color_label in color_choices %}
-                {# point at your static helmet images #}
                 {% static 'products/'|add:color|add:'-cooper-helmet.webp' as helmet_img %}
                 <option value="{{ color }}" data-image-url="{{ helmet_img }}">
                   {{ color_label }}
@@ -108,18 +105,19 @@
             </select>
           </div>
         {% endif %}
+
         {% if product.sliotar %}
           <div class="form-group">
             <label for="sliotar-color">Color:</label>
             <select id="sliotar-color"
                     name="color"
                     class="form-control"
-                    disabled  
-            >
+                    disabled>
               <option value="yellow" selected>Yellow</option>
             </select>
           </div>
         {% endif %}
+
         <div class="form-group">
           <label for="quantity">Quantity:</label>
           <input
@@ -139,64 +137,39 @@
 </div>
 
 <script>
-    // Get references to the manufacturer dropdown and description placeholder
+    // Manufacturer description logic
     const manufacturerDropdown = document.getElementById('manufacturer');
     const manufacturerDescription = document.getElementById('manufacturer-description');
 
-    if (manufacturerDropdown) {
-        // Create a mapping of manufacturer IDs to their descriptions
+    if (manufacturerDropdown && manufacturerDescription) {
         const manufacturerDescriptions = {
             {% for manufacturer in manufacturers %}
                 "{{ manufacturer.id|escapejs }}": "{{ manufacturer.description|escapejs }}",
             {% endfor %}
         };
 
-        // Add an event listener to update the description when the manufacturer changes
         manufacturerDropdown.addEventListener('change', function () {
             const selectedManufacturerId = this.value;
             const description = manufacturerDescriptions[selectedManufacturerId] || '';
-            manufacturerDescription.textContent = description; // Update the description
+            manufacturerDescription.textContent = description;
         });
 
-        // Trigger the event listener on page load to show the default description
         manufacturerDropdown.dispatchEvent(new Event('change'));
     }
 
     // Helmet color dropdown logic
     const colorDropdown = document.getElementById('color');
-    const productImage = document.querySelector('.img-fluid'); // Assuming this is the helmet image
+    const productImage = document.querySelector('.img-fluid');
 
     if (colorDropdown && productImage) {
-        // Add an event listener to update the image when the color changes
         colorDropdown.addEventListener('change', function () {
-            // Get the selected option
             const selectedOption = colorDropdown.options[colorDropdown.selectedIndex];
-            // Get the data-image-url attribute from the selected option
             const newImageUrl = selectedOption.getAttribute('data-image-url');
-            // Update the image's src attribute
             if (newImageUrl) {
                 productImage.src = newImageUrl;
             }
         });
-
-        // Trigger the change event on page load to set the default image
         colorDropdown.dispatchEvent(new Event('change'));
-    }
-
-      const sliotarColorDropdown = document.getElementById('color');
-      const productImage         = document.querySelector('.img-fluid');
-
-    if (sliotarColorDropdown && productImage) {
-      sliotarColorDropdown.addEventListener('change', () => {
-        const selectedOpt  = sliotarColorDropdown.options[sliotarColorDropdown.selectedIndex];
-        const newImageUrl  = selectedOpt.getAttribute('data-image-url');
-        if (newImageUrl) {
-          productImage.src = newImageUrl;
-        }
-      });
-
-      // Set initial image based on the default selection
-      sliotarColorDropdown.dispatchEvent(new Event('change'));
     }
 </script>
 {% endblock %}

@@ -22,33 +22,33 @@
                 <h2 class="logo-font mb-4">My Profile</h2>
                 <p>Welcome, {{ user.username }}!</p>
                 <hr>
-
+                <!-- Manage Shipping Address-->
                 <h2>Manage Shipping Addresses</h2>
-                <a href="{% url 'add_address' %}" class="btn btn-primary">Add New Address</a>
+                <a href="{% url 'add_address' %}" class="btn btn-primary mb-3">Add New Address</a>
                 <ul>
                     {% for address in addresses %}
                         <li>
                             <strong>{{ address.full_name }}</strong><br>
                             {{ address.street_address1 }}<br>
-                            {{ address.street_address2 }}<br>
+                            {% if address.street_address2 %}{{ address.street_address2 }}<br>{% endif %}
                             {{ address.town_or_city }}, {{ address.county }}<br>
                             {{ address.country }} - {{ address.eircode }}<br>
                             {% if address.is_default %}<em>(Default Address)</em>{% endif %}
                             <br>
-                            <a href="{% url 'edit_address' address.id %}">Edit</a> |
-                            <a href="{% url 'delete_address' address.id %}">Delete</a>
+                            <a href="{% url 'edit_address' address.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{% url 'delete_address' address.id %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
                         </li>
                     {% empty %}
                         <li>You have no saved addresses.</li>
                     {% endfor %}
                 </ul>
-
+                <!-- Display previous order if any -->
                 <h3 class="mt-5">Previous Orders</h3>
                 <ul>
                     {% for order in orders %}
                         <li>
                             Order #{{ order.order_number }} - {{ order.date }}
-                            <a href="{% url 'order_detail' order.id %}">View Details</a>
+                            <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-link">View Details</a>
                         </li>
                     {% empty %}
                         <li>You have no previous orders.</li>
@@ -56,4 +56,5 @@
                 </ul>
             </div>
         </div>
+    </div>
 {% endblock %}

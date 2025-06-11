@@ -6,26 +6,27 @@
     <h1 class="text-center">Accessories</h1>
     <div class="row text-center mt-4">
 
+      {# Sliotars #}
       {% for sliotar in sliotars %}
-         <div class="col-md-4 mb-4">
-           <a href="{% url 'products:sliotar_detail' sliotar.product.id %}">
-             <img
-               src="{% static 'products/white-sliotar.webp' %}"
-               alt="{{ sliotar.product.name }}"
-               class="img-fluid rounded"
-             >
-             <h3 class="mt-3">{{ sliotar.product.name }}</h3>
-           </a>
-         </div>
-       {% endfor %}
+        <div class="col-md-4 mb-4">
+          <a href="{% url 'products:sliotar_detail' sliotar.product.id %}">
+            <img
+              src="{% static 'products/white-sliotar.webp' %}"
+              alt="{{ sliotar.product.name }}"
+              class="img-fluid rounded">
+            <h3 class="mt-3">{{ sliotar.product.name }}</h3>
+          </a>
+        </div>
+      {% endfor %}
 
       {# Helmets #}
       {% for helmet in helmets %}
         <div class="col-md-4 mb-4">
           <a href="{% url 'products:helmet_detail' helmet.product.id %}">
-            <img src="{% static 'products/'|add:helmet.color|add:'-cooper-helmet.webp' %}"
-                 alt="{{ helmet.product.name }}"
-                 class="img-fluid rounded">
+            <img
+              src="{% static 'products/'|add:helmet.color|add:'-cooper-helmet.webp' %}"
+              alt="{{ helmet.product.name }}"
+              class="img-fluid rounded">
             <h3 class="mt-3">{{ helmet.product.name }}</h3>
           </a>
         </div>
@@ -35,9 +36,10 @@
       {% for grip in grips %}
         <div class="col-md-4 mb-4">
           <a href="{% url 'products:grip_detail' grip.product.id %}">
-            <img src="{% static 'products/grips.webp' %}"
-                 alt="{{ grip.product.name }}"
-                 class="img-fluid rounded">
+            <img
+              src="{% static 'products/grips.webp' %}"
+              alt="{{ grip.product.name }}"
+              class="img-fluid rounded">
             <h3 class="mt-3">{{ grip.product.name }}</h3>
           </a>
         </div>

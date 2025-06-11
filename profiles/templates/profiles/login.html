@@ -12,7 +12,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
 
-      {# ─── LOGIN CARD ─── #}
+      <!-- LOGIN CARD -->
       <div class="card shadow-sm mb-4">
         <div class="card-header text-center bg-primary text-white">
           <h4>Log In</h4>
@@ -21,14 +21,14 @@
           <form method="post" action="{% url 'account_login' %}">
             {% csrf_token %}
 
-            {# form‐level errors for login (invalid credentials, etc.) #}
+            <!-- Form-level errors for login (invalid credentials, etc.) -->
             {% if login_form.non_field_errors %}
               <div class="alert alert-danger">
                 {{ login_form.non_field_errors|join:" " }}
               </div>
             {% endif %}
 
-            {# Username or Email field #}
+            <!-- Username or Email field -->
             <div class="mb-3">
               <label for="{{ login_form.login.id_for_label }}" class="form-label">
                 Username or Email
@@ -43,7 +43,7 @@
               {% endif %}
             </div>
 
-            {# Password field #}
+            <!-- Password field -->
             <div class="mb-3">
               <label for="{{ login_form.password.id_for_label }}" class="form-label">
                 Password
@@ -65,8 +65,7 @@
         </div>
       </div>
 
-
-      {# ─── SIGN-UP CARD ─── #}
+      <!-- SIGN-UP CARD -->
       <div class="card shadow-sm">
         <div class="card-header text-center bg-secondary text-white">
           <h4>Sign Up</h4>
@@ -75,14 +74,14 @@
           <form method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
 
-            {# form‐level (non_field) errors for sign-up #}
+            <!-- Form-level (non_field) errors for sign-up -->
             {% if signup_form.non_field_errors %}
               <div class="alert alert-danger">
                 {{ signup_form.non_field_errors|join:" " }}
               </div>
             {% endif %}
 
-            {# USERNAME (only if you have ACCOUNT_USERNAME_REQUIRED=True) #}
+            <!-- USERNAME (only if you have ACCOUNT_USERNAME_REQUIRED=True) -->
             {% if signup_form.username %}
               <div class="mb-3">
                 <label for="{{ signup_form.username.id_for_label }}" class="form-label">
@@ -99,7 +98,7 @@
               </div>
             {% endif %}
 
-            {# EMAIL #}
+            <!-- EMAIL -->
             <div class="mb-3">
               <label for="{{ signup_form.email.id_for_label }}" class="form-label">
                 Email
@@ -114,7 +113,7 @@
               {% endif %}
             </div>
 
-            {# PASSWORD #1 #}
+            <!-- PASSWORD #1 -->
             <div class="mb-3">
               <label for="{{ signup_form.password1.id_for_label }}" class="form-label">
                 Password
@@ -129,7 +128,7 @@
               {% endif %}
             </div>
 
-            {# PASSWORD #2 (confirmation) #}
+            <!-- PASSWORD #2 (confirmation) -->
             <div class="mb-3">
               <label for="{{ signup_form.password2.id_for_label }}" class="form-label">
                 Confirm Password
@@ -144,13 +143,13 @@
               {% endif %}
             </div>
 
-            {# “next” redirect, if present #}
+            <!-- “next” redirect, if present -->
             {% if redirect_field_value %}
               <input
                 type="hidden"
                 name="{{ redirect_field_name }}"
                 value="{{ redirect_field_value }}"
-              />
+              >
             {% endif %}
 
             <button type="submit" class="btn btn-secondary w-100">
