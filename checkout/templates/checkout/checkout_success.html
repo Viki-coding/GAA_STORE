@@ -49,17 +49,21 @@
     </div>
 
     <!-- Navigation Options -->
-    <div class="thank-you-nav mt-5">
-        <a href="{% url 'home' %}"
-            class="btn-return-home btn btn-lg rounded-0">
+    <div id="thank-you-nav" class="mt-5">
+        <a
+            href="{% url 'home' %}"
+            class="btn btn-outline-light btn-lg rounded-0"
+        >
             <i class="fas fa-home"></i>
             Return to Homepage
         </a>
-        <a href="{% url 'products:product_list' %}"
-            class="btn-continue-shopping btn btn-lg rounded-0">
+        <a
+            href="{% url 'products:product_list' %}"
+            class="btn btn-outline-light btn-lg rounded-0"
+        >
             <i class="fas fa-shopping-bag"></i>
             Continue Shopping
         </a>
     </div>
-</div>
+
 {% endblock %}

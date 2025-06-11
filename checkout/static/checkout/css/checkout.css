@@ -148,54 +148,20 @@ footer .form-control {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); 
 }
 
-.btn-continue-shopping,
-.btn-return-home {
-  display: inline-block;
-  margin: 0.5rem 1rem;
-  padding: 0.75rem 2rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  border-width: 2px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
 /* Return home: outline style */
-/* -------------------------------------------------------------------
-   Thank-You Page Nav Buttons
-   ------------------------------------------------------------------- */
-
-/* Container to center them */
-.thank-you-nav {
-  display: inline-flex;
-  flex-wrap: wrap;
+#thank-you-nav {
+  display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;   /* space between buttons */
+  padding: 2rem 0;
 }
 
-/* Return Home or Continue Shopping nav options */
-.thank-you-nav .btn-outline-light {
-  border-width: 2px;
-  color: #fff;
-  transition: background-color 0.2s ease, color 0.2s ease,
-              transform 0.1s ease;
+Hover state */
+#btn-return-home:hover,
+#btn-continue-shopping:hover {
+  background-color: #0056b3 !important;
 }
 
-.thank-you-nav .btn-outline-light:hover {
-  background-color: #ffffff;
-  color: #000;
-  transform: translateY(-2px);
-}
-
-/* Stack on small screens */
-@media (max-width: 576px) {
-  .thank-you-nav {
-    flex-direction: column;
-  }
-  .thank-you-nav .btn {
-    width: 100%;
-  }
-}
 
 @media (max-width: 768px) {
     .col-md-6 {
