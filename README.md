@@ -426,6 +426,7 @@ Future: Add color-coded statuses for products (e.g., "In Stock," "Low Stock"). u
 User testimonials from All Ireland and county players
 - Currently if a new user completes their address and details at checkout and ticks the remember me box, their email and gmail is remembered and when they click into their user profile, their order is there but not the address they first used.  I would like to update that. 
 - When a user logs in - I would like them to be able to go to their user profile and see the status or their order whether its pending, processed, out for delivery etc.
+- Update sliotars products so you can choose different colors from dropdown, ran out of time to fix it this time"
 
 ## Accessibility:
 
