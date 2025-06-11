@@ -76,7 +76,6 @@
         {% endif %}
 
         {% if product.helmet %}
-          {# helmet size + color … #}
           <div class="form-group">
             <label for="size">Size:</label>
             <select id="size" name="size" class="form-control">
@@ -111,17 +110,13 @@
         {% endif %}
         {% if product.sliotar %}
           <div class="form-group">
-            <label for="color">Color:</label>
-            <select id="color" name="color" class="form-control">
-              {% for color, color_label in color_choices %}
-                {% static "products/"|add:color|add:"-sliotar.webp" as sliotar_img %}
-                <option 
-                  value="{{ color }}" 
-                  data-image-url="{{ sliotar_img }}"
-                >
-                  {{ color_label }}
-                </option>
-              {% endfor %}
+            <label for="sliotar-color">Color:</label>
+            <select id="sliotar-color"
+                    name="color"
+                    class="form-control"
+                    disabled  
+            >
+              <option value="yellow" selected>Yellow</option>
             </select>
           </div>
         {% endif %}
