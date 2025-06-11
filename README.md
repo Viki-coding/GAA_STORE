@@ -43,6 +43,8 @@ Table of Contents
   - [FEATURES](#features)
     - [Navigation Bar:](#navigation-bar)
       - [Sign Up Feature:](#sign-up-feature)
+      - [Save Shipping Addresses:](#save-shipping-addresses)
+      - [Gift Message:](#gift-message)
       - [Hurleys](#hurleys)
       - [Accessories:](#accessories)
       - [How To Measure:](#how-to-measure)
@@ -51,6 +53,7 @@ Table of Contents
     - [FOOTER FEATURES:](#footer-features)
       - [Facebook:](#facebook)
       - [Privacy Policy](#privacy-policy)
+      - [Contact Us](#contact-us)
       - [Mailchimp Signup](#mailchimp-signup)
   - [Security](#security)
       - [Interaction](#interaction)
@@ -61,7 +64,6 @@ Table of Contents
   - [Accessibility:](#accessibility)
   - [WAVE:](#wave)
   - [Lighthouse Testing](#lighthouse-testing)
-  - [Color Blindness Simulator Tool:](#color-blindness-simulator-tool)
   - [Technologies Used:](#technologies-used)
   - [Deployment Steps:](#deployment-steps)
   - [How to Fork:](#how-to-fork)
@@ -552,6 +554,7 @@ Lighthouse test results
 * Figma - to crate wireframes
 * Converting tabel to markdown (https://tabletomarkdown.com/convert-spreadsheet-to-markdown/)
 * Whitenoise
+* Cloudidnary
 * Perplexity for trouble shooting 
 * dbdiagram.io - For creation of ERD diagram 
 * https://www.vecteezy.com - used for images 
