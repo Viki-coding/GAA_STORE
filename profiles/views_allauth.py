@@ -31,13 +31,13 @@ class CombinedLoginView(LoginView):
             print("Redirecting staff to FAQ...")
             return reverse("faq")
 
-        # Debugging: Print the next parameter from POST or GET
-        next_url = self.request.POST.get("next") or self.request.GET.get("next")
-        print(f"Next URL parameter: {next_url}")
+        # # Debugging: Print the next parameter from POST or GET
+        # next_url = self.request.POST.get("next") or self.request.GET.get("next")
+        # print(f"Next URL parameter: {next_url}")
 
-        if next_url:
-            print(f"Redirecting to next URL: {next_url}")
-            return next_url
+        # if next_url:
+        #     print(f"Redirecting to next URL: {next_url}")
+        #     return next_url
 
         print("Redirecting to profile...")
         return reverse("profile")

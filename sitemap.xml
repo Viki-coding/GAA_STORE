@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/hurleys/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/accessories/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/how-to-measure/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/faq/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/accounts/login/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/bag/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/faq/privacy-policy/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/faq/contact/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/products/hurley/4/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/products/hurley/8/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/products/hurley/5/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/products/helmet/3/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/products/grip/6/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://gaastore-2f38a7e53edc.herokuapp.com/products/</loc>
+  <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
