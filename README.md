@@ -276,8 +276,23 @@ This structure was chosen to allow easy expansion (e.g., adding new product type
 
 ##ER Diagram:
 
+This was my first draft of my models which I changed: 
+
 ![ERD Project 5 GAA Store V5](https://github.com/user-attachments/assets/6fdc491e-3896-4698-87c0-a4733502d609)
 
+
+**Project ERD**
+Data model overview
+
+We have a central Product model with a FK to Manufacturer, and four specialized product tables (Hurley, Grip, Sliotar, Helmet) linked one-to-one for their unique attributes.
+
+The Order model captures each checkout, with OrderItem line entries pointing back to Product. Orders reference a ShippingAddress, which in turn belongs to a UserProfile tied one-to-one to Django’s User.
+
+We also store simple site content in FAQ and ContactMessage tables.
+
+My three custom models were - Stored Shipping Address, Contact and FAQ.
+
+![Data model](models.png)
 
 ## Design Choices
 
