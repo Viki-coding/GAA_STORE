@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'checkout',
     'crispy_forms',
     'widget_tweaks',
-    'core'
+    'core',
     'cloudinary_storage',
     'cloudinary',
 ]
