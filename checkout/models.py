@@ -34,7 +34,7 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.eircode}"
- 
+
     class Meta:
         ordering = ['-is_default', '-date_added']
 

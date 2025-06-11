@@ -1,5 +1,4 @@
 from allauth.account.forms import SignupForm
-from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,8 +9,12 @@ from checkout.forms import ShippingAddressForm
 @login_required
 def profile(request):
     """ Display the user's profile with shipping addresses and orders. """
-    addresses = ShippingAddress.objects.filter(user_profile=request.user.userprofile)
-    orders = Order.objects.filter(user_profile=request.user.userprofile)  # Assuming an Order model exists
+    addresses = ShippingAddress.objects.filter(
+        user_profile=request.user.userprofile
+    )
+    orders = Order.objects.filter(
+        user_profile=request.user.userprofile
+    )  # Assuming an Order model exists
 
     # Initialize Allauth's SignupForm
     signup_form = SignupForm()
@@ -80,7 +83,11 @@ def order_detail(request, order_id):
     """
     Display detailed information about a specific order.
     """
-    order = get_object_or_404(Order, id=order_id, user_profile=request.user.userprofile)
+    order = get_object_or_404(
+        Order,
+        id=order_id,
+        user_profile=request.user.userprofile
+    )
 
     template = 'checkout/order_detail.html'
     context = {

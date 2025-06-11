@@ -136,7 +136,10 @@ class Hurley(models.Model):
     )
 
     def __str__(self):
-        return f"{self.product.name} - {self.size}, {self.grip_color}, {self.manufacturer}"
+        return (
+            f"{self.product.name} - {self.size}, "
+            f"{self.grip_color}, {self.manufacturer}"
+        )
 
 
 class Grip(models.Model):

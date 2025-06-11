@@ -27,10 +27,19 @@ class CheckoutForm(forms.ModelForm):
         validators=[
             RegexValidator(
                 regex=r'^\+?[0-9\s\-]{7,15}$',
-                message="Enter a valid phone number (digits, spaces, dashes, and optional leading +)."
+                message=(
+                    "Enter a valid phone number (digits, spaces, dashes, "
+                    "and optional leading +)."
+                )
             )
         ],
-        widget=forms.TextInput(attrs={'autocomplete': 'tel', 'inputmode': 'tel', 'pattern': r'^\+?[0-9\s\-]{7,15}$'})
+        widget=forms.TextInput(
+            attrs={
+                'autocomplete': 'tel',
+                'inputmode': 'tel',
+                'pattern': r'^\+?[0-9\s\-]{7,15}$'
+            }
+        )
     )
     street_address1 = forms.CharField(
         max_length=255,
@@ -60,7 +69,7 @@ class CheckoutForm(forms.ModelForm):
     )
     country = CountryField(
         blank_label="Country *",
-        default='IE'  # Default to Ireland (ISO code 'IE')
+        default='IE'
     ).formfield(
         required=True,
         widget=forms.Select(
@@ -123,13 +132,15 @@ class CheckoutForm(forms.ModelForm):
 
         # Populate the saved_address field with the user's saved addresses
         if self.user and self.user.is_authenticated:
-            self.fields['saved_address'].queryset = ShippingAddress.objects.\
-                filter(
-                user_profile=self.user.userprofile
+            self.fields['saved_address'].queryset = (
+                ShippingAddress.objects.filter(
+                    user_profile=self.user.userprofile
+                )
             )
         else:
-            self.fields['saved_address'].queryset = ShippingAddress.objects.\
-                none()
+            self.fields['saved_address'].queryset = (
+                ShippingAddress.objects.none()
+            )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -137,7 +148,7 @@ class CheckoutForm(forms.ModelForm):
 
         # If user chose an existing address, skip "new address" validation
         if saved:
-            # remove any errors on the new‐address fields
+            # Remove any errors on the new-address fields
             for field in [
                 'full_name', 'street_address1', 'town_or_city',
                 'county', 'eircode', 'country'
@@ -175,12 +186,14 @@ class CheckoutForm(forms.ModelForm):
         ):
             if not pwd1 or not pwd2:
                 raise forms.ValidationError(
-                    "Please enter and confirm your password.")
+                    "Please enter and confirm your password."
+                )
             if pwd1 != pwd2:
                 raise forms.ValidationError("Passwords do not match.")
             if len(pwd1) < 8:
                 raise forms.ValidationError(
-                    "Password must be at least 8 characters long.")
+                    "Password must be at least 8 characters long."
+                )
 
         return cleaned_data
 

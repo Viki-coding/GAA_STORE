@@ -31,28 +31,22 @@ class CombinedLoginView(LoginView):
             print("Redirecting staff to FAQ...")
             return reverse("faq")
 
-        # # Debugging: Print the next parameter from POST or GET
-        # next_url = self.request.POST.get("next") or self.request.GET.get("next")
-        # print(f"Next URL parameter: {next_url}")
-
-        # if next_url:
-        #     print(f"Redirecting to next URL: {next_url}")
-        #     return next_url
-
         print("Redirecting to profile...")
         return reverse("profile")
-    
-    
+
+
 class CombinedSignupView(SignupView):
     # Tell Allauth to use our single template instead of account/signup.html
     template_name = "profiles/login.html"
 
     def get_context_data(self, **kwargs):
-        # 1) Let Allauth build its normal context → context["form"] = SignupForm(POST data or empty)
+        # 1) Let Allauth build its normal context →
+        #    context["form"] = SignupForm(POST data or empty)
         context = super().get_context_data(**kwargs)
 
-        # 2) Allauth has placed its signup_form (valid or with errors) into context["form"].
-        #    Copy that into 'signup_form' so our template can do signup_form.password1.errors, etc.
+        # 2) Allauth has placed its signup_form (valid or with errors)
+        #    into context["form"]. Copy that into 'signup_form' so our
+        #    template can do signup_form.password1.errors, etc.
         context["signup_form"] = context.pop("form")
 
         # 3) Always provide a fresh login_form for the “Log In” card.

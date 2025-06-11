@@ -1,15 +1,11 @@
-import json
 import logging
 import os
-from decimal import Decimal
-
 import stripe
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
@@ -19,6 +15,8 @@ from profiles.models import UserProfile
 
 from .forms import CheckoutForm, ShippingAddressForm
 from .models import Order, OrderItem, ShippingAddress
+
+logger = logging.getLogger(__name__)
 
 
 def checkout(request):
@@ -37,10 +35,10 @@ def checkout(request):
     # 1) Pull bag contents and compute total
     bag = bag_contents(request)
     bag_items = bag["bag_items"]
-    subtotal = bag["total"] 
-    delivery_cost = bag["delivery"] 
+    subtotal = bag["total"]
+    delivery_cost = bag["delivery"]
     free_delivery_delta = bag["free_delivery_delta"]
-    final_total = bag["grand_total"] 
+    final_total = bag["grand_total"]
 
     if subtotal == 0:
         messages.warning(
@@ -84,16 +82,17 @@ def checkout(request):
             )
             return redirect("checkout")
 
-        #  Process the form data if valid 
+        # Process the form data if valid
         if form.is_valid():
-            create_user_profile = form.cleaned_data.get("create_user_profile", False)
-            store_shipping_address = form.cleaned_data.get("store_shipping_address", False)
+            create_user_profile = form.cleaned_data.get(
+                "create_user_profile", False
+            )
             saved_address = form.cleaned_data.get("saved_address")
 
             user_profile = None
 
             if create_user_profile and not request.user.is_authenticated:
-                email    = form.cleaned_data["email"]
+                email = form.cleaned_data["email"]
                 password = form.cleaned_data["password"]
 
                 User = get_user_model()
@@ -112,12 +111,11 @@ def checkout(request):
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 login(request, user)
 
-                # Ensure profile exists errrro handling - dont double‐create)
+                # Ensure profile exists, error handling - don't double-create
                 user_profile, _ = UserProfile.objects.get_or_create(user=user)
 
             elif request.user.is_authenticated:
                 user_profile = request.user.userprofile
-
 
             # Handle gift message
             session_bag = request.session.get('bag', {})
@@ -130,9 +128,9 @@ def checkout(request):
                 gift_message_val = raw_msg if raw_msg else None
 
             # Handle shipping address
-           
-            # Only persist for logged-in users who checked “Save Shipping Address”
-            store_shipping = form.cleaned_data.get("store_shipping_address", False)
+            store_shipping = form.cleaned_data.get(
+                "store_shipping_address", False
+            )
             saved_address = form.cleaned_data.get("saved_address")
 
             if request.user.is_authenticated and store_shipping:
@@ -140,10 +138,18 @@ def checkout(request):
                 if saved_address:
                     # Overwrite the existing saved address
                     saved_address.full_name = form.cleaned_data["full_name"]
-                    saved_address.phone_number = form.cleaned_data["phone_number"]
-                    saved_address.street_address1 = form.cleaned_data["street_address1"]
-                    saved_address.street_address2 = form.cleaned_data["street_address2"]
-                    saved_address.town_or_city = form.cleaned_data["town_or_city"]
+                    saved_address.phone_number = (
+                        form.cleaned_data["phone_number"]
+                    )
+                    saved_address.street_address1 = (
+                        form.cleaned_data["street_address1"]
+                    )
+                    saved_address.street_address2 = (
+                        form.cleaned_data["street_address2"]
+                    )
+                    saved_address.town_or_city = (
+                        form.cleaned_data["town_or_city"]
+                    )
                     saved_address.county = form.cleaned_data["county"]
                     saved_address.eircode = form.cleaned_data["eircode"]
                     saved_address.country = form.cleaned_data["country"]
@@ -243,11 +249,9 @@ def checkout(request):
     context = {
         "form": form,
         "bag_items": bag_items,
-        "subtotal":      subtotal,
+        "subtotal": subtotal,
         "delivery_cost": delivery_cost,
         "free_delivery_delta": free_delivery_delta,
-        "final_total":   final_total,
-        "delivery_cost": delivery_cost,
         "final_total": final_total,
         "settings": settings,
         "stripe_public_key": stripe_public_key,
@@ -321,9 +325,6 @@ def edit_address(request, address_id):
     else:
         form = ShippingAddressForm(instance=address)
     return render(request, 'checkout/edit_address.html', {'form': form})
-
-
-logger = logging.getLogger(__name__)
 
 
 @csrf_exempt

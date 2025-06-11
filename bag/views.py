@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.contrib import messages
-from django.conf import settings
-from decimal import Decimal
 from products.models import Product, Hurley, Grip, Sliotar, Helmet
 from django.http import JsonResponse
 
