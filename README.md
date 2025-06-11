@@ -1,7 +1,8 @@
 # GAA_STORE
 
 
-![Uploading Am I responsive readme.png…]()
+![Am I responsive readme](https://github.com/user-attachments/assets/0494aeae-324d-4338-8326-a196e978908c)
+
 
 
 
@@ -412,7 +413,13 @@ Accessories such as helmets, sliotars and grips. Easily navigable from the nav b
 ![Accessories](https://github.com/user-attachments/assets/b4007cd3-a8b6-4c55-b765-bbcd96a7ca34)
 
 #### How To Measure:
-Many parents new to the game may not understand how to measure their child for the correct size hurley or helmet. By clicking on this How to Measure nav bar heading takes you to our page giving expert advice on how to do it. 
+Many parents new to the game may not understand how to measure their child for the correct size hurley or helmet. By clicking on this How to Measure nav bar heading takes you to our page giving expert advice on how to do it.  Note also the useful converter calculator that converts cms into inches which is what hurls are measued in!
+
+![Hurley Measure](https://github.com/user-attachments/assets/523fd99d-0e5d-4db7-90fb-4af6a751e011)
+
+
+![Helmet Measure](https://github.com/user-attachments/assets/dd46949e-ab52-4cb1-8bc0-aebfa879e80d)
+
 
 #### FAQ:
 Our FAQ is easy to navigate from the nav bar and details important and informed advice on everything associated with hurling and camogie. 
@@ -420,6 +427,7 @@ Our FAQ is easy to navigate from the nav bar and details important and informed 
 #### BAG: 
 
 ![Shopping Bag](https://github.com/user-attachments/assets/860eca15-0241-4f82-bffc-92963ec89a40)
+
 
 ![Thank you for your order](https://github.com/user-attachments/assets/f7e3b6ce-e239-47b7-88f6-fe3ad42c854f)
 
