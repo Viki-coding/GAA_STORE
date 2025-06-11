@@ -14,7 +14,7 @@
       {% elif product.grip %}
         {% static "products/grips.webp" as image_url %}
       {% elif product.sliotar %}
-        {% static "products/white-sliotar.webp" as image_url %}
+        {% static "products/"|add:product.sliotar.color|add:"-sliotar.webp" as image_url %}
       {% elif product.image %}
         {# if you really have an uploaded media fallback #}
         {% with product.image.url as image_url %}{% endwith %}
@@ -109,18 +109,22 @@
             </select>
           </div>
         {% endif %}
-
         {% if product.sliotar %}
           <div class="form-group">
             <label for="color">Color:</label>
             <select id="color" name="color" class="form-control">
               {% for color, color_label in color_choices %}
-                <option value="{{ color }}">{{ color_label }}</option>
+                {% static "products/"|add:color|add:"-sliotar.webp" as sliotar_img %}
+                <option 
+                  value="{{ color }}" 
+                  data-image-url="{{ sliotar_img }}"
+                >
+                  {{ color_label }}
+                </option>
               {% endfor %}
             </select>
           </div>
         {% endif %}
-
         <div class="form-group">
           <label for="quantity">Quantity:</label>
           <input
@@ -182,6 +186,22 @@
 
         // Trigger the change event on page load to set the default image
         colorDropdown.dispatchEvent(new Event('change'));
+    }
+
+      const sliotarColorDropdown = document.getElementById('color');
+      const productImage         = document.querySelector('.img-fluid');
+
+    if (sliotarColorDropdown && productImage) {
+      sliotarColorDropdown.addEventListener('change', () => {
+        const selectedOpt  = sliotarColorDropdown.options[sliotarColorDropdown.selectedIndex];
+        const newImageUrl  = selectedOpt.getAttribute('data-image-url');
+        if (newImageUrl) {
+          productImage.src = newImageUrl;
+        }
+      });
+
+      // Set initial image based on the default selection
+      sliotarColorDropdown.dispatchEvent(new Event('change'));
     }
 </script>
 {% endblock %}
