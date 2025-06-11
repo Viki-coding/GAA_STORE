@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get("DEBUG", "False").lower() in ("1", "true", "yes")
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'core'
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 CRISY_TEMPLATE_PACK = 'bootstrap4'
@@ -226,9 +228,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-WHITENOISE_ALLOW_ALL_ORIGINS = True  # optional: if you want cross‐origin
+WHITENOISE_ALLOW_ALL_ORIGINS = True  
 WHITENOISE_STATIC_PREFIX = STATIC_URL
 WHITENOISE_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Cloudinary settings
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # Stripe
 FREE_DELIVERY_THRESHOLD = 50
