@@ -1,5 +1,10 @@
 # GAA_STORE
 
+
+![Uploading Am I responsive readme.png…]()
+
+
+
 Live Link: https://gaastore-2f38a7e53edc.herokuapp.com/
 
 Link to Kanban Board:  https://github.com/users/Viki-coding/projects/9/views/1?layout=board
