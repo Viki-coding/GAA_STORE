@@ -10,15 +10,6 @@ body {
   padding: 0 1rem;
 }
 
-/* Order summary 
-.order-summary-card {
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem 1.8rem;
-  margin-bottom: 2rem;
-}
-
 /* heading */
 .order-summary-card h2 {
   font-size: 1.25rem;    

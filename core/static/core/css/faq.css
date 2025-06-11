@@ -21,7 +21,6 @@
     border-bottom-color: #cfcfcf;
   }
   
-  
   .accordion .btn-link {
     color: #007bff;
     font-weight: 500;
@@ -106,7 +105,7 @@
 }
 
 .card-header.bg-danger {
-  background-color: #dc3545; /* Bootstrap danger color */
+  background-color: #dc3545; 
   color: #fff;
 }
 

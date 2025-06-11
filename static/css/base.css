@@ -312,7 +312,6 @@ footer .input-group-lg .btn-primary:hover {
   }
 }
 
-
 /* Stack input and button for mobile */
 @media (max-width: 600px) {
     .subscribe-form {
@@ -321,7 +320,7 @@ footer .input-group-lg .btn-primary:hover {
     .subscribe-form input,
     .subscribe-form button {
         width: 100%; 
-        margin-bottom: 8px; /
+        margin-bottom: 8px; 
     }
     .subscribe-form button {
         margin-bottom: 0; 

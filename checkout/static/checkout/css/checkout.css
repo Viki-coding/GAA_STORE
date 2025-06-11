@@ -156,13 +156,6 @@ footer .form-control {
   padding: 2rem 0;
 }
 
-Hover state */
-#btn-return-home:hover,
-#btn-continue-shopping:hover {
-  background-color: #0056b3 !important;
-}
-
-
 @media (max-width: 768px) {
     .col-md-6 {
         flex: 0 0 100%;
