@@ -9,8 +9,11 @@
 {% block content %}
 <div class="container mt-5 mb-5">
     <h1 class="text-center">Thank You for Your Order!</h1>
-    <p class="text-center">Your order has been successfully placed. A confirmation email has been sent to <strong>{{ order.email }}</strong>.</p>
-
+    <p class="text-center">
+        Your order has been successfully placed. A confirmation email has been sent to
+        <strong>{{ order.email }}</strong>.
+    </p>
+    <!-- Gift Message -->
     {% if order.gift_message %}
     <div class="alert alert-info text-center">
         <strong>Gift Message:</strong> {{ order.gift_message }}
@@ -30,8 +33,8 @@
                     <div>
                         <strong>{{ item.product.name }}</strong>
                         <small>
-                            {% if item.size %}Size: {{ item.size }}, {% endif %}
-                            {% if item.color %}Color: {{ item.color }}, {% endif %}
+                            {% if item.size %}Size: {{ item.size }}{% if item.color or item.manufacturer %}, {% endif %}{% endif %}
+                            {% if item.color %}Color: {{ item.color }}{% if item.manufacturer %}, {% endif %}{% endif %}
                             {% if item.manufacturer %}Manufacturer: {{ item.manufacturer }}{% endif %}
                         </small>
                         <br>
@@ -50,20 +53,16 @@
 
     <!-- Navigation Options -->
     <div id="thank-you-nav" class="mt-5">
-        <a
-            href="{% url 'home' %}"
-            class="btn btn-outline-light btn-lg rounded-0"
-        >
-            <i class="fas fa-home"></i>
+        <a href="{% url 'home' %}" class="btn btn-outline-light btn-lg rounded-0">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span class="sr-only">Return to Homepage</span>
             Return to Homepage
         </a>
-        <a
-            href="{% url 'products:product_list' %}"
-            class="btn btn-outline-light btn-lg rounded-0"
-        >
-            <i class="fas fa-shopping-bag"></i>
+        <a href="{% url 'products:product_list' %}" class="btn btn-outline-light btn-lg rounded-0">
+            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+            <span class="sr-only">Continue Shopping</span>
             Continue Shopping
         </a>
     </div>
-
+</div>
 {% endblock %}
