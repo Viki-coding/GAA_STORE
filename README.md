@@ -81,6 +81,8 @@ There will be an FAQ section to highlight frequently asked questions, such as wh
 User will be able to REGISTER as a user on the site
 User will be able to LOGIN
 
+![Profile Page](https://github.com/user-attachments/assets/8f3a4530-240f-4e66-b680-030ff64b0f4e)
+
 ###### Create
 User will be able to create a profile and add a number of shipping address to their profile. 
 
@@ -191,16 +193,21 @@ I found the Kanban very helpful, it did take time to set up, it was well planned
 
 #### Kanban Board Progress:
 
+![Kanban Board](https://github.com/user-attachments/assets/512e9692-6dbe-4c43-81a1-91c7ce87a43a)
 
 
 
 ## UX
+
+![Home Page](https://github.com/user-attachments/assets/d68a474f-9116-4760-bc6f-3b5285c4fe5f)
 
 When you land on our site it is immediately obvious what the site is and conveys the message of passion about the sport of hurling with the iconic hero image of a helmet and hurl.  Hurling is a historic and deep rooted game and lifestyle in Ireland. 
 
 The site is easy to navigate, there is an immediate call to action button 'Shop for Hurleys Now'. 
 
 Users can view products and add and remove items from their bag, there is feedback provided for each action.  
+
+![Success ](https://github.com/user-attachments/assets/d13be8fe-55dc-40db-b897-41df5af1b029)
 
 Forms fields that are filled out incorrectly are highlighted to the user. 
 
@@ -327,11 +334,10 @@ Hurley Size Calculator: This feature is visible on both the homepage and the pro
 FAQ Section: The FAQ questions are displayed them with collapsible dropdowns for quick navigation.
 
 **7. Admin and Superuser Features**
-Admin Login: We have created an user friendly dashboard for product management with icons for adding, editing, and deleting products. 
-Drag-and-Drop Functionality: Enable image uploads with a drag-and-drop interface for managers.
+Admin Login: We have created an user friendly dashboard for shop owners / staff to create, edit and delete FAQ
 
 **8. Encouraging Engagement**
-Mailchimp Integration: We have designed an eye-catching newsletter signup form with benefits like "Be the First to Know About New Arrivals and Deals."
+Mailchimp Integration: We have created an easy to subscribe field on the footer of the site. 
 
 Social Media Integration: Displays our Facebook clickable icon in the footer to foster community engagement.
 
@@ -340,6 +346,9 @@ Social Media Integration: Displays our Facebook clickable icon in the footer to 
 Using a colour contrast checked we checked which font colours stood out best against our base colours. All receiving good ratings. Graphic illustrated below:
 
 Color-contrast-good
+
+![Constrast WAVE](https://github.com/user-attachments/assets/8cc199d7-8712-4dc6-9c54-5db93d70eb90)
+
 
 #### Typography
 Font used is Roboto from Google Fonts. It is in the sans serif family, is clean with a modern appearance. It is dyslexic friendly helping with readability.
@@ -371,11 +380,29 @@ Login/Signup Feature If you already have a username and password you can log in 
 
 If you are a new user, it is easy to navigate to the Sign Up form, enter your details and password being set up within seconds, the 'Login' button changes to 'Log Out' and you have access to your profile and orders.
 
+#### Save Shipping Addresses:
+
+![Drop down showing shipping address](https://github.com/user-attachments/assets/638364cd-c2e5-4e0f-87c0-823857d445a1)
+
+![Pre inputted shipping addres](https://github.com/user-attachments/assets/42be0c4b-7a4d-46f2-9aea-c4d6f7389ba8)
+
+If you log in as a user, you can navigate to your profile page and add a number of shipping addresses which will be kept and assoicated with you when you log in. When you go to checkout your stored shipping address can be accessed from the drop down arrow. You can have multiple shipping addresses so if you are a grandfather shipping hurleys to different grand children or a coach shipping to a different address this is a very handy feature.
+
+#### Gift Message:
+
+When you navigate to the bag page you have the option of ticking the message box and adding your personal message, once the order is processed your message is displayed on the Thank you for your orde page and will be printed for delivery with your order. 
+![Personalised message](https://github.com/user-attachments/assets/82732c3b-8ffa-43a4-8dc9-566d86e068e5)
+
+
 #### Hurleys 
 This site sell hurleys, if you want a hurley you click on the hurley section on my main nav bar, this displays 3 categories of hurleys, Ash/Bambu/Goalie. 
 
+![Hurleys](https://github.com/user-attachments/assets/4137dc0c-36e9-41f1-9a37-1b68c8c9f3b0)
+
 #### Accessories:
 Accessories such as helmets, sliotars and grips. Easily navigable from the nav bar and you can add items to your bag quickly. 
+
+![Accessories](https://github.com/user-attachments/assets/b4007cd3-a8b6-4c55-b765-bbcd96a7ca34)
 
 #### How To Measure:
 Many parents new to the game may not understand how to measure their child for the correct size hurley or helmet. By clicking on this How to Measure nav bar heading takes you to our page giving expert advice on how to do it. 
@@ -385,17 +412,32 @@ Our FAQ is easy to navigate from the nav bar and details important and informed 
 
 #### BAG: 
 
+![Shopping Bag](https://github.com/user-attachments/assets/860eca15-0241-4f82-bffc-92963ec89a40)
+
+![Thank you for your order](https://github.com/user-attachments/assets/f7e3b6ce-e239-47b7-88f6-fe3ad42c854f)
+
 ### FOOTER FEATURES:
 
 #### Facebook:
 Link to Facebook to enhance user enhancement and communication. This allows the user to access the GAA Store socials in a new page.
 We use the attribute rel="noopener noreferrer" in the anchor tags to enhance security and protect against security vulnerabilities.
 
+<img width="1438" alt="facebook page for GAA Store" src="https://github.com/user-attachments/assets/968971c9-da08-4a6a-b744-f93af9835eb3" />
+
 #### Privacy Policy 
 We have created a privacy policy with a link here to the privacy policy statement. 
 
+
+#### Contact Us
+Easy to user contact form which a user can enter and then staff can view and deal with messages in the django admin. All messages are kept making it a valuable souce for compiling relevant FAQ's
+
+![Contact Us](https://github.com/user-attachments/assets/694140e5-9d85-4ad9-9e83-2883b61154bf)
+
+
 #### Mailchimp Signup
 We have created a mailchimp sign up with an input field where you can input your email and sign up easily. 
+
+<img width="1385" alt="Mailchimp" src="https://github.com/user-attachments/assets/55675620-3349-4429-b2f7-2f5c25c79d37" />
 
 ## Security
 
@@ -469,9 +511,8 @@ WAVE evaluation results
 
 Lighthouse test results
 
-## Color Blindness Simulator Tool:
+![Light House Test](https://github.com/user-attachments/assets/34c601b4-cb11-41f9-88e2-7b8345664013)
 
-Color Blindness simulator
 
 ## Technologies Used:
 
@@ -514,6 +555,7 @@ Color Blindness simulator
 * Stripe 
 * Privacy policy generator (https://www.privacypolicygenerator.info/)
 * Site map generator: (https://www.xml-sitemaps.com/)
+* Pygraphviz to create ERD 
 
 ## Deployment Steps:
 
