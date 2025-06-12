@@ -83,7 +83,7 @@ The site passed accessibility testing. After passing it through wave I made some
 ## 4. Validation
 
 NOTE: I did not validate or remove commented out code in SETTINGS.py or the privacy policy or any other files that I created as we were advised not to do that in the CI course videos. 
-
+To validate the html I went to the deployed site, right clicked and copied the code from View Page Source. I have put these as pass in  my sheet, base.html and main-nav.html as they were part of the source code.
 
 #### HTML validation (e.g., W3C Validator) and #### CSS validation
 
