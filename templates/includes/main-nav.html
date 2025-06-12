@@ -16,7 +16,7 @@
           <a class="nav-link" href="{% url 'how_to_measure' %}">How to Measure</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+          <a class="nav-link" href="{% url 'core:faq_list' %}">FAQ</a>
         </li>
         {% if user.is_authenticated %}
           <li class="nav-item">

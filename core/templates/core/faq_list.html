@@ -15,14 +15,14 @@
     <!-- Only staff/superusers see the “Add New FAQ” button -->
     {% if user.is_authenticated %}
       <div class="text-right mb-3">
-        <a href="{% url 'faq_list' %}" class="btn btn-secondary">
+        <a href="{% url 'core:faq_list' %}" class="btn btn-secondary">
           View All FAQs
         </a>
       </div>
     {% endif %}
     {% if user.is_staff %}
       <div class="text-right mb-3">
-        <a href="{% url 'faq_add' %}" class="btn btn-add-faq">
+        <a href="{% url 'core:faq_add' %}" class="btn btn-add-faq">
           + Add New FAQ
         </a>
       </div>
@@ -44,11 +44,11 @@
             </h5>
             {% if user.is_staff %}
               <div class="ml-2">
-                <a href="{% url 'faq_edit' faq.pk %}"
+                <a href="{% url 'core:faq_edit' faq.pk %}"
                    class="btn btn-sm btn-outline-secondary mr-1">
                   Edit
                 </a>
-                <a href="{% url 'faq_delete' faq.pk %}"
+                <a href="{% url 'core:faq_delete' faq.pk %}"
                    class="btn btn-sm btn-outline-danger">
                   Delete
                 </a>

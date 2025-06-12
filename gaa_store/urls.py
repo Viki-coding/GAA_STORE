@@ -26,7 +26,7 @@ urlpatterns = [
     path("bag/",     include("bag.urls")),
     path("checkout/", include("checkout.urls")),
     path("privacy-policy/", core_views.privacy_policy, name="privacy_policy"),
-    path("faq/", include("core.urls")),
+    path("faq/", include(("core.urls", "core"), namespace="core")),
 ]
 
 

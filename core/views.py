@@ -29,7 +29,7 @@ class FaqCreateView(CreateView):
     model = FAQ
     form_class = FAQForm
     template_name = "core/faq_form.html"
-    success_url = reverse_lazy("faq")
+    success_url = reverse_lazy("core:faq_list")
 
 
 @method_decorator(login_required, name="dispatch")
@@ -41,7 +41,7 @@ class FaqUpdateView(UpdateView):
     model = FAQ
     form_class = FAQForm
     template_name = "core/faq_form.html"
-    success_url = reverse_lazy("faq")
+    success_url = reverse_lazy("core:faq_list")
 
 
 @method_decorator(login_required, name="dispatch")
@@ -52,7 +52,7 @@ class FaqDeleteView(DeleteView):
     """
     model = FAQ
     template_name = "core/faq_confirm_delete.html"
-    success_url = reverse_lazy("faq")
+    success_url = reverse_lazy("core:faq_list")
 
 
 def contact_us(request):
