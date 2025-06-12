@@ -15,7 +15,6 @@ Link to Kanban Board:  https://github.com/users/Viki-coding/projects/9/views/1?l
 - [SEO and Marketing Document](seo-marketing.md)
 - [Testing Document](TESTING.md)
   
-Table of Contents
 
 ## Table of Contents
 
@@ -80,9 +79,11 @@ Table of Contents
 ## Introduction
 
 #### Description - Project Purpose
-Gaelic Games in Ireland is an integral part of every townland, parish, village, town, city and county in Ireland and now farther afield.  This site aims at show casing a large variety of different hurleys made by different manufactures and different materials, such as ash and bamboo and goalie hurleys, to allow the customer to quickly view and purchase hurleys, sliotars and hurley grips and hurley helmets.  Currently, there are individual hurley makers or sports shops who only sell one particular type of hurley and do not show the range available in Ireland from a number of different hurley makers. 
+Gaelic Games in Ireland is an integral part of every townland, parish, village, town, city and county in Ireland and now farther afield.  This site aims at show casing a large variety of different hurleys made by different manufactures and different materials, such as ash and bamboo and goalie hurleys, to allow the customer to quickly view and purchase hurleys, sliotars and hurley grips and hurley helmets.  
 
-There will be an FAQ section to highlight frequently asked questions, such as why metal bands are used.  We will have a hurley size calculator where a user can enter their height, the height to their hip and the hurley calculator will tell you what size hurley is appropriate.  The customer will be able to add items to their basket, they will be able to select the size of the particular hurley they require, a success message will appear when they successfully add an item to their basket. when they add to their basket a display will appear at the bottom of other items to 'bundle' other items in for a deal.  When they log on to the site, a pop up will appear offering 5% off their first order when they enter their email address. There will be mail chimp newsletter.  There will be a privacy policy.  There will be a 404 page. Once the customer has added items to their shopping cart, they will proceed to checkout section, where they will enter their payment details for stripe to process,  there will be a remember me tick box so the customer can set up an account profile where they can view their orders. During each process, success or warning messages will be displayed. 
+The selection of different manufacturers on the one site is our unique selling point. Currently, there are individual hurley makers or sports shops who only sell one particular make and type of hurley and do not show the range available in Ireland from a number of different hurley makers. 
+
+The site aims at being a clearn and user friendly and intuitive site where users and return users can navigate seemlessly. 
 
 
 #### CRUD
@@ -297,6 +298,7 @@ This was my first draft of my models which I changed:
 
 
 **Project ERD**
+
 Data model overview
 
 We have a central Product model with a FK to Manufacturer, and four specialized product tables (Hurley, Grip, Sliotar, Helmet) linked one-to-one for their unique attributes.
@@ -313,10 +315,10 @@ My three custom models were - Stored Shipping Address, Contact and FAQ.
 
 **1. Captivating Homepage**
 
-Hero Image I have incorporated a high-quality hero image of a hurley and helmet
-I am using  taglines like "Your Ultimate Source for Gaelic Games Gear." This aligns with my user persona profiles of Liam Murphy (The Dedicated Player) and Emily Ryan (The Aspiring Camogie Player).
+Hero Image I have incorporated is a hero image of a hurley and helmet
 
-I have a dynamic Call-to-Actions (CTAs): "Shop Now" "Find Your Perfect Hurley" prominently featured on the homepage.
+I have a dynamic Call-to-Actions (CTAs): "Shop for Hurleys" prominently featured on the homepage.
+
 I am engaging users with the FAQ and the How to Measure pages. 
 
 **2. Clear Navigation and Layout**
@@ -331,13 +333,13 @@ I have used sticky navigation to keep the navigation bar accessible as users scr
 Included in the site is filter options for material (e.g., ash or bamboo), manufacturer, size, and price to suit gift buyers like Aoife Byrne (The Gift Buyer).
 
 **4. Enhanced Shopping Cart Experience**
-Mini Cart Preview: I display a preview of the cart when items are added to confirm selections, along with success messages.
+I display a success messages when items are added to the bag.
 
 **5. Engaging User Features**
-We have a Profile Dashboard: For logged-in users like Seán McCarthy (The Busy Coach), display a personalized dashboard to view order history, manage orders, and edit profiles.
+We have a Profile Dashboard: For logged-in users like Seán McCarthy (The Busy Coach), display a personalized dashboard to view order history, and add shippings addresses.
 
 **6. Specialized Tools and Calculators**
-Hurley Size Calculator: This feature is visible on both the homepage and the product pages. 
+How to Measure: Available from the nav bar, users can quickly view an informatic picture with instructions of how to measure for a hurley or a helmet. If they have measured in cms we have an easy to use converter calculator to inches to understand what size hurley to order. 
 
 FAQ Section: The FAQ questions are displayed them with collapsible dropdowns for quick navigation.
 
@@ -359,7 +361,7 @@ Color-contrast-good
 
 
 #### Typography
-Font used is Roboto from Google Fonts. It is in the sans serif family, is clean with a modern appearance. It is dyslexic friendly helping with readability.
+Font used is Montserrat from Google Fonts. It is in the sans serif family, is clean with a modern appearance. It is dyslexic friendly helping with readability.
 
 ## Wireframes
 
@@ -378,7 +380,7 @@ Font used is Roboto from Google Fonts. It is in the sans serif family, is clean 
 
 
 ## FEATURES
-Feature Title / Screenshot / Value to the User
+
 
 ### Navigation Bar:
 
@@ -399,6 +401,7 @@ If you log in as a user, you can navigate to your profile page and add a number 
 #### Gift Message:
 
 When you navigate to the bag page you have the option of ticking the message box and adding your personal message, once the order is processed your message is displayed on the Thank you for your orde page and will be printed for delivery with your order. 
+
 ![Personalised message](https://github.com/user-attachments/assets/82732c3b-8ffa-43a4-8dc9-566d86e068e5)
 
 
@@ -489,16 +492,17 @@ When a user attempts to book an event who’s capacity has already been reached,
 
 ## Future Implementation Section: 
 
- - I would like when a user logs onto their profile that they see the item they bought - but also the item details such as colour and size if applicable. I would modify my order item model. Unfortunately I just ran out of time on this occasion. 
- - I would like to add a reviews section
- - I would like to add prompts such as customers who bought this also bought ... 
- - Implement functionality for password reset via email
- - Implement a wish list feature 
-Future: Add color-coded statuses for products (e.g., "In Stock," "Low Stock"). under admin superuser section
-User testimonials from All Ireland and county players
-- Currently if a new user completes their address and details at checkout and ticks the remember me box, their email and gmail is remembered and when they click into their user profile, their order is there but not the address they first used.  I would like to update that. 
+- I would like when a user logs onto their profile that they see the item they bought - but also the item details such as colour and size if applicable. I would modify my order item model. Unfortunately I just ran out of time on this occasion. 
+- I would like to add a reviews section
+- I would like to add prompts such as customers who bought this also bought ... 
+- Implement functionality for password reset via email
+- Implement a wish list feature 
+- Add color-coded statuses for products (e.g., "In Stock," "Low Stock"). under admin superuser section
+- User testimonials from All Ireland and county players
+- Currently if a new user completes their address and details at checkout and ticks the remember me box, their email and gmail is remembered and when they click into their user profile, their order is there but not the address they first used.  - I would like to update that. 
 - When a user logs in - I would like them to be able to go to their user profile and see the status or their order whether its pending, processed, out for delivery etc.
-- Update sliotars products so you can choose different colors from dropdown, ran out of time to fix it this time"
+- Update sliotars products so you can choose different colors from dropdown, ran out of time to fix it this time
+- I would like to manage my images better, the site does not contain a lot of images, they are more part of the structure of the site but I would have prefered to have managed them better on cloudinary or another platform. 
 
 ## Accessibility:
 
@@ -518,9 +522,6 @@ Accessibility of the site is very important.
 
 (e) Testing, we used WAVE a Web Accessible Evaluation Tool to analyse the page and made adjustments to the site to try to improve it. 
 
-## WAVE:
-
-WAVE evaluation results
 
 ## Lighthouse Testing
 
@@ -664,24 +665,24 @@ CI [eCommerce & Stripe] - Paul outlining some of the stripe implementation
 
 CI [Community Q&A: PP5 eCommerce Project FAQ]
 
-https://www.w3schools.com/howto/howto_js_accordion.asp
+(https://www.w3schools.com/howto/howto_js_accordion.asp)
 Found this useful when creating my FAQ page to create an accordion style FAQ section. 
 
-https://dbdiagram.io/ - Excellent for planning my ERD 
+(https://dbdiagram.io/ - Excellent for planning my ERD)
 At my first meeting with my mentor, I showed him my ERD diagram, he didn't think my model approach would work with my products the way I had it mapped and suggested to use the abstract-base-model as detailed here: 
-https://realpython.com/modeling-polymorphism-django-python/#abstract-base-model
+(https://realpython.com/modeling-polymorphism-django-python/#abstract-base-model)
 
-https://www.w3schools.com/django/ref_tags_verbatim.php
+(https://www.w3schools.com/django/ref_tags_verbatim.php)
 Found this W3 schools helpful for explaining about verbatim template tags when my JS was causing errors on my product detail template. 
 
 Understanding tags in django
-https://docs.djangoproject.com/en/5.2/ref/templates/builtins/
+(https://docs.djangoproject.com/en/5.2/ref/templates/builtins/)
 
 Stripe documentation 
-https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
+(https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements)
 
 Webhooks
-https://docs.stripe.com/webhooks/quickstart
+(https://docs.stripe.com/webhooks/quickstart)
 
 [how-to-redirect-superuser-to-specific-page-in-django](https://stackoverflow.com/questions/68572107/how-to-redirect-superuser-to-specific-page-in-django)
 
@@ -691,22 +692,21 @@ Help with markdown, found this site useful (https://www.markdownguide.org/basic-
 
 We gained inspiration with the READ.me by watching the video 'Creating your README' on CI Chanel Lead Library on YouTube and also the video with Lane-Sawyer Thompson on CI Channel on YouTube. Thanks to the on-line tutor, Oisin and Alan for their expertise and ability to explain some of the 'challenges' I encountered. Thanks to our very supportive and positive facilitator Kay and my Kiwi mentor Dick Vlaanderen. Also found the webinar 'Community Q&A: How to Troubleshoot with Lane-Sawyer Thompson' very helpful approach to how to view looking at the site for bugs and methodically identifying issues.
 
-CI - Community Q&A: PP5 eCommerce Project FAQ's video with the accessor Lucy. 
+CI - Community Q&A: PP5 eCommerce Project FAQ's video with the accessor Lucy Cudmore. 
 
 ## Media/Images
 
 Images used from 
 https://www.vecteezy.com and edited in canva. 
 Elverys 
-
+Torpey
+Coopers
 
 ## CONTENT
 
 Hurley size: https://learning.gaa.ie/sites/default/files/info_hurl_FINAL.pdf
 How to measure for a hurley and helmet content from: https://www.elverys.ie/pages/how-to-measure-for-a-hurley-buying-guide
 Hurley measure guide from: https://camogie.ie/files/Hurl%20Size%20Poster.pdf
-
-
 
 ## Legal & Ethical Compliance
 This project is for educational purposes only.
