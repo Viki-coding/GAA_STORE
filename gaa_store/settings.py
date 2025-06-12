@@ -70,7 +70,7 @@ INSTALLED_APPS = [
     'cloudinary',
 ]
 
-CRISY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -231,7 +231,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 WHITENOISE_ALLOW_ALL_ORIGINS = True  
 WHITENOISE_STATIC_PREFIX = STATIC_URL
-WHITENOISE_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Cloudinary settings
 CLOUDINARY_STORAGE = {
