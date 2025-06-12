@@ -23,24 +23,18 @@
                         {% for item in bag_items %}
                             <tr>
                                 <!-- Product Image -->
-                                 <td class="text-center">
-                                    {% if item.product.image %}
-                                        <img 
-                                        src="{% static 'products/'|add:item.product.slug|add:'.webp' %}"
-                                        alt="{{ item.product.name }}" 
-                                        class="img-fluid rounded" 
-                                        style="max-width:100px;"
-                                        >
-                                    {% else %}
-                                        <img 
-                                        src="{% static 'products/default-product.png' %}" 
-                                        alt="No image available" 
-                                        class="img-fluid rounded" 
-                                        style="max-width:100px;"
-                                        >
-                                    {% endif %}
-                                    <p class="mt-2 text-dark">{{ item.product.name }}</p>
-                                 </td>
+                                <td class="text-center">
+                                {# Turn “Bambu Hurley” → “bambu-hurley” right in the template #}
+                                {% with item.product.name|slugify as filename %}
+                                    <img
+                                    src="{% static 'products/'|add:filename|add:'.webp' %}"
+                                    alt="{{ item.product.name }}"
+                                    class="img-fluid rounded"
+                                    style="max-width:100px;"
+                                    >
+                                {% endwith %}
+                                <p class="mt-2 text-dark">{{ item.product.name }}</p>
+                                </td>
    
                                 <!-- Product Details -->
                                 <td class="text-dark">
