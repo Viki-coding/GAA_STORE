@@ -1,6 +1,7 @@
 # SEO and Marketing Document
 
-![Facebook page](<facebook page for GAA Store.png>)
+<img width="1438" alt="facebook page for GAA Store" src="https://github.com/user-attachments/assets/a33c80ef-da11-4080-a6b0-0368ed888fc8" />
+
 
 ## Table of Contents
 
@@ -70,11 +71,12 @@ o	This GAA Store ecommerce site, is both B2B and B2C focused, the site itself wi
   
 #### WORDTRACKER RESULTS:
 
-![GAA hurleys keyword search](<Screenshot 2025-06-05 at 17.12.36.png>) 
+![Keyword Search Result 3](https://github.com/user-attachments/assets/cc4bf99b-3d1c-4d15-84c6-064709de564a)
 
-![Hurley Makers keyword search](<Screenshot 2025-06-05 at 17.15.35.png>) 
+![Keyword Search Result 2](https://github.com/user-attachments/assets/b07bacee-8ac9-4d03-b1d7-58f3a6390ef0)
 
-![Gaa Hurley Shops Keyword search](<Screenshot 2025-06-05 at 17.16.28.png>)
+![Keyword Search Result 1](https://github.com/user-attachments/assets/fbcc7f4b-e0da-40f3-8025-bbc82b701158)
+
 
 
 
