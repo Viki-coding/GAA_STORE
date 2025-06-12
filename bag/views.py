@@ -143,30 +143,33 @@ def update_bag(request, product_key):
         if product_key in bag:
             if quantity > 0:
                 bag[product_key]['quantity'] = quantity
-                msg = (
-                    f"Updated {bag[product_key]['quantity']} x "
-                    f"{bag[product_key]['product_id']} in your bag."
-                )
+                msg = "You have amended your bag."
             else:
                 del bag[product_key]
                 msg = "Removed item from your bag."
         else:
             msg = "Item not found in your bag."
-            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                return JsonResponse(
-                    {'success': False, 'message': msg},
-                    status=404
-                )
-            messages.error(request, msg)
-            return redirect('view_bag')
+
+        # AJAX error response for not found or removed
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest' and msg != "You have amended your bag.":
+            status = 200 if msg == "Removed item from your bag." else 404
+            return JsonResponse(
+                {'success': msg == "Removed item from your bag.", 'message': msg},
+                status=status
+            )
+
+        # Save the updated bag back to the session
         request.session['bag'] = bag
 
-        # AJAX response
+        # AJAX success response
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             return JsonResponse({'success': True, 'message': msg})
 
         # Non-AJAX response
-        messages.success(request, msg)
+        if msg == "Item not found in your bag.":
+            messages.error(request, msg)
+        else:
+            messages.success(request, msg)
         return redirect('view_bag')
 
 
