@@ -2,59 +2,73 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
-{% endblock %}
-
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
+  <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4">My Profile</h2>
-                <p>Welcome, {{ user.username }}!</p>
-                <hr>
-                <!-- Manage Shipping Address-->
-                <h2>Manage Shipping Addresses</h2>
-                <a href="{% url 'add_address' %}" class="btn btn-primary mb-3">Add New Address</a>
-                <ul>
-                    {% for address in addresses %}
-                        <li>
-                            <strong>{{ address.full_name }}</strong><br>
-                            {{ address.street_address1 }}<br>
-                            {% if address.street_address2 %}{{ address.street_address2 }}<br>{% endif %}
-                            {{ address.town_or_city }}, {{ address.county }}<br>
-                            {{ address.country }} - {{ address.eircode }}<br>
-                            {% if address.is_default %}<em>(Default Address)</em>{% endif %}
-                            <br>
-                            <a href="{% url 'edit_address' address.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <a href="{% url 'delete_address' address.id %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
-                        </li>
-                    {% empty %}
-                        <li>You have no saved addresses.</li>
-                    {% endfor %}
-                </ul>
-                <!-- Display previous order if any -->
-                <h3 class="mt-5">Previous Orders</h3>
-                <ul>
-                    {% for order in orders %}
-                        <li>
-                            Order #{{ order.order_number }} - {{ order.date }}
-                            <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-link">View Details</a>
-                        </li>
-                    {% empty %}
-                        <li>You have no previous orders.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+    <hr>
+    <h2 class="logo-font mb-4">USER DASHBOARD</h2>
+    <p>Welcome, {{ user.username }}!</p>
+    <hr>
+
+    {# Staff-only FAQ link/button #}
+    {% if user.is_staff %}
+      <div class="my-4 text-center">
+        <p class="lead">Staff members logged in can edit FAQs here:</p>
+        <a 
+          href="{% url 'core:faq_list' %}" 
+          class="btn btn-lg btn-warning"
+          role="button"
+        >
+          Manage FAQs
+        </a>
+      </div>
+    {% endif %}
+
+    {# Regular user sections #}
+    <h2>Manage Shipping Addresses</h2>
+    <a href="{% url 'add_address' %}" class="btn btn-primary mb-3">
+      Add New Address
+    </a>
+    <ul>
+      {% for address in addresses %}
+        <li>
+          <strong>{{ address.full_name }}</strong><br>
+          {{ address.street_address1 }}<br>
+          {% if address.street_address2 %}{{ address.street_address2 }}<br>{% endif %}
+          {{ address.town_or_city }}, {{ address.county }}<br>
+          {{ address.country }} – {{ address.eircode }}<br>
+          {% if address.is_default %}<em>(Default Address)</em>{% endif %}
+          <br>
+          <a href="{% url 'edit_address' address.id %}"
+             class="btn btn-sm btn-outline-secondary"
+          >
+            Edit
+          </a>
+          <a href="{% url 'delete_address' address.id %}"
+             class="btn btn-sm btn-outline-danger ms-2"
+          >
+            Delete
+          </a>
+        </li>
+      {% empty %}
+        <li>You have no saved addresses.</li>
+      {% endfor %}
+    </ul>
+
+    <h3 class="mt-5">Previous Orders</h3>
+    <ul>
+      {% for order in orders %}
+        <li>
+          Order #{{ order.order_number }} – {{ order.date }}
+          <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-link">
+            View Details
+          </a>
+        </li>
+      {% empty %}
+        <li>You have no previous orders.</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
