@@ -23,24 +23,25 @@
                         {% for item in bag_items %}
                             <tr>
                                 <!-- Product Image -->
-                                <td class="text-center">
-                                {% if item.product.hurley %}
-                                    {% static "products/"|add:item.size|add:"-hurley.webp" as thumb_url %}
-                                {% elif item.product.helmet %}
-                                    {% static "products/"|add:item.color|add:"-cooper-helmet.webp" as thumb_url %}
-                                {% elif item.product.grip %}
-                                    {% static "products/grips.webp" as thumb_url %}
-                                {% elif item.product.sliotar %}
-                                    {% static "products/white-sliotar.webp" as thumb_url %}
-                                {% else %}
-                                    {% static "images/default-product.png" as thumb_url %}
-                                {% endif %}
-                                <img src="{{ thumb_url }}"
-                                    alt="{{ item.product.name }}"
-                                    class="img-fluid rounded"
-                                    style="max-width: 100px;">
-                                <p class="mt-2 text-dark">{{ item.product.name }}</p>
-                                </td>
+                                 <td class="text-center">
+                                    {% if item.product.image %}
+                                        <img 
+                                        src="{{ item.product.image.url }}" 
+                                        alt="{{ item.product.name }}" 
+                                        class="img-fluid rounded" 
+                                        style="max-width:100px;"
+                                        >
+                                    {% else %}
+                                        <img 
+                                        src="{% static 'images/default-product.png' %}" 
+                                        alt="No image available" 
+                                        class="img-fluid rounded" 
+                                        style="max-width:100px;"
+                                        >
+                                    {% endif %}
+                                    <p class="mt-2 text-dark">{{ item.product.name }}</p>
+                                 </td>
+   
                                 <!-- Product Details -->
                                 <td class="text-dark">
                                     {% if item.size %}
