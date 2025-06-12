@@ -12,13 +12,26 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # allauth
-    path("accounts/login/",  CombinedLoginView.as_view(),  name="account_login"),
-    path("accounts/signup/", CombinedSignupView.as_view(), name="account_signup"),
+    path(
+        "accounts/login/",
+        CombinedLoginView.as_view(),
+        name="account_login",
+    ),
+    path(
+        "accounts/signup/",
+        CombinedSignupView.as_view(),
+        name="account_signup",
+    ),
     path("accounts/", include("allauth.urls")),
 
     path("hurleys/", product_views.hurleys_shop, name="hurleys_root_shop"),
-    path("accessories/", product_views.accessories_shop, name="accessories_root_shop"),
-    
+    path(
+        "accessories/",
+        product_views.accessories_shop,
+        name="accessories_root_shop",
+    ),
+
+
     # home, products, profiles, bag, checkout, etc.
     path("products/", include("products.urls", namespace="products")),
     path("", include("home.urls")),

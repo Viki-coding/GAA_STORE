@@ -1,10 +1,3 @@
-// stripe_elements.js
-
-/*
-  Core logic/payment flow for Stripe. 
-  See: https://stripe.com/docs/payments/accept-a-payment
-*/
-
 // 1) Grab the Stripe public key and client secret that Django embedded in the page
 var stripePublicKey = JSON.parse(
     document.getElementById('id_stripe_public_key').textContent
