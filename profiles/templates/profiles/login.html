@@ -131,9 +131,9 @@
                 {% else %}
                   {{ signup_form.password1|add_class:"form-control" }}
                   {% if signup_form.password1.help_text %}
-                    <small id="id_password1_helptext" class="form-text text-muted">
+                    <div id="id_password1_helptext" class="form-text text-muted">
                       {{ signup_form.password1.help_text }}
-                    </small>
+                    </div>
                   {% endif %}
                 {% endif %}
               </div>
