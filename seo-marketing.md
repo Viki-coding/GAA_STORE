@@ -43,8 +43,12 @@ In this SEO and Marketing document we will outline some of our business concepts
 
 #### SEO implementation, including:
    o	A robots.txt file - we have added a robots.txt file to our application, which will tell search engines where they are not allowed to go on the wbsite. It shows SEO that seacrches are allowed on the files we have not included and can crawled and indexed. Having this file in our site shows quality and improves our SEO ranking. 
+   
+<img width="526" height="170" alt="robots" src="https://github.com/user-attachments/assets/9630977a-2de7-4c08-bc9e-49e131841b69" />
 
    o	A sitemap.xml file
+   
+<img width="846" height="219" alt="sitemap" src="https://github.com/user-attachments/assets/8bbb7cfe-fbda-445e-a003-d99b8dd11afb" />
 
    o	Descriptive meta tags have been inserted into the head of our base.file and includes a description of the site and some of the keywords that we did research on which is outlined below. We also applied some {% block meta_keywords %} at the top of other pages that were not the base.html to highlight some of the information on that particular page. 
 
