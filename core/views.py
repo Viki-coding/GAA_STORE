@@ -97,4 +97,3 @@ def robots_txt(request):
         "Sitemap: https://gaastore-2f38a7e53edc.herokuapp.com/sitemap.xml\n"
     )
     return HttpResponse(content, content_type="text/plain")
-
