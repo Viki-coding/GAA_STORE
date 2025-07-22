@@ -6,6 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from profiles.views_allauth import CombinedLoginView, CombinedSignupView
 from core import views as core_views
+from django.contrib.sitemaps.views import sitemap
+from core.sitemaps import YourSitemapClass
 
 
 urlpatterns = [
@@ -40,6 +42,8 @@ urlpatterns = [
     path("privacy-policy/", core_views.privacy_policy, name="privacy_policy"),
     path("faq/", include(("core.urls", "core"), namespace="core")),
     path("", include("home.urls")),
+    path("sitemap.xml", core_views.sitemap_view, name="sitemap"),
+    path("robots.txt", core_views.robots_txt, name="robots_txt"),
 ]
 
 
