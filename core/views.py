@@ -5,10 +5,10 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import ContactMessageForm
+from .forms import ContactMessageForm, FAQForm
+from django.http import HttpResponse
 
 from .models import FAQ
-from .forms import FAQForm
 
 
 class FaqListView(ListView):
@@ -73,3 +73,28 @@ def contact_us(request):
 
 def privacy_policy(request):
     return render(request, "core/privacy_policy.html")
+
+
+def sitemap_view(request):
+    xml_content = '''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://gaastore-2f38a7e53edc.herokuapp.com/</loc>
+    <lastmod>2025-06-11T07:42:53+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+</urlset>'''
+    return HttpResponse(xml_content, content_type="application/xml")
+
+
+def robots_txt(request):
+    content = (
+        "User-agent: *\n"
+        "Disallow: /admin/\n"
+        "Disallow: /profile/\n"
+        "Disallow: /checkout/\n"
+        "\n"
+        "Sitemap: https://gaastore-2f38a7e53edc.herokuapp.com/sitemap.xml\n"
+    )
+    return HttpResponse(content, content_type="text/plain")
+

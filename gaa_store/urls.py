@@ -6,8 +6,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from profiles.views_allauth import CombinedLoginView, CombinedSignupView
 from core import views as core_views
-from django.contrib.sitemaps.views import sitemap
-from core.sitemaps import YourSitemapClass
 
 
 urlpatterns = [
