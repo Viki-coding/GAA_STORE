@@ -8,158 +8,166 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
 
-      <!-- LOGIN CARD -->
-      <div class="card shadow-sm mb-4">
-        <div class="card-header text-center bg-primary text-white">
-          <h4>Log In</h4>
-        </div>
-        <div class="card-body">
-          <form method="post" action="{% url 'account_login' %}">
-            {% csrf_token %}
+        <!-- LOGIN CARD -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header text-center bg-primary text-white">
+            <h4>Log In</h4>
+          </div>
+          <div class="card-body">
+            <form method="post" action="{% url 'account_login' %}">
+              {% csrf_token %}
 
-            <!-- Form-level errors for login (invalid credentials, etc.) -->
-            {% if login_form.non_field_errors %}
-              <div class="alert alert-danger">
-                {{ login_form.non_field_errors|join:" " }}
-              </div>
-            {% endif %}
-
-            <!-- Username or Email field -->
-            <div class="mb-3">
-              <label for="{{ login_form.login.id_for_label }}" class="form-label">
-                Username or Email
-              </label>
-              {% if login_form.login.errors %}
-                {{ login_form.login|add_class:"form-control is-invalid" }}
-                <div class="invalid-feedback">
-                  {{ login_form.login.errors|join:" " }}
+              <!-- Form-level errors for login -->
+              {% if login_form.non_field_errors %}
+                <div class="alert alert-danger">
+                  {{ login_form.non_field_errors|join:" " }}
                 </div>
-              {% else %}
-                {{ login_form.login|add_class:"form-control" }}
               {% endif %}
-            </div>
 
-            <!-- Password field -->
-            <div class="mb-3">
-              <label for="{{ login_form.password.id_for_label }}" class="form-label">
-                Password
-              </label>
-              {% if login_form.password.errors %}
-                {{ login_form.password|add_class:"form-control is-invalid" }}
-                <div class="invalid-feedback">
-                  {{ login_form.password.errors|join:" " }}
-                </div>
-              {% else %}
-                {{ login_form.password|add_class:"form-control" }}
-              {% endif %}
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">
-              Log In
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- SIGN-UP CARD -->
-      <div class="card shadow-sm">
-        <div class="card-header text-center bg-secondary text-white">
-          <h4>Sign Up</h4>
-        </div>
-        <div class="card-body">
-          <form method="post" action="{% url 'account_signup' %}">
-            {% csrf_token %}
-
-            <!-- Form-level (non_field) errors for sign-up -->
-            {% if signup_form.non_field_errors %}
-              <div class="alert alert-danger">
-                {{ signup_form.non_field_errors|join:" " }}
-              </div>
-            {% endif %}
-
-            <!-- USERNAME (only if you have ACCOUNT_USERNAME_REQUIRED=True) -->
-            {% if signup_form.username %}
+              <!-- Username or Email field -->
               <div class="mb-3">
-                <label for="{{ signup_form.username.id_for_label }}" class="form-label">
-                  Username
+                <label for="{{ login_form.login.id_for_label }}" class="form-label">
+                  Username or Email
                 </label>
-                {% if signup_form.username.errors %}
-                  {{ signup_form.username|add_class:"form-control is-invalid" }}
+                {% if login_form.login.errors %}
+                  {{ login_form.login|add_class:"form-control is-invalid" }}
                   <div class="invalid-feedback">
-                    {{ signup_form.username.errors|join:" " }}
+                    {{ login_form.login.errors|join:" " }}
                   </div>
                 {% else %}
-                  {{ signup_form.username|add_class:"form-control" }}
+                  {{ login_form.login|add_class:"form-control" }}
                 {% endif %}
               </div>
-            {% endif %}
 
-            <!-- EMAIL -->
-            <div class="mb-3">
-              <label for="{{ signup_form.email.id_for_label }}" class="form-label">
-                Email
-              </label>
-              {% if signup_form.email.errors %}
-                {{ signup_form.email|add_class:"form-control is-invalid" }}
-                <div class="invalid-feedback">
-                  {{ signup_form.email.errors|join:" " }}
-                </div>
-              {% else %}
-                {{ signup_form.email|add_class:"form-control" }}
-              {% endif %}
-            </div>
+              <!-- Password field -->
+              <div class="mb-3">
+                <label for="{{ login_form.password.id_for_label }}" class="form-label">
+                  Password
+                </label>
+                {% if login_form.password.errors %}
+                  {{ login_form.password|add_class:"form-control is-invalid" }}
+                  <div class="invalid-feedback">
+                    {{ login_form.password.errors|join:" " }}
+                  </div>
+                {% else %}
+                  {{ login_form.password|add_class:"form-control" }}
+                  {% if login_form.password.help_text %}
+                    <small id="id_password_helptext" class="form-text text-muted">
+                      {{ login_form.password.help_text }}
+                    </small>
+                  {% endif %}
+                {% endif %}
+              </div>
 
-            <!-- PASSWORD #1 -->
-            <div class="mb-3">
-              <label for="{{ signup_form.password1.id_for_label }}" class="form-label">
-                Password
-              </label>
-              {% if signup_form.password1.errors %}
-                {{ signup_form.password1|add_class:"form-control is-invalid" }}
-                <div class="invalid-feedback">
-                  {{ signup_form.password1.errors|join:" " }}
-                </div>
-              {% else %}
-                {{ signup_form.password1|add_class:"form-control" }}
-              {% endif %}
-            </div>
-
-            <!-- PASSWORD #2 (confirmation) -->
-            <div class="mb-3">
-              <label for="{{ signup_form.password2.id_for_label }}" class="form-label">
-                Confirm Password
-              </label>
-              {% if signup_form.password2.errors %}
-                {{ signup_form.password2|add_class:"form-control is-invalid" }}
-                <div class="invalid-feedback">
-                  {{ signup_form.password2.errors|join:" " }}
-                </div>
-              {% else %}
-                {{ signup_form.password2|add_class:"form-control" }}
-              {% endif %}
-            </div>
-
-            <!-- “next” redirect, if present -->
-            {% if redirect_field_value %}
-              <input
-                type="hidden"
-                name="{{ redirect_field_name }}"
-                value="{{ redirect_field_value }}"
-              >
-            {% endif %}
-
-            <button type="submit" class="btn btn-secondary w-100">
-              Sign Up
-            </button>
-          </form>
+              <button type="submit" class="btn btn-primary w-100">
+                Log In
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
 
+        <!-- SIGN-UP CARD -->
+        <div class="card shadow-sm">
+          <div class="card-header text-center bg-secondary text-white">
+            <h4>Sign Up</h4>
+          </div>
+          <div class="card-body">
+            <form method="post" action="{% url 'account_signup' %}">
+              {% csrf_token %}
+
+              <!-- Form-level errors for sign-up -->
+              {% if signup_form.non_field_errors %}
+                <div class="alert alert-danger">
+                  {{ signup_form.non_field_errors|join:" " }}
+                </div>
+              {% endif %}
+
+              <!-- Username (if enabled) -->
+              {% if signup_form.username %}
+                <div class="mb-3">
+                  <label for="{{ signup_form.username.id_for_label }}" class="form-label">
+                    Username
+                  </label>
+                  {% if signup_form.username.errors %}
+                    {{ signup_form.username|add_class:"form-control is-invalid" }}
+                    <div class="invalid-feedback">
+                      {{ signup_form.username.errors|join:" " }}
+                    </div>
+                  {% else %}
+                    {{ signup_form.username|add_class:"form-control" }}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="{{ signup_form.email.id_for_label }}" class="form-label">
+                  Email
+                </label>
+                {% if signup_form.email.errors %}
+                  {{ signup_form.email|add_class:"form-control is-invalid" }}
+                  <div class="invalid-feedback">
+                    {{ signup_form.email.errors|join:" " }}
+                  </div>
+                {% else %}
+                  {{ signup_form.email|add_class:"form-control" }}
+                {% endif %}
+              </div>
+
+              <!-- Password 1 -->
+              <div class="mb-3">
+                <label for="{{ signup_form.password1.id_for_label }}" class="form-label">
+                  Password
+                </label>
+                {% if signup_form.password1.errors %}
+                  {{ signup_form.password1|add_class:"form-control is-invalid" }}
+                  <div class="invalid-feedback">
+                    {{ signup_form.password1.errors|join:" " }}
+                  </div>
+                {% else %}
+                  {{ signup_form.password1|add_class:"form-control" }}
+                  {% if signup_form.password1.help_text %}
+                    <small id="id_password1_helptext" class="form-text text-muted">
+                      {{ signup_form.password1.help_text }}
+                    </small>
+                  {% endif %}
+                {% endif %}
+              </div>
+
+              <!-- Password 2 -->
+              <div class="mb-3">
+                <label for="{{ signup_form.password2.id_for_label }}" class="form-label">
+                  Confirm Password
+                </label>
+                {% if signup_form.password2.errors %}
+                  {{ signup_form.password2|add_class:"form-control is-invalid" }}
+                  <div class="invalid-feedback">
+                    {{ signup_form.password2.errors|join:" " }}
+                  </div>
+                {% else %}
+                  {{ signup_form.password2|add_class:"form-control" }}
+                {% endif %}
+              </div>
+
+              <!-- Redirect field -->
+              {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}">
+              {% endif %}
+
+              <button type="submit" class="btn btn-secondary w-100">
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 {% endblock %}
