@@ -34,12 +34,12 @@ urlpatterns = [
 
     # home, products, profiles, bag, checkout, etc.
     path("products/", include("products.urls", namespace="products")),
-    path("", include("home.urls")),
     path("profile/", include("profiles.urls")),
     path("bag/",     include("bag.urls")),
     path("checkout/", include("checkout.urls")),
     path("privacy-policy/", core_views.privacy_policy, name="privacy_policy"),
     path("faq/", include(("core.urls", "core"), namespace="core")),
+    path("", include("home.urls")),
 ]
 
 
