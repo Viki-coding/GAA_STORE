@@ -88,6 +88,11 @@ To validate the html I went to the deployed site, right clicked and copied the c
 
 #### HTML validation (e.g., W3C Validator) and #### CSS validation
 
+CSS for website passes validation test:
+
+<img width="1374" height="515" alt="css validator" src="https://github.com/user-attachments/assets/d92a3763-905b-47b9-926b-1c14fdc8311f" />
+
+
 | CSS Validation Check List |      |
 | ------------------------- | ---- |
 |                           |      | Check for un-used code |
@@ -101,11 +106,13 @@ To validate the html I went to the deployed site, right clicked and copied the c
 |                           |      |  |
 | HTML Validation           |      |  |
 
-All HTML urls rechecked and corrected for errors and passed. 
+All HTML urls rechecked and corrected for errors and passed 22.07.25
+
+HTML for website passes validation test:
 
 <img width="766" height="440" alt="HTML Full url checked" src="https://github.com/user-attachments/assets/fb8f42a0-d708-45cc-957a-88b129ac6935" />
 
-![order_detail](https://github.com/user-attachments/assets/ddf9a93c-f9e5-483a-8cf2-83c6d15164f0)
+
 
 
 
