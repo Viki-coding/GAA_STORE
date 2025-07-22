@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 from bag.context_processors import bag_contents
 from profiles.models import UserProfile
@@ -285,6 +287,23 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
     }
+
+    subject = f"Order Confirmation - {order.order_number}"
+    body = render_to_string(
+        "checkout/order_confirmation_email.html",
+        {"order": order}
+    )
+    try:
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [order.email],
+            fail_silently=False,
+        )
+        logger.info(f"Confirmation email sent to {order.email}")
+    except Exception as e:
+        logger.error(f"Failed to send confirmation email: {e}")
     return render(request, template, context)
 
 

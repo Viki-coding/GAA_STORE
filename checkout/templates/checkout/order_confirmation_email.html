@@ -1,0 +1,15 @@
+Hi {{ order.shipping_address.full_name }},
+
+Thank you for your order with GAA Store!
+
+Order Number: {{ order.order_number }}
+Total: €{{ order.total_price }}
+
+{% if order.is_gift %}
+This order is marked as a gift.
+Gift message: "{{ order.gift_message }}"
+{% endif %}
+
+
+Best regards,  
+The GAA Store Team

@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "default-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get("DEBUG", "False").lower() in ("1", "true", "yes")
-DEBUG = True 
+DEBUG = False 
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -140,6 +140,8 @@ ACCOUNT_LOGIN_ON_SIGNUP = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'GAA Store <noreply@gaastore.com>'
+
 
 
 # ACCOUNT_LOGIN_METHODS = {'username', 'email'}
