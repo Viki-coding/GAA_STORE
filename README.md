@@ -484,7 +484,8 @@ Django forms has server-side error handling for fields.
 We have created a 404 page so that user of accidentally enters a typo in the address they get an opportunity to be redirected back to the home page: 404 page 
 When a user attempts to book an event who’s capacity has already been reached, i.e. the event is already booked out, a message is displayed to let them know event capacity has been reached:
 
-![404 Error](https://github.com/user-attachments/assets/7b71ca73-7c08-49af-a247-8e8b6b67fe85)
+<img width="1696" height="1025" alt="404 page not found" src="https://github.com/user-attachments/assets/6bc7b3c3-15f6-4e83-a62e-6b66f2ea8cf0" />
+
 
 #### 500 Page 
 
