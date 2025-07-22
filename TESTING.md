@@ -100,28 +100,10 @@ To validate the html I went to the deployed site, right clicked and copied the c
 | products.css              | Pass | Clear |
 |                           |      |  |
 | HTML Validation           |      |  |
-|                           |      | Check for un-used code |
-| checkout_success_html     | Pass | Clear |
-| checkout.html             | Pass | Clear |
-| order_detail.html         | Pass | Clear |
-| contact_us.html           | Pass | Clear |
-| faq_confirm_delete.html   | Pass | Clear |
-| faq_form.html             | Pass | Clear |
-| faq_list                  | Pass | Clear |
-| privacy policey           | N/A  | N/A |
-| how_to_measure.html       | Pass | Clear |
-| index.html                | Pass | Clear |
-| accessories_shop.html     | Pass | Clear |
-| hurleys_shop.html         | Pass | Clear |
-| product_detail.html       | Pass | Clear |
-| product_list.html         | Pass | Clear |
-| add_address.html          | Pass | Clear |
-| edit_address.html         | Pass | Clear |
-| login.html                | Pass | Clear |
-| profile.html              | Pass | Clear |
-| base.html                 | Pass | Clear |
-| main-nav.html             | Pass | Clear |
-| mobile-top-header         | Pass | Clear |
+
+All HTML urls rechecked and corrected for errors and passed. 
+
+<img width="766" height="440" alt="HTML Full url checked" src="https://github.com/user-attachments/assets/fb8f42a0-d708-45cc-957a-88b129ac6935" />
 
 ![order_detail](https://github.com/user-attachments/assets/ddf9a93c-f9e5-483a-8cf2-83c6d15164f0)
 
