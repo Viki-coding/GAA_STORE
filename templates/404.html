@@ -1,12 +1,29 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Page Not Found</title>
-</head>
-<body>
-  <h1>404 - Page Not Found</h1>
-  <p>The page you’re looking for does not exist.</p>
-</body>
-</html>
+
+{% block extra_head %}
+<meta name="description" content="Page not found - Explore our hurleys, helmets, and accessories at GAA Store.">
+{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="display-4">404 - Page Not Found</h1>
+
+    <img src="{% static 'images/500-server-error.png' %}" alt="Page Not Found" class="img-fluid hurleys-shop mb-4" style="max-width: 300px;">
+
+    <p class="lead">Oops! You knocked that one out of the park!</p>
+    <a href="/" class="btn btn-primary mt-3">Back to Home</a>
+
+    <div class="mt-4">
+        <p>Or check out our popular categories:</p>
+        <a href="/hurleys/" class="btn btn-outline-primary mx-1">Hurleys</a>
+        <a href="/helmets/" class="btn btn-outline-primary mx-1">Helmets</a>
+        <a href="/grips/" class="btn btn-outline-primary mx-1">Grips</a>
+    </div>
+
+    <form action="/search/" method="get" class="mt-4">
+        <input type="text" name="q" class="form-control" placeholder="Search for products..." required>
+        <button type="submit" class="btn btn-secondary mt-2">Search</button>
+    </form>
+</div>
+{% endblock %}
