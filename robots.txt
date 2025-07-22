@@ -1,8 +1,6 @@
 User-agent: *
 Disallow: /admin/
-Disallow: /accounts/
 Disallow: /profile/
-Disallow: /bag/
 Disallow: /checkout/
 
 Sitemap: https://gaastore-2f38a7e53edc.herokuapp.com/sitemap.xml
