@@ -1,27 +1,11 @@
 {% load static %}
 {% extends 'base.html' %}
 
-{% block extra_head %}
-<meta name="description" content="Page not found - Explore our hurleys, helmets, and accessories at GAA Store.">
-{% endblock %}
-
 {% block content %}
 <div class="container text-center mt-5">
     <h1 class="display-4">404 - Page Not Found</h1>
     <img src="{% static 'images/500-server-error.png' %}" alt="Server Error" class="img-fluid hurleys-shop">
     <p class="lead">Oops! You knocked that one out of the park!</p>
     <a href="/" class="btn btn-primary">Let's find ourselves a new hurley HERE!</a>
-
-    <div class="mt-4">
-        <p>Or check out our popular categories:</p>
-        <a href="/hurleys/" class="btn btn-outline-primary mx-2">Hurleys</a>
-        <a href="/helmets/" class="btn btn-outline-primary mx-2">Helmets</a>
-        <a href="/grips/" class="btn btn-outline-primary mx-2">Grips</a>
-    </div>
-
-    <form action="/search/" method="get" class="mt-4">
-        <input type="text" name="q" class="form-control" placeholder="Search for products..." required>
-        <button type="submit" class="btn btn-secondary mt-2">Search</button>
-    </form>
 </div>
 {% endblock %}
