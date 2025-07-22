@@ -3,48 +3,78 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'core/css/contact.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/contact.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5" style="max-width: 600px;">
+  <div class="container mt-5" style="max-width: 600px;">
     <h1 class="text-center mb-4">Contact Us</h1>
     <form method="post" novalidate>
-        {% csrf_token %}
-        {% if form.non_field_errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ form.non_field_errors }}
-            </div>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <!-- Name -->
+      <div class="form-group">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {% if form.name.help_text %}
+          <div id="id_name_helptext" class="form-text text-muted">
+            {{ form.name.help_text }}
+          </div>
         {% endif %}
-        <div class="form-group">
-            {{ form.name.label_tag }}
-            {{ form.name }}
-            {% for error in form.name.errors %}
-                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            {{ form.email.label_tag }}
-            {{ form.email }}
-            {% for error in form.email.errors %}
-                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            {{ form.subject.label_tag }}
-            {{ form.subject }}
-            {% for error in form.subject.errors %}
-                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            {{ form.body.label_tag }}
-            {{ form.body }}
-            {% for error in form.body.errors %}
-                <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
+        {% for error in form.name.errors %}
+          <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {% if form.email.help_text %}
+          <div id="id_email_helptext" class="form-text text-muted">
+            {{ form.email.help_text }}
+          </div>
+        {% endif %}
+        {% for error in form.email.errors %}
+          <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Subject -->
+      <div class="form-group">
+        {{ form.subject.label_tag }}
+        {{ form.subject }}
+        {% if form.subject.help_text %}
+          <div id="id_subject_helptext" class="form-text text-muted">
+            {{ form.subject.help_text }}
+          </div>
+        {% endif %}
+        {% for error in form.subject.errors %}
+          <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Body -->
+      <div class="form-group">
+        {{ form.body.label_tag }}
+        {{ form.body }}
+        {% if form.body.help_text %}
+          <div id="id_body_helptext" class="form-text text-muted">
+            {{ form.body.help_text }}
+          </div>
+        {% endif %}
+        {% for error in form.body.errors %}
+          <div class="invalid-feedback d-block" role="alert">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
-</div>
+  </div>
 {% endblock %}
