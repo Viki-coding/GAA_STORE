@@ -171,8 +171,17 @@ def checkout(request):
                         country=form.cleaned_data["country"],
                     )
             else:
-                # Either a guest, or they didn’t tick “Save Shipping Address”
-                shipping_address = None
+                # Save it, not linked to profile) but attached to order
+                shipping_address = ShippingAddress.objects.create(
+                    full_name=form.cleaned_data["full_name"],
+                    phone_number=form.cleaned_data["phone_number"],
+                    street_address1=form.cleaned_data["street_address1"],
+                    street_address2=form.cleaned_data["street_address2"],
+                    town_or_city=form.cleaned_data["town_or_city"],
+                    county=form.cleaned_data["county"],
+                    eircode=form.cleaned_data["eircode"],
+                    country=form.cleaned_data["country"],
+                )
 
             # Create the Order
             order = Order.objects.create(
@@ -274,8 +283,15 @@ def checkout_success(request, order_number):
     # Display a success message to the user
     messages.success(
         request,
-        f'Payment successfull, order is processed! Your order number is {order_number}. '
-        f'A confirmation email will be sent to {order.email}.'
+        (
+            (
+                (
+                    f'Payment successfull, order is processed! '
+                    f'Your order number is {order_number}. '
+                    f'A confirmation email will be sent to {order.email}.'
+                )
+            )
+        )
     )
 
     # Clear the shopping bag from the session
