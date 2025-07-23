@@ -510,7 +510,8 @@ When a user attempts to book an event who’s capacity has already been reached,
 
 #### 500 Page 
 
-![500 Error](https://github.com/user-attachments/assets/6747674d-8ad5-4899-a4bc-ed5798943a71)
+<img width="1667" height="383" alt="500 error" src="https://github.com/user-attachments/assets/77e37cd8-28a8-4a7e-a328-0bb8f6c2365c" />
+
 
 ## Future Implementation Section: 
 
