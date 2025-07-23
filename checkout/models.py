@@ -15,7 +15,9 @@ class ShippingAddress(models.Model):
     user_profile = models.ForeignKey(
             UserProfile,
             on_delete=models.CASCADE,
-            related_name='shipping_addresses'
+            related_name='shipping_addresses',
+            null=True,
+            blank=True
         )
     full_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
