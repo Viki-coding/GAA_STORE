@@ -19,18 +19,27 @@ var elements = stripe.elements();
 var style = {
     base: {
         color: '#000',
+        backgroundColor: '#ffffff',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
             color: '#aab7c4',
         },
+        '::selection': {
+            backgroundColor: '#cce4ff',
+        },
+    },
+    complete: {
+        color: '#000',
+        backgroundColor: '#ffffff',
     },
     invalid: {
         color: '#dc3545',
         iconColor: '#dc3545',
     },
 };
+
 
 // 4) Create and mount the Card Element
 var card = elements.create('card', { style: style });
@@ -49,13 +58,13 @@ card.addEventListener('change', function (event) {
             <span>${event.error.message}</span>
         `;
         errorDiv.innerHTML = html;
-        feedbackDiv.textContent = '';  // clear any success msg
+        feedbackDiv.textContent = '';
     } else {
         errorDiv.textContent = '';
         if (event.complete) {
             feedbackDiv.innerHTML = `
               <div class="alert alert-success py-1 px-2 small">
-                <i class="fas fa-check-circle"></i> Card is valid. Processing payment...
+              <i class="fas fa-check-circle"></i> Card is valid. Press COMPLETE ORDER to process payment.
               </div>
             `;
         } else {
@@ -91,9 +100,10 @@ form.addEventListener('submit', function(event) {
             }
         }
     }).then(function(result) {
+        var errorDiv = document.getElementById('card-errors');
+        var feedbackDiv = document.getElementById('card-feedback');
+
         if (result.error) {
-            var errorDiv = document.getElementById('card-errors');
-            var feedbackDiv = document.getElementById('card-feedback');
             var html = `
                 <span class="icon" role="alert">
                     <i class="fas fa-times"></i>

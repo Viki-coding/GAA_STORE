@@ -73,33 +73,24 @@ footer .form-control {
     margin-bottom: 1rem;
 }
 
-#card-element iframe {
-    pointer-events: auto !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
 
 #card-element {
-    background: #fff;
+    background: #ffffff !important;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    height: 48px; 
     padding: 10px 12px;
+    min-height: 48px;
     margin-bottom: 1rem;
-    position: relative;
-    z-index: 9999;
-    pointer-events: auto !important;
+    box-sizing: border-box;
 }
 
 .StripeElement {
+    background-color: transparent !important;
+    color: #000;
+    font-size: 16px;
+    padding: 0;
+    width: 100%;
     box-sizing: border-box;
-    height: 40px;
-    padding: 10px 12px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    transition: box-shadow 150ms ease;
 }
 
 .StripeElement--focus {
@@ -155,6 +146,16 @@ footer .form-control {
   gap: 1.5rem;   /* space between buttons */
   padding: 2rem 0;
 }
+
+#card-feedback {
+    min-height: 1.5em;
+    margin-top: 0.25rem;
+    display: block;
+    color: lime;
+    font-weight: bold;
+    pointer-events: none;
+}
+
 
 @media (max-width: 768px) {
     .col-md-6 {

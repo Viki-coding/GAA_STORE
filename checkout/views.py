@@ -274,7 +274,7 @@ def checkout_success(request, order_number):
     # Display a success message to the user
     messages.success(
         request,
-        f'Order successfully processed! Your order number is {order_number}. '
+        f'Payment successfull, order is processed! Your order number is {order_number}. '
         f'A confirmation email will be sent to {order.email}.'
     )
 
