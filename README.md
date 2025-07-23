@@ -230,6 +230,21 @@ The user has the ability to choose the correct size hurl and colour using a drop
 
 When the users click on their bag they have the option to see and adjust the items in the bag and continue shopping or proceed to checkout. 
 
+## PAYMENT AND ORDER FEEDBACK TO CUSTOMER
+When the user enters an incorrect card number, an expired card, one with insufficent funds or a valid card the user is informed and can correct the issue and won't be allowed to complete payment until rectified. 
+
+<img width="531" height="163" alt="Expired Card" src="https://github.com/user-attachments/assets/95690d2d-31a7-4395-85fb-25d842496569" />
+
+<img width="546" height="321" alt="insufficient funds" src="https://github.com/user-attachments/assets/354cfb78-2ed2-447c-8def-d8a26644b4df" />
+
+
+<img width="513" height="308" alt="Valid Payment" src="https://github.com/user-attachments/assets/539db5b1-2b41-4a4d-8fce-b00064d8c1b1" />
+
+When the user enters a valid card detail and clicks to complete order the customer is informed by a toast that the payment was successful and that the order has been processed. We also tell the user that a confirmation email has been sent to them. Confirmation email is delivered to the email entered during the payment process, thanking them and informing them that their order has been processed. 
+
+#### EMAIL CONFIRMATION: 
+<img width="799" height="451" alt="Order confirmation email" src="https://github.com/user-attachments/assets/d244e5e8-f5c1-415a-8009-030c1447e49b" />
+
 ## USER STORIES
 
 **Epic 1: Product Showcase & Navigation**
