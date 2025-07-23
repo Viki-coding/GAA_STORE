@@ -334,7 +334,7 @@ Hero Image I have incorporated is a hero image of a hurley and helmet
 
 I have a dynamic Call-to-Actions (CTAs): "Shop for Hurleys" prominently featured on the homepage.
 
-I am engaging users with the FAQ and the How to Measure pages. 
+I am engaging users with the FAQ and the How to Measure pages. I give feedback when items are added and removed from cart. I give feedback on payments details and orders successfuly processed aswell and sending an actual email to the email registered to the order. 
 
 **2. Clear Navigation and Layout**
 
@@ -448,6 +448,12 @@ Our FAQ is easy to navigate from the nav bar and details important and informed 
 
 
 ![Thank you for your order](https://github.com/user-attachments/assets/f7e3b6ce-e239-47b7-88f6-fe3ad42c854f)
+
+#### PROFILE PAGE: 
+Once you register as a new user, you can log in and view previous orders. 
+
+<img width="872" height="870" alt="My previous order" src="https://github.com/user-attachments/assets/43ce7713-fe08-47a6-a15f-596628977862" />
+
 
 ### FOOTER FEATURES:
 
