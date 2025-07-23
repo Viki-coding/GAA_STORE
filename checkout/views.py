@@ -283,15 +283,9 @@ def checkout_success(request, order_number):
     # Display a success message to the user
     messages.success(
         request,
-        (
-            (
-                (
-                    f'Payment successfull, order is processed! '
-                    f'Your order number is {order_number}. '
-                    f'A confirmation email will be sent to {order.email}.'
-                )
-            )
-        )
+        f'Payment successful, order is processed! '
+        f'Your order number is {order_number}. '
+        f'A confirmation email will be sent to {order.email}.'
     )
 
     # Clear the shopping bag from the session
