@@ -237,11 +237,12 @@ I receive an alert message that my card is expired and I am unable to proceed un
 
 ![Stipe Webhooks success](https://github.com/user-attachments/assets/a5830cb4-35b3-4ca9-85ea-bb2629afd3d5)
 
+<img width="1696" height="1025" alt="404 page not found" src="https://github.com/user-attachments/assets/4be451bc-7665-4cee-993e-d792c6b76f34" />
+
+<img width="1413" height="290" alt="Screenshot 2025-07-30 at 09 04 33" src="https://github.com/user-attachments/assets/780c4b91-b32d-4def-b203-4936f704d110" />
 
 
-![404 Error](https://github.com/user-attachments/assets/b2e2efb7-a7c2-4bb0-9462-7a6c3a80c36b)
 
-![500 Error](https://github.com/user-attachments/assets/748438fd-9007-40f8-b329-abb22a17eb7f)
 
 ## 7. SOLVED BUGS 
 
