@@ -108,9 +108,34 @@ CSS for website passes validation test:
 
 All HTML urls rechecked and corrected for errors and passed 22.07.25
 
-HTML for website passes validation test:
+#### HTML for website passes validation test:
 
+#### Main Page
 <img width="766" height="440" alt="HTML Full url checked" src="https://github.com/user-attachments/assets/fb8f42a0-d708-45cc-957a-88b129ac6935" />
+
+#### User Profile Page
+<img width="1079" height="773" alt="User Dashboard Profiles Page validated" src="https://github.com/user-attachments/assets/acfa4b1e-49f3-4a03-8e33-6befe5fb90ea" />
+
+#### Signout Page
+<img width="1126" height="714" alt="Signout page validated" src="https://github.com/user-attachments/assets/e41fe2d5-00c0-4359-8241-e631a143918b" />
+
+#### Hurleys Page
+<img width="831" height="453" alt="Hurleys page validated" src="https://github.com/user-attachments/assets/7a003a67-6725-423e-ac8c-8f043ab71f0c" />
+
+#### How to Measure Page
+<img width="882" height="452" alt="How to measure page validated" src="https://github.com/user-attachments/assets/2026371a-68cb-4632-b93a-e595249dbe4a" />
+
+#### FAQ Page
+<img width="787" height="457" alt="FAQ page validated" src="https://github.com/user-attachments/assets/24709a99-9470-416f-ab2b-540aaeef01e0" />
+
+#### Contact Us Page
+<img width="772" height="447" alt="Contact page validated" src="https://github.com/user-attachments/assets/f8716bae-bf66-4e9e-a54c-900d50da8bd3" />
+
+#### Bag Page
+<img width="787" height="448" alt="Bag page validated" src="https://github.com/user-attachments/assets/cea90351-badc-450d-9ca5-e937ef098b59" />
+
+#### Accessories Page
+<img width="818" height="460" alt="Accessories Page validated" src="https://github.com/user-attachments/assets/1de75fb4-5e76-413c-bcb6-2b476ffe05a1" />
 
 
 
