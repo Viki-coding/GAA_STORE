@@ -141,10 +141,13 @@ footer .form-control {
 
 /* Return home: outline style */
 #thank-you-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;   /* space between buttons */
-  padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    width: 100%;
+    margin: 0 auto;
 }
 
 #card-feedback {
