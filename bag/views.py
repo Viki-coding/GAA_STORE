@@ -151,10 +151,16 @@ def update_bag(request, product_key):
             msg = "Item not found in your bag."
 
         # AJAX error response for not found or removed
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest' and msg != "You have amended your bag.":
+        if (
+            request.headers.get('x-requested-with') == 'XMLHttpRequest'
+            and msg != "You have amended your bag."
+        ):
             status = 200 if msg == "Removed item from your bag." else 404
             return JsonResponse(
-                {'success': msg == "Removed item from your bag.", 'message': msg},
+                {
+                    'success': msg == "Removed item from your bag.",
+                    'message': msg
+                },
                 status=status
             )
 

@@ -58,10 +58,8 @@ def checkout(request):
         # ───────────────────────────────────────────────
         form = CheckoutForm(request.POST, user=request.user)
 
-        # Debugging: Print form errors if validation fails
         if not form.is_valid():
-            print("Form validation failed:")
-            print(form.errors)
+            return redirect("checkout")
 
         # Retrieve the PaymentIntent ID from the hidden <input>
         payment_intent_id = request.POST.get("payment_intent_id")
@@ -212,10 +210,6 @@ def checkout(request):
             # Clear the bag from session
             if "bag" in request.session:
                 del request.session["bag"]
-
-            # Debugging: Print success messages
-            print("Form is valid. Proceeding to create order...")
-            print("Redirecting to checkout_success...")
 
             # Redirect to success
             return redirect(

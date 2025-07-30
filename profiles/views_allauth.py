@@ -13,25 +13,15 @@ class CombinedLoginView(LoginView):
         context["login_form"] = context.pop("form")
         context["signup_form"] = SignupForm(self.request.POST or None)
 
-        # Debugging: Print the request method and POST data
-        print(f"Request method: {self.request.method}")
-        print(f"POST data: {self.request.POST}")
-
         return context
 
     def get_success_url(self):
         user = self.request.user
 
-        # Debugging: Print the user authentication status
-        print(f"User authenticated: {user.is_authenticated}")
-        print(f"User is staff: {user.is_staff}")
-
         # Always redirect staff to FAQ, regardless of 'next'
         if user.is_authenticated and user.is_staff:
-            print("Redirecting staff to FAQ...")
             return reverse("faq")
 
-        print("Redirecting to profile...")
         return reverse("profile")
 
 

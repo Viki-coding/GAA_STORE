@@ -14,4 +14,7 @@ application = WhiteNoise(
     prefix="static/"
 )
 
-application.add_files(os.path.join(os.path.dirname(__file__), "..", "media"), prefix="media/")
+application.add_files(
+    os.path.join(os.path.dirname(__file__), "..", "media"),
+    prefix="media/"
+)
